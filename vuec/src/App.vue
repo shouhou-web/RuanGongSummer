@@ -1,8 +1,16 @@
 <template>
   <div id="app">
-    <router-view></router-view>
-    <!-- 全局加载组件 -->
-    <fullscrren-loading></fullscrren-loading>
+    <el-container>
+      <el-header>
+        HEADER
+      </el-header>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
+
+      <!-- 全局加载组件 -->
+      <fullscrren-loading></fullscrren-loading>
+    </el-container>
   </div>
 </template>
 
@@ -19,3 +27,4 @@ export default {
 <style>
 @import "assets/css/base.css";
 </style>
+
