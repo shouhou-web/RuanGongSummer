@@ -1,6 +1,8 @@
 <template>
   <div id="home">
-    <div class="header">Home.vue</div>
+    <div class="home-style">Home.vue</div>
+    <hr>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -11,8 +13,10 @@ export default {
 };
 </script>
 
-<style scoped>
-.header {
+<style>
+.home-style {
+  border-radius: 10px;
+  background: linear-gradient(to right, #eaf5de, #abe2de);
   font-size: 50px;
   text-align: center;
 }

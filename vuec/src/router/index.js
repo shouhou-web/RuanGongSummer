@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 // 首页相关组件
 const Home = () => import('views/Home/Home.vue');
+const Profile = () => import('views/Profile/Profile.vue')
 
 //1.安装插件
 Vue.use(VueRouter)
@@ -21,7 +22,13 @@ const routes = [
     meta: {
       title: '首页'
     },
-    children: []
+    children: [
+      {
+        path: '/home/profile',
+        name: 'Profile',
+        component: Profile
+      }
+    ]
   },
 ]
 
