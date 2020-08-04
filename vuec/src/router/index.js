@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 // 首页相关组件
 const Home = () => import('views/Home/Home.vue');
 const Profile = () => import('views/Profile/Profile.vue')
+const Login = () => import('views/login/login.vue')
+const Register = () => import('views/register/register.vue')
 
 //1.安装插件
 Vue.use(VueRouter)
@@ -30,6 +32,16 @@ const routes = [
       }
     ]
   },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  }
 ]
 
 const router = new VueRouter({

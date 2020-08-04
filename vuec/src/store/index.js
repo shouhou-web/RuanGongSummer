@@ -7,6 +7,8 @@ Vue.use(Vuex);
 
 const state = {
   fullscreenLoading: false,
+  token: false,
+  user: {},
 };
 
 const store = new Vuex.Store({
