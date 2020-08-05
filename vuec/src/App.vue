@@ -1,24 +1,26 @@
 <template>
   <div id="app">
-    <div>
-      <div class="topbar">
-        <div class="project-name">
-          PRACTICE OF YU
-        </div>
-        <div v-if="!token" class="user-operate">
-          <router-link to="/register" tag="div">Log in/Sign up</router-link>
-        </div>
-        <div v-if="token" class="user-operate">
-          {{$store.state.user.userName}}
-        </div>
+    <div class="header">
+      <div class="header__name">
+        PRACTICE OF YU
       </div>
-      <div class="all-main">
-        <router-view></router-view>
+      <div class="header__userstate" v-if="!token">
+        <router-link tag="div" to="/register">
+          Log in/Sign up
+        </router-link>
       </div>
-      <div class="footer"></div>
-      <!-- 全局加载组件 -->
-      <fullscrren-loading></fullscrren-loading>
+      <div class="header__userstate" v-if="token">
+        {{$store.state.user.userName}}
+      </div>
     </div>
+
+    <div class="main">
+      <router-view></router-view>
+    </div>
+
+    <div class="footer"></div>
+    <!-- 全局加载组件 -->
+    <fullscrren-loading></fullscrren-loading>
   </div>
 </template>
 
@@ -30,68 +32,60 @@ export default {
   name: "App",
   data() {
     return {
-
+      // 暂无可用数据
     }
   },
   computed: {
     token: function () {
-      if (sessionStorage.getItem("user") != null){
-        this.$store.commit("login",JSON.parse(sessionStorage.getItem("user")));
+      if (sessionStorage.getItem("user") != null) {
+        this.$store.commit("login", JSON.parse(sessionStorage.getItem("user")));
       }
-
       return this.$store.state.token;
     }
   },
   components: {
     FullscrrenLoading
   },
-  methods: {
-
-  }
+  methods: {}
 };
 </script>
 
-<style>
+<style scoped>
 @import "assets/css/base.css";
 
-.topbar{
+.header {
+  background: #66ccff;
   display: flex;
   flex-direction: row;
-  background: #b8b6b6;
 }
 
-.project-name {
+.header__name {
   font-size: 30px;
-  text-align: left;
-  font-family: "JetBrains Mono";
-
   height: 80px;
+  padding-left: 20px;
   padding-top: 20px;
+  text-align: left;
 }
 
-.user-operate{
-  display: flex;
-
-  font-size: 20px;
-  font-family: "JetBrains Mono",KaiTi;
-
-  height: 80px;
-  padding-top: 30px;
-  margin-left: 65%;
-
+.header__userstate {
   cursor: pointer;
+  display: flex;
+  font-size: 20px;
+  height: 80px;
+  margin-left: 65%;
+  padding-top: 30px;
 }
 
-.all-main{
+.main {
+  height: 100%;
   position: absolute;
   width: 100%;
-  height: 100%;
 }
 
-.footer{
-  margin-top: 55%;
+.footer {
+  background: #66ccff;
   height: 200px;
-  background: #b8b6b6;
+  margin-top: 55%;
 }
 </style>
 

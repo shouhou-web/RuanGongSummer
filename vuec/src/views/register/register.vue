@@ -1,34 +1,56 @@
 <template>
-  <div>
-    <div class="section">
-      <div class="container">
-        <div class="row full-height justify-content-center">
-          <div class="col-12 text-center align-self-center py-5">
-            <div class="section pb-5 pt-5 pt-sm-2 text-center">
-              <div class="choose-tab">
+  <div class="container">
+    <div class="container__intro"></div>
+    <div class="container__div--active">
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <br>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <br>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+    </div>
+    <div class="container__slice"></div>
+    <div>
+      <div>
+        <div>
+          <div>
+            <div>
+              <div class="switch-tab">
                 <h4>
                   <span>Log_In</span>
-                  <span class="tab-span">Sign_Up</span>
+                  <span class="switch-tab__span">Sign_Up</span>
                 </h4>
               </div>
-              <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
-              <label for="reg-log"></label>
-              <div class="card-3d-wrap mx-auto">
-                <div class="card-3d-wrapper">
+              <input
+                class="checkbox"
+                id="reg-log"
+                name="reg-log"
+                type="checkbox"
+              />
+              <label for="reg-log" style="margin-left: 70%"></label>
+              <div class="card-wrap">
+                <div class="card-wrapper">
                   <div class="card-front">
                     <div class="center-wrap">
-                      <div class="section text-center">
-                        <h2 class="mb-4 pb-3">Log In·登录</h2>
+                      <div>
+                        <h2>Log In·登录</h2>
                         <div class="form-group">
-                          <input type="text" name="logemail" class="form-style" placeholder="Username" id="logemail" autocomplete="off" v-model="username">
+                          <input autocomplete="off" class="form-style" name="logemail" placeholder="Username"
+                                 type="text" v-model="username">
                         </div>
                         <div class="form-group mt-2">
-                          <input type="password" name="logpass" class="form-style" placeholder="Password" id="logpass" autocomplete="off" v-model="password">
+                          <input autocomplete="off" class="form-style" name="logpass" placeholder="Password"
+                                 type="password" v-model="password">
                         </div>
-                        <a class="btn mt-4" @click="loginSubmit">Log in</a>
+                        <a @click="loginSubmit" class="btn">Log in</a>
                         <div>
-                          <p class="mb-0 mt-4 text-center">
-                            <a href="#" class="link">Forgot your password?</a>
+                          <p>
+                            <a class="link" href="#">Forgot your password?</a>
                           </p>
                         </div>
                       </div>
@@ -36,18 +58,21 @@
                   </div>
                   <div class="card-back">
                     <div class="center-wrap">
-                      <div class="section text-center">
-                        <h2 class="mb-4 pb-3">Sign Up·注册</h2>
+                      <div>
+                        <h2>Sign Up·注册</h2>
                         <div class="form-group">
-                          <input type="text" name="logname" class="form-style" placeholder="Username" id="logname" autocomplete="off" v-model="username">
+                          <input autocomplete="off" class="form-style" id="logname" name="logname" placeholder="Username"
+                                 type="text" v-model="username">
                         </div>
-                        <div class="form-group mt-2">
-                          <input type="passsword" name="logemail" class="form-style" placeholder="Password" id="logemail" autocomplete="off" v-model="password">
+                        <div class="form-group">
+                          <input autocomplete="off" class="form-style" id="logemail" name="logemail" placeholder="Password"
+                                 type="password" v-model="password">
                         </div>
-                        <div class="form-group mt-2">
-                          <input type="password" name="logpass" class="form-style" placeholder="Password Confirm" id="logpass" autocomplete="off" v-model="password_again">
+                        <div class="form-group">
+                          <input autocomplete="off" class="form-style" id="logpass" name="logpass"
+                                 placeholder="Password Confirm" type="password" v-model="password_again">
                         </div>
-                        <a href="#" class="btn mt-4" @click="registerSubmit">Sign up</a>
+                        <a @click="registerSubmit" class="btn" href="#">Sign up</a>
                       </div>
                     </div>
                   </div>
@@ -62,7 +87,8 @@
 </template>
 
 <script>
-import { login, register } from "../../network/user.js";
+import {login, register} from "../../network/user.js";
+
 export default {
   name: "Register",
   data() {
@@ -118,13 +144,10 @@ export default {
       login(this.username, this.password)
         .then(
           res => {
-            if (res == null || res == "")
-            {
+            if (res == null || res == "") {
               this.$message.error("用户名与密码不匹配");
               return;
-            }
-            else
-            {
+            } else {
               // 存储数据
               sessionStorage.setItem("user", JSON.stringify(res));
 
@@ -144,311 +167,404 @@ export default {
         });
     },
   },
-  computed: {
+  computed: {},
+  mounted() {
+    var squares = document.querySelectorAll('.square');
+    var lastSquare = 0;
 
+    function move() {
+      lastSquare = (lastSquare + 1 + Math.floor(Math.random() * 5)) % 9;
+      squares[lastSquare].style.transform = 'translateZ(' + ((Math.random() - 0.5) * 100) + 'px)';
+      setTimeout(function () {
+        move();
+      }, 125);
+    }
+
+    move();
   }
 };
 </script>
 
-<style>
+<style scoped>
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
-body{
-  font-family: "JetBrains Mono", SimHei;
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 1.7;
+body {
   color: #626262;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
   overflow-x: hidden;
 }
+
 a {
   cursor: pointer;
   transition: all 200ms linear;
 }
+
 a:hover {
   text-decoration: none;
 }
+
 .link {
   color: #4a4a4c;
 }
+
 .link:hover {
-  color: #d08881;
+  color: #66ccff;
 }
+
 p {
-  font-weight: 500;
   font-size: 14px;
+  font-weight: 500;
   line-height: 1.7;
 }
-h4 {
-  font-weight: 600;
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: inherit;
 }
-h6 span{
-  padding: 0 20px;
-  text-transform: uppercase;
-  font-weight: 700;
+
+.container__intro {
+  border: 1px solid red;
+  height: inherit;
+  margin-bottom: 1%;
+  width: 50%;
 }
-.section{
-  position: relative;
-  width: 100%;
-  display: block;
+
+.container__slice {
+  background-color: #66ccff;
+  border-radius: 5px;
+  height: inherit;
+  margin-bottom: 1%;
+  margin-left: 1%;
+  width: 2px;
 }
-.full-height{
-  min-height: 100vh;
-}
+
 [type="checkbox"]:checked,
-[type="checkbox"]:not(:checked){
-  position: absolute;
+[type="checkbox"]:not(:checked) {
   left: -9999px;
+  position: absolute;
 }
+
 .checkbox:checked + label,
-.checkbox:not(:checked) + label{
-  position: relative;
+.checkbox:not(:checked) + label {
+  background-color: #ffffff;
+  border: 2px solid #b3b0b0;
+  border-radius: 8px;
+  cursor: pointer;
   display: block;
+  height: 20px;
+  margin: 10px auto;
+  padding: 0px;
+  position: relative;
   text-align: center;
   width: 60px;
-  height: 16px;
-  border-radius: 8px;
-  padding: 0;
-  margin: 10px auto;
-  cursor: pointer;
-  background-color: #cfccc7;
 }
+
 .checkbox:checked + label:before,
-.checkbox:not(:checked) + label:before{
-  position: absolute;
-  display: block;
-  width: 36px;
-  height: 36px;
+.checkbox:not(:checked) + label:before {
+  background-color: #66ccff;
+  border: 2px solid #4b97b8;
   border-radius: 50%;
   color: #f8f7f5;
-  background-color: #8c8a8a;
+  content: '_';
+  display: block;
   font-family: 'unicons';
-  content: '···';
-  z-index: 20;
-  top: -10px;
+  font-size: 24px;
+  height: 36px;
   left: -10px;
   line-height: 36px;
+  position: absolute;
   text-align: center;
-  font-size: 24px;
+  top: -10px;
   transition: all 0.5s ease;
+  width: 36px;
+  z-index: 20;
 }
+
 .checkbox:checked + label:before {
   transform: translateX(44px) rotate(-270deg);
 }
 
-
-.card-3d-wrap {
-  position: relative;
-  width: 440px;
-  max-width: 100%;
+.card-wrap {
+  color: #66ccff;
   height: 400px;
+  margin-left: 30%;
+  margin-top: 150px;
+  max-width: 100%;
+  perspective: 800px;
+  position: relative;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
-  perspective: 800px;
-  margin-top: 60px;
-  margin-left: 36%;
+  width: 440px;
 }
-.card-3d-wrapper {
-  width: 100%;
+
+.card-wrapper {
   height: 100%;
-  position:absolute;
-  top: 0;
   left: 0;
+  position: absolute;
+  top: 0;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   transition: all 600ms ease-out;
-}
-.card-front, .card-back {
   width: 100%;
-  height: 100%;
-  background-color: #cdcdd0;
+}
+
+.card-front, .card-back {
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background-color: #ffffff;
   background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: 300%;
-  position: absolute;
-  border-radius: 6px;
+  border: 2px solid #66ccff;
+  border-radius: 20px;
+  height: 100%;
   left: 0;
+  position: absolute;
   top: 0;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden;
+  width: 100%;
 }
+
 .card-back {
   transform: rotateY(180deg);
 }
-.checkbox:checked ~ .card-3d-wrap .card-3d-wrapper {
+
+.checkbox:checked ~ .card-wrap .card-wrapper {
   transform: rotateY(180deg);
 }
-.center-wrap{
-  position: absolute;
-  width: 100%;
-  padding: 0 35px;
-  top: 50%;
-  left: 0;
-  transform: translate3d(0, -50%, 35px) perspective(100px);
-  z-index: 20;
+
+.center-wrap {
   display: block;
+  left: 0;
+  padding: 0 35px;
+  position: absolute;
+  top: 50%;
+  transform: translate3d(0, -50%, 35px) perspective(100px);
+  width: 100%;
+  z-index: 20;
 }
 
-
-.form-group{
-  position: relative;
+.form-group {
   display: block;
   margin: 0;
   padding: 0;
+  position: relative;
 }
+
 .form-style {
+  background-color: #66ccff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  height: 48px;
+  letter-spacing: 0.5px;
+  line-height: 22px;
+  margin-top: 20px;
+  outline: none;
   padding: 13px 20px;
   padding-left: 55px;
-  height: 48px;
-  width: 100%;
-  font-weight: 500;
-  border-radius: 4px;
-  font-size: 14px;
-  line-height: 22px;
-  letter-spacing: 0.5px;
-  outline: none;
-  color: #c4c3ca;
-  background-color: #6d6d70;
-  border: none;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
-  box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
-  margin-top: 20px;
+  width: 100%;
 }
+
 .form-style:focus,
 .form-style:active {
   border: none;
+  box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
   outline: none;
-  box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
 }
-.input-icon {
-  position: absolute;
-  top: 0;
-  left: 18px;
-  height: 48px;
-  font-size: 24px;
-  line-height: 48px;
-  text-align: left;
-  color: #6e6e69;
+
+.form-group input:-ms-input-placeholder {
+  color: #ffffff;
+  opacity: 0.7;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
 }
 
-.form-group input:-ms-input-placeholder  {
-  color: #c4c3ca;
+.form-group input::-moz-placeholder {
+  color: #ffffff;
   opacity: 0.7;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
 }
-.form-group input::-moz-placeholder  {
-  color: #c4c3ca;
+
+.form-group input:-moz-placeholder {
+  color: #fcfcfc;
   opacity: 0.7;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
 }
-.form-group input:-moz-placeholder  {
-  color: #c4c3ca;
+
+.form-group input::-webkit-input-placeholder {
+  color: #ffffff;
   opacity: 0.7;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
 }
-.form-group input::-webkit-input-placeholder  {
-  color: #c4c3ca;
-  opacity: 0.7;
-  -webkit-transition: all 200ms linear;
-  transition: all 200ms linear;
-}
-.form-group input:focus:-ms-input-placeholder  {
-  opacity: 0;
-  -webkit-transition: all 200ms linear;
-  transition: all 200ms linear;
-}
-.form-group input:focus::-moz-placeholder  {
-  opacity: 0;
-  -webkit-transition: all 200ms linear;
-  transition: all 200ms linear;
-}
-.form-group input:focus:-moz-placeholder  {
-  opacity: 0;
-  -webkit-transition: all 200ms linear;
-  transition: all 200ms linear;
-}
-.form-group input:focus::-webkit-input-placeholder  {
+
+.form-group input:focus:-ms-input-placeholder {
   opacity: 0;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
 }
 
-.btn{
-  border-radius: 4px;
-  height: 44px;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  -webkit-transition : all 200ms linear;
+.form-group input:focus::-moz-placeholder {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
-  padding: 0 30px;
-  letter-spacing: 1px;
+}
+
+.form-group input:focus:-moz-placeholder {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+}
+
+.form-group input:focus::-webkit-input-placeholder {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+}
+
+.btn {
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -webkit-align-items: center;
+  align-items: center;
+  background-color: #66ccff;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
+  color: #ffffff;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  -ms-align-items: center;
-  align-items: center;
-  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  font-size: 13px;
+  font-weight: 600;
+  height: 44px;
   -moz-justify-content: center;
   -ms-justify-content: center;
+  -webkit-justify-content: center;
   justify-content: center;
-  -ms-flex-pack: center;
-  text-align: center;
-  border: none;
-  background-color: #949490;
-  color: #eaeaea;
-  box-shadow: 0 8px 24px 0 rgba(245, 241, 228, 0.2);
-  margin-top: 30px;
+  letter-spacing: 1px;
   margin-bottom: 30px;
-  margin-left: 30%;
+  margin-left: 35%;
+  margin-top: 30px;
+  padding: 0 30px;
+  text-align: center;
+  text-transform: uppercase;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
 }
+
 .btn:active,
-.btn:focus{
-  background-color: #222121;
-  color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
-}
-.btn:hover{
-  background-color: #403f3f;
-  color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+.btn:focus {
+  background-color: #404856;
+  box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
+  color: #ffffff;
 }
 
-.choose-tab{
-  font-family: "JetBrains Mono", KaiTi;
-  margin-top: 10px;
+.btn:hover {
+  background-color: #404856;
+  box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
+  color: #ffffff;
+}
+
+.switch-tab {
   margin-bottom: 20px;
-  margin-left: 45%;
+  margin-left: 60%;
+  margin-top: 10px;
 }
 
-.tab-span{
+.switch-tab__span {
   margin-left: 20px;
 }
 
 .logo {
-  position: absolute;
-  top: 30px;
-  right: 30px;
   display: block;
-  z-index: 100;
+  position: absolute;
+  right: 30px;
+  top: 30px;
   transition: all 250ms linear;
+  z-index: 100;
 }
+
 .logo img {
+  display: block;
   height: 26px;
   width: auto;
-  display: block;
 }
+
+/*动效*/
+.container__div--active {
+  font-size: 0;
+  height: 250px;
+  left: 50%;
+  perspective: 100px;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+  width: 250px;
+  z-index: -1;
+}
+
+.square {
+  background: #aaa;
+  border-radius: 10px;
+  display: inline-block;
+  height: 80px;
+  margin: 1px;
+  transition: all 0.25s;
+  width: 80px;
+}
+
+.square:nth-child(1) {
+  background: #BA68C8;
+}
+
+.square:nth-child(2) {
+  background: #8E24AA;
+}
+
+.square:nth-child(3) {
+  background: #4A148C;
+}
+
+.square:nth-child(5) {
+  background: #4FC3F7;
+}
+
+.square:nth-child(6) {
+  background: #039BE5;
+}
+
+.square:nth-child(7) {
+  background: #01579B;
+}
+
+.square:nth-child(9) {
+  background: #81C784;
+}
+
+.square:nth-child(10) {
+  background: #43A047;
+}
+
+.square:nth-child(11) {
+  background: #33691E;
+}
+
 </style>

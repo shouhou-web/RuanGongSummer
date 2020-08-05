@@ -1,7 +1,7 @@
 <template>
-  <div class="login-main">
-    <div class="intro"></div>
-    <div class="div-line"></div>
+  <div class="container">
+    <div class="container__intro"></div>
+    <div class="container__slice"></div>
     <div class="login">
       <div class="card-main">
         <h1>Login · 登录</h1>
@@ -116,12 +116,12 @@ export default {
   font-family: "JetBrains Mono",SimHei;
 }
 
-.intro{
+.container__intro{
   width: 50%;
   border: 2px solid red;
 }
 
-.div-line{
+.container__slice{
   width: 2px;
   margin-left: 20px;
   height: inherit;
@@ -134,7 +134,7 @@ export default {
   background-color: #ff8198;
 }
 
-.login-main{
+.container{
   display: flex;
   flex-direction: row;
 }

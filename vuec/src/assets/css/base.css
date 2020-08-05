@@ -2,34 +2,34 @@
 
 /*:root 伪类获取根元素html，定义变量*/
 :root {
-  --color-text: #666;
-  --color-high-text: #ff5777;
-  --color-tint: #ff8198;
   --color-background: #fff;
-  --font-size: 14px;
   --line-height: 1.5;
+  --color-high-text: #ff5777;
+  --font-size: 14px;
+  --color-text: #666;
+  --color-tint: #ff8198;
 }
 
 *,
 *::before,
 *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
-  overflow-y: auto;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
-  "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-  user-select: none; /* 禁止用户鼠标在页面上选中文字/图片等 */
-  -webkit-tap-highlight-color: transparent; /* webkit是苹果浏览器引擎，tap点击，highlight背景高亮，color颜色，颜色用数值调节 */
   background: var(--color-background);
   color: var(--color-text);
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+  "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent; /* webkit是苹果浏览器引擎，tap点击，highlight背景高亮，color颜色，颜色用数值调节 */
+  user-select: none; /* 禁止用户鼠标在页面上选中文字/图片等 */
   width: 100vw;
 }
 
@@ -47,9 +47,9 @@ a {
   clear: both;
   content: "";
   display: block;
-  width: 0;
   height: 0;
   visibility: hidden;
+  width: 0;
 }
 
 .clear-fix {
@@ -57,14 +57,14 @@ a {
 }
 
 .arrow-right {
-  border-top: 1px solid #999;
-  border-left: 1px solid #999;
-  width: 9px;
-  height: 9px;
   background-color: transparent;
-  transform: rotate(135deg);
+  border-left: 1px solid #999;
+  border-top: 1px solid #999;
   display: inline-block;
+  height: 9px;
   margin-left: 0.1rem;
+  transform: rotate(135deg);
+  width: 9px;
 }
 
 .left {
