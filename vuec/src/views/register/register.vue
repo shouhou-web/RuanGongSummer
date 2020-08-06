@@ -66,11 +66,13 @@
                       <div>
                         <h2>Sign Up·注册</h2>
                         <div class="form-group">
-                          <input autocomplete="off" class="form-style" id="logname" name="logname" placeholder="Username"
+                          <input autocomplete="off" class="form-style" id="logname" name="logname"
+                                 placeholder="Username"
                                  type="text" v-model="username">
                         </div>
                         <div class="form-group">
-                          <input autocomplete="off" class="form-style" id="logemail" name="logemail" placeholder="Password"
+                          <input autocomplete="off" class="form-style" id="logemail" name="logemail"
+                                 placeholder="Password"
                                  type="password" v-model="password">
                         </div>
                         <div class="form-group">
@@ -237,14 +239,14 @@ p {
 }
 
 .container__intro__words {
-  margin-top: 20%;
-  margin-left: 15%;
-  width: 70%;
-  height: 60%;
-  border-radius: 10px;
   background: #66ccff;
-  opacity: 0.85;
   border: 1px solid #66ccff;
+  border-radius: 10px;
+  height: 60%;
+  margin-left: 15%;
+  margin-top: 20%;
+  opacity: 0.85;
+  width: 70%;
 }
 
 .container__slice {
@@ -523,76 +525,76 @@ p {
 
 .square {
   background: #aaa;
+  border: 2px solid gray;
   border-radius: 10px;
   display: inline-block;
   height: 90px;
   margin: 1px;
   transition: all 0.25s;
   width: 90px;
-  border: 2px solid gray;
 }
 
 .square:nth-child(1) {
   background: #BA68C8;
-  opacity: 0.7;
   filter: blur(2px);
+  opacity: 0.7;
 }
 
 .square:nth-child(2) {
   background: #8E24AA;
-  opacity: 0.7;
   filter: blur(2px);
+  opacity: 0.7;
 }
 
 .square:nth-child(3) {
   background: #4A148C;
-  opacity: 0.7;
   filter: blur(2px);
+  opacity: 0.7;
 }
 
 .square:nth-child(5) {
   background: #4FC3F7;
-  opacity: 0.7;
   filter: blur(2px);
+  opacity: 0.7;
 }
 
 .square:nth-child(6) {
   background: #039BE5;
-  opacity: 0.7;
   filter: blur(2px);
+  opacity: 0.7;
 }
 
 .square:nth-child(7) {
   background: #01579B;
-  opacity: 0.7;
   filter: blur(2px);
+  opacity: 0.7;
 }
 
 .square:nth-child(9) {
   background: #81C784;
-  opacity: 0.7;
   filter: blur(2px);
+  opacity: 0.7;
 }
 
 .square:nth-child(10) {
   background: #43A047;
-  opacity: 0.7;
   filter: blur(2px);
+  opacity: 0.7;
 }
 
 .square:nth-child(11) {
   background: #33691E;
-  opacity: 0.7;
   filter: blur(2px);
+  opacity: 0.7;
 }
 
-.words{
+.words {
+  background-color: white;
   border-radius: 10px;
+  color: #4a4a4c;
   height: 96%;
-  width: 96%;
   margin-left: 2%;
   margin-top: 2%;
-  background-color: white;
-  color: #4a4a4c;
+  width: 96%;
 }
 </style>
