@@ -1,6 +1,11 @@
 <template>
   <div class="container">
-    <div class="container__intro"></div>
+    <div class="container__intro">
+      <div class="container__intro__words">
+        <div class="words">
+        </div>
+      </div>
+    </div>
     <div class="container__div--active">
       <div class="square"></div>
       <div class="square"></div>
@@ -22,8 +27,8 @@
             <div>
               <div class="switch-tab">
                 <h4>
-                  <span>Log_In</span>
-                  <span class="switch-tab__span">Sign_Up</span>
+                  <span>Log · In</span>
+                  <span class="switch-tab__span">Sign · Up</span>
                 </h4>
               </div>
               <input
@@ -226,10 +231,20 @@ p {
 }
 
 .container__intro {
-  border: 1px solid red;
   height: inherit;
   margin-bottom: 1%;
   width: 50%;
+}
+
+.container__intro__words {
+  margin-top: 20%;
+  margin-left: 15%;
+  width: 70%;
+  height: 60%;
+  border-radius: 10px;
+  background: #66ccff;
+  opacity: 0.85;
+  border: 1px solid #66ccff;
 }
 
 .container__slice {
@@ -492,79 +507,92 @@ p {
   margin-left: 20px;
 }
 
-.logo {
-  display: block;
-  position: absolute;
-  right: 30px;
-  top: 30px;
-  transition: all 250ms linear;
-  z-index: 100;
-}
-
-.logo img {
-  display: block;
-  height: 26px;
-  width: auto;
-}
-
 /*动效*/
 .container__div--active {
   font-size: 0;
-  height: 250px;
+  height: 280px;
   left: 50%;
   perspective: 100px;
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
   transform-style: preserve-3d;
-  width: 250px;
-  z-index: -1;
+  width: 280px;
+  z-index: -2;
 }
 
 .square {
   background: #aaa;
   border-radius: 10px;
   display: inline-block;
-  height: 80px;
+  height: 90px;
   margin: 1px;
   transition: all 0.25s;
-  width: 80px;
+  width: 90px;
+  border: 2px solid gray;
 }
 
 .square:nth-child(1) {
   background: #BA68C8;
+  opacity: 0.7;
+  filter: blur(2px);
 }
 
 .square:nth-child(2) {
   background: #8E24AA;
+  opacity: 0.7;
+  filter: blur(2px);
 }
 
 .square:nth-child(3) {
   background: #4A148C;
+  opacity: 0.7;
+  filter: blur(2px);
 }
 
 .square:nth-child(5) {
   background: #4FC3F7;
+  opacity: 0.7;
+  filter: blur(2px);
 }
 
 .square:nth-child(6) {
   background: #039BE5;
+  opacity: 0.7;
+  filter: blur(2px);
 }
 
 .square:nth-child(7) {
   background: #01579B;
+  opacity: 0.7;
+  filter: blur(2px);
 }
 
 .square:nth-child(9) {
   background: #81C784;
+  opacity: 0.7;
+  filter: blur(2px);
 }
 
 .square:nth-child(10) {
   background: #43A047;
+  opacity: 0.7;
+  filter: blur(2px);
 }
 
 .square:nth-child(11) {
   background: #33691E;
+  opacity: 0.7;
+  filter: blur(2px);
 }
 
+.words{
+  border-radius: 10px;
+  height: 96%;
+  width: 96%;
+  margin-left: 2%;
+  margin-top: 2%;
+  background-color: white;
+  color: #4a4a4c;
+}
 </style>
