@@ -217,7 +217,7 @@ a:hover {
 }
 
 .link:hover {
-  color: #66ccff;
+  color: #a1c4fd;
 }
 
 p {
@@ -239,10 +239,10 @@ p {
 }
 
 .container__intro__words {
-  background: #66ccff;
-  border: 1px solid #66ccff;
-  border-radius: 10px;
-  height: 60%;
+  background: #a1c4fd;
+  border: 1px solid #a1c4fd;
+  border-radius: 20px;
+  height: 80%;
   margin-left: 15%;
   margin-top: 20%;
   opacity: 0.85;
@@ -250,7 +250,7 @@ p {
 }
 
 .container__slice {
-  background-color: #66ccff;
+  background-color: #a1c4fd;
   border-radius: 5px;
   height: inherit;
   margin-bottom: 1%;
@@ -281,7 +281,7 @@ p {
 
 .checkbox:checked + label:before,
 .checkbox:not(:checked) + label:before {
-  background-color: #66ccff;
+  background-color: #a1c4fd;
   border: 2px solid #4b97b8;
   border-radius: 50%;
   color: #f8f7f5;
@@ -305,7 +305,7 @@ p {
 }
 
 .card-wrap {
-  color: #66ccff;
+  color: #a1c4fd;
   height: 400px;
   margin-left: 30%;
   margin-top: 150px;
@@ -338,7 +338,7 @@ p {
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: 300%;
-  border: 2px solid #66ccff;
+  border: 2px solid #a1c4fd;
   border-radius: 20px;
   height: 100%;
   left: 0;
@@ -377,7 +377,7 @@ p {
 }
 
 .form-style {
-  background-color: #66ccff;
+  background-color: #a1c4fd;
   border: none;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
@@ -460,7 +460,7 @@ p {
   -ms-align-items: center;
   -webkit-align-items: center;
   align-items: center;
-  background-color: #66ccff;
+  background-color: #a1c4fd;
   border: none;
   border-radius: 25px;
   box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
