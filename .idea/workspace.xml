@@ -26,7 +26,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="在自己尝试后发现一个安全而且还不错的登录样式（放在register.vue里面了，那个class绑定的登录样式在login.vue里面）" />
+    <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="在自己尝试后发现一个安全而且还不错的登录样式（放在register.vue里面了，那个class绑定的登录样式在login.vue里面）">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/store/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -110,6 +113,7 @@
       <workItem from="1596768906150" duration="18000" />
       <workItem from="1596768925726" duration="680000" />
       <workItem from="1596769620660" duration="10000" />
+      <workItem from="1596769631963" duration="941000" />
     </task>
     <task id="LOCAL-00001" summary="看了看🐎佬的项目，大概看了一下App.vue的结构">
       <created>1596016363239</created>
@@ -188,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596768672813</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="unknown">
+      <created>1596769756243</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1596769756243</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,7 +261,8 @@
     <MESSAGE value="小改动" />
     <MESSAGE value="主题颜色替换了一下" />
     <MESSAGE value="删除杂项，修改名称，登录注册路由合并到login-register上" />
-    <option name="LAST_COMMIT_MESSAGE" value="删除杂项，修改名称，登录注册路由合并到login-register上" />
+    <MESSAGE value="unknown" />
+    <option name="LAST_COMMIT_MESSAGE" value="unknown" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-735" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1596358814923">
@@ -281,10 +293,10 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-1126" y="262" key="SettingsEditor/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596609965280" />
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1596768696590">
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1596770538792">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596768696590" />
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596770538792" />
     <state x="-1766" y="92" width="1674" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1596767599481">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
@@ -293,10 +305,10 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-904" y="140" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596595158424" />
-    <state x="-684" y="453" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596593466211">
+    <state x="-684" y="453" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596769702217">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-684" y="453" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596593466211" />
+    <state x="-684" y="453" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596769702217" />
     <state x="-809" y="254" key="run.anything.popup" timestamp="1596451264474">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
