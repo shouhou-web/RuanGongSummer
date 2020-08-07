@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <div class="header">Home.vue</div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -11,9 +11,5 @@ export default {
 };
 </script>
 
-<style scoped>
-.header {
-  font-size: 50px;
-  text-align: center;
-}
+<style>
 </style>

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 // 首页相关组件
 const Home = () => import('views/Home/Home.vue');
+const Register = () => import('views/register/register.vue')
 
 //1.安装插件
 Vue.use(VueRouter)
@@ -17,12 +18,13 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: Home,
-    meta: {
-      title: '首页'
-    },
-    children: []
+    component: Home
   },
+  {
+    path: '/login-register',
+    name: 'Register',
+    component: Register
+  }
 ]
 
 const router = new VueRouter({
