@@ -347,6 +347,7 @@ p {
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   width: 100%;
+  opacity: 0.85;
 }
 
 .card-back {
