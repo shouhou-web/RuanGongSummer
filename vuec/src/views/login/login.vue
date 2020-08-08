@@ -6,19 +6,6 @@
         </div>
       </div>
     </div>
-    <div class="container__div--active">
-      <div class="square"></div>
-      <div class="square"></div>
-      <div class="square"></div>
-      <br>
-      <div class="square"></div>
-      <div class="square"></div>
-      <div class="square"></div>
-      <br>
-      <div class="square"></div>
-      <div class="square"></div>
-      <div class="square"></div>
-    </div>
     <div class="container__slice"></div>
     <div>
       <div>
@@ -37,49 +24,100 @@
                 name="reg-log"
                 type="checkbox"
               />
-              <label for="reg-log" style="margin-left: 70%"></label>
+              <label for="reg-log" style="margin-left: 75%"></label>
               <div class="card-wrap">
                 <div class="card-wrapper">
-                  <div class="card-front">
-                    <div class="center-wrap">
-                      <div>
-                        <h2>Log In·登录</h2>
-                        <div class="form-group">
-                          <input autocomplete="off" class="form-style" name="logemail" placeholder="Username"
-                                 type="text" v-model="username">
-                        </div>
-                        <div class="form-group mt-2">
-                          <input autocomplete="off" class="form-style" name="logpass" placeholder="Password"
-                                 type="password" v-model="password">
-                        </div>
-                        <a @click="loginSubmit" class="btn">Log in</a>
+                  <div v-if="choice == 0">
+                    <!--login-->
+                    <div class="card-front">
+                      <div class="center-wrap">
                         <div>
-                          <p>
-                            <a class="link" href="#">Forgot your password?</a>
-                          </p>
+                          <h2>Log In·登录</h2>
+                          <div class="form-group">
+                            <input autocomplete="off" class="form-style" name="logemail" placeholder="Username"
+                                   type="text" v-model="username">
+                          </div>
+                          <div class="form-group mt-2">
+                            <input autocomplete="off" class="form-style" name="logpass" placeholder="Password"
+                                   type="password" v-model="password">
+                          </div>
+                          <a @click="loginSubmit" class="btn">Log in</a>
+                          <div>
+                            <p>
+                              <a class="link" style="margin-left: 30%" href="#">Forgot your password?</a>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--login-->
+                    <div class="card-back">
+                      <div class="center-wrap">
+                        <div>
+                          <h2>Sign Up·注册</h2>
+                          <div class="form-group">
+                            <input autocomplete="off" class="form-style" id="logname" name="logname"
+                                   placeholder="Username"
+                                   type="text" v-model="username">
+                          </div>
+                          <div class="form-group">
+                            <input autocomplete="off" class="form-style" id="logemail" name="logemail"
+                                   placeholder="Password"
+                                   type="password" v-model="password">
+                          </div>
+                          <div class="form-group">
+                            <input autocomplete="off" class="form-style" id="logpass" name="logpass"
+                                   placeholder="Password Confirm" type="password" v-model="password_again">
+                          </div>
+                          <a @click="registerSubmit" class="btn" href="#">Sign up</a>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="card-back">
-                    <div class="center-wrap">
-                      <div>
-                        <h2>Sign Up·注册</h2>
-                        <div class="form-group">
-                          <input autocomplete="off" class="form-style" id="logname" name="logname"
-                                 placeholder="Username"
-                                 type="text" v-model="username">
+                  <div v-else>
+                    <!--login-->
+                    <div class="card-back">
+                      <div class="center-wrap">
+                        <div>
+                          <h2>Log In·登录</h2>
+                          <div class="form-group">
+                            <input autocomplete="off" class="form-style" name="logemail" placeholder="Username"
+                                   type="text" v-model="username">
+                          </div>
+                          <div class="form-group mt-2">
+                            <input autocomplete="off" class="form-style" name="logpass" placeholder="Password"
+                                   type="password" v-model="password">
+                          </div>
+                          <a @click="loginSubmit" class="btn">Log in</a>
+                          <div>
+                            <p>
+                              <a class="link" style="margin-left: 30%" href="#">Forgot your password?</a>
+                            </p>
+                          </div>
                         </div>
-                        <div class="form-group">
-                          <input autocomplete="off" class="form-style" id="logemail" name="logemail"
-                                 placeholder="Password"
-                                 type="password" v-model="password">
+                      </div>
+                    </div>
+                    <!--login-->
+                    <div class="card-front">
+                      <div class="center-wrap">
+                        <div>
+                          <h2>Sign Up·注册</h2>
+                          <div class="form-group">
+                            <input autocomplete="off" class="form-style" id="logname" name="logname"
+                                   placeholder="Username"
+                                   type="text" v-model="username">
+                          </div>
+                          <div class="form-group">
+                            <input autocomplete="off" class="form-style" id="logemail" name="logemail"
+                                   placeholder="Password"
+                                   type="password" v-model="password">
+                          </div>
+                          <div class="form-group">
+                            <input autocomplete="off" class="form-style" id="logpass" name="logpass"
+                                   placeholder="Password Confirm" type="password" v-model="password_again">
+                          </div>
+                          <a @click="registerSubmit" class="btn" href="#">Sign up</a>
                         </div>
-                        <div class="form-group">
-                          <input autocomplete="off" class="form-style" id="logpass" name="logpass"
-                                 placeholder="Password Confirm" type="password" v-model="password_again">
-                        </div>
-                        <a @click="registerSubmit" class="btn" href="#">Sign up</a>
                       </div>
                     </div>
                   </div>
@@ -98,11 +136,13 @@ import {login, register} from "../../network/user.js";
 
 export default {
   name: "Register",
+  props: ['choice'],
   data() {
     return {
       username: '',
       password: '',
-      password_again: ''
+      password_again: '',
+      choice: 0
     }
   },
   methods: {
@@ -175,20 +215,6 @@ export default {
     },
   },
   computed: {},
-  mounted() {
-    var squares = document.querySelectorAll('.square');
-    var lastSquare = 0;
-
-    function move() {
-      lastSquare = (lastSquare + 1 + Math.floor(Math.random() * 5)) % 9;
-      squares[lastSquare].style.transform = 'translateZ(' + ((Math.random() - 0.5) * 100) + 'px)';
-      setTimeout(function () {
-        move();
-      }, 125);
-    }
-
-    move();
-  }
 };
 </script>
 
@@ -502,12 +528,12 @@ p {
 
 .switch-tab {
   margin-bottom: 20px;
-  margin-left: 60%;
+  margin-left: 65%;
   margin-top: 10px;
 }
 
 .switch-tab__span {
-  margin-left: 20px;
+  margin-left: 25px;
 }
 
 /*动效*/
