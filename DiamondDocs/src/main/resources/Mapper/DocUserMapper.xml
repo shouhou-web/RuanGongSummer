@@ -5,8 +5,34 @@
 
 <mapper namespace="com.diamond.mapper.DocUserMapper">
 
-    <select id="getUserByID" parameterType="String" resultType="DocUser">
-        select * from DocUser where userID = #{userID};
+    <insert id="addDocUser" parameterType="DocUser">
+        insert
+        into DocUser(userID, userName, userPassword, mobile, emailAddress, imagePath)
+        values (#{userID}, #{userName}, #{userPassword}, #{mobile}, #{emailAddress}, #{imagePath});
+    </insert>
+    
+    <select id="getDocUserByUserName" parameterType="String" resultType="DocUser">
+        select *
+        from DocUser
+        where userName = #{userName};
     </select>
+
+    <select id="getDocUserByEmailAddress" parameterType="String" resultType="DocUser">
+        select *
+        from DocUser
+        where emailAddress = #{emailAddress};
+    </select>
+
+    <select id="getUserByID" parameterType="String" resultType="DocUser">
+        select *
+        from DocUser
+        where userID = #{userID};
+    </select>
+
+    <update id="updateDocUser" parameterType="DocUser">
+        update DocUser
+        set userName = #{userName}, userPassword = #{userPassword}, mobile = #{mobile}, emailAddress = #{emailAddress}, imagePath = #{imagePath}
+        where userID = #{userID}
+    </update>
 
 </mapper>
