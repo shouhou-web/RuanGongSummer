@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div class="login">
       <input
         class="checkbox"
         id="reg-log"
@@ -16,7 +16,7 @@
               <div class="center-wrap">
                 <div>
                   <div class="login-header">
-                    <h2>Log In·登录</h2>
+                    <h2>登录</h2>
                   </div>
                   <div class="login-main">
                     <div class="form-group">
@@ -28,39 +28,91 @@
                              type="password" v-model="password">
                     </div>
                   </div>
+                  <div class="forget">
+                    <router-link class="forget-text" to="/forgetPwd">
+                      <div>
+                        <img src="../../assets/image/forget.svg" style="height: 15px;">
+                      </div>
+                      ··· 忘记密码？
+                    </router-link>
+                  </div>
                   <a @click="loginSubmit" class="btn">Log in</a>
-                  <div>
-                    <p>
-                      <a class="link" style="margin-left: 30%" href="#">Forgot your password?</a>
-                    </p>
+                </div>
+                <div class="otherway-login">
+                  <div style="text-align: center">
+                    第三方登录
+                  </div>
+                  <div class="otherway-icons">
+                    <a href="#" style="margin-left: 25%" title="微信登录">
+                      <img src="../../assets/image/wechat.svg">
+                    </a>
+                    <a href="#" style="margin-left: 10%" title="QQ登录">
+                      <img src="../../assets/image/qq.svg">
+                    </a>
+                    <a href="#" style="margin-left: 10%" title="github登录">
+                      <img src="../../assets/image/github.svg" style="width: 25px">
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
-            <!--login-->
+            <!--register-->
             <div class="card-back">
               <div class="center-wrap">
                 <div>
                   <div class="login-header">
-                    <h2>Sign Up·注册</h2>
+                    <h2>注册</h2>
                   </div>
                   <div class="login-main">
                     <div class="form-group">
-                      <input autocomplete="off" class="form-style" id="logname" name="logname"
+                      <input autocomplete="off"
+                             class="form-style"
+                             id="logname"
+                             name="logname"
                              placeholder="Username"
-                             type="text" v-model="username">
+                             type="text"
+                             v-model="username">
                     </div>
                     <div class="form-group">
-                      <input autocomplete="off" class="form-style" id="logemail" name="logemail"
+                      <input autocomplete="off"
+                             class="form-style"
+                             id="logpass"
+                             name="logpass"
                              placeholder="Password"
-                             type="password" v-model="password">
+                             type="password"
+                             v-model="password">
+                    </div>
+                    <div class="form-group">
+                      <input autocomplete="off"
+                             class="form-style"
+                             id="logpassagain"
+                             name="logpassagain"
+                             placeholder="Password Confirm"
+                             type="password"
+                             v-model="password_again">
+                    </div>
+                    <div class="form-group">
+                      <input @focus="email_info = 0"
+                             autocomplete="off"
+                             id="logemail"
+                             name="logeamil"
+                             placeholder="Your email"
+                             type="email"
+                             v-bind:class="{ 'form-style' : (email_info == 0), 'error-style' : (email_info == 2) }"
+                             v-model="email">
+                    </div>
+                    <div style="display: flex;flex-direction: row">
+                      <input @focus="code_info = 0"
+                             id="logcode"
+                             name="logcode"
+                             placeholder="邮箱验证码"
+                             type="text"
+                             v-bind:class="{ 'code-style' : (code_info == 0), 'error-code-style' : (code_info == 2), 'empty-code-style' : (code_info == 3) }"
+                             v-model="code">
+                      <div @click="sendCode" class="send-code">发送验证码</div>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <input autocomplete="off" class="form-style" id="logpass" name="logpass"
-                           placeholder="Password Confirm" type="password" v-model="password_again">
-                  </div>
-                  <a @click="registerSubmit" class="btn" href="#">Sign up</a>
+                  <a @click="registerSubmit" class="btn">Sign up</a>
                 </div>
               </div>
             </div>
@@ -70,44 +122,104 @@
             <div class="card-back">
               <div class="center-wrap">
                 <div>
-                  <h2>Log In·登录</h2>
-                  <div class="form-group">
-                    <input autocomplete="off" class="form-style" name="logemail" placeholder="Username"
-                           type="text" v-model="username">
+                  <div class="login-header">
+                    <h2>登录</h2>
                   </div>
-                  <div class="form-group mt-2">
-                    <input autocomplete="off" class="form-style" name="logpass" placeholder="Password"
-                           type="password" v-model="password">
+                  <div class="login-main">
+                    <div class="form-group">
+                      <input autocomplete="off" class="form-style" name="logemail" placeholder="Username"
+                             type="text" v-model="username">
+                    </div>
+                    <div class="form-group mt-2">
+                      <input autocomplete="off" class="form-style" name="logpass" placeholder="Password"
+                             type="password" v-model="password">
+                    </div>
+                  </div>
+                  <div class="forget">
+                    <a class="forget-text" href="#">
+                      <div>
+                        <img src="../../assets/image/forget.svg" style="height: 15px;">
+                      </div>
+                      ··· 忘记密码？
+                    </a>
                   </div>
                   <a @click="loginSubmit" class="btn">Log in</a>
-                  <div>
-                    <p>
-                      <a class="link" style="margin-left: 30%" href="#">Forgot your password?</a>
-                    </p>
+                </div>
+                <div class="otherway-login">
+                  <div style="text-align: center">
+                    第三方登录
+                  </div>
+                  <div class="otherway-icons">
+                    <a href="#" style="margin-left: 25%" title="微信登录">
+                      <img src="../../assets/image/wechat.svg">
+                    </a>
+                    <a href="#" style="margin-left: 10%" title="QQ登录">
+                      <img src="../../assets/image/qq.svg">
+                    </a>
+                    <a href="#" style="margin-left: 10%" title="github登录">
+                      <img src="../../assets/image/github.svg" style="width: 25px">
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
-            <!--login-->
+            <!--register-->
             <div class="card-front">
               <div class="center-wrap">
                 <div>
-                  <h2>Sign Up·注册</h2>
-                  <div class="form-group">
-                    <input autocomplete="off" class="form-style" id="logname" name="logname"
-                           placeholder="Username"
-                           type="text" v-model="username">
+                  <div class="login-header">
+                    <h2>注册</h2>
                   </div>
-                  <div class="form-group">
-                    <input autocomplete="off" class="form-style" id="logemail" name="logemail"
-                           placeholder="Password"
-                           type="password" v-model="password">
+                  <div class="login-main">
+                    <div class="form-group">
+                      <input autocomplete="off"
+                             class="form-style"
+                             id="logname"
+                             name="logname"
+                             placeholder="Username"
+                             type="text"
+                             v-model="username">
+                    </div>
+                    <div class="form-group">
+                      <input autocomplete="off"
+                             class="form-style"
+                             id="logpass"
+                             name="logpass"
+                             placeholder="Password"
+                             type="password"
+                             v-model="password">
+                    </div>
+                    <div class="form-group">
+                      <input autocomplete="off"
+                             class="form-style"
+                             id="logpassagain"
+                             name="logpassagain"
+                             placeholder="Password Confirm"
+                             type="password"
+                             v-model="password_again">
+                    </div>
+                    <div class="form-group">
+                      <input @focus="email_info = 0"
+                             autocomplete="off"
+                             id="logemail"
+                             name="logeamil"
+                             placeholder="Your email"
+                             type="email"
+                             v-bind:class="{ 'form-style' : (email_info == 0), 'error-style' : (email_info == 2) }"
+                             v-model="email">
+                    </div>
+                    <div style="display: flex;flex-direction: row">
+                      <input @focus="code_info = 0"
+                             id="logcode"
+                             name="logcode"
+                             placeholder="邮箱验证码"
+                             type="text"
+                             v-bind:class="{ 'code-style' : (code_info == 0), 'error-code-style' : (code_info == 2), 'empty-code-style' : (code_info == 3) }"
+                             v-model="code">
+                      <div @click="sendCode" class="send-code">发送验证码</div>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <input autocomplete="off" class="form-style" id="logpass" name="logpass"
-                           placeholder="Password Confirm" type="password" v-model="password_again">
-                  </div>
-                  <a @click="registerSubmit" class="btn" href="#">Sign up</a>
+                  <a @click="registerSubmit" class="btn">Sign up</a>
                 </div>
               </div>
             </div>
@@ -119,7 +231,7 @@
 </template>
 
 <script>
-import {login, register} from "../../network/user.js";
+import {emailVerification, login, register} from "../../network/user.js";
 
 export default {
   name: "Register",
@@ -128,29 +240,43 @@ export default {
     return {
       username: '',
       password: '',
-      password_again: ''
+      password_again: '',
+      email: '',
+      code: '',
+      code_confirm: '012345',
+      email_info: 0,//存放email的状态 0正常/1已存在/2未填写
+      code_info: 0,//存放code的状态 0正常/1通过/2错误/3未填写
     }
   },
   methods: {
     registerSubmit() {
-      if (!this.username || !this.password || !this.password_again) {
-        this.$message({
-          message: "用户名或密码不能为空",
-          type: "warning"
-        });
+      if (!this.username || !this.password || !this.password_again || !this.email) {
+        this.$message.warning('用户名 · 密码 · 邮箱不能为空')
+        if (!this.email) this.email_info = 2;
+        return;
+      } else if (!this.code) {
+        this.code_info = 3;
+        this.$message.warning('请填写验证码');
+        return;
+      } else if (!(this.code == this.code_confirm)) {
+        this.code_info = 2;
+        this.$message.error('验证码错误');
         return;
       }
-      register(this.username, this.password, this.password_again)
+      register(this.username, this.password, this.password_again, this.email)
         .then(res => {
           console.log(res);
           if (res === 1) {
-            this.$message.error("用户名已存在");
+            this.$message.error("邮箱不合法");
             return;
           } else if (res === 2) {
-            this.$message.error("两次密码不等");
+            this.$message.error("密码不一致");
             return;
           } else if (res == 3) {
             this.$message.error("密码应至少由两种形式的字符组成，长度在6-18位之间");
+            return;
+          } else if (res == 4) {
+            this.$message.error("邮箱已注册");
             return;
           } else {
             this.$message({
@@ -199,6 +325,29 @@ export default {
           return;
         });
     },
+    sendCode() {
+      if (!this.email) {
+        this.email_info = 2;
+        this.$message.error('请填写邮箱以获取验证码');
+        return;
+      }
+
+      // emailVerification(this.email)
+      // .then(res => {
+      //   console.log('验证码：',res);
+      //
+      //   if (res === 0){
+      //     this.$message.error('验证码返回错误，请检查网络');
+      //   } else {
+      //     this.code_confirm = res;
+      //   }
+      // })
+      // .catch(err => {
+      //   this.$message.error('验证码返回错误，请检查网络');
+      //   return;
+      // })
+
+    },
   },
   computed: {},
 };
@@ -244,16 +393,54 @@ p {
   height: inherit;
 }
 
-.login-header{
+.login {
+  margin-top: 30px
+}
+
+.login-header {
+  color: #4a4a4c;
   margin-top: 0;
 }
 
-.login-main{
+.login-main {
   margin-top: 30px;
 }
 
-.login-btn{
+.login-btn {
 
+}
+
+.forget {
+  margin-left: 35%;
+  margin-top: 55px;
+}
+
+.forget-text {
+  display: flex;
+  flex-direction: row;
+  font-family: "JetBrains Mono";
+  font-size: 13px;
+}
+
+.forget-text:hover {
+  color: #a1c4fd;
+}
+
+.otherway-login {
+  border: 2px dashed #a1c4fd;
+  border-radius: 10px;
+  color: #4a4a4c;
+  font-family: "JetBrains Mono";
+  height: 20%;
+  margin-top: 40px;
+  padding: 10px;
+}
+
+.otherway-icons {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
 }
 
 /*
@@ -307,24 +494,24 @@ p {
 
 .checkbox:checked + label:before,
 .checkbox:not(:checked) + label:before {
+  align-content: center;
   background-color: #a1c4fd;
   border: 2px solid #4b97b8;
   border-radius: 50%;
   color: #f8f7f5;
-  content: '';/*这里显示有问题*/
+  content: ''; /*这里显示有问题*/
   display: block;
   font-family: 'unicons';
   font-size: 24px;
-  height: 36px;
+  height: 26px;
   left: -10px;
   line-height: 36px;
   position: absolute;
   text-align: center;
-  top: -10px;
+  top: -5px;
   transition: all 0.5s ease;
-  width: 36px;
+  width: 26px;
   z-index: 20;
-  align-content: center;
 }
 
 .checkbox:checked + label:before {
@@ -335,7 +522,7 @@ p {
   color: #a1c4fd;
   height: 400px;
   margin-left: 35%;
-  margin-top: 50px;
+  margin-top: 20px;
   max-width: 100%;
   perspective: 800px;
   position: relative;
@@ -368,14 +555,14 @@ p {
   background-size: 300%;
   border: 2px solid #a1c4fd;
   border-radius: 20px;
-  height: 500px;
+  height: 600px;
   left: 0;
+  opacity: 0.85;
   position: absolute;
   top: 0;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   width: 100%;
-  opacity: 0.85;
 }
 
 .card-back {
@@ -388,13 +575,13 @@ p {
 
 .center-wrap {
   display: block;
+  height: 80%;
   left: 0;
   padding: 0 35px;
   position: absolute;
   top: 50%;
   transform: translate3d(0, -50%, 35px) perspective(100px);
   width: 100%;
-  height: 80%;
   z-index: 20;
 }
 
@@ -425,11 +612,119 @@ p {
   width: 100%;
 }
 
+.error-style {
+  background-color: #f6a3a3;
+  border: 2px solid #fc7f7f;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  height: 48px;
+  letter-spacing: 0.5px;
+  line-height: 22px;
+  margin-top: 20px;
+  outline: none;
+  padding: 13px 20px;
+  padding-left: 55px;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+  width: 100%;
+}
+
+.code-style {
+  background-color: #ffffff;
+  border: 2px solid #a1c4fd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
+  color: #646161;
+  font-size: 14px;
+  font-weight: 500;
+  height: 48px;
+  letter-spacing: 0.5px;
+  line-height: 22px;
+  margin-top: 20px;
+  outline: none;
+  padding: 13px 20px;
+  padding-left: 55px;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+  width: 50%;
+}
+
+.error-code-style {
+  background-color: #f5b9b9;
+  border: 2px solid #f17785;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
+  color: #646161;
+  font-size: 14px;
+  font-weight: 500;
+  height: 48px;
+  letter-spacing: 0.5px;
+  line-height: 22px;
+  margin-top: 20px;
+  outline: none;
+  padding: 13px 20px;
+  padding-left: 55px;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+  width: 50%;
+}
+
+.empty-code-style {
+  background-color: #f8c37f;
+  border: 2px solid #f89c5e;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
+  color: #646161;
+  font-size: 14px;
+  font-weight: 500;
+  height: 48px;
+  letter-spacing: 0.5px;
+  line-height: 22px;
+  margin-top: 20px;
+  outline: none;
+  padding: 13px 20px;
+  padding-left: 55px;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+  width: 50%;
+}
+
+.send-code {
+  background-color: #e5e2e2;
+  border: none;
+  border: 2px solid #a1c4fd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
+  color: #514c4c;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  height: 48px;
+  letter-spacing: 3px;
+  line-height: 45px;
+  margin-left: 20%;
+  margin-top: 20px;
+  outline: none;
+  padding-left: 10px;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
+  width: 30%;
+}
+
 .form-style:focus,
 .form-style:active {
   border: none;
   box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
   outline: none;
+}
+
+.code-style:focus::-webkit-input-placeholder {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
+  transition: all 200ms linear;
 }
 
 .form-group input:-ms-input-placeholder {
@@ -538,84 +833,6 @@ p {
   margin-left: 25px;
 }
 
-/*动效*/
-.container__div--active {
-  font-size: 0;
-  height: 280px;
-  left: 50%;
-  perspective: 100px;
-  position: fixed;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  transform-style: preserve-3d;
-  width: 280px;
-  z-index: -2;
-}
-
-.square {
-  background: #aaa;
-  border: 2px solid gray;
-  border-radius: 10px;
-  display: inline-block;
-  height: 90px;
-  margin: 1px;
-  transition: all 0.25s;
-  width: 90px;
-}
-
-.square:nth-child(1) {
-  background: #BA68C8;
-  filter: blur(2px);
-  opacity: 0.7;
-}
-
-.square:nth-child(2) {
-  background: #8E24AA;
-  filter: blur(2px);
-  opacity: 0.7;
-}
-
-.square:nth-child(3) {
-  background: #4A148C;
-  filter: blur(2px);
-  opacity: 0.7;
-}
-
-.square:nth-child(5) {
-  background: #4FC3F7;
-  filter: blur(2px);
-  opacity: 0.7;
-}
-
-.square:nth-child(6) {
-  background: #039BE5;
-  filter: blur(2px);
-  opacity: 0.7;
-}
-
-.square:nth-child(7) {
-  background: #01579B;
-  filter: blur(2px);
-  opacity: 0.7;
-}
-
-.square:nth-child(9) {
-  background: #81C784;
-  filter: blur(2px);
-  opacity: 0.7;
-}
-
-.square:nth-child(10) {
-  background: #43A047;
-  filter: blur(2px);
-  opacity: 0.7;
-}
-
-.square:nth-child(11) {
-  background: #33691E;
-  filter: blur(2px);
-  opacity: 0.7;
-}
 
 .words {
   background-color: white;

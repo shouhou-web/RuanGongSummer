@@ -20,14 +20,21 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:dev" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:practice-yu" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="在自己尝试后发现一个安全而且还不错的登录样式（放在register.vue里面了，那个class绑定的登录样式在login.vue里面）">
-      <change afterPath="$PROJECT_DIR$/vuec/src/assets/image/lines.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vuec/src/assets/image/forget.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vuec/src/assets/image/github.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vuec/src/assets/image/qq.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vuec/src/assets/image/wechat.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vuec/src/assets/image/weibo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vuec/src/views/ForgetPwd/ForgetPwd.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/components/common/m-app-header/MAppHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/components/common/m-app-header/MAppHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/network/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/network/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vuec/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vuec/src/views/login/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/login/login.vue" afterDir="false" />
     </list>
@@ -46,13 +53,16 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/vuec/src/App.vue" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/vuec/src/components/common/m-app-header/MAppHeader.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/login/login.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/assets/image/forget.svg" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/views/ForgetPwd/ForgetPwd.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/components/common/m-app-header/MAppHeader.vue" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/vuec/src/assets/image" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -90,6 +100,9 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="-1766" y="92" width="1674" height="896" key="DiffContextDialog" timestamp="1597029926634">
       <screen x="-1858" y="0" width="1858" height="1080" />
@@ -107,9 +120,9 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-1148" y="449" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596771161767" />
-    <state x="-1266" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1597029160178">
+    <state x="-1266" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1597038365181">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1266" y="235" width="672" height="678" key="search.everywhere.popup/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597029160178" />
+    <state x="-1266" y="235" width="672" height="678" key="search.everywhere.popup/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597038365181" />
   </component>
 </project>

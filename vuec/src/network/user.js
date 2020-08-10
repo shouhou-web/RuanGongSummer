@@ -11,15 +11,26 @@ export function login(username, password) {
   })
 }
 
-export function register(username, password, password2) {
+export function register(username, password, password2, emailAddress) {
   return request({
-    url: "/register",
+    url: "/signUp",
     params: {
       username,
       password,
-      password2
+      password2,
+      emailAddress
     },
     method: 'post'
   })
 }
 
+export function emailVerification(emailAddress) {
+  return request({
+      url: "/emailVerification",
+      params: {
+        emailAddress
+      },
+      method: 'post'
+    }
+  )
+}
