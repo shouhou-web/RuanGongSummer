@@ -14,7 +14,7 @@ public interface MemberMapper {
     /*
     添加一个成员
      */
-    int addMember(@Param("member") Member member);
+    int addMember(Member member);
 
     /*
     返回和userID对应用户同组的总人数
@@ -25,5 +25,5 @@ public interface MemberMapper {
     修改用户身份
     用map进行传参，key分别为userID和userIdentity
      */
-    int updateDocUserIdentity(@Param("map") Map<String, Object> map);
+    int updateDocUserIdentity(Map<String, Object> map);
 }
