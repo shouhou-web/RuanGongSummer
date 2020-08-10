@@ -3,8 +3,8 @@ package com.diamond.pojo;
 import lombok.Data;
 
 @Data
-public class Team {
+public class Member {
+    private String userID;
+    private int userIdentity;
     private String teamID;
-    private String teamName;
-    private String creatorID;
 }
