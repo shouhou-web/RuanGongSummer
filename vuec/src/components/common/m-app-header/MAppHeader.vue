@@ -19,7 +19,7 @@
           </ul>
         </div>
         <div class="nav-right">
-          <div class="nav-right" v-if="token">
+          <div class="nav-right-item" v-if="token">
             <!-- 头像 -->
             <div class="item">
               <div class="mini-avator">
@@ -37,7 +37,7 @@
                 <div class="account">
                   <div class="account-item">
                     <div class="account__header">
-                      项目
+                      团队
                     </div>
                     <div class="account__content">
                       3
@@ -53,7 +53,7 @@
                   </div>
                   <div class="account-item">
                     <div class="account__header">
-                      团队成员
+                      协作成员
                     </div>
                     <div class="account__content">
                       15
@@ -66,8 +66,8 @@
                     <div class="option__icon">
                       <img src="@/assets/icon/header/about.png" alt="" />
                     </div>
-                    <div class="option__content">
-                      个人中心
+                    <div @click="toProfile" class="option__content">
+                      账号设置
                     </div>
                   </div>
                   <div class="option-item">
@@ -75,7 +75,7 @@
                       <img src="@/assets/icon/header/component.png" alt="" />
                     </div>
                     <div class="option__content">
-                      我的项目
+                      我的团队
                     </div>
                   </div>
                   <div class="option-item">
@@ -124,9 +124,9 @@
               </div>
             </div>
           </div>
-          <div class="nav-right" v-else>
+          <div class="nav-right-item" v-else>
             <div class="item">
-              <a class="nav-item__inner" href="#">登录</a>
+              <a class="nav-item__inner" href="/login-register">登录</a>
             </div>
             <div class="item">
               <a class="nav-item__inner" href="#">注册</a>
@@ -143,8 +143,6 @@ export default {
   name: "MAppHeader",
   data() {
     return {
-      avatorSrc: "https://avatars0.githubusercontent.com/u/52785537?s=460&v=4",
-      userName: "枯真",
       user: {} // 用户数据
     };
   },
@@ -161,7 +159,11 @@ export default {
       return this.$store.state.token;
     }
   },
-  methods: {}
+  methods: {
+    toProfile(){
+      this.$router.push({path:"/profile"})
+    }
+  }
 };
 </script>
 <style scoped>
@@ -184,7 +186,8 @@ export default {
 
 .nav-left,
 .nav-left-ul,
-.nav-right {
+.nav-right,
+.nav-right-item {
   align-items: center;
   display: flex;
 }
@@ -392,7 +395,6 @@ export default {
 .item:hover .mini-avator {
   transform: scale(1.3) translateY(20px);
   transition: transform 0.5s;
-  /* animation: avator-move 0.5s ease forwards; */
 }
 
 .item:hover .avator--hide {
@@ -417,16 +419,6 @@ export default {
   }
   100% {
     opacity: 0;
-  }
-}
-
-@keyframes avator-move {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.3) translateY(20px);
   }
 }
 
