@@ -1,5 +1,6 @@
 package com.diamond.controller;
 
+import com.diamond.service.UserInfoService;
 import com.diamond.utils.MailClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,8 @@ public class UserInfoController {
 
     @Autowired
     private MailClient mailClient;
+    @Autowired
+    private UserInfoService userInfoService;
 
     @RequestMapping("/emailVerification")
     public int emailVerification(@RequestParam("emailAddress") String emailAddress){
@@ -29,12 +32,11 @@ public class UserInfoController {
     public int signUp(@RequestParam("name") String name, @RequestParam("emailAddress") String emailAddress,
                       @RequestParam("password") String password, @RequestParam("password2") String password2){
         try {
-
-            return 0;
+            return userInfoService.signUp(name,emailAddress,password,password2);
         }
         catch (Exception e){
             e.printStackTrace();
-            return 1;
+            return 5;
         }
     }
 
