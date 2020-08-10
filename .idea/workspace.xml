@@ -19,9 +19,8 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/practice-yu" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:dev" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
@@ -77,7 +76,21 @@
       <option name="project" value="LOCAL" />
       <updated>1597053279472</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="打开API,进行测试">
+      <created>1597053659323</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1597053659323</updated>
+    </task>
+    <task id="LOCAL-00004" summary="git忽略内容指定">
+      <created>1597053821434</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1597053821434</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -91,7 +104,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/practice-yu" />
+                        <option value="dev" />
                       </list>
                     </value>
                   </entry>
@@ -108,7 +121,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="登陆注册/忘记密码完成，缺少API" />
     <MESSAGE value="打开API,进行测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="打开API,进行测试" />
+    <MESSAGE value="git忽略内容指定" />
+    <option name="LAST_COMMIT_MESSAGE" value="git忽略内容指定" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1766" y="92" width="1674" height="896" key="DiffContextDialog" timestamp="1597029926634">
@@ -123,18 +137,18 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-1398" y="185" key="SettingsEditor/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597028293908" />
-    <state x="-1337" y="254" key="Vcs.Push.Dialog.v2" timestamp="1597053464405">
+    <state x="-1337" y="254" key="Vcs.Push.Dialog.v2" timestamp="1597053823583">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1337" y="254" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597053464405" />
+    <state x="-1337" y="254" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597053823583" />
     <state x="-1148" y="449" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596771161767">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-1148" y="449" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596771161767" />
-    <state x="-1212" y="172" key="git4idea.branch.GitSmartOperationDialog" timestamp="1597053237412">
+    <state x="-1212" y="172" key="git4idea.branch.GitSmartOperationDialog" timestamp="1597053598689">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1212" y="172" key="git4idea.branch.GitSmartOperationDialog/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597053237412" />
+    <state x="-1212" y="172" key="git4idea.branch.GitSmartOperationDialog/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597053598689" />
     <state x="-1266" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1597038365181">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
