@@ -71,7 +71,7 @@ export default {
       headerText: '忘记密码',
       email: '',
       code: '',
-      code_confirm: '12345',
+      code_confirm: '',
       password: '',
       password_again: '',
       email_info: 0,//存放email的状态 0正常/1已存在/2未填写
@@ -87,20 +87,20 @@ export default {
         return;
       }
 
-      // emailVerification(this.email)
-      // .then(res => {
-      //   console.log('验证码：',res);
-      //
-      //   if (res === 0){
-      //     this.$message.error('验证码返回错误，请检查网络');
-      //   } else {
-      //     this.code_confirm = res;
-      //   }
-      // })
-      // .catch(err => {
-      //   this.$message.error('验证码返回错误，请检查网络');
-      //   return;
-      // })
+      emailVerification(this.email)
+      .then(res => {
+        console.log('验证码：',res);
+
+        if (res === 0){
+          this.$message.error('验证码返回错误，请检查网络');
+        } else {
+          this.code_confirm = res;
+        }
+      })
+      .catch(err => {
+        this.$message.error('验证码返回错误，请检查网络');
+        return;
+      })
 
     },
     confirmCode() {
