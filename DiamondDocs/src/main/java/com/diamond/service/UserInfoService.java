@@ -6,6 +6,10 @@ import com.diamond.utils.DiyUUID;
 import com.diamond.utils.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class UserInfoService {
@@ -29,6 +33,23 @@ public class UserInfoService {
         user.setUserName(name);
         user.setUserPassword(password);
         docUserMapper.addDocUser(user);
+        return 0;
+    }
+
+    public int resetPwd(String emailAddress, String password, String password2)
+    {
+        if(!Validation.checkEmailFormat(emailAddress))
+            return 1;
+        else if(!password.equals(password2))
+            return 2;
+        else if(!Validation.checkPasswordFormat(password))
+            return 3;
+
+        String userID = docUserMapper.getDocUserByEmailAddress(emailAddress).getUserID();
+        Map<String, Object> map = new HashMap<>();
+        map.put("userID", userID);
+        map.put("userPassword", password);
+        docUserMapper.updateDocUserPassword(map);
         return 0;
     }
 }

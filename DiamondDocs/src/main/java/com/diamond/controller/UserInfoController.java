@@ -40,4 +40,16 @@ public class UserInfoController {
         }
     }
 
+    @RequestMapping("/resetPwd")
+    public int resetPwd(@RequestParam("emailAddress") String emailAddress, @RequestParam("password") String password,
+                        @RequestParam("password2") String password2) {
+        try {
+            return userInfoService.resetPwd(emailAddress, password, password2);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
 }
