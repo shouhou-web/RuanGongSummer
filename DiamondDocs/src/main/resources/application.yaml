@@ -1,3 +1,19 @@
+spring:
+  datasource:
+    username: sa
+    password: 123456
+    url: jdbc:sqlserver://localhost:1433;database=DiamondDocs
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 20MB
+      max-request-size: 100MB
+  mail:
+    username: diamond_docs@163.com
+    password: SROYYIQXDOANMRTC
+    host: smtp.163.com
 mybatis:
-  type-aliases-package: com.deadline.pojo
+  type-aliases-package: com.diamond.pojo
   mapper-locations: classpath:mapper/*.xml
