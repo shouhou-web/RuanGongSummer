@@ -44,6 +44,8 @@ public class UserInfoService {
             return 2;
         else if(!Validation.checkPasswordFormat(password))
             return 3;
+        else if(docUserMapper.getDocUserByEmailAddress(emailAddress)==null)
+            return 4;
 
         String userID = docUserMapper.getDocUserByEmailAddress(emailAddress).getUserID();
         Map<String, Object> map = new HashMap<>();

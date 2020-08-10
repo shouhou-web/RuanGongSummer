@@ -48,7 +48,7 @@ public class UserInfoController {
         }
         catch (Exception e){
             e.printStackTrace();
-            return 1;
+            return 5;
         }
     }
 
