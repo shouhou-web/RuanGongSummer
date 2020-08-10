@@ -50,7 +50,7 @@
                            type="password"
                            v-model="password_again">
                   </div>
-                  <a @click="" class="btn">reset</a>
+                  <a @click="resetPassword" class="btn">reset</a>
                 </div>
               </div>
             </div>
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import {login, register} from "@/network/user";
+import {login, register, resetPwd, emailVerification} from "@/network/user";
 
 export default {
   name: 'ForgetPassword',
@@ -116,6 +116,33 @@ export default {
         this.isShow = false;
         this.headerText = '重置密码'
       }
+    },
+    resetPassword() {
+      if (!this.email || !this.code || !this.password || !this.password_again) {
+        this.$message.warning('请填写相关项');
+        return;
+      }
+
+      resetPwd(this.email,this.password,this.password_again)
+      .then(res => {
+        console.log('重置密码:',res);
+        if (res == 1){
+          this.$message.warning('请确保邮箱格式正确');
+          return;
+        }else if (res == 2){
+          this.$message.warning('两次密码不一致');
+          return;
+        }else if (res == 3){
+          this.$message.warning('密码格式不合法');
+          return;
+        }else if (res == 4){
+          this.$message.warning('邮箱暂未注册');
+          return;
+        }else {
+          this.$message.success('密码修改成功');
+        }
+      })
+
     }
   },
   props: {},

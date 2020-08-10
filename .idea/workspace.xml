@@ -20,12 +20,19 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:dev" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:practice-yu" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="在自己尝试后发现一个安全而且还不错的登录样式（放在register.vue里面了，那个class绑定的登录样式在login.vue里面）" />
+    <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="在自己尝试后发现一个安全而且还不错的登录样式（放在register.vue里面了，那个class绑定的登录样式在login.vue里面）">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020_8_10_11_39__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020_8_10_11_39__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020_8_7_11_31__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020_8_7_11_31__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/network/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/network/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/ForgetPwd/ForgetPwd.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/ForgetPwd/ForgetPwd.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/login/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/login/login.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,10 +47,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/vuec/src/App.vue" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/vuec/src/views/login/login.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/assets/image/forget.svg" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/ForgetPwd/ForgetPwd.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/App.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/views/login/login.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/components/common/m-app-header/MAppHeader.vue" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -149,9 +156,9 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-1212" y="172" key="git4idea.branch.GitSmartOperationDialog/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597053598689" />
-    <state x="-1266" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1597038365181">
+    <state x="-1266" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1597063757179">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1266" y="235" width="672" height="678" key="search.everywhere.popup/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597038365181" />
+    <state x="-1266" y="235" width="672" height="678" key="search.everywhere.popup/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597063757179" />
   </component>
 </project>

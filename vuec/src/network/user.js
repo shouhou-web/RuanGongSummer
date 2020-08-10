@@ -1,21 +1,21 @@
 import {request} from "@/network/request";
 
-export function login(username, password) {
+export function login(name, password) {
   return request({
     url: "/login",
     params: {
-      username,
+      name,
       password
     },
     method: 'post'
   })
 }
 
-export function register(username, password, password2, emailAddress) {
+export function register(name, password, password2, emailAddress) {
   return request({
     url: "/signUp",
     params: {
-      username,
+      name,
       password,
       password2,
       emailAddress
@@ -29,6 +29,20 @@ export function emailVerification(emailAddress) {
       url: "/emailVerification",
       params: {
         emailAddress
+      },
+      method: 'post'
+    }
+  )
+}
+
+export function resetPwd(emailAddress,password,password2) {
+  return request(
+    {
+      url: "/resetPwd",
+      params: {
+        emailAddress,
+        password,
+        password2
       },
       method: 'post'
     }

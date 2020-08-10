@@ -263,6 +263,9 @@ export default {
         this.$message.error('验证码错误');
         return;
       }
+
+      console.log('this is ok');
+
       register(this.username, this.password, this.password_again, this.email)
         .then(res => {
           console.log(res);
@@ -331,6 +334,8 @@ export default {
         this.$message.error('请填写邮箱以获取验证码');
         return;
       }
+
+      console.log(this.email)
 
       emailVerification(this.email)
       .then(res => {
