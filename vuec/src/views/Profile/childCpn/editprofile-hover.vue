@@ -8,10 +8,10 @@
     </div>
     <div class="footer">
       <my-button @click="submit" size="small">
-        提交修改
+        {{assure}}
       </my-button>
       <my-button @click="cancel" type="info" size="small">
-        放弃修改
+        {{cancel}}
       </my-button>
     </div>
   </div>
@@ -22,7 +22,9 @@ export default {
   name: "EditProfileHover",
   props: {
     title: String, // 标题
-    content: String // 按钮
+    content: String, // 按钮
+    assure:String, // 确定按钮文字
+    cancel:String, // 取消按钮文字
   },
   methods: {
     submit() {

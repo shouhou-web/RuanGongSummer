@@ -44,8 +44,11 @@ export default {
 
 <style scoped>
 .wrapper {
+  border-radius: 8px;
   background-color: #fff;
-  margin: 0 auto;
+  box-shadow:  0 2px 12px #ebebeb;
+  margin: 100px auto 0;
+  padding-bottom: 20px;
   width: 746px;
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper--son">
     <div class="header">
       <div class="avator">
         <img class="avator__inner" :src="user.imagePath" alt="" />
@@ -51,10 +51,8 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
+.wrapper--son {
   align-items: center;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
   display: flex;
   justify-content: space-around;
   padding: 20px 50px;

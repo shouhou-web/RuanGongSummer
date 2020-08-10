@@ -1,7 +1,12 @@
 <template>
   <div>
     <editprofile-item icon="user" title="昵称" content="">
-      <input class="input" type="text" v-model="userName" />
+      <input
+        @blur="editUserName"
+        class="input"
+        type="text"
+        v-model="userName"
+      />
     </editprofile-item>
     <!-- 编辑密码 -->
     <editprofile-item icon="lock" title="密码" content="******">
@@ -28,6 +33,8 @@
         @cancel="changeOpen"
         v-if="editPwd"
         title="修改密码"
+        assure="确定修改"
+        cancel="暂不修改"
       >
         <input
           class="hover-input"
@@ -54,6 +61,8 @@
         @cancel="changeOpen"
         v-else-if="editEmail"
         title="修改绑定邮箱"
+        assure="确定修改"
+        cancel="暂不修改"
       >
         <input
           class="hover-input"
@@ -68,7 +77,10 @@
             v-model="newCode"
             placeholder="验证码"
           />
-          <my-button :disabled="isAddress(emailAddressNew)" type="text"
+          <my-button
+            @click="sendCode(emailAddressNew)"
+            :disabled="isAddress(emailAddressNew)"
+            type="text"
             >发送验证码</my-button
           >
         </div>
@@ -79,6 +91,8 @@
         @cancel="changeOpen"
         v-else
         title="安全验证"
+        assure="验证"
+        cancel="取消"
       >
         <input
           class="hover-input"
@@ -93,7 +107,10 @@
             v-model="tokenCode"
             placeholder="验证码"
           />
-          <my-button :disabled="isAddress(emailAddress)" type="text"
+          <my-button
+            @click="sendCode(emailAddress)"
+            :disabled="isAddress(emailAddress)"
+            type="text"
             >发送验证码</my-button
           >
         </div>
@@ -105,6 +122,12 @@
 <script>
 import editprofileItem from "./childCpn/editprofile-item";
 import editprofileHover from "./childCpn/editprofile-hover";
+import {
+  setUserName,
+  setUserPassword,
+  setEmailAddress
+} from "network/profile.js";
+import { emailVerification } from "network/user.js";
 export default {
   name: "Home",
   data() {
@@ -112,6 +135,7 @@ export default {
       userName: "",
       userPassword: "",
       emailAddress: "",
+      emailAddressNew: "",
       open: false, //  是否打开悬浮窗
       editPwd: false, // 悬浮窗状态
       editEmail: false, // 悬浮窗状态
@@ -135,9 +159,26 @@ export default {
     // this.emailAddress = this.$store.state.user.emailAddress;
     this.emailAddress = "18373337@buaa.edu.cn";
   },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    }
+  },
   methods: {
     changeOpen() {
       this.open = !this.open;
+    },
+    editUserName() {
+      setUserName(this.userName).then(res => {
+        this.$notify({
+          title: "成功",
+          message: "修改昵称成功",
+          type: "success"
+        });
+        // 更新信息
+        this.user.userName = this.userName;
+        this.$commit("login", this.user);
+      });
     },
     clickPassword() {
       this.changeOpen();
@@ -154,6 +195,17 @@ export default {
       this.editPwd = false;
       this.editEmail = true;
     },
+    // 发送验证码
+    sendCode(e) {
+      emailVerification(e).then(res => {
+        this.code = res;
+        this.$notify({
+          title: "成功",
+          message: "验证码发送成功",
+          type: "success"
+        });
+      });
+    },
     submit(e) {
       console.log(e);
       if (e == "修改密码") this._changePwd();
@@ -167,16 +219,59 @@ export default {
         this.$message.error("原密码不正确");
       else if (this.newpwd1 != this.newpwd2)
         this.$message.error("两次密码填写不一致");
-    //   else  发送修改密码
+      // 发送修改密码
+      else
+        setUserPassword(this.newpwd1).then(res => {
+          this.$notify({
+            title: "成功",
+            message: "修改密码成功",
+            type: "success"
+          });
+          this.userPassword = newpwd1;
+          // 更新信息
+          this.user.userPassword = newpwd1;
+          this.$commit("login", this.user);
+        });
     },
-    _checkTokenCode(){
-        
+    _checkTokenCode() {
+      if (this.code == this.tokenCode) {
+        this.$notify({
+          title: "成功",
+          message: "安全验证成功",
+          type: "success"
+        });
+        this.token = true;
+        this.editEmail = true;
+      }
     },
-    _changeEmail(){
-
+    _changeEmail() {
+      if (this.code == this.newCode) {
+        setEmailAddress(this.emailAddressNew).then(res => {
+          if (res == 0) {
+            this.$notify({
+              title: "成功",
+              message: "邮箱注册成功",
+              type: "success"
+            });
+            // 更新信息
+            this.user.userPassword = this.emailAddressNew;
+            this.$commit("login", this.user);
+          } else if (res == 1) {
+            this.$notify({
+              title: "邮箱已注册",
+              message: "该邮箱已经被注册过",
+              type: "warning"
+            });
+          } else
+            this.$notify.error({
+              title: "未知错误",
+              message: "请稍后重试~"
+            });
+        });
+      }
     },
     isAddress(e) {
-      //   console.log(e.indexOf('@'));
+      //   console.log(e);
       return e.indexOf("@") == -1;
     }
   }
