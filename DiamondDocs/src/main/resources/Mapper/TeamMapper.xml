@@ -11,7 +11,7 @@
         values (#{teamID}, #{teamName}, #{creatorID})
     </insert>
 
-    <update id="updateTeam" parameterType="Map">
+    <update id="updateTeamName" parameterType="Map">
         update Team
         set teamName = #{teamName}
         where teamID = #{teamID}

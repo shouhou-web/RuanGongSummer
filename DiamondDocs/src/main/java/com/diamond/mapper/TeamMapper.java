@@ -21,7 +21,7 @@ public interface TeamMapper {
     更新团队信息，只能修改团队名字
     使用map传参，key分别为teamID和teamName
      */
-    int updateTeam(@Param("map") Map<String, Object> map);
+    int updateTeamName(@Param("map") Map<String, Object> map);
 
     /*
     删除一个团队，解散团队用

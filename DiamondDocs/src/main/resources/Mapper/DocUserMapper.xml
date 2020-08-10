@@ -29,9 +29,33 @@
         where userID = #{userID};
     </select>
 
-    <update id="updateDocUser" parameterType="DocUser">
+    <update id="updateDocUserName" parameterType="Map">
         update DocUser
-        set userName = #{userName}, userPassword = #{userPassword}, mobile = #{mobile}, emailAddress = #{emailAddress}, imagePath = #{imagePath}
+        set userName = #{userName}
+        where userID = #{userID}
+    </update>
+
+    <update id="updateDocUserPassword" parameterType="Map">
+        update DocUser
+        set userPassword = #{userPassword}
+        where userID = #{userID}
+    </update>
+
+    <update id="updateDocUserMobile" parameterType="Map">
+        update DocUser
+        set mobile = #{mobile}
+        where userID = #{userID}
+    </update>
+
+    <update id="updateDocUserEmailAddress" parameterType="Map">
+        update DocUser
+        set emailAddress = #{emailAddress}
+        where userID = #{userID}
+    </update>
+
+    <update id="updateDocUserImagePath" parameterType="Map">
+        update DocUser
+        set imagePath = #{imagePath}
         where userID = #{userID}
     </update>
 
