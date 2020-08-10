@@ -39,9 +39,36 @@ public interface DocUserMapper {
     /*
     修改用户信息
     返回结果为更新行数，结果为0时更新失败
-    只更新UserName,UserPassword,ImagePath,EmailAddress四个参数，而且会将四个参数对应的值全部置为传入参数中对应属性的值
-    对修改单属性不方便，需要先获取原DocUser对象并将其中不修改的属性值输入到传入参数的对应属性中
+    使用map传参，key分别为userID和userName
      */
-    int updateDocUser(@Param("docUser") DocUser docUser);
+    int updateDocUserName(@Param("map") Map<String, Object> map);
+
+    /*
+    修改用户信息
+    返回结果为更新行数，结果为0时更新失败
+    使用map传参，key分别为userID和userPassword
+     */
+    int updateDocUserPassword(@Param("map") Map<String, Object> map);
+
+    /*
+    修改用户信息
+    返回结果为更新行数，结果为0时更新失败
+    使用map传参，key分别为userID和mobile
+     */
+    int updateDocUserMobile(@Param("map") Map<String, Object> map);
+
+    /*
+    修改用户信息
+    返回结果为更新行数，结果为0时更新失败
+    使用map传参，key分别为userID和emailAddress
+     */
+    int updateDocUserEmailAddress(@Param("map") Map<String, Object> map);
+
+    /*
+    修改用户信息
+    返回结果为更新行数，结果为0时更新失败
+    使用map传参，key分别为userID和imagePath
+     */
+    int updateDocUserImagePath(@Param("map") Map<String, Object> map);
 
 }
