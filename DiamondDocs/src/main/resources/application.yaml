@@ -1,0 +1,3 @@
+mybatis:
+  type-aliases-package: com.deadline.pojo
+  mapper-locations: classpath:mapper/*.xml
