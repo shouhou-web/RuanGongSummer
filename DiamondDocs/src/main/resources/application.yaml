@@ -1,7 +1,7 @@
 spring:
   datasource:
     username: sa
-    password: 123456
+    password: Zx20180607
     url: jdbc:sqlserver://localhost:1433;database=DiamondDocs
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   servlet:
@@ -14,6 +14,13 @@ spring:
     username: diamond_docs@163.com
     password: SROYYIQXDOANMRTC
     host: smtp.163.com
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+    port: 465
 mybatis:
   type-aliases-package: com.diamond.pojo
   mapper-locations: classpath:mapper/*.xml
