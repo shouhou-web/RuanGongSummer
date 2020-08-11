@@ -5,8 +5,8 @@
       <my-button size="small">退出团队</my-button>
     </div>
     <div class="my-team-details">
-      <div class="team-docs" v-for="(adoc,docIndex) in docs">
-        <div class="doc">
+      <div class="team-docs">
+        <div class="doc" v-for="(adoc,docIndex) in docs">
           <input type="checkbox"></input>
           <div><img src="../../assets/image/file.svg" class="doc--img"></div>
           <div class="doc--name">{{adoc.docID}}:{{adoc.docName}}</div>
@@ -50,7 +50,8 @@ export default {
 }
 </script>
 
-<style scoped>.teamspace{
+<style scoped>
+.teamspace{
   height: 100vh;
   border-left: 2px solid #a1c4fd;
   padding-left: 30px;
@@ -100,7 +101,7 @@ export default {
   height: auto;
   font-family: "JetBrains Mono";
   font-size: 13px;
-  box-shadow:2px 2px 5px #b5b5b5;
+  box-shadow:2px 2px 5px #d7d7d7;
 }
 
 .one-team_chosen{
