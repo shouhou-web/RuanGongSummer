@@ -7,8 +7,8 @@
 
     <insert id="addDocUser" parameterType="DocUser">
         insert
-        into DocUser(userID, userName, userPassword, mobile, emailAddress, imagePath)
-        values (#{userID}, #{userName}, #{userPassword}, #{mobile}, #{emailAddress}, #{imagePath});
+        into DocUser(userID, userName, userPassword, mobile, emailAddress, imagePath, githubID)
+        values (#{userID}, #{userName}, #{userPassword}, #{mobile}, #{emailAddress}, #{imagePath}, #{githubID});
     </insert>
     
     <select id="getDocUserByUserName" parameterType="String" resultType="DocUser">
@@ -27,6 +27,12 @@
         select *
         from DocUser
         where userID = #{userID};
+    </select>
+
+    <select id="getUserByGithubID" parameterType="String" resultType="DocUser">
+        select *
+        from DocUser
+        where githubID = #{githubID};
     </select>
 
     <update id="updateDocUserName" parameterType="Map">

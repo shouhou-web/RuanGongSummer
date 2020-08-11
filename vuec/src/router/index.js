@@ -19,6 +19,9 @@ const IMade = () => import("views/Home/WorkSpace/IMade/IMade.vue"); // 我的创
 const MyCollection = () =>
   import("views/Home/WorkSpace/MyCollection/MyCollection.vue"); // 我的收藏界面
 
+// 文档编辑
+const Doc = () => import("views/Doc/Doc.vue");
+
 //1.安装插件
 Vue.use(VueRouter);
 
@@ -84,6 +87,11 @@ const routes = [
     path: "/forgetPwd",
     name: "ForgetPwd",
     component: ForgetPwd
+  },
+  {
+    path: "/doc",
+    name: "Doc",
+    component: Doc
   }
 ];
 
