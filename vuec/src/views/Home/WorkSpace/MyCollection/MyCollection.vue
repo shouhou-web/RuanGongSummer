@@ -21,11 +21,11 @@ export default {
 
 .doc {
   align-items: center;
-  display: flex;
-  width: 300px;
-  height: 80px;
   background-color: #e1e2e4;
+  display: flex;
+  height: 80px;
   margin: 20px;
+  width: 300px;
 }
 
 .doc-icon {
