@@ -216,7 +216,7 @@
                              type="text"
                              v-bind:class="{ 'code-style' : (code_info == 0), 'error-code-style' : (code_info == 2), 'empty-code-style' : (code_info == 3) }"
                              v-model="code">
-                      <input @click="sendCode" class="send-code" :disabled="countFlag" :value="btnMsg"></input>
+                      <input @click="sendCode" class="send-code" :disabled="countFlag" :value="btnMsg"/>
                     </div>
                   </div>
                   <a @click="registerSubmit" class="btn">Sign up</a>
