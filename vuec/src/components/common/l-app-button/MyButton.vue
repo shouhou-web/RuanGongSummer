@@ -100,10 +100,6 @@ export default {
   -webkit-user-select: none;
 }
 
-.l-button + .l-button {
-  margin-left: 10px;
-}
-
 .l-button:focus,
 .l-button:hover {
   color: #25374f;
@@ -536,13 +532,14 @@ export default {
 
 .l-button--text:focus,
 .l-button--text:hover {
-  color: #66b1ff;
+  color: #2C405A;
   border-color: transparent;
   background-color: transparent;
 }
 
+.l-button--text.is-active,
 .l-button--text:active {
-  color: #3a8ee6;
+  color: #2C405A;
   border-color: transparent;
   background-color: transparent;
 }

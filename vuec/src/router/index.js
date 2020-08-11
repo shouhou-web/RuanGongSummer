@@ -10,7 +10,20 @@ const Login = () =>
 // 个人界面
 const Profile = () =>
     import ("views/Profile/Profile.vue");
-
+const EditProfile = () =>
+    import ("views/Profile/EditProfile.vue");
+// 工作台二级导航栏
+const WorkSpace = () =>
+    import ("views/Home/WorkSpace/WorkSpace.vue");
+// 最近浏览界面
+const Recent = () =>
+    import ("views/Home/WorkSpace/Recent/Recent.vue");
+// 我的创建界面
+const IMade = () =>
+    import ("views/Home/WorkSpace/IMade/IMade.vue");
+// 我的收藏界面
+const MyCollection = () =>
+    import ("views/Home/WorkSpace/MyCollection/MyCollection.vue");
 //1.安装插件
 Vue.use(VueRouter);
 
@@ -23,12 +36,41 @@ const routes = [{
     {
         path: "/home",
         name: "Home",
-        component: Home
+        component: Home,
+        children: [{
+            path: 'workspace',
+            name: 'WorkSpace',
+            component: WorkSpace,
+            children: [{
+                path: 'recent',
+                name: 'Recent',
+                component: Recent
+            }, {
+                path: 'imade',
+                name: 'IMade',
+                component: IMade
+            }, {
+                path: 'mycollection',
+                name: 'MyCollection',
+                component: MyCollection
+            }]
+        }]
     },
     {
         path: "/profile",
         name: "Profile",
-        component: Profile
+        component: Profile,
+        children: [{
+                path: "/",
+                // redirect重定向
+                redirect: "/profile/editProfile"
+            },
+            {
+                path: "/profile/editProfile",
+                name: "EditProfile",
+                component: EditProfile
+            }
+        ]
     },
     {
         path: "/login/:choice",
