@@ -37,6 +37,12 @@ public interface DocUserMapper {
     DocUser getUserByID(@Param("userID") String userID);
 
     /*
+    根据githubID获取用户所有信息
+    返回一个DocUser
+     */
+    DocUser getUserByGithubID(@Param("githubID") String githubID);
+
+    /*
     修改用户信息
     返回结果为更新行数，结果为0时更新失败
     使用map传参，key分别为userID和userName

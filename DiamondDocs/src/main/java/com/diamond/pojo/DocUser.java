@@ -10,4 +10,5 @@ public class DocUser {
     private String mobile;
     private String emailAddress;
     private String imagePath;
+    private String githubID;
 }
