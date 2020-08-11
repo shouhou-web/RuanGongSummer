@@ -28,7 +28,7 @@ export default {
 .nav {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
   font-size: 16px;
-  padding: 0 40px
+  padding: 0 60px;
 }
 
 .wrap {

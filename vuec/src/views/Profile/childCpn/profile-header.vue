@@ -72,6 +72,16 @@ export default {
       imagePath: "",
       editImage: false, // 编辑头像
       image: [
+        "https://img-static.mihoyo.com/communityweb/upload/0e16987863d21f5344d4d1d85af4f665.png",
+        "https://img-static.mihoyo.com/communityweb/upload/6b0f081237dd42848c2337a1654b6834.png",
+        "https://img-static.mihoyo.com/communityweb/upload/ac0e91166369b32514591a3fa8696533.png",
+        "https://img-static.mihoyo.com/communityweb/upload/d728c63133906a6e155985edeba52a91.png",
+        "https://img-static.mihoyo.com/communityweb/upload/00889bcad86a4ca6b2b3423c186a5277.png",
+        "https://img-static.mihoyo.com/communityweb/upload/ef068eb6f4cc679fd744c7fc5a985de7.png",
+        "https://img-static.mihoyo.com/communityweb/upload/133b0fea749a4eab2ff2aa776fb6552f.png",
+        "https://img-static.mihoyo.com/communityweb/upload/e362041b0d2b67b8ecea72372d1dfd77.png",
+        "https://img-static.mihoyo.com/communityweb/upload/b051698fcf40c6b0bc3c156ccd1169b4.png",
+        "https://img-static.mihoyo.com/communityweb/upload/0b31dfc7a1078bc0950f94ba3b757613.png",
         "https://img-static.mihoyo.com/communityweb/upload/2adac6e4e0195c39d90696955f9a7902.png",
         "https://img-static.mihoyo.com/avatar/avatar30003.png",
         "https://img-static.mihoyo.com/avatar/avatar30044.png",
@@ -122,6 +132,7 @@ export default {
               type: "success"
             });
             this.$store.commit("setImagePath", this.imagePath);
+            this.close();
           } else
             this.$notify.error({
               title: "网络错误",
