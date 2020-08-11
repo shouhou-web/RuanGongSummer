@@ -42,7 +42,7 @@ public class TeamSpaceController {
     }
 
     @RequestMapping("/getTeamDocs")
-    public List<DocPreview> getTeamDocs(@RequestParam("userID") String teamID){
+    public List<DocPreview> getTeamDocs(@RequestParam("teamID") String teamID){
         try {
             return teamSpaceService.getTeamDocs(teamID);
         }
