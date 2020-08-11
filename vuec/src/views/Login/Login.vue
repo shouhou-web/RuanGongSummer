@@ -313,8 +313,11 @@ export default {
               this.$message.error("用户名与密码不匹配");
               return;
             } else {
+              console.log('12345')
               // 存储数据
               sessionStorage.setItem("user", JSON.stringify(res));
+
+              console.log("本地缓存", sessionStorage.getItem("user"));
 
               this.$store.commit("login", res);
               this.$message({

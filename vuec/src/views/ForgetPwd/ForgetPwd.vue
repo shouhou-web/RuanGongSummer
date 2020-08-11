@@ -161,6 +161,7 @@ export default {
           return;
         }else {
           this.$message.success('密码修改成功');
+          this.$router.push({path: "/login?page=0"})
         }
       })
 
