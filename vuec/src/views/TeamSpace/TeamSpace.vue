@@ -5,7 +5,7 @@
       我的团队 | My Team
     </div>
     <div class="my-teams-space">
-      <div v-for="(ateam,teamIndex) in myTeams">
+      <div v-for="(ateam,teamIndex) in myTeams" :key="teamIndex">
         <div class="one-team" @click="chooseTeam(ateam.teamID)">
           {{teamIndex}} : {{ateam.TeamName}} : {{ateam.teamID}}
         </div>

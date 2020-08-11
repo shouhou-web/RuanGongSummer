@@ -1,24 +1,24 @@
 <template>
   <div>
-    <div class="nav">
-      <div class="wrap">
-        <div class="nav-left">
-          <div class="welcome">
-            <img class="welcome__img" src="@/assets/image/logo.png" alt="" />
-          </div>
-          <ul class="nav-left-ul">
-            <li class="nav-left-item">
-              <a class="nav-item__inner" href="#">云平台</a>
-            </li>
-            <li class="nav-left-item">
-              <a class="nav-item__inner" href="#">课程中心</a>
-            </li>
-            <li class="nav-left-item">
-              <a class="nav-item__inner" href="#">Github</a>
-            </li>
-          </ul>
+    <m-header>
+      <template v-slot:left>
+        <div class="welcome">
+          <img class="welcome__img" src="@/assets/image/logo.png" alt="" />
         </div>
-        <div class="nav-right">
+        <ul class="nav-left-ul">
+          <li class="nav-left-item">
+            <a class="nav-item__inner" href="#">云平台</a>
+          </li>
+          <li class="nav-left-item">
+            <a class="nav-item__inner" href="#">课程中心</a>
+          </li>
+          <li class="nav-left-item">
+            <a class="nav-item__inner" href="#">Github</a>
+          </li>
+        </ul>
+      </template>
+      <template v-slot:right>
+        <div>
           <div class="nav-right-item" v-if="token">
             <!-- 头像 -->
             <div class="item">
@@ -133,14 +133,24 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </template>
+    </m-header>
   </div>
 </template>
 
 <script>
+import MHeader from "./MHeader.vue";
 export default {
   name: "MAppHeader",
+  components: {
+    MHeader
+  },
+  props: {
+    bgColor: {
+      type: String,
+      default: "var(--color-main)"
+    }
+  },
   data() {
     return {
       user: {} // 用户数据
@@ -179,26 +189,7 @@ export default {
 };
 </script>
 <style scoped>
-.nav {
-  /* background-image: var(--background-image); */
-  background-color: var(--color-main);
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
-  font-size: 16px;
-  min-width: 1200px;
-}
-
-.wrap {
-  display: flex;
-  justify-content: space-between;
-  line-height: 30px;
-  margin: 0 auto;
-  padding: 10px 0;
-  width: 1100px;
-}
-
-.nav-left,
 .nav-left-ul,
-.nav-right,
 .nav-right-item {
   align-items: center;
   display: flex;

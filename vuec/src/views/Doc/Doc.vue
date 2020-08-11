@@ -1,7 +1,7 @@
 <template>
   <div id="doc">
     <div class="header">
-      
+      <m-doc-header></m-doc-header>
     </div>
     <div class="editor">
       <in-editor></in-editor>
@@ -10,28 +10,20 @@
 </template>
 
 <script>
+import MDocHeader from "@/components/common/m-header/MDocHeader"
 import inEditor from "./childCpn/in-editor/index";
 export default {
   name: "Doc",
   components: {
-    inEditor
+    inEditor,
+    MDocHeader
   }
 };
 </script>
 
 <style scoped>
-#doc {
-  background-color: orange;
-}
-
 .editor {
   margin: 50px auto 0;
   width: 80vw;
-}
-
-#doc p::before {
-  content: "123";
-  position: absolute;
-  left: -9px;
 }
 </style>
