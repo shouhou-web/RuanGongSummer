@@ -17,6 +17,10 @@ const mutations = {
     state.token = false
     state.user = {}
   },
+  // profile相关修改
+  setImagePath(state, imagePath) {
+    state.user.imagePath = imagePath;
+  }
 };
 
 export default mutations;

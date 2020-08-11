@@ -2,7 +2,7 @@
   <div id="app">
     <router-view></router-view>
     <!-- 全局加载组件 -->
-    <fullscrren-loading></fullscrren-loading>
+    <fullscrren-loading class="loading"></fullscrren-loading>
   </div>
 </template>
 
@@ -18,5 +18,7 @@ export default {
 
 <style>
 @import "assets/css/base.css";
-
+.loading {
+  height: 100vh;
+}
 </style>
