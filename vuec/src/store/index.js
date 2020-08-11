@@ -21,7 +21,9 @@ const state = {
     // userState: 0, //0正常，1被禁
     // isNew: 0 //0正常，1还没看新手上路
   },
-  fullscreenLoading: false
+  fullscreenLoading: false,
+  homeMidNav: 0,
+  homeLeftNav: 0,
 };
 
 const store = new Vuex.Store({

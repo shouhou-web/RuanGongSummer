@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "../store/index";
 
 // 首页相关组件
 const Home = () => import("views/Home/Home.vue");
@@ -22,6 +23,8 @@ const IMade = () => import("views/Home/WorkSpace/IMade/IMade.vue"); // 我的创
 const MyCollection = () =>
   import("views/Home/WorkSpace/MyCollection/MyCollection.vue"); // 我的收藏界面
 
+const Trash = () => import("views/Home/Trash/Trash.vue"); // 回收站界面
+
 // 文档编辑
 const Doc = () => import("views/Doc/Doc.vue");
 
@@ -41,26 +44,31 @@ const routes = [
     component: Home,
     children: [
       {
-        path: "workspace",
+        path: "/home/workSpace",
         name: "WorkSpace",
         component: WorkSpace,
         children: [
           {
-            path: "recent",
+            path: "/home/workSpace/recent",
             name: "Recent",
             component: Recent
           },
           {
-            path: "imade",
+            path: "/home/workSpace/iMade",
             name: "IMade",
             component: IMade
           },
           {
-            path: "mycollection",
+            path: "/home/workSpace/myCollection",
             name: "MyCollection",
             component: MyCollection
           }
         ]
+      },
+      {
+        path: "/home/trash",
+        name: "Trash",
+        component: Trash
       },
       {
         path: "/home/teamSpace",
@@ -120,6 +128,13 @@ router.beforeEach((to, from, next) => {
   // ${//to and from are Route Object,next() must be called to resolve the hook}
   // 这里是修改名字的全局守护路由，暂不应用
   // document.title = to.matched[0].meta.title;
+  if (to.path === "/home/workSpace/recent") store.commit("homemidnav", 1);
+  else if (to.path === "/home/workSpace/iMade") store.commit("homemidnav", 2);
+  else if (to.path === "/home/workSpace/myCollection")
+    store.commit("homemidnav", 3);
+  else if (to.path === "/home/workSpace") store.commit("homeleftnav", 1);
+  else if (to.path === "/home/trash") store.commit("homeleftnav", 2);
+  else if (to.path === "/home/teamSpace") store.commit("homeleftnav", 3);
   next();
 });
 
