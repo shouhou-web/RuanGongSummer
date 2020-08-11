@@ -7,7 +7,7 @@
         @blur="editUserName"
         class="input"
         type="text"
-        v-model="user.userName"
+        v-model="userName"
       />
     </editprofile-item>
     <!-- 编辑密码 -->
@@ -74,6 +74,7 @@
           placeholder="验证码"
         />
         <my-button
+          class="group-button"
           @click="sendCode(emailAddressNew)"
           :disabled="isAddress(emailAddressNew)"
           type="text"
@@ -104,6 +105,7 @@
           placeholder="验证码"
         />
         <my-button
+          class="group-button"
           @click="sendCode(user.emailAddress)"
           :disabled="isAddress(user.emailAddress)"
           type="text"
@@ -127,6 +129,7 @@ export default {
   name: "Home",
   data() {
     return {
+      userName: "", // 页面临时数据，避免直接修改vuex
       emailAddressNew: "",
       open: false, //  是否打开悬浮窗
       editPwd: false, // 悬浮窗状态
@@ -146,6 +149,9 @@ export default {
     editprofileItem,
     MHover
   },
+  created() {
+    this.userName = this.$store.state.user.userName;
+  },
   computed: {
     user() {
       return this.$store.state.user;
@@ -158,7 +164,7 @@ export default {
       this.editEmail = false;
     },
     editUserName() {
-      setUserName(this.user.userID, this.user.userName)
+      setUserName(this.user.userID, this.userName)
         .then(res => {
           this.$notify({
             title: "成功",
@@ -166,7 +172,7 @@ export default {
             type: "success"
           });
           // 更新信息
-          this.$store.commit("login", this.user);
+          this.$store.commit("setUserName", this.userName);
         })
         .catch(err => {
           console.log(err);
@@ -231,8 +237,7 @@ export default {
             type: "success"
           });
           // 更新信息
-          this.user.userPassword = this.newpwd1;
-          this.$store.commit("login", this.user);
+          this.$store.commit("setPassword", this.newpwd1);
           this.open = false;
         });
     },
@@ -263,8 +268,7 @@ export default {
                 type: "success"
               });
               // 更新信息
-              this.user.userPassword = this.emailAddressNew;
-              this.$commit("login", this.user);
+              this.$commit("setEmailAddress", this.emailAddressNew);
               this.open = false;
             } else if (res == 1) {
               this.$notify({
@@ -300,6 +304,7 @@ export default {
 .hover-input--small {
   border: 0px;
   color: #111;
+  margin: 0 20px;
 }
 
 .input {
@@ -317,6 +322,7 @@ export default {
 
 .hover-input {
   margin-bottom: 10px;
+  width: 360px;
 }
 
 .input:focus,
@@ -334,5 +340,9 @@ export default {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+}
+
+.group-button {
+  margin-right: 20px;
 }
 </style>

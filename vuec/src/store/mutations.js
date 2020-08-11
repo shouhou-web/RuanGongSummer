@@ -20,6 +20,12 @@ const mutations = {
   // profile相关修改
   setImagePath(state, imagePath) {
     state.user.imagePath = imagePath;
+  },
+  setUserName(state,userName) {
+    state.user.userName = userName
+  },
+  setPassword(state,userPassword) {
+    state.user.userPassword = userPassword
   }
 };
 
