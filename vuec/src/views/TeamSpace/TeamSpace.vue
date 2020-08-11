@@ -12,7 +12,9 @@
       </div>
     </div>
     <div>
-      <router-view v-bind:TeamID="TeamID"></router-view>
+      <transition mode="out-in">
+        <router-view v-bind:TeamID="TeamID" class="fade-in"></router-view>
+      </transition>
     </div>
   </div>
 </template>
@@ -64,7 +66,6 @@ export default {
 <style scoped>
 .teamspace{
   height: 100vh;
-  border-left: 2px solid #a1c4fd;
   padding-left: 30px;
 }
 
@@ -170,5 +171,29 @@ export default {
   text-align: center;
   font-family: "JetBrains Mono";
   font-size: 12px;
+}
+
+.v-enter{
+  opacity: 0;
+}
+
+.v-enter-active{
+  transition: 0.5s;
+}
+
+.v-enter-to{
+  opacity: 1;
+}
+
+.v-leave{
+  opacity: 1;
+}
+
+.v-leave-to{
+  opacity: 1;
+}
+
+.v-leave-active{
+  transition: 0.3s;
 }
 </style>
