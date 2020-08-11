@@ -98,4 +98,22 @@ public class UserInfoService {
         return 0;
     }
 
+    public int setImagePath(String userID, String imagePath)
+    {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userID", userID);
+        map.put("imagePath", imagePath);
+        docUserMapper.updateDocUserImagePath(map);
+        return 0;
+    }
+
+    public int setMobile(String userID, String mobile)
+    {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userID", userID);
+        map.put("mobile", mobile);
+        docUserMapper.updateDocUserMobile(map);
+        return 0;
+    }
+
 }

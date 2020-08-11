@@ -108,4 +108,32 @@ public class UserInfoController {
         }
     }
 
+    @RequestMapping("/setImagePath")
+    public int setImagePath(@RequestParam("userID") String userID, @RequestParam("imagePath") String imagePath)
+    {
+        try
+        {
+            return userInfoService.setImagePath(userID, imagePath);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    @RequestMapping("/setMobile")
+    public int setMobile(@RequestParam("userID") String userID, @RequestParam("mobile") String mobile)
+    {
+        try
+        {
+            return userInfoService.setMobile(userID, mobile);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
 }
