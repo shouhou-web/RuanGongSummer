@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.diamond.mapper.TeamMapper">
+
+    <insert id="createTeam" parameterType="Team">
+        insert
+        into Team (teamID, teamName, creatorID)
+        values (#{teamID}, #{teamName}, #{creatorID})
+    </insert>
+
+    <update id="updateTeamName" parameterType="Map">
+        update Team
+        set teamName = #{teamName}
+        where teamID = #{teamID}
+    </update>
+
+    <delete id="deleteTeam" parameterType="String">
+        delete
+        from Team
+        where teamID = #{teamID}
+    </delete>
+
+</mapper>

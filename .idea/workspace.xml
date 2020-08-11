@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:dev" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/Teamspace/Teamspace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Teamspace/Teamspace.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="HTML File" />
+        <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/vuec/src/App.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/views/Home/Home.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/components/common/m-app-header/MAppHeader.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/views/Login/Login.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/views/ForgetPwd/ForgetPwd.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/assets/image/forget.svg" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProjectId" id="1fLGyCTivlgcbjypveth1jTDZUP" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\RuanGongSummer\vuec\src\views" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\RuanGongSummer\vuec\src\assets" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="" />
+      <created>1595990211669</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1595990211669</updated>
+      <workItem from="1595990212733" duration="11397000" />
+      <workItem from="1596016647728" duration="136110000" />
+      <workItem from="1596585475190" duration="22942000" />
+      <workItem from="1596765386375" duration="3480000" />
+      <workItem from="1596768906150" duration="18000" />
+      <workItem from="1596768925726" duration="680000" />
+      <workItem from="1596769620660" duration="10000" />
+      <workItem from="1596769631963" duration="941000" />
+    </task>
+    <task id="LOCAL-00001" summary="看了看🐎佬的项目，大概看了一下App.vue的结构">
+      <created>1596016363239</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1596016363240</updated>
+    </task>
+    <task id="LOCAL-00002" summary="听取mgg的意见去掉了el-ui的布局标签，尝试自己写css的第一天，害怕">
+      <created>1596080811344</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1596080811344</updated>
+    </task>
+    <task id="LOCAL-00003" summary="第一次组件+vue.config.js的补充（虽然那个组件啥用没有）">
+      <created>1596107440518</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1596107440518</updated>
+    </task>
+    <task id="LOCAL-00004" summary="一次失败的尝试，完成了login和register的模拟，但是没法保存，回头试试mgg的方法">
+      <created>1596278845121</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1596278845121</updated>
+    </task>
+    <task id="LOCAL-00005" summary="在自己尝试后发现一个安全而且还不错的登录样式（放在register.vue里面了，那个class绑定的登录样式在login.vue里面）">
+      <created>1596547499835</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1596547499835</updated>
+    </task>
+    <task id="LOCAL-00006" summary="push了一个登录注册页的残次品">
+      <created>1596612899963</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1596612899963</updated>
+    </task>
+    <task id="LOCAL-00007" summary="push了一个登录注册页的残次品plus">
+      <created>1596678477377</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1596678477377</updated>
+    </task>
+    <task id="LOCAL-00008" summary="push了一个登录注册页的残次品plus">
+      <created>1596678871525</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1596678871525</updated>
+    </task>
+    <task id="LOCAL-00009" summary="小改动">
+      <created>1596766658785</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1596766658785</updated>
+    </task>
+    <task id="LOCAL-00010" summary="主题颜色替换了一下">
+      <created>1596768076426</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1596768076426</updated>
+    </task>
+    <task id="LOCAL-00011" summary="删除杂项，修改名称，登录注册路由合并到login-register上">
+      <created>1596768672813</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1596768672813</updated>
+    </task>
+    <task id="LOCAL-00012" summary="unknown">
+      <created>1596769756243</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1596769756243</updated>
+    </task>
+    <task id="LOCAL-00013" summary="login路由修改">
+      <created>1597113231767</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1597113231767</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="practice-yu" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="看了看佬的项目，大概看了一下App.vue的结构" />
+    <MESSAGE value="听取mgg的意见去掉了el-ui的布局标签，尝试自己写css的第一天，害怕" />
+    <MESSAGE value="第一次组件+vue.config.js的补充（虽然那个组件啥用没有）" />
+    <MESSAGE value="一次失败的尝试，完成了login和register的模拟，但是没法保存，回头试试mgg的方法" />
+    <MESSAGE value="在自己尝试后发现一个安全而且还不错的登录样式（放在register.vue里面了，那个class绑定的登录样式在login.vue里面）" />
+    <MESSAGE value="push了一个登录注册页的残次品" />
+    <MESSAGE value="push了一个登录注册页的残次品plus" />
+    <MESSAGE value="小改动" />
+    <MESSAGE value="主题颜色替换了一下" />
+    <MESSAGE value="删除杂项，修改名称，登录注册路由合并到login-register上" />
+    <MESSAGE value="unknown" />
+    <MESSAGE value="login路由修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="login路由修改" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-735" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1596358814923">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state x="-735" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596358814923" />
+    <state x="-836" y="100" width="743" height="887" key="DiffContextDialog" timestamp="1596767173267">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state x="-836" y="100" width="743" height="887" key="DiffContextDialog/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596767173267" />
+    <state x="-841" y="322" key="EditFileWatcherDialog" timestamp="1596424038030">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state x="-841" y="322" key="EditFileWatcherDialog/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596424038030" />
+    <state x="-685" y="298" key="FileChooserDialogImpl" timestamp="1596769628264">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state x="-685" y="298" key="FileChooserDialogImpl/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596769628264" />
+    <state width="1815" height="289" key="GridCell.Tab.0.bottom" timestamp="1597134499307">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1815" height="289" key="GridCell.Tab.0.bottom/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597134499307" />
+    <state width="1815" height="289" key="GridCell.Tab.0.center" timestamp="1597134499307">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1815" height="289" key="GridCell.Tab.0.center/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597134499307" />
+    <state width="1815" height="289" key="GridCell.Tab.0.left" timestamp="1597134499306">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1815" height="289" key="GridCell.Tab.0.left/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597134499306" />
+    <state width="1815" height="289" key="GridCell.Tab.0.right" timestamp="1597134499307">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1815" height="289" key="GridCell.Tab.0.right/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597134499307" />
+    <state x="-1307" y="294" key="MultipleFileMergeDialog" timestamp="1597113333825">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state x="-1307" y="294" key="MultipleFileMergeDialog/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597113333825" />
+    <state x="-647" y="158" key="RollbackChangesDialog" timestamp="1596608792846">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state x="-647" y="158" key="RollbackChangesDialog/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596608792846" />
+    <state x="-1157" y="197" key="SettingsEditor" timestamp="1597114153668">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state x="-1157" y="197" key="SettingsEditor/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597114153668" />
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597134436177">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597134436177" />
+    <state x="-1766" y="92" width="1674" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1596767599481">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state x="-1766" y="92" width="1674" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596767599481" />
+    <state x="-904" y="140" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1596595158424">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state x="-904" y="140" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596595158424" />
+    <state x="-684" y="453" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596769702217">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state x="-684" y="453" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596769702217" />
+    <state x="-809" y="254" key="run.anything.popup" timestamp="1596451264474">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state x="-809" y="254" key="run.anything.popup/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596451264474" />
+    <state x="-802" y="241" width="672" height="678" key="search.everywhere.popup" timestamp="1597133633408">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state x="-802" y="241" width="672" height="678" key="search.everywhere.popup/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597133633408" />
+  </component>
+</project>

@@ -7,15 +7,16 @@
 </template>
 
 <script>
-import FullscrrenLoading from "./components/common/fullscreenloading/FullscreenLoading"
+import FullscrrenLoading from "components/common/fullscreen-loading/FullscreenLoading";
 export default {
   name: "App",
   components: {
     FullscrrenLoading
-  },
+  }
 };
 </script>
 
 <style>
 @import "assets/css/base.css";
+
 </style>

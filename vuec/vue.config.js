@@ -21,6 +21,7 @@ module.exports = {
       msTileImage: "favicon.ico",
     },
   },
+  runtimeCompiler: true
   // devServer: {
   //     open: true,
   //     host: 'localhost',

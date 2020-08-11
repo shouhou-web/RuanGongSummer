@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.diamond.mapper.DocUserMapper">
+
+    <insert id="addDocUser" parameterType="DocUser">
+        insert
+        into DocUser(userID, userName, userPassword, mobile, emailAddress, imagePath, githubID)
+        values (#{userID}, #{userName}, #{userPassword}, #{mobile}, #{emailAddress}, #{imagePath}, #{githubID});
+    </insert>
+    
+    <select id="getDocUserByUserName" parameterType="String" resultType="DocUser">
+        select *
+        from DocUser
+        where userName = #{userName};
+    </select>
+
+    <select id="getDocUserByEmailAddress" parameterType="String" resultType="DocUser">
+        select *
+        from DocUser
+        where emailAddress = #{emailAddress};
+    </select>
+
+    <select id="getUserByID" parameterType="String" resultType="DocUser">
+        select *
+        from DocUser
+        where userID = #{userID};
+    </select>
+
+    <select id="getUserByGithubID" parameterType="String" resultType="DocUser">
+        select *
+        from DocUser
+        where githubID = #{githubID};
+    </select>
+
+    <update id="updateDocUserName" parameterType="Map">
+        update DocUser
+        set userName = #{userName}
+        where userID = #{userID}
+    </update>
+
+    <update id="updateDocUserPassword" parameterType="Map">
+        update DocUser
+        set userPassword = #{userPassword}
+        where userID = #{userID}
+    </update>
+
+    <update id="updateDocUserMobile" parameterType="Map">
+        update DocUser
+        set mobile = #{mobile}
+        where userID = #{userID}
+    </update>
+
+    <update id="updateDocUserEmailAddress" parameterType="Map">
+        update DocUser
+        set emailAddress = #{emailAddress}
+        where userID = #{userID}
+    </update>
+
+    <update id="updateDocUserImagePath" parameterType="Map">
+        update DocUser
+        set imagePath = #{imagePath}
+        where userID = #{userID}
+    </update>
+
+</mapper>

@@ -7,8 +7,31 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-autoformat": "^21.0.0",
+    "@ckeditor/ckeditor5-basic-styles": "^21.0.0",
+    "@ckeditor/ckeditor5-block-quote": "^21.0.0",
+    "@ckeditor/ckeditor5-build-classic": "^21.0.0",
+    "@ckeditor/ckeditor5-dev-utils": "^23.1.1",
+    "@ckeditor/ckeditor5-dev-webpack-plugin": "^23.1.1",
+    "@ckeditor/ckeditor5-editor-classic": "^21.0.0",
+    "@ckeditor/ckeditor5-essentials": "^21.0.0",
+    "@ckeditor/ckeditor5-heading": "^21.0.0",
+    "@ckeditor/ckeditor5-indent": "^21.0.0",
+    "@ckeditor/ckeditor5-link": "^21.0.0",
+    "@ckeditor/ckeditor5-list": "^21.0.0",
+    "@ckeditor/ckeditor5-media-embed": "^21.0.0",
+    "@ckeditor/ckeditor5-paragraph": "^21.0.0",
+    "@ckeditor/ckeditor5-paste-from-office": "^21.0.0",
+    "@ckeditor/ckeditor5-table": "^21.0.0",
+    "@ckeditor/ckeditor5-theme-lark": "^21.0.0",
+    "@ckeditor/ckeditor5-ui": "^21.0.0",
+    "@ckeditor/ckeditor5-vue": "^1.0.1",
+    "axios": "^0.19.2",
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
+    "jquery": "^3.5.1",
+    "postcss-loader": "^3.0.0",
+    "raw-loader": "^0.5.1",
     "vue": "^2.6.11",
     "vue-router": "^3.3.4",
     "vuex": "^3.4.0"
@@ -17,6 +40,8 @@
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-vuex": "~4.4.0",
     "@vue/cli-service": "~4.4.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^9.0.2",
     "vue-template-compiler": "^2.6.11"
   }
 }
