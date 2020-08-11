@@ -1,5 +1,6 @@
 package com.diamond.controller;
 
+import com.diamond.pojo.DocUser;
 import com.diamond.service.UserInfoService;
 import com.diamond.utils.MailClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,17 @@ public class UserInfoController {
         catch (Exception e){
             e.printStackTrace();
             return 5;
+        }
+    }
+
+    @RequestMapping("/login")
+    public DocUser login(@RequestParam("name") String name, @RequestParam("password") String password){
+        try {
+            return userInfoService.login(name,password);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
     }
 

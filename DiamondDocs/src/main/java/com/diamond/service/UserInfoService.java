@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -36,7 +38,21 @@ public class UserInfoService {
         return 0;
     }
 
-    public int resetPwd(String emailAddress, String password, String password2)
+    public DocUser login(String name, String password) throws Exception {
+        DocUser user = null;
+        if(Validation.checkEmailFormat(name))
+            user = docUserMapper.getDocUserByEmailAddress(name);
+        if(user != null)
+            return user;
+
+        List<DocUser> userList = docUserMapper.getDocUserByUserName(name);
+        for(DocUser candidate : userList)
+            if(password.equals(candidate.getUserPassword()))
+                return candidate;
+        return null;
+    }
+
+    public int resetPwd(String emailAddress, String password, String password2) throws Exception
     {
         if(!Validation.checkEmailFormat(emailAddress))
             return 1;
