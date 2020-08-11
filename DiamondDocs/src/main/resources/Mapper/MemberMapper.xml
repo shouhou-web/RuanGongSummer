@@ -23,4 +23,22 @@
         where userID = #{userID}
     </update>
 
+    <select id="getTeamByUserID" parameterType="String" resultType="Team">
+        select *
+        from Team
+        where Team.teamID in (select Member.teamID from Member where Member.userID = #{userID});
+    </select>
+
+    <select id="getTeamMemberByTeamID" parameterType="String" resultType="DocUser">
+        select *
+        from DocUser
+        where DocUser.userID in (select Member.userID from Member where Member.teamID = #{teamID});
+    </select>
+
+    <select id="getDocByTeamID" parameterType="String" resultType="Doc">
+        select *
+        from Doc
+        where teamID = #{teamID};
+    </select>
+
 </mapper>

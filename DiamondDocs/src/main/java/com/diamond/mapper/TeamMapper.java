@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 @Mapper
@@ -27,4 +28,5 @@ public interface TeamMapper {
     删除一个团队，解散团队用
      */
     int deleteTeam(@Param("teamID") String teamID);
+
 }
