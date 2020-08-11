@@ -28,9 +28,7 @@ export default {
     return {
       user: '',
       TeamID: '',
-      myTeams: [
-        {TeamName:'first',teamID:1},
-      ],
+      myTeams: '',
     }
   },
   methods: {
