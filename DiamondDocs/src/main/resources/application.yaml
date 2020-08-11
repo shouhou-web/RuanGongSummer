@@ -22,5 +22,5 @@ spring:
             class: javax.net.ssl.SSLSocketFactory
     port: 465
 mybatis:
-  type-aliases-package: com.diamond.pojo
+  type-aliases-package: com.diamond.pojo,com.diamond.dto
   mapper-locations: classpath:mapper/*.xml

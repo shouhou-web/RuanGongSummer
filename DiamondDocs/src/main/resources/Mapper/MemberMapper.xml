@@ -35,6 +35,12 @@
         where DocUser.userID in (select Member.userID from Member where Member.teamID = #{teamID});
     </select>
 
+    <select id="getTeamMemberPreviewByTeamID" parameterType="String" resultType="MemberPreview">
+        select userName, userIdentity
+        from Member,DocUser
+        where Member.teamID = #{teamID} and Member.userID = DocUser.userID;
+    </select>
+
     <select id="getDocByTeamID" parameterType="String" resultType="Doc">
         select *
         from Doc
