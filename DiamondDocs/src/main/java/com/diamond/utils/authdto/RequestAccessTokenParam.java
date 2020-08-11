@@ -1,4 +1,4 @@
-package com.diamond.utils;
+package com.diamond.utils.authdto;
 
 import lombok.Data;
 
