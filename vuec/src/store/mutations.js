@@ -29,6 +29,17 @@ const mutations = {
   },
   setEmailAddress(state, emailAddress) {
     state.user.emailAddress = emailAddress;
+  },
+  // 侧边栏active
+  homemidnav(state, isActive) {
+    if (isActive !== state.homeMidNav) {
+      state.homeMidNav = isActive;
+    }
+  },
+  homeleftnav(state, isActive) {
+    if (isActive !== state.homeLeftNav) {
+      state.homeLeftNav = isActive;
+    }
   }
 };
 
