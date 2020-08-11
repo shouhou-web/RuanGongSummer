@@ -1,52 +1,45 @@
 <template>
-  <div class="teamspace">
-    <div class="teamspace-header">
-      <img src="../../assets/image/Team.svg" style="margin-left: 3vh;padding-bottom: 1.5vh;padding-left: 1vh;margin-right: 10px">
-      我的团队 | My Team
+  <div>
+    <div style="margin-top: 20px;margin-left: 5px">
+      <my-button size="small" style="margin-right: 20px">新建doc</my-button>
+      <my-button size="small">退出团队</my-button>
     </div>
-    <div class="my-teams-space">
-      <div v-for="(ateam,teamIndex) in myTeams">
-        <div class="one-team" @click="chooseTeam(ateam.teamID)">
-          {{teamIndex}} : {{ateam.TeamName}} : {{ateam.teamID}}
+    <div class="my-team-details">
+      <div class="team-docs" v-for="(adoc,docIndex) in docs">
+        <div class="doc">
+          <input type="checkbox"></input>
+          <div><img src="../../assets/image/file.svg" class="doc--img"></div>
+          <div class="doc--name">{{adoc.docID}}:{{adoc.docName}}</div>
         </div>
       </div>
     </div>
-    <div>
-      <router-view></router-view>
-    </div>
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'TeamSpace',
+  name: "TeamDoc",
   data() {
     return {
-      TeamID: '',
-      myTeams: [
+      teamID: '',
+      docs: [
         {
-          teamID: 1,
-          TeamName: 'FIRST'
+          docID: 1,
+          docName: 'DOC_1'
         }
       ],
     }
   },
   methods: {
-    chooseTeam(teamID) {
-      console.log(teamID);
-      this.TeamID = teamID;
-      this.$router.push({path: '/home/TeamSpace/TeamDoc?TeamID=' + teamID})
-    }
+
   },
   created() {
 
   }
-};
+}
 </script>
 
-<style scoped>
-.teamspace{
+<style scoped>.teamspace{
   height: 100vh;
   border-left: 2px solid #a1c4fd;
   padding-left: 30px;

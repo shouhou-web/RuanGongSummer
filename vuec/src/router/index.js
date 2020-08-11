@@ -14,7 +14,8 @@ const EditProfile = () => import("views/Profile/EditProfile.vue");
 
 // 工作台二级导航栏
 const WorkSpace = () => import("views/Home/WorkSpace/WorkSpace.vue");
-const TeamSpace = () => import("views/TeamSpace/TeamSpace.vue")
+const TeamSpace = () => import("views/TeamSpace/TeamSpace.vue");
+const TeamDoc = () => import("views/TeamSpace/TeamDoc.vue");
 
 const Recent = () => import("views/Home/WorkSpace/Recent/Recent.vue"); // 最近浏览界面
 const IMade = () => import("views/Home/WorkSpace/IMade/IMade.vue"); // 我的创建界面
@@ -61,7 +62,14 @@ const routes = [
       {
         path: "/home/TeamSpace",
         name: "TeamSpace",
-        component: TeamSpace
+        component: TeamSpace,
+        children: [
+          {
+            path: "/home/TeamSpace/TeamDoc",
+            name: "TeamDoc",
+            component: TeamDoc
+          }
+        ]
       }
     ]
   },

@@ -26,14 +26,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
-      <change afterPath="$PROJECT_DIR$/vuec/src/assets/image/Team.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vuec/src/assets/image/add-file.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vuec/src/assets/image/remove.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vuec/src/assets/image/权限.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vuec/src/assets/image/file.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/assets/image/remove.svg" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/assets/image/remove.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/assets/image/权限.svg" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/assets/image/权限.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vuec/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/Home/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Home/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/Login/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Login/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,10 +44,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Vue Single File Component" />
         <option value="CSS File" />
         <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
@@ -65,6 +66,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/App.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/Home/Home.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/components/common/m-app-header/MAppHeader.vue" root0="SKIP_INSPECTION" />
@@ -102,11 +104,11 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\RuanGongSummer\vuec\src\assets" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\RuanGongSummer\vuec\src\views" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\RuanGongSummer\vuec\src\assets" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -332,9 +334,9 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-809" y="254" key="run.anything.popup/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596451264474" />
-    <state x="-802" y="241" width="672" height="678" key="search.everywhere.popup" timestamp="1596677908687">
+    <state x="-802" y="241" width="672" height="678" key="search.everywhere.popup" timestamp="1597133633408">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-802" y="241" width="672" height="678" key="search.everywhere.popup/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596677908687" />
+    <state x="-802" y="241" width="672" height="678" key="search.everywhere.popup/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597133633408" />
   </component>
 </project>
