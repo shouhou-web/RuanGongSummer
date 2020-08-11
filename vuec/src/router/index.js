@@ -76,10 +76,9 @@ const routes = [
     ]
   },
   {
-    path: "/Login/:choice",
+    path: "/Login",
     name: "Login",
-    component: Login,
-    props: true
+    component: Login
   },
   {
     path: "/forgetPwd",

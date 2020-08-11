@@ -126,12 +126,10 @@
           </div>
           <div class="nav-right-item" v-else>
             <div class="item">
-              <a @click="toLogin(0)" class="nav-item__inner" href="/login/0">登录</a>
+              <a @click="toLogin(0)" class="nav-item__inner">登录</a>
             </div>
             <div class="item">
-              <a @click="toLogin(1)" class="nav-item__inner" href="/login/1"
-                >注册</a
-              >
+              <a @click="toLogin(1)" class="nav-item__inner">注册</a>
             </div>
           </div>
         </div>

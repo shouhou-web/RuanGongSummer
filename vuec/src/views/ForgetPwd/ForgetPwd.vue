@@ -27,7 +27,7 @@
                            type="text"
                            v-bind:class="{ 'code-style' : (code_info == 0), 'success-code-style' : (code_info == 1), 'error-code-style' : (code_info == 2), 'empty-code-style' : (code_info == 3) }"
                            v-model="code">
-                    <div v-show="isShow" @click="sendCode" class="send-code">发送验证码</div>
+                    <input v-show="isShow" @click="sendCode" :disabled="countFlag" class="send-code" :value="btnMsg"></input>
                   </div>
                   <a v-show="isShow" @click="confirmCode" class="btn">confirm</a>
                 </div>
@@ -76,7 +76,11 @@ export default {
       password_again: '',
       email_info: 0,//存放email的状态 0正常/1已存在/2未填写
       code_info: 0,//存放code的状态 0正常/1通过/2错误/3未填写
-      isShow: true
+      isShow: true,
+      countNum: 50,
+      countFlag: false,
+      timer: null,
+      btnMsg: '发送验证码'
     }
   },
   methods: {
@@ -95,6 +99,23 @@ export default {
           this.$message.error('验证码返回错误，请检查网络');
         } else {
           this.code_confirm = res;
+
+          // 处理倒计时问题
+          this.countFlag = !this.countFlag;
+          this.timer = setInterval(
+            () => {
+              if (this.countNum > 0 && this.countNum <= 50) {
+                this.btnMsg = this.countNum + 's';
+                this.countNum --;
+              } else {
+                this.countFlag = false;
+                clearInterval(this.timer);
+                this.timer = null;
+                this.btnMsg = '发送验证码';
+                this.countNum = 50;
+              }
+            }, 1000
+          )
         }
       })
       .catch(err => {
