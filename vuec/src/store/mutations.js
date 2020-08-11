@@ -8,14 +8,14 @@ const mutations = {
   },
   // 登录
   login(state, info) {
-    console.log(info)
-    state.token = true
-    state.user = info
+    console.log(info);
+    state.token = true;
+    state.user = info;
   },
   // 登出
   logout(state) {
-    state.token = false
-    state.user = {}
+    state.token = false;
+    state.user = {};
   },
   // profile相关修改
   setImagePath(state, imagePath) {
@@ -26,6 +26,17 @@ const mutations = {
   },
   setPassword(state,userPassword) {
     state.user.userPassword = userPassword
+  },
+  // 侧边栏active
+  homemidnav(state, isActive) {
+    if (isActive !== state.homeMidNav) {
+      state.homeMidNav = isActive;
+    }
+  },
+  homeleftnav(state, isActive) {
+    if (isActive !== state.homeLeftNav) {
+      state.homeLeftNav = isActive;
+    }
   }
 };
 

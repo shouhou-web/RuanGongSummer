@@ -4,22 +4,21 @@
       <my-button
         type="text"
         class="second-nav-item"
-        id="button1"
-        :active="isActive[0]"
+        :active="this.$store.state.homeMidNav === 1"
         @click="toRecent"
         >最近使用</my-button
       >
       <my-button
         type="text"
         class="second-nav-item"
-        :active="isActive[1]"
+        :active="this.$store.state.homeMidNav === 2"
         @click="toIMade"
         >我的创建</my-button
       >
       <my-button
         type="text"
         class="second-nav-item"
-        :active="isActive[2]"
+        :active="this.$store.state.homeMidNav === 3"
         @click="toMyColletion"
         >我的收藏</my-button
       >
@@ -35,36 +34,15 @@
 <script>
 export default {
   name: "WorkSpace",
-  data() {
-    return {
-      activeIndex: 0,
-      isActive: [true, false, false]
-    };
-  },
   methods: {
     toRecent() {
-      if (this.activeIndex != 0) {
-        this.isActive[this.activeIndex] = false;
-        this.activeIndex = 0;
-        this.isActive[0] = true;
-      }
-      this.$router.push({ path: "/home/workspace/recent" });
+      this.$router.push({ path: "/home/workSpace/recent" });
     },
     toIMade() {
-      if (this.activeIndex != 1) {
-        this.isActive[this.activeIndex] = false;
-        this.activeIndex = 1;
-        this.isActive[1] = true;
-      }
-      this.$router.push({ path: "/home/workspace/imade" });
+      this.$router.push({ path: "/home/workSpace/iMade" });
     },
     toMyColletion() {
-      if (this.activeIndex != 2) {
-        this.isActive[this.activeIndex] = false;
-        this.activeIndex = 2;
-        this.isActive[2] = true;
-      }
-      this.$router.push({ path: "/home/workspace/mycollection" });
+      this.$router.push({ path: "/home/workSpace/myCollection" });
     }
   },
   components: {}
@@ -83,22 +61,22 @@ second-whole-page {
   margin: 20px;
 }
 
-.v-enter{
- opacity: 0;
+.v-enter {
+  opacity: 0;
 }
-.v-enter-active{
- transition: 0.5s;
+.v-enter-active {
+  transition: 0.5s;
 }
-.v-enter-to{
- opacity: 1;
+.v-enter-to {
+  opacity: 1;
 }
-.v-leave{
- opacity: 1;
+.v-leave {
+  opacity: 1;
 }
-.v-leave-to{
- opacity:0;
+.v-leave-to {
+  opacity: 0;
 }
-.v-leave-active{
- transition: 0.3s;
+.v-leave-active {
+  transition: 0.3s;
 }
 </style>

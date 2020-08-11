@@ -5,12 +5,12 @@
     <div class="nav">
       <!--      <div class="side-bar"></div>-->
       <div class="wrap">
-        <my-button type="text" class="nav-btn" @click="toRecent" :active="isActive[0]">
+        <my-button type="text" class="nav-btn" @click="toRecent" :active="this.$store.state.homeLeftNav === 1">
           <span class="nav-item">
             <img src="@/assets/icon/home/ET.png" class="option-icon" />工作台
           </span>
         </my-button>
-        <my-button type="text" class="nav-btn" @click="toTrash" :active="isActive[1]">
+        <my-button type="text" class="nav-btn" @click="toTrash" :active="this.$store.state.homeLeftNav === 2">
           <span class="nav-item">
             <img
               src="@/assets/icon/home/delete.png"
@@ -18,7 +18,7 @@
             />回收站
           </span>
         </my-button>
-        <my-button type="text" class="nav-btn" @click="toTeamSpace" :active="isActive[2]">
+        <my-button type="text" class="nav-btn" @click="toTeamSpace" :active="this.$store.state.homeLeftNav === 3">
           <span class="nav-item">
             <img
               src="@/assets/icon/home/partner.png"
@@ -34,6 +34,7 @@
         <router-view class="fade-in"></router-view>
       </transition>
     </div>
+    <div class="divider"></div>
     <div class="sub-page">
       <div class="option-nav">
         <my-button type="text" class="nav-btn">
@@ -77,36 +78,15 @@ import Recent from "./WorkSpace/WorkSpace";
 
 export default {
   name: "Home",
-  data() {
-    return {
-      activeIndex: -1,
-      isActive: [false, false, false]
-    };
-  },
   methods: {
     toRecent() {
-      if(this.activeIndex != 0) {
-        this.isActive[this.activeIndex] = false;
-        this.activeIndex = 0;
-        this.isActive[0] = true;
-      }
-      this.$router.push({ path: "/home/workspace/recent" });
+      this.$router.push({ path: "/home/workSpace" });
     },
     toTrash() {
-      if(this.activeIndex != 1) {
-        this.isActive[this.activeIndex] = false;
-        this.activeIndex = 1;
-        this.isActive[1] = true;
-      }
-      this.$router.push({ path: "/home/workspace/trash" });
+      this.$router.push({ path: "/home/trash" });
     },
     toTeamSpace() {
-      if(this.activeIndex != 2) {
-        this.isActive[this.activeIndex] = false;
-        this.activeIndex = 2;
-        this.isActive[2] = true;
-      }
-      this.$router.push({ path: "/home/TeamSpace" });
+      this.$router.push({ path: "/home/teamSpace" });
     }
   },
   components: {
@@ -131,7 +111,7 @@ export default {
   background-color: #ffffff;
   height: 90vh;
   margin: 30px;
-  padding: 10px 100px;
+  padding: 10px 90px;
   width: 10%;
 }
 
@@ -167,9 +147,7 @@ export default {
   background-color: #b8b6b6;
   border: 0;
   border-top-style: solid;
-  display: block;
   height: 92vh;
-  margin: 0px 1px;
   width: 2px;
 }
 
@@ -186,6 +164,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 90vh;
+  margin: 30px;
   width: 13%;
 }
 
@@ -194,6 +173,7 @@ export default {
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
+  padding: 10px;
 }
 
 .fade-in {
