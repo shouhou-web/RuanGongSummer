@@ -22,10 +22,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/login/:choice',
+    path: '/login',
     name: 'Login',
     component: login,
-    props: true
   },
   {
     path: '/forgetPwd',

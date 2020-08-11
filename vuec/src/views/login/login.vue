@@ -10,114 +10,7 @@
       <label for="reg-log"></label>
       <div class="card-wrap">
         <div class="card-wrapper">
-          <div v-if="choice == 0">
-            <!--login-->
-            <div class="card-front">
-              <div class="center-wrap">
-                <div>
-                  <div class="login-header">
-                    <h2>登录</h2>
-                  </div>
-                  <div class="login-main">
-                    <div class="form-group">
-                      <input autocomplete="off" class="form-style" name="logemail" placeholder="Username"
-                             type="text" v-model="username">
-                    </div>
-                    <div class="form-group mt-2">
-                      <input autocomplete="off" class="form-style" name="logpass" placeholder="Password"
-                             type="password" v-model="password">
-                    </div>
-                  </div>
-                  <div class="forget">
-                    <router-link class="forget-text" to="/forgetPwd">
-                      <div>
-                        <img src="../../assets/image/forget.svg" style="height: 15px;">
-                      </div>
-                      ··· 忘记密码？
-                    </router-link>
-                  </div>
-                  <a @click="loginSubmit" class="btn">Log in</a>
-                </div>
-                <div class="otherway-login">
-                  <div style="text-align: center">
-                    第三方登录
-                  </div>
-                  <div class="otherway-icons">
-                    <a href="#" style="margin-left: 25%" title="微信登录">
-                      <img src="../../assets/image/wechat.svg">
-                    </a>
-                    <a href="#" style="margin-left: 10%" title="QQ登录">
-                      <img src="../../assets/image/qq.svg">
-                    </a>
-                    <a href="#" style="margin-left: 10%" title="github登录">
-                      <img src="../../assets/image/github.svg" style="width: 25px">
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--register-->
-            <div class="card-back">
-              <div class="center-wrap">
-                <div>
-                  <div class="login-header">
-                    <h2>注册</h2>
-                  </div>
-                  <div class="login-main">
-                    <div class="form-group">
-                      <input autocomplete="off"
-                             class="form-style"
-                             id="logname"
-                             name="logname"
-                             placeholder="Username"
-                             type="text"
-                             v-model="username">
-                    </div>
-                    <div class="form-group">
-                      <input autocomplete="off"
-                             class="form-style"
-                             id="logpass"
-                             name="logpass"
-                             placeholder="Password"
-                             type="password"
-                             v-model="password">
-                    </div>
-                    <div class="form-group">
-                      <input autocomplete="off"
-                             class="form-style"
-                             id="logpassagain"
-                             name="logpassagain"
-                             placeholder="Password Confirm"
-                             type="password"
-                             v-model="password_again">
-                    </div>
-                    <div class="form-group">
-                      <input @focus="email_info = 0"
-                             autocomplete="off"
-                             id="logemail"
-                             name="logeamil"
-                             placeholder="Your email"
-                             type="email"
-                             v-bind:class="{ 'form-style' : (email_info == 0), 'error-style' : (email_info == 2) }"
-                             v-model="email">
-                    </div>
-                    <div style="display: flex;flex-direction: row">
-                      <input @focus="code_info = 0"
-                             id="logcode"
-                             name="logcode"
-                             placeholder="邮箱验证码"
-                             type="text"
-                             v-bind:class="{ 'code-style' : (code_info == 0), 'error-code-style' : (code_info == 2), 'empty-code-style' : (code_info == 3) }"
-                             v-model="code">
-                      <input @click="sendCode" class="send-code" :disabled="countFlag" :value="btnMsg"></input>
-                    </div>
-                  </div>
-                  <a @click="registerSubmit" class="btn">Sign up</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div v-else>
+          <div v-if="this.$route.query.page == 1">
             <!--login-->
             <div class="card-back">
               <div class="center-wrap">
@@ -224,6 +117,113 @@
               </div>
             </div>
           </div>
+          <div v-else>
+            <!--login-->
+            <div class="card-front">
+              <div class="center-wrap">
+                <div>
+                  <div class="login-header">
+                    <h2>登录</h2>
+                  </div>
+                  <div class="login-main">
+                    <div class="form-group">
+                      <input autocomplete="off" class="form-style" name="logemail" placeholder="Username"
+                             type="text" v-model="username">
+                    </div>
+                    <div class="form-group mt-2">
+                      <input autocomplete="off" class="form-style" name="logpass" placeholder="Password"
+                             type="password" v-model="password">
+                    </div>
+                  </div>
+                  <div class="forget">
+                    <router-link class="forget-text" to="/forgetPwd">
+                      <div>
+                        <img src="../../assets/image/forget.svg" style="height: 15px;">
+                      </div>
+                      ··· 忘记密码？
+                    </router-link>
+                  </div>
+                  <a @click="loginSubmit" class="btn">Log in</a>
+                </div>
+                <div class="otherway-login">
+                  <div style="text-align: center">
+                    第三方登录
+                  </div>
+                  <div class="otherway-icons">
+                    <a href="#" style="margin-left: 25%" title="微信登录">
+                      <img src="../../assets/image/wechat.svg">
+                    </a>
+                    <a href="#" style="margin-left: 10%" title="QQ登录">
+                      <img src="../../assets/image/qq.svg">
+                    </a>
+                    <a href="#" style="margin-left: 10%" title="github登录">
+                      <img src="../../assets/image/github.svg" style="width: 25px">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--register-->
+            <div class="card-back">
+              <div class="center-wrap">
+                <div>
+                  <div class="login-header">
+                    <h2>注册</h2>
+                  </div>
+                  <div class="login-main">
+                    <div class="form-group">
+                      <input autocomplete="off"
+                             class="form-style"
+                             id="logname"
+                             name="logname"
+                             placeholder="Username"
+                             type="text"
+                             v-model="username">
+                    </div>
+                    <div class="form-group">
+                      <input autocomplete="off"
+                             class="form-style"
+                             id="logpass"
+                             name="logpass"
+                             placeholder="Password"
+                             type="password"
+                             v-model="password">
+                    </div>
+                    <div class="form-group">
+                      <input autocomplete="off"
+                             class="form-style"
+                             id="logpassagain"
+                             name="logpassagain"
+                             placeholder="Password Confirm"
+                             type="password"
+                             v-model="password_again">
+                    </div>
+                    <div class="form-group">
+                      <input @focus="email_info = 0"
+                             autocomplete="off"
+                             id="logemail"
+                             name="logeamil"
+                             placeholder="Your email"
+                             type="email"
+                             v-bind:class="{ 'form-style' : (email_info == 0), 'error-style' : (email_info == 2) }"
+                             v-model="email">
+                    </div>
+                    <div style="display: flex;flex-direction: row">
+                      <input @focus="code_info = 0"
+                             id="logcode"
+                             name="logcode"
+                             placeholder="邮箱验证码"
+                             type="text"
+                             v-bind:class="{ 'code-style' : (code_info == 0), 'error-code-style' : (code_info == 2), 'empty-code-style' : (code_info == 3) }"
+                             v-model="code">
+                      <input @click="sendCode" class="send-code" :disabled="countFlag" :value="btnMsg"></input>
+                    </div>
+                  </div>
+                  <a @click="registerSubmit" class="btn">Sign up</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -235,7 +235,6 @@ import {emailVerification, login, register} from "../../network/user.js";
 
 export default {
   name: "Register",
-  props: ['choice'],
   data() {
     return {
       username: '',
@@ -548,7 +547,7 @@ p {
 .card-wrap {
   color: #a1c4fd;
   height: 400px;
-  margin-left: 35%;
+  margin: auto;
   margin-top: 20px;
   max-width: 100%;
   perspective: 800px;
