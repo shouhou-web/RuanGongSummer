@@ -23,6 +23,8 @@ const IMade = () => import("views/Home/WorkSpace/IMade/IMade.vue"); // 我的创
 const MyCollection = () =>
   import("views/Home/WorkSpace/MyCollection/MyCollection.vue"); // 我的收藏界面
 
+const Trash = () => import("views/Home/Trash/Trash.vue"); // 回收站界面
+
 // 文档编辑
 const Doc = () => import("views/Doc/Doc.vue");
 
@@ -63,7 +65,11 @@ const routes = [
           }
         ]
       },
-      { path: "/home/trash", name: "Trash" },
+      {
+        path: "/home/trash",
+        name: "Trash",
+        component: Trash
+      },
       {
         path: "/home/teamSpace",
         name: "TeamSpace",
@@ -127,7 +133,7 @@ router.beforeEach((to, from, next) => {
   else if (to.path === "/home/workSpace/myCollection")
     store.commit("homemidnav", 3);
   else if (to.path === "/home/workSpace") store.commit("homeleftnav", 1);
-  else if (to.path === "/home/workSpace") store.commit("homeleftnav", 2);
+  else if (to.path === "/home/trash") store.commit("homeleftnav", 2);
   else if (to.path === "/home/teamSpace") store.commit("homeleftnav", 3);
   next();
 });
