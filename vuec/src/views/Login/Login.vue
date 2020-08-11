@@ -324,6 +324,8 @@ export default {
 
               this.username = "";
               this.password = "";
+
+              this.$router.push({path: '/home'});
             }
           })
         .catch(err => {
