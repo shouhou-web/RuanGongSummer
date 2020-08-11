@@ -6,9 +6,7 @@ import com.diamond.utils.DiyUUID;
 import com.diamond.utils.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +20,7 @@ public class UserInfoService {
     public int signUp(String name, String emailAddress, String password, String password2) throws Exception{
         if(!Validation.checkEmailFormat(emailAddress))
             return 1;
-        else if(docUserMapper.getDocUserByEmailAddress(emailAddress)!=null)
+        else if(docUserMapper.getDocUserByEmailAddress(emailAddress) != null)
             return 4;
         else if(!password.equals(password2))
             return 2;
@@ -79,4 +77,25 @@ public class UserInfoService {
         docUserMapper.updateDocUserName(map);
         return 0;
     }
+
+    public int setUserPassword(String userID, String userPassword)
+    {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userID", userID);
+        map.put("userPassword", userPassword);
+        docUserMapper.updateDocUserPassword(map);
+        return 0;
+    }
+
+    public int setEmailAddress(String userID, String emailAddress)
+    {
+        if(docUserMapper.getDocUserByEmailAddress(emailAddress) != null)
+            return 1;
+        Map<String, Object> map = new HashMap<>();
+        map.put("userID", userID);
+        map.put("emailAddress", emailAddress);
+        docUserMapper.updateDocUserEmailAddress(map);
+        return 0;
+    }
+
 }
