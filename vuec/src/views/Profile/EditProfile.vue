@@ -1,6 +1,6 @@
 <template>
   <div>
-    <editprofile-item icon="user" title="昵称" :content="user.userID">
+    <editprofile-item icon="license" title="账号ID" :content="user.userID">
     </editprofile-item>
     <editprofile-item icon="user" title="昵称" content="">
       <input
@@ -163,7 +163,7 @@ export default {
       this.open = !this.open;
     },
     editUserName() {
-      setUserName(this.userID, this.user.userName)
+      setUserName(this.user.userID, this.user.userName)
         .then(res => {
           this.$notify({
             title: "成功",
@@ -228,7 +228,7 @@ export default {
         this.$message.error("两次密码填写不一致");
       // 发送修改密码
       else
-        setUserPassword(this.userID, this.newpwd1).then(res => {
+        setUserPassword(this.user.userID, this.newpwd1).then(res => {
           this.$notify({
             title: "成功",
             message: "修改密码成功",
@@ -252,7 +252,7 @@ export default {
     },
     _changeEmail() {
       if (this.code == this.newCode) {
-        setEmailAddress(this.userID, this.emailAddressNew)
+        setEmailAddress(this.user.userID, this.emailAddressNew)
           .then(res => {
             if (res == 0) {
               this.$notify({
