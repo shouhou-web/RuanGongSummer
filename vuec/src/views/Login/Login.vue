@@ -1,5 +1,6 @@
 <template>
   <div>
+    <m-app-header></m-app-header>
     <div class="login">
       <input
         class="checkbox"
@@ -231,6 +232,7 @@
 </template>
 
 <script>
+import MAppHeader from "@/components/common/m-header/MAppHeader";
 import {emailVerification, login, register} from "../../network/user.js";
 
 export default {
@@ -250,6 +252,9 @@ export default {
       timer: null,
       btnMsg: '发送验证码'
     }
+  },
+  components:{
+    MAppHeader
   },
   methods: {
     registerSubmit() {
@@ -435,10 +440,6 @@ p {
 
 .login-main {
   margin-top: 30px;
-}
-
-.login-btn {
-
 }
 
 .forget {

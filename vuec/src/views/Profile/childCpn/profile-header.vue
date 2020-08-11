@@ -1,51 +1,154 @@
 <template>
-  <div class="wrapper--son">
-    <div class="header">
-      <div class="avator">
-        <img class="avator__inner" :src="user.imagePath" alt="" />
+  <div>
+    <div class="wrapper--son">
+      <div class="header">
+        <div @click="editImage = true" class="avator">
+          <img class="avator__inner" :src="user.imagePath" alt="" />
+        </div>
+        <div class="name">
+          {{ user.userName }}
+        </div>
       </div>
-      <div class="name">
-        {{ user.userName }}
+      <!-- 右侧信息展示 -->
+      <div class="main">
+        <div class="main-item">
+          <div class="num">
+            3
+          </div>
+          <div class="label">
+            团队
+          </div>
+        </div>
+        <div class="main-item border-left">
+          <div class="num">
+            1
+          </div>
+          <div class="label">
+            已完成
+          </div>
+        </div>
+        <div class="main-item border-left">
+          <div class="num">
+            15
+          </div>
+          <div class="label">
+            协作成员
+          </div>
+        </div>
       </div>
     </div>
-    <!-- 右侧信息展示 -->
-    <div class="main">
-      <div class="main-item">
-        <div class="num">
-          3
-        </div>
-        <div class="label">
-          团队
-        </div>
-      </div>
-      <div class="main-item border-left">
-        <div class="num">
-          1
-        </div>
-        <div class="label">
-          已完成
-        </div>
-      </div>
-      <div class="main-item border-left">
-        <div class="num">
-          15
-        </div>
-        <div class="label">
-          协作成员
-        </div>
-      </div>
-    </div>
+    <m-hover
+      @submit="submit"
+      @cancel="close"
+      :onShow="editImage"
+      title="选择头像"
+      assureBtn="选择"
+      cancelBtn="取消"
+    >
+      <ul class="avator-list">
+        <li
+          class="avator-item"
+          :class="[item == imagePath ? 'avator-item--active' : '']"
+          v-for="(item, index) in image"
+          :key="index"
+        >
+          <img @click="imgClick(item)" :src="item" alt="" />
+        </li>
+      </ul>
+    </m-hover>
   </div>
 </template>
 
 <script>
+import MHover from "components/common/m-hover/m-hover";
+import { setImagePath } from "network/profile";
 export default {
   name: "ProfileHeader",
-  components: {},
+  components: {
+    MHover
+  },
+  data() {
+    return {
+      imagePath: "",
+      editImage: false, // 编辑头像
+      image: [
+        "https://img-static.mihoyo.com/communityweb/upload/2adac6e4e0195c39d90696955f9a7902.png",
+        "https://img-static.mihoyo.com/avatar/avatar30003.png",
+        "https://img-static.mihoyo.com/avatar/avatar30044.png",
+        "https://img-static.mihoyo.com/avatar/avatar30045.png",
+        "https://img-static.mihoyo.com/avatar/avatar30017.png",
+        "https://img-static.mihoyo.com/communityweb/upload/d3183774d0d6f7a41d670e7dbc4654e3.png",
+        "https://img-static.mihoyo.com/communityweb/upload/820f461e107e17f11d8fa8c5e45d5289.png",
+        "https://img-static.mihoyo.com/communityweb/upload/fbdf7f523c1dd6626d2c5f03ee3f6f98.png",
+        "https://img-static.mihoyo.com/communityweb/upload/57b90e40dc9dc200b5edd78dee9c2229.png",
+        "https://img-static.mihoyo.com/communityweb/upload/1ef39940f7b29521ec1eddd2e7dec95f.png",
+        "https://img-static.mihoyo.com/communityweb/upload/f50dd4023f740340b1c54141c7b6c1be.png",
+        "https://img-static.mihoyo.com/communityweb/upload/de22b6827f169102f4cf860462d92feb.png",
+        "https://img-static.mihoyo.com/communityweb/upload/323cc51093b9f86722bb20482508bf3d.png",
+        "https://img-static.mihoyo.com/communityweb/upload/696cf7f6443df04eccf6ebb2e241ee74.png",
+        "https://img-static.mihoyo.com/communityweb/upload/b6bbc725a4afd2369827782d537b24d4.png",
+        "https://img-static.mihoyo.com/communityweb/upload/cae78e205c56da101fb44b13554a949b.png",
+        "https://img-static.mihoyo.com/communityweb/upload/da411f6525512811eba03bfbad9633a6.png",
+        "https://img-static.mihoyo.com/communityweb/upload/b847b9027dc47246d1e2b11b172764b4.png",
+        "https://img-static.mihoyo.com/communityweb/upload/3462ba26d0721ebc099410fd28a97edd.png",
+        "https://img-static.mihoyo.com/communityweb/upload/7cb31635bc3a1d70aaa318815da7da52.png",
+        "https://img-static.mihoyo.com/communityweb/upload/d081a9ec7c36973cfdd05c65868e64db.png",
+        "https://img-static.mihoyo.com/communityweb/upload/04bec71668213f8415e2f70a658f7052.png",
+        "https://img-static.mihoyo.com/communityweb/upload/d5ec3a882e86840aa8a89977ff6027ff.png",
+        "https://img-static.mihoyo.com/communityweb/upload/8b93fdb528544b275c55738b12c75ffe.png",
+        "https://img-static.mihoyo.com/communityweb/upload/3853cac2e164aaef0e113156a059b811.png",
+        "https://img-static.mihoyo.com/communityweb/upload/cdc6ca1158d4ae532ca3a7f4224d22cc.png",
+        "https://img-static.mihoyo.com/communityweb/upload/247bf074f83f9e2de0f61402c269669f.png",
+        "https://img-static.mihoyo.com/communityweb/upload/2872edd31066251e2430110fea06152a.png",
+        "https://img-static.mihoyo.com/communityweb/upload/222b847170feb3f2babcc1bd4f0e30dd.png",
+        "https://img-static.mihoyo.com/communityweb/upload/43c2bf44e066f3f763d0456100d6c2a6.png",
+        "https://img-static.mihoyo.com/communityweb/upload/b1493c45ae9c4c47877e5e8297046f90.png",
+        "https://img-static.mihoyo.com/communityweb/upload/8075f7c3db21e5325281aa7a7d2fe6de.png",
+        "https://img-static.mihoyo.com/communityweb/upload/a57113d5e6173a05f7980c978c5a2bd6.png",
+        "https://img-static.mihoyo.com/communityweb/upload/38a67cbf6a0bf5feadde8bde74025041.png",
+        "https://img-static.mihoyo.com/communityweb/upload/ec4e226f47a169749d96433dd63f391e.png",
+        "https://img-static.mihoyo.com/communityweb/upload/52de23f1b1a060e4ccaa8b24c1305dd9.png"
+      ]
+    };
+  },
+  methods: {
+    submit() {
+      setImagePath(this.user.userID, this.imagePath)
+        .then(res => {
+          if (res == 0) {
+            this.$notify({
+              title: "成功",
+              message: "修改头像成功",
+              type: "success"
+            });
+            this.$store.commit("setImagePath", this.imagePath);
+          } else
+            this.$notify.error({
+              title: "网络错误",
+              message: "请稍后重试~"
+            });
+        })
+        .catch(err => {
+          this.$notify.error({
+            title: "网络错误",
+            message: "请稍后重试~"
+          });
+        });
+    },
+    close() {
+      this.editImage = false;
+    },
+    imgClick(src) {
+      this.imagePath = src;
+    }
+  },
   computed: {
     user() {
       return this.$store.state.user;
     }
+  },
+  created() {
+    this.imagePath = this.$store.state.imagePath;
   }
 };
 </script>
@@ -108,5 +211,37 @@ export default {
 
 .label {
   color: #ccc;
+}
+
+/* --------------------悬浮窗的代码----------------------- */
+
+.avator-list {
+  padding: 30px 0 0 30px;
+  width: 490px;
+  height: 470px;
+  overflow: auto;
+}
+
+.avator-item {
+  display: inline-block;
+  vertical-align: top;
+  width: 90px;
+  height: 90px;
+  padding: 4px;
+  border: 1px solid transparent;
+  margin: 0 20px 20px 0;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.avator-item img {
+  border: 1px solid #f0f0f0;
+  border-radius: 100%;
+  height: 100%;
+  width: 100%;
+}
+
+.avator-item--active {
+  border-color: #4cc3ff;
 }
 </style>
