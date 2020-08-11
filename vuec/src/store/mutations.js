@@ -8,24 +8,27 @@ const mutations = {
   },
   // 登录
   login(state, info) {
-    console.log(info)
-    state.token = true
-    state.user = info
+    console.log(info);
+    state.token = true;
+    state.user = info;
   },
   // 登出
   logout(state) {
-    state.token = false
-    state.user = {}
+    state.token = false;
+    state.user = {};
   },
   // profile相关修改
   setImagePath(state, imagePath) {
     state.user.imagePath = imagePath;
   },
-  setUserName(state,userName) {
-    state.user.userName = userName
+  setUserName(state, userName) {
+    state.user.userName = userName;
   },
-  setPassword(state,userPassword) {
-    state.user.userPassword = userPassword
+  setPassword(state, userPassword) {
+    state.user.userPassword = userPassword;
+  },
+  setEmailAddress(state, emailAddress) {
+    state.user.emailAddress = emailAddress;
   }
 };
 
