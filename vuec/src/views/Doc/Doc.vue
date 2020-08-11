@@ -1,5 +1,8 @@
 <template>
   <div id="doc">
+    <div class="header">
+      
+    </div>
     <div class="editor">
       <in-editor></in-editor>
     </div>
@@ -7,7 +10,7 @@
 </template>
 
 <script>
-import inEditor from "./childCpn/inEditor";
+import inEditor from "./childCpn/in-editor/index";
 export default {
   name: "Doc",
   components: {
