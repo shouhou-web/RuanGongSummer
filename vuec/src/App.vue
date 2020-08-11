@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import MAppHeader from "components/common/m-app-header/MAppHeader";
+import MAppHeader from "components/common/m-header/MAppHeader";
 import FullscrrenLoading from "components/common/fullscreen-loading/FullscreenLoading";
 export default {
   name: "App",
