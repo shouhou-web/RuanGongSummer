@@ -99,7 +99,7 @@ export default {
   border-bottom-left-radius: 5px;
   background-color: white;
   margin-top: 1.5vh;
-  box-shadow:2px 2px 5px #838282;
+  box-shadow:2px 2px 5px #a5a5a5;
 }
 
 .one-team{
@@ -195,5 +195,10 @@ export default {
 
 .v-leave-active{
   transition: 0.3s;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s;
 }
 </style>
