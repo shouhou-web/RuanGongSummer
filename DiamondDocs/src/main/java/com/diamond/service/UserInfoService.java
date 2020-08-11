@@ -70,4 +70,13 @@ public class UserInfoService {
         docUserMapper.updateDocUserPassword(map);
         return 0;
     }
+
+    public int setUserName(String userID, String userName)
+    {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userID", userID);
+        map.put("userName", userName);
+        docUserMapper.updateDocUserName(map);
+        return 0;
+    }
 }

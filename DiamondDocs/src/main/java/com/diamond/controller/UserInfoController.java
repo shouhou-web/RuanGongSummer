@@ -66,4 +66,18 @@ public class UserInfoController {
         }
     }
 
+    @RequestMapping("/setUserName")
+    public int setUserName(@RequestParam("userID") String userID, @RequestParam("userName") String userName)
+    {
+        try
+        {
+            return userInfoService.setUserName(userID, userName);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
 }
