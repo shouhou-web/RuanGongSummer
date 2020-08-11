@@ -5,30 +5,29 @@
       我的团队 | My Team
     </div>
     <div class="my-teams-space">
-      <div v-for="(ateam,teamIndex) in myTeams" :key="teamIndex">
+      <div v-for="(ateam,teamIndex) in myTeams">
         <div class="one-team" @click="chooseTeam(ateam.teamID)">
           {{teamIndex}} : {{ateam.TeamName}} : {{ateam.teamID}}
         </div>
       </div>
     </div>
     <div>
-      <router-view></router-view>
+      <router-view v-bind:TeamID="TeamID"></router-view>
     </div>
-
   </div>
 </template>
 
 <script>
+import {getMyTeam,getTeamDocs} from "../../network/team.js";
+
 export default {
   name: 'TeamSpace',
   data() {
     return {
+      user: '',
       TeamID: '',
       myTeams: [
-        {
-          teamID: 1,
-          TeamName: 'FIRST'
-        }
+        {TeamName:'first',teamID:1},
       ],
     }
   },
@@ -40,7 +39,24 @@ export default {
     }
   },
   created() {
+    this.user = this.$store.state.user;
 
+    if (!this.user.userID){
+      this.$message.error('请先登录');
+      // this.$router.push({path: '/login?page=0'})
+      return;
+    }
+
+    console.log(this.user.userID)
+
+    getMyTeam(this.user.userID)
+      .then(res => {
+        console.log(res);
+        this.myTeams = res
+      })
+      .catch(err => {
+        this.$message.error("请检查网络 - 暂时无法获取你的团队")
+      })
   }
 };
 </script>

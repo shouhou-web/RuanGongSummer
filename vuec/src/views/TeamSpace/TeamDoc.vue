@@ -17,24 +17,35 @@
 </template>
 
 <script>
+import {getTeamDocs} from "@/network/team";
+
 export default {
   name: "TeamDoc",
   data() {
     return {
       teamID: '',
-      docs: [
-        {
-          docID: 1,
-          docName: 'DOC_1'
-        }
-      ],
+      docs: '',
+    }
+  },
+  props: {
+    TeamID: {
+      type: Number,
+      require: true
     }
   },
   methods: {
 
   },
   created() {
-
+    console.log(this.TeamID);
+    getTeamDocs(this.TeamID)
+      .then(docs => {
+        console.log(docs);
+        this.docs = docs;
+      })
+      .catch(err => {
+        this.$message.error("请检查网络 - 暂时还无法获取团队文档")
+      })
   }
 }
 </script>
