@@ -76,7 +76,7 @@ const routes = [
     ]
   },
   {
-    path: "/login/:choice",
+    path: "/Login/:choice",
     name: "Login",
     component: Login,
     props: true

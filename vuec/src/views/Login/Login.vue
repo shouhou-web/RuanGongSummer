@@ -11,7 +11,7 @@
       <div class="card-wrap">
         <div class="card-wrapper">
           <div v-if="choice == 0">
-            <!--login-->
+            <!--Login-->
             <div class="card-front">
               <div class="center-wrap">
                 <div>
@@ -118,7 +118,7 @@
             </div>
           </div>
           <div v-else>
-            <!--login-->
+            <!--Login-->
             <div class="card-back">
               <div class="center-wrap">
                 <div>

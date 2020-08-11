@@ -155,7 +155,7 @@ export default {
     token() {
       // if (sessionStorage.getItem("user") != null) {
       //   console.log("我执行了", sessionStorage.getItem("user"));
-      //   this.$store.commit("login", JSON.parse(sessionStorage.getItem("user")));
+      //   this.$store.commit("Login", JSON.parse(sessionStorage.getItem("user")));
       // }
       console.log(this.$store.state.token);
       return this.$store.state.token;
@@ -165,7 +165,7 @@ export default {
     toLogin(e) {
       console.log(e);
       this.$router.push({
-        path: "/login",
+        path: "/Login",
         query: {
           page: e
         }
