@@ -1,75 +1,96 @@
 <template>
-<div id="home">
-  <m-app-header></m-app-header>
-  <div class="main-page">
-    <div class="nav">
-      <!--      <div class="side-bar"></div>-->
-      <div class="wrap">
-        <my-button type="text" class="nav-btn" @click="toRecent" :active="this.$store.state.homeLeftNav === 1">
-          <span class="nav-item">
-            <img src="@/assets/icon/home/ET.png" class="option-icon" />工作台
-          </span>
-        </my-button>
-        <my-button type="text" class="nav-btn" @click="toTrash" :active="this.$store.state.homeLeftNav === 2">
-          <span class="nav-item">
-            <img
-              src="@/assets/icon/home/delete.png"
-              class="option-icon"
-            />回收站
-          </span>
-        </my-button>
-        <my-button type="text" class="nav-btn" @click="toTeamSpace" :active="this.$store.state.homeLeftNav === 3">
-          <span class="nav-item">
-            <img
-              src="@/assets/icon/home/partner.png"
-              class="option-icon"
-            />团队空间
-          </span>
-        </my-button>
+  <div id="home">
+    <m-app-header></m-app-header>
+    <div class="main-page">
+      <div class="nav">
+        <div class="wrap">
+          <my-button
+            type="text"
+            class="nav-btn"
+            @click="toRecent"
+            :active="this.$store.state.homeLeftNav === 1"
+          >
+            <span class="nav-item">
+              <img src="@/assets/icon/home/ET.png" class="option-icon" />工作台
+            </span>
+          </my-button>
+          <my-button
+            type="text"
+            class="nav-btn"
+            @click="toTrash"
+            :active="this.$store.state.homeLeftNav === 2"
+          >
+            <span class="nav-item">
+              <img
+                src="@/assets/icon/home/delete.png"
+                class="option-icon"
+              />回收站
+            </span>
+          </my-button>
+          <my-button
+            type="text"
+            class="nav-btn"
+            @click="toTeamSpace"
+            :active="this.$store.state.homeLeftNav === 3"
+          >
+            <span class="nav-item">
+              <img
+                src="@/assets/icon/home/partner.png"
+                class="option-icon"
+              />团队空间
+            </span>
+          </my-button>
+        </div>
       </div>
-    </div>
-    <div class="divider"></div>
-    <div class="second-nav">
-      <transition mode="out-in">
-        <router-view class="fade-in"></router-view>
-      </transition>
-    </div>
-    <div class="divider"></div>
-    <div class="sub-page">
-      <div class="option-nav">
-        <my-button type="text" class="nav-btn">
-          <span class="nav-item">
-            <img src="@/assets/icon/home/new.png" class="option-icon" />新建文档
-          </span>
-        </my-button>
-        <my-button type="text" class="nav-btn">
-          <span class="nav-item">
-            <img
-              src="@/assets/icon/home/sample.png"
-              class="option-icon"
-            />文档模板
-          </span>
-        </my-button>
-        <my-button type="text" class="nav-btn">
-          <span class="nav-item">
-            <img
-              src="@/assets/icon/home/newteam.png"
-              class="option-icon"
-            />新建团队
-          </span>
-        </my-button>
-        <my-button type="text" class="nav-btn">
-          <span class="nav-item">
-            <img
-              src="@/assets/icon/home/upload.png"
-              class="option-icon"
-            />导入文档
-          </span>
-        </my-button>
+      <div class="row-divider"></div>
+      <div class="second-nav">
+        <transition mode="out-in">
+          <router-view class="fade-in"></router-view>
+        </transition>
+      </div>
+      <div class="row-divider"></div>
+      <div class="sub-page">
+        <div class="option-nav">
+          <my-button type="text" class="nav-btn">
+            <span class="nav-item">
+              <img
+                src="@/assets/icon/home/new.png"
+                class="option-icon"
+              />新建文档
+            </span>
+          </my-button>
+          <my-button type="text" class="nav-btn">
+            <span class="nav-item">
+              <img
+                src="@/assets/icon/home/sample.png"
+                class="option-icon"
+              />文档模板
+            </span>
+          </my-button>
+          <my-button type="text" class="nav-btn">
+            <span class="nav-item">
+              <img
+                src="@/assets/icon/home/newteam.png"
+                class="option-icon"
+              />新建团队
+            </span>
+          </my-button>
+          <my-button type="text" class="nav-btn">
+            <span class="nav-item">
+              <img
+                src="@/assets/icon/home/upload.png"
+                class="option-icon"
+              />导入文档
+            </span>
+          </my-button>
+        </div>
+        <div class="column-divider"></div>
+        <div class="Other">
+          Other Things!
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -103,7 +124,7 @@ export default {
 }
 
 .nav-btn {
-  padding: 10px;
+  padding: 13px;
   margin: 5px;
 }
 
@@ -113,18 +134,6 @@ export default {
   margin: 30px;
   padding: 10px 90px;
   width: 10%;
-}
-
-.side-bar {
-  position: absolute;
-  border: 2px solid #7c7878;
-  border-radius: 10px;
-  margin-top: -3vh;
-  margin-left: -3vh;
-  z-index: -1;
-  width: 25vh;
-  height: 100vh;
-  background-color: #ecf0f1;
 }
 
 .wrap {
@@ -143,12 +152,20 @@ export default {
   width: 24px;
 }
 
-.divider {
+.row-divider {
   background-color: #b8b6b6;
   border: 0;
   border-top-style: solid;
   height: 92vh;
   width: 2px;
+}
+
+.column-divider {
+  background-color: #b8b6b6;
+  border: 0;
+  border-top-style: solid;
+  height: 1px;
+  width: 180px;
 }
 
 .second-nav {
@@ -176,27 +193,31 @@ export default {
   padding: 10px;
 }
 
+.Other {
+  margin-top: 20px;
+}
+
 .fade-in {
   opacity: 1;
   transition: opacity 0.5s;
 }
 
-.v-enter{
- opacity: 0;
+.v-enter {
+  opacity: 0;
 }
-.v-enter-active{
- transition: 0.5s;
+.v-enter-active {
+  transition: 0.5s;
 }
-.v-enter-to{
- opacity: 1;
+.v-enter-to {
+  opacity: 1;
 }
-.v-leave{
- opacity: 1;
+.v-leave {
+  opacity: 1;
 }
-.v-leave-to{
- opacity:0;
+.v-leave-to {
+  opacity: 0;
 }
-.v-leave-active{
- transition: 0.3s;
+.v-leave-active {
+  transition: 0.3s;
 }
 </style>
