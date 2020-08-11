@@ -1,6 +1,7 @@
 package com.diamond.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.diamond.pojo.DocUser;
 import com.diamond.utils.HttpHelper;
 import com.diamond.utils.authdto.RequestAccessTokenParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class AuthController {
     String client_secret = "fd71c17f3c23abaf684e1f114520c2801aadf7b9";
 
     @RequestMapping("/githubcallback")
-    public String callback(@RequestParam("code") String code){
+    public String loginByGitHub(@RequestParam("code") String code){
         RequestAccessTokenParam param = new RequestAccessTokenParam();
         param.setClient_id(client_id);
         param.setClient_secret(client_secret);
