@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 // 首页相关组件
 const Home = () => import('views/Home/Home.vue');
-const login = () => import('views/login/login.vue')
+const Login = () => import('views/Login/Login.vue')
 const forgetPwd = () => import('views/ForgetPwd/ForgetPwd.vue')
 
 //1.安装插件
@@ -22,9 +22,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/login',
+    path: '/Login',
     name: 'Login',
-    component: login,
+    component: Login,
   },
   {
     path: '/forgetPwd',

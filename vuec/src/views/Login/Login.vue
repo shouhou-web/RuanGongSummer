@@ -11,7 +11,7 @@
       <div class="card-wrap">
         <div class="card-wrapper">
           <div v-if="this.$route.query.page == 1">
-            <!--login-->
+            <!--Login-->
             <div class="card-back">
               <div class="center-wrap">
                 <div>
@@ -118,7 +118,7 @@
             </div>
           </div>
           <div v-else>
-            <!--login-->
+            <!--Login-->
             <div class="card-front">
               <div class="center-wrap">
                 <div>
@@ -234,7 +234,7 @@
 import {emailVerification, login, register} from "../../network/user.js";
 
 export default {
-  name: "Register",
+  name: "Login",
   data() {
     return {
       username: '',
