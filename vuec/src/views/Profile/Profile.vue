@@ -1,34 +1,39 @@
 <template>
-  <div class="wrapper">
-    <div class="header">
-      <profile-header></profile-header>
-    </div>
-    <div class="main">
-      <div class="nav">
-        <div class="nav-item" :class="[isEditProfile ? 'active' : '']">
-          <router-link to="/profile/editProfile">账号信息</router-link>
-        </div>
-        <div class="nav-item">
-          <router-link to="/profile/myTeam">参与的团队</router-link>
-        </div>
-        <div class="nav-item">
-          <router-link to="/profile/setMessage">消息设置</router-link>
-        </div>
+  <div>
+    <m-app-header></m-app-header>
+    <div class="wrapper">
+      <div class="header">
+        <profile-header></profile-header>
       </div>
-      <div class="div"></div>
-      <!-- 子页面 -->
-      <div class="content">
-        <router-view></router-view>
+      <div class="main">
+        <div class="nav">
+          <div class="nav-item" :class="[isEditProfile ? 'active' : '']">
+            <router-link to="/profile/editProfile">账号信息</router-link>
+          </div>
+          <div class="nav-item">
+            <router-link to="/profile/myTeam">参与的团队</router-link>
+          </div>
+          <div class="nav-item">
+            <router-link to="/profile/setMessage">消息设置</router-link>
+          </div>
+        </div>
+        <div class="div"></div>
+        <!-- 子页面 -->
+        <div class="content">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import MAppHeader from "components/common/m-header/MAppHeader";
 import ProfileHeader from "./childCpn/profile-header";
 export default {
   name: "Home",
   components: {
+    MAppHeader,
     ProfileHeader
   },
   computed: {
@@ -46,7 +51,7 @@ export default {
 .wrapper {
   border-radius: 8px;
   background-color: #fff;
-  box-shadow:  0 2px 12px #ebebeb;
+  box-shadow: 0 2px 12px #ebebeb;
   margin: 100px auto 0;
   padding-bottom: 20px;
   width: 746px;

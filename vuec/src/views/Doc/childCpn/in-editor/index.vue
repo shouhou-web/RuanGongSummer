@@ -1,5 +1,5 @@
 <template>
-  <ckeditor :editor="editor" :value="editorData"></ckeditor>
+  <ckeditor class="wrapper" :editor="editor" :value="editorData"></ckeditor>
 </template>
 
 <script>
@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style scoped>
-p {
-  color: orange;
+.wrapper {
+  height: 80vh;
 }
 </style>

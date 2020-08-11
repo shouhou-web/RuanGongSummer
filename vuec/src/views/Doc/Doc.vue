@@ -25,5 +25,10 @@ export default {
 .editor {
   margin: 50px auto 0;
   width: 80vw;
+  height: 80vh;
+}
+
+.ck {
+  height: 80vh;
 }
 </style>
