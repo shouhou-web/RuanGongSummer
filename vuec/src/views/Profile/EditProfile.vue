@@ -20,6 +20,7 @@
         编辑
       </my-button>
     </editprofile-item>
+    <!-- 悬浮窗部分 -->
     <!-- 阴影 -->
     <div
       :class="[open ? '' : 'page-hide']"
@@ -33,8 +34,8 @@
         @cancel="changeOpen"
         v-if="editPwd"
         title="修改密码"
-        assure="确定修改"
-        cancel="暂不修改"
+        assureBtn="确定修改"
+        cancelBtn="暂不修改"
       >
         <input
           class="hover-input"
@@ -61,8 +62,8 @@
         @cancel="changeOpen"
         v-else-if="editEmail"
         title="修改绑定邮箱"
-        assure="确定修改"
-        cancel="暂不修改"
+        assureBtn="确定修改"
+        cancelBtn="暂不修改"
       >
         <input
           class="hover-input"
@@ -91,8 +92,8 @@
         @cancel="changeOpen"
         v-else
         title="安全验证"
-        assure="验证"
-        cancel="取消"
+        assureBtn="验证"
+        cancelBtn="取消"
       >
         <input
           class="hover-input"
@@ -169,16 +170,23 @@ export default {
       this.open = !this.open;
     },
     editUserName() {
-      setUserName(this.userName).then(res => {
-        this.$notify({
-          title: "成功",
-          message: "修改昵称成功",
-          type: "success"
+      setUserName(this.userName)
+        .then(res => {
+          this.$notify({
+            title: "成功",
+            message: "修改昵称成功",
+            type: "success"
+          });
+          // 更新信息
+          this.user.userName = this.userName;
+          this.$commit("login", this.user);
+        })
+        .catch(err => {
+          this.$notify.error({
+            title: "未知错误",
+            message: "请稍后重试~"
+          });
         });
-        // 更新信息
-        this.user.userName = this.userName;
-        this.$commit("login", this.user);
-      });
     },
     clickPassword() {
       this.changeOpen();
@@ -197,14 +205,21 @@ export default {
     },
     // 发送验证码
     sendCode(e) {
-      emailVerification(e).then(res => {
-        this.code = res;
-        this.$notify({
-          title: "成功",
-          message: "验证码发送成功",
-          type: "success"
+      emailVerification(e)
+        .then(res => {
+          this.code = res;
+          this.$notify({
+            title: "成功",
+            message: "验证码发送成功",
+            type: "success"
+          });
+        })
+        .catch(err => {
+          this.$notify.error({
+            title: "未知错误",
+            message: "请稍后重试~"
+          });
         });
-      });
     },
     submit(e) {
       console.log(e);
@@ -246,28 +261,35 @@ export default {
     },
     _changeEmail() {
       if (this.code == this.newCode) {
-        setEmailAddress(this.emailAddressNew).then(res => {
-          if (res == 0) {
-            this.$notify({
-              title: "成功",
-              message: "邮箱注册成功",
-              type: "success"
-            });
-            // 更新信息
-            this.user.userPassword = this.emailAddressNew;
-            this.$commit("login", this.user);
-          } else if (res == 1) {
-            this.$notify({
-              title: "邮箱已注册",
-              message: "该邮箱已经被注册过",
-              type: "warning"
-            });
-          } else
+        setEmailAddress(this.emailAddressNew)
+          .then(res => {
+            if (res == 0) {
+              this.$notify({
+                title: "成功",
+                message: "邮箱注册成功",
+                type: "success"
+              });
+              // 更新信息
+              this.user.userPassword = this.emailAddressNew;
+              this.$commit("login", this.user);
+            } else if (res == 1) {
+              this.$notify({
+                title: "邮箱已注册",
+                message: "该邮箱已经被注册过",
+                type: "warning"
+              });
+            } else
+              this.$notify.error({
+                title: "未知错误",
+                message: "请稍后重试~"
+              });
+          })
+          .catch(err => {
             this.$notify.error({
               title: "未知错误",
               message: "请稍后重试~"
             });
-        });
+          });
       }
     },
     isAddress(e) {

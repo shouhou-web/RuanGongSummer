@@ -27,7 +27,7 @@
               </div>
               <!-- 隐藏部分 -->
               <div class="avator--show avator--hide">
-                <div class="big-avator">
+                <div @click="toProfile" class="big-avator">
                   <img class="big-avator__inner" :src="user.imagePath" alt="" />
                 </div>
                 <div class="username">
@@ -95,7 +95,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="exit">
+                <div @click="logout" class="exit">
                   <div class="exit__icon">
                     <img src="@/assets/icon/header/exit.png" alt="" />
                   </div>
@@ -126,10 +126,12 @@
           </div>
           <div class="nav-right-item" v-else>
             <div class="item">
-              <a class="nav-item__inner" href="/login-register">登录</a>
+              <a @click="toLogin(0)" class="nav-item__inner" href="/login/0">登录</a>
             </div>
             <div class="item">
-              <a class="nav-item__inner" href="#">注册</a>
+              <a @click="toLogin(1)" class="nav-item__inner" href="/login/1"
+                >注册</a
+              >
             </div>
           </div>
         </div>
@@ -160,8 +162,20 @@ export default {
     }
   },
   methods: {
-    toProfile(){
-      this.$router.push({path:"/profile"})
+    toLogin(e) {
+      console.log(e);
+      this.$router.push({
+        path: "/login",
+        query: {
+          page: e
+        }
+      });
+    },
+    toProfile() {
+      this.$router.push({ path: "/profile" });
+    },
+    logout() {
+      this.$store.commit("logout");
     }
   }
 };
@@ -247,6 +261,7 @@ export default {
   padding-top: 12px;
   position: absolute;
   width: 152px;
+  z-index: 628;
 }
 
 .message--show .header {
@@ -283,6 +298,7 @@ export default {
   position: absolute;
   padding: 7px 0;
   width: 240px;
+  z-index: 628;
 }
 
 .big-avator,
