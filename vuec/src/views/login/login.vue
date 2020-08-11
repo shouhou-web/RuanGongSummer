@@ -109,7 +109,7 @@
                              type="text"
                              v-bind:class="{ 'code-style' : (code_info == 0), 'error-code-style' : (code_info == 2), 'empty-code-style' : (code_info == 3) }"
                              v-model="code">
-                      <div @click="sendCode" class="send-code">发送验证码</div>
+                      <input @click="sendCode" class="send-code" :disabled="countFlag" :value="btnMsg"></input>
                     </div>
                   </div>
                   <a @click="registerSubmit" class="btn">Sign up</a>
@@ -246,6 +246,10 @@ export default {
       code_confirm: '012345',
       email_info: 0,//存放email的状态 0正常/1已存在/2未填写
       code_info: 0,//存放code的状态 0正常/1通过/2错误/3未填写
+      countNum: 50,
+      countFlag: false,
+      timer: null,
+      btnMsg: '发送验证码'
     }
   },
   methods: {
@@ -335,8 +339,6 @@ export default {
         return;
       }
 
-      console.log(this.email)
-
       emailVerification(this.email)
       .then(res => {
         console.log(this.email)
@@ -346,6 +348,24 @@ export default {
           this.$message.error('验证码返回错误，请检查网络');
         } else {
           this.code_confirm = res;
+
+          // 处理倒计时问题
+          this.countFlag = !this.countFlag;
+          this.timer = setInterval(
+            () => {
+              if (this.countNum > 0 && this.countNum <= 50) {
+                this.btnMsg = this.countNum + 's';
+                this.countNum --;
+              } else {
+                this.countFlag = false;
+                clearInterval(this.timer);
+                this.timer = null;
+                this.btnMsg = '发送验证码';
+                this.countNum = 50;
+              }
+            }, 1000
+          )
+
         }
       })
       .catch(err => {
@@ -354,6 +374,7 @@ export default {
       })
 
     },
+    countDown() {},
   },
   computed: {},
 };
@@ -706,7 +727,7 @@ p {
   box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
   color: #514c4c;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   height: 48px;
   letter-spacing: 3px;
