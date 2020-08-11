@@ -63,12 +63,12 @@ const routes = [
         ]
       },
       {
-        path: "/home/TeamSpace",
+        path: "/home/teamSpace",
         name: "TeamSpace",
         component: TeamSpace,
         children: [
           {
-            path: "/home/TeamSpace/TeamDoc",
+            path: "/home/teamSpace/teamDoc",
             name: "TeamDoc",
             component: TeamDoc
           }

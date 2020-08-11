@@ -106,7 +106,7 @@ export default {
         this.activeIndex = 2;
         this.isActive[2] = true;
       }
-      this.$router.push({ path: "/home/TeamSpace" });
+      this.$router.push({ path: "/home/teamSpace" });
     }
   },
   components: {

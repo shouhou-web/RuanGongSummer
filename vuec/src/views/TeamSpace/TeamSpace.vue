@@ -35,7 +35,7 @@ export default {
     chooseTeam(teamID) {
       console.log(teamID);
       this.TeamID = teamID;
-      this.$router.push({path: '/home/TeamSpace/TeamDoc?TeamID=' + teamID})
+      this.$router.push({path: '/home/teamSpace/teamDoc?TeamID=' + teamID})
     }
   },
   created() {
