@@ -66,4 +66,46 @@ public class UserInfoController {
         }
     }
 
+    @RequestMapping("/setUserName")
+    public int setUserName(@RequestParam("userID") String userID, @RequestParam("userName") String userName)
+    {
+        try
+        {
+            return userInfoService.setUserName(userID, userName);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    @RequestMapping("/setUserPassword")
+    public int setUserPassword(@RequestParam("userID") String userID, @RequestParam("userPassword") String userPassword)
+    {
+        try
+        {
+            return userInfoService.setUserPassword(userID, userPassword);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    @RequestMapping("/setEmailAddress")
+    public int setEmailAddress(@RequestParam("userID") String userID, @RequestParam("emailAddress") String emailAddress)
+    {
+        try
+        {
+            return userInfoService.setEmailAddress(userID, emailAddress);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
 }

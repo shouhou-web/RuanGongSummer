@@ -1,11 +1,13 @@
 <template>
   <div>
+    <editprofile-item icon="user" title="昵称" :content="user.userID">
+    </editprofile-item>
     <editprofile-item icon="user" title="昵称" content="">
       <input
         @blur="editUserName"
         class="input"
         type="text"
-        v-model="userName"
+        v-model="user.userName"
       />
     </editprofile-item>
     <!-- 编辑密码 -->
@@ -15,7 +17,7 @@
       </my-button>
     </editprofile-item>
     <!-- 编辑邮箱 -->
-    <editprofile-item icon="email" title="邮箱" :content="emailAddress">
+    <editprofile-item icon="email" title="邮箱" :content="user.emailAddress">
       <my-button @click="clickEmail" type="primary" size="small">
         编辑
       </my-button>
@@ -98,7 +100,7 @@
         <input
           class="hover-input"
           type="text"
-          v-model="emailAddress"
+          v-model="user.emailAddress"
           placeholder="当前邮箱"
         />
         <div class="group">
@@ -109,8 +111,8 @@
             placeholder="验证码"
           />
           <my-button
-            @click="sendCode(emailAddress)"
-            :disabled="isAddress(emailAddress)"
+            @click="sendCode(user.emailAddress)"
+            :disabled="isAddress(user.emailAddress)"
             type="text"
             >发送验证码</my-button
           >
@@ -133,9 +135,6 @@ export default {
   name: "Home",
   data() {
     return {
-      userName: "",
-      userPassword: "",
-      emailAddress: "",
       emailAddressNew: "",
       open: false, //  是否打开悬浮窗
       editPwd: false, // 悬浮窗状态
@@ -154,12 +153,6 @@ export default {
     editprofileItem,
     editprofileHover
   },
-  created() {
-    this.userName = this.$store.state.user.userName;
-    this.userPassword = this.$store.state.user.userPassword;
-    // this.emailAddress = this.$store.state.user.emailAddress;
-    this.emailAddress = "18373337@buaa.edu.cn";
-  },
   computed: {
     user() {
       return this.$store.state.user;
@@ -170,7 +163,7 @@ export default {
       this.open = !this.open;
     },
     editUserName() {
-      setUserName(this.userName)
+      setUserName(this.userID, this.user.userName)
         .then(res => {
           this.$notify({
             title: "成功",
@@ -178,7 +171,6 @@ export default {
             type: "success"
           });
           // 更新信息
-          this.user.userName = this.userName;
           this.$commit("login", this.user);
         })
         .catch(err => {
@@ -230,19 +222,18 @@ export default {
     _changePwd() {
       if (this.oldpwd == "" || this.newpwd1 == "" || this.newpwd2 == "")
         this.$message.error("请完整填写三个字段~");
-      else if (this.oldpwd != this.userPassword)
+      else if (this.oldpwd != this.user.userPassword)
         this.$message.error("原密码不正确");
       else if (this.newpwd1 != this.newpwd2)
         this.$message.error("两次密码填写不一致");
       // 发送修改密码
       else
-        setUserPassword(this.newpwd1).then(res => {
+        setUserPassword(this.userID, this.newpwd1).then(res => {
           this.$notify({
             title: "成功",
             message: "修改密码成功",
             type: "success"
           });
-          this.userPassword = newpwd1;
           // 更新信息
           this.user.userPassword = newpwd1;
           this.$commit("login", this.user);
@@ -261,7 +252,7 @@ export default {
     },
     _changeEmail() {
       if (this.code == this.newCode) {
-        setEmailAddress(this.emailAddressNew)
+        setEmailAddress(this.userID, this.emailAddressNew)
           .then(res => {
             if (res == 0) {
               this.$notify({
