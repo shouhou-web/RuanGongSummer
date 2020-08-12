@@ -11,9 +11,42 @@
         </div>
       </div>
     </div>
-    <div class="member-iden">
-
+    <div class="member-iden" :class="{'member-iden--member':(iden == 0),'member-iden--manager':(iden == 1),'member-iden--creater':(iden == 2)}">
+      {{iden_message}}
     </div>
+    <div style="margin-top: 10px;margin-left: 5px" v-if="iden != 2">
+      <my-button size="small"
+                 style="margin-right: 10px;margin-top: 10px"
+                 @click="readyToQuit">退出团队</my-button>
+    </div>
+    <div style="margin-top: 10px;margin-left: 5px" v-if="iden == 2">
+      <my-button size="small"
+                 style="margin-right: 10px;margin-top: 10px"
+                 @click="readyToDisband">解散团队</my-button>
+    </div>
+
+    <!-- 悬浮窗 -->
+    <m-hover :on-show="isQuit"
+             title="是否确定要退出该团队"
+             assure-btn="确定"
+             cancel-btn="手滑了"
+             @submit="toQuitTeam"
+             @cancel="cancelQuit">
+      <div style="font-family: 'JetBrains Mono';margin: 20px">
+        注意：退出该团体后，将无法参与团体文档的编写和查看
+      </div>
+    </m-hover>
+    <m-hover :on-show="isDisband"
+             title="是否确定要解散该团队"
+             assure-btn="确定"
+             cancel-btn="手滑了"
+             @submit="toDisbandTeam"
+             @cancel="cancelDisband">
+      <div style="font-family: 'JetBrains Mono';margin: 20px">
+        注意：解散该团体后，所有团队文件将彻底销毁
+      </div>
+    </m-hover>
+
     <div>
       <transition mode="out-in">
         <TeamDoc v-bind:TeamID="TeamID" class="fade-in"></TeamDoc>
@@ -23,7 +56,7 @@
 </template>
 
 <script>
-import {getMyTeam, getTeamDocs, getUserIdentity} from "../../network/team.js";
+import {disbandTeam, getMyTeam, getTeamDocs, getUserIdentity, quitTeam} from "../../network/team.js";
 import TeamDoc from "@/views/TeamSpace/TeamDoc";
 
 export default {
@@ -34,7 +67,10 @@ export default {
       TeamID: '',
       myTeams: '',
       iden: 0,// 默认成员
-      chosenPos: -1
+      chosenPos: -1,
+      iden_message: '普通成员',
+      isQuit: false,
+      isDisband: false
     }
   },
   components: {
@@ -46,6 +82,52 @@ export default {
       this.TeamID = teamID;
       this.chosenPos = teamID;
       // this.$router.push({path: '/home/teamSpace/teamDoc?TeamID=' + teamID})
+    },
+    readyToQuit() {
+      this.isQuit = true;
+    },
+    cancelQuit() {
+      this.isQuit = false;
+    },
+    toQuitTeam() {
+      console.log(this.$store.state.user.userID);
+      console.log(this.TeamID);
+
+      quitTeam(this.$store.state.user.userID,this.TeamID)
+        .then(res => {
+          console.log(res);
+          if (res == 0){
+            this.$notify.success("退出团体成功");
+            this.$router.push({path: "/home/teamSpace"});
+            this.isQuit = false;
+          }else {
+            this.$notify.error("网络出现问题，无法退出，请检查网络情况")
+            this.isQuit = false;
+          }
+        })
+    },
+    readyToDisband() {
+      this.isDisband = true;
+    },
+    cancelDisband() {
+      this.isDisband = false;
+    },
+    toDisbandTeam() {
+      console.log(this.$store.state.user.userID);
+      console.log(this.TeamID);
+
+      disbandTeam(this.TeamID)
+        .then(res => {
+          console.log(res);
+          if (res == 0){
+            this.$notify.success("解散团体成功");
+            this.$router.push({path: "/home/teamSpace"});
+            this.isDisband = false;
+          }else {
+            this.$notify.error("网络出现问题，无法解散，请检查网络情况")
+            this.isDisband = false;
+          }
+        })
     }
   },
   created() {
@@ -73,6 +155,16 @@ export default {
         .then(res => {
           console.log('Iden',res);
           this.iden = res;
+          if (res == 0){
+            this.iden = 0;
+            this.iden_message = '普通成员';
+          }else if (res == 1){
+            this.iden = 1;
+            this.iden_message = '管理员';
+          }else{
+            this.iden = 2;
+            this.iden_message = '创建者';
+          }
         })
         .catch(err => {
           this.$notify(
@@ -151,6 +243,32 @@ export default {
 }
 
 .member-iden{
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  margin-top: 30px;
+  margin-left: 5px;
+  width: 100px;
+  height: 40px;
+  font-family: "JetBrains Mono";
+  box-shadow:2px 2px 5px #b5b5b5;
+  padding-top: 10px;
+  padding-left: 15px;
+}
+
+.member-iden--member{
+  background-color: #fafafa;
+}
+
+.member-iden--manager{
+  padding-left: 20px;
+  background-color: #eefdd6;
+  border: 1px solid #acfaac;
+}
+
+.member-iden--creater{
+  padding-left: 20px;
+  background-color: #d9f6f6;
+  border: 1px solid #85ddfa;
 }
 
 .my-team-details{
