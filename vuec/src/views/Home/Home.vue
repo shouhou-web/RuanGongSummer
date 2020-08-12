@@ -40,6 +40,12 @@
               />团队空间
             </span>
           </my-button>
+          <my-button type="timer" count=30 class="test"></my-button>
+          <my-button type="timer" count=10 size="medium" class="test"></my-button>
+          <my-button type="timer" count=1 size="small" class="test"></my-button>
+          <my-button type="timer" count=0 size="mini" class="test"></my-button>
+          <my-button type="timer" count=2 circle class="test"></my-button>
+          <my-button type="timer" count=50 round class="test"></my-button>
         </div>
       </div>
       <div class="row-divider"></div>
@@ -67,7 +73,7 @@
               />文档模板
             </span>
           </my-button>
-          <my-button type="text" class="nav-btn">
+          <my-button type="text" class="nav-btn" @click="addNewTeam">
             <span class="nav-item">
               <img
                 src="@/assets/icon/home/newteam.png"
@@ -82,6 +88,12 @@
         </div>
       </div>
     </div>
+    <m-hover :onShow=teamHoverOn title="创建我的团队" assureBtn="创建" cancelBtn="取消" @cancel="cancelNewTeamHover" @submit="createNewTeamHover">
+      <div class="hover-text">
+        请输入要创建的团队名称：
+      </div>
+      <input class="hover-input" placeholder="团队名称" v-model="teamName"></input>
+    </m-hover>
   </div>
 </template>
 
@@ -97,6 +109,7 @@ export default {
     return {
       user: "",
       teamName: "",
+      teamHoverOn: false,
     };
   },
   methods: {
@@ -108,6 +121,33 @@ export default {
     },
     toTeamSpace() {
       this.$router.push({ path: "/home/teamSpace" });
+    },
+    addNewTeam() {
+      this.teamHoverOn = true;
+    },
+    cancelNewTeamHover() {
+      this.teamHoverOn = false;
+    },
+    createNewTeamHover() {
+      if(!this.teamName) {
+        this.$message.error("团队名称不能为空！");
+      }
+      if(!this.user.userID) {
+        this.$message.error("请先登录！");
+      }
+      console.log(this.teamName)
+      addTeam(this.user.userID, this.teamName)
+      .then(res => {
+        console.log(res);
+        if(res === 1) {
+          this.$message.error("邮箱不合法");
+        } else if (res === 0) {
+          this.$message({
+            message: "创建成功！",
+            type: "success"
+          });
+        }
+      })
     }
   },
   components: {
@@ -118,8 +158,7 @@ export default {
     this.user = this.$store.state.user;
 
     if (!this.user.userID) {
-      this.$message.error("请先登录");
-      // this.$router.push({path: '/login?page=0'})
+      this.$message.error("请先登录！");
       return;
     }
     console.log(this.user.userID);
@@ -128,6 +167,10 @@ export default {
 </script>
 
 <style scoped>
+.test {
+  margin: 5px;
+}
+
 .main-page {
   align-items: center;
   display: flex;
@@ -205,6 +248,29 @@ export default {
 
 .Other {
   margin-top: 20px;
+}
+
+.hover-text {
+  margin-bottom: 5px;
+  padding: 7px;
+  width: 500px;
+}
+
+.hover-input {
+  border: 1px solid #C5D9E8;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  margin-left: 20px;
+  margin-top: 10px;
+  padding: 8px 15px;
+  width: 450px;
+  transition: 0.5s;
+}
+
+.hover-input:focus {
+  border-color: #3F536E;
+  box-shadow: 2px 2px 5px 1px rgba(10, 69, 105, 0.2);
+  transition: 0.5s;
 }
 
 .fade-in {
