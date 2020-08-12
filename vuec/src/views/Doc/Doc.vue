@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import MDocHeader from "@/components/common/m-header/MDocHeader"
+import MDocHeader from "@/components/content/m-doc-header/MDocHeader"
 import inEditor from "./childCpn/in-editor/index";
 export default {
   name: "Doc",
