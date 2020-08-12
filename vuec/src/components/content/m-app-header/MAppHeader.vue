@@ -21,6 +21,7 @@
         <div>
           <div class="nav-right-item" v-if="token">
             <!-- 头像 -->
+            <app-search></app-search>
             <div class="item">
               <div class="mini-avator">
                 <img class="mini-avator__inner" :src="user.imagePath" alt="" />
@@ -125,6 +126,7 @@
             </div>
           </div>
           <div class="nav-right-item" v-else>
+            <app-search></app-search>
             <div class="item">
               <a @click="toLogin(0)" class="nav-item__inner">登录</a>
             </div>
@@ -140,10 +142,12 @@
 
 <script>
 import MHeader from "components/common/m-header/MHeader.vue";
+import appSearch from "./childCpn/app-header-search";
 export default {
   name: "MAppHeader",
   components: {
-    MHeader
+    MHeader,
+    appSearch
   },
   props: {
     bgColor: {
