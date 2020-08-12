@@ -232,7 +232,7 @@
 </template>
 
 <script>
-import MAppHeader from "@/components/common/m-header/MAppHeader";
+import MAppHeader from "components/content/m-app-header/MAppHeader";
 import {emailVerification, login, register} from "../../network/user.js";
 
 export default {

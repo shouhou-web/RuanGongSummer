@@ -1,5 +1,6 @@
 <template>
   <div>
+    <m-app-header></m-app-header>
     <div class="login">
       <div class="card-wrap">
         <div class="card-wrapper">
@@ -27,7 +28,7 @@
                            type="text"
                            v-bind:class="{ 'code-style' : (code_info == 0), 'success-code-style' : (code_info == 1), 'error-code-style' : (code_info == 2), 'empty-code-style' : (code_info == 3) }"
                            v-model="code">
-                    <input v-show="isShow" @click="sendCode" :disabled="countFlag" class="send-code" :value="btnMsg"></input>
+                    <input v-show="isShow" @click="sendCode" :disabled="countFlag" class="send-code" :value="btnMsg" />
                   </div>
                   <a v-show="isShow" @click="confirmCode" class="btn">confirm</a>
                 </div>
@@ -63,9 +64,13 @@
 
 <script>
 import {login, register, resetPwd, emailVerification} from "@/network/user";
+import MAppHeader from "components/content/m-app-header/MAppHeader";
 
 export default {
   name: 'ForgetPassword',
+  components:{
+    MAppHeader
+  },
   data() {
     return {
       headerText: '忘记密码',

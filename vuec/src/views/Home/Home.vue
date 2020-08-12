@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import MAppHeader from "@/components/common/m-header/MAppHeader";
+import MAppHeader from "components/content/m-app-header/MAppHeader";
 import Recent from "./WorkSpace/WorkSpace";
 
 export default {
