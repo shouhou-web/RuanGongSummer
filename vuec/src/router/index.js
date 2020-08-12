@@ -36,7 +36,7 @@ const routes = [
   {
     path: "/",
     // redirect重定向
-    redirect: "/home"
+    redirect: "/home/workSpace"
   },
   {
     path: "/home",
@@ -48,6 +48,11 @@ const routes = [
         name: "WorkSpace",
         component: WorkSpace,
         children: [
+          {
+            path: "/home/workSpace",
+            // redirect重定向
+            redirect: "/home/workSpace/recent"
+          },
           {
             path: "/home/workSpace/recent",
             name: "Recent",
@@ -128,12 +133,16 @@ router.beforeEach((to, from, next) => {
   // ${//to and from are Route Object,next() must be called to resolve the hook}
   // 这里是修改名字的全局守护路由，暂不应用
   // document.title = to.matched[0].meta.title;
-  if (to.path === "/home/workSpace/recent") store.commit("homemidnav", 1);
-  else if (to.path === "/home/workSpace/iMade") store.commit("homemidnav", 2);
-  else if (to.path === "/home/workSpace/myCollection")
+  if (to.path === "/home/workSpace/recent") {
+    store.commit("homeleftnav", 1);
+    store.commit("homemidnav", 1);
+  } else if (to.path === "/home/workSpace/iMade") {
+    store.commit("homeleftnav", 1);
+    store.commit("homemidnav", 2);
+  } else if (to.path === "/home/workSpace/myCollection") {
+    store.commit("homeleftnav", 1);
     store.commit("homemidnav", 3);
-  else if (to.path === "/home/workSpace") store.commit("homeleftnav", 1);
-  else if (to.path === "/home/trash") store.commit("homeleftnav", 2);
+  } else if (to.path === "/home/trash") store.commit("homeleftnav", 2);
   else if (to.path === "/home/teamSpace") store.commit("homeleftnav", 3);
   next();
 });
