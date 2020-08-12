@@ -166,6 +166,7 @@ export default {
           return;
         }else {
           this.$message.success('密码修改成功');
+          this.$router.push({path: "/login?page=0"})
         }
       })
 
@@ -264,7 +265,7 @@ p {
 .card-wrap {
   color: #a1c4fd;
   height: 400px;
-  margin-left: 35%;
+  margin: auto;
   margin-top: 80px;
   max-width: 100%;
   perspective: 800px;

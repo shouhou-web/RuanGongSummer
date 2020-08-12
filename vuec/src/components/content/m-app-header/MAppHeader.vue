@@ -165,10 +165,10 @@ export default {
   },
   computed: {
     token() {
-      // if (sessionStorage.getItem("user") != null) {
-      //   console.log("我执行了", sessionStorage.getItem("user"));
-      //   this.$store.commit("Login", JSON.parse(sessionStorage.getItem("user")));
-      // }
+      if (sessionStorage.getItem("user") != null) {
+        console.log("我执行了", sessionStorage.getItem("user"));
+        this.$store.commit("Login", JSON.parse(sessionStorage.getItem("user")));
+      }
       console.log(this.$store.state.token);
       return this.$store.state.token;
     }
