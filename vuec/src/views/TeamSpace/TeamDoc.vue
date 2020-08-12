@@ -29,7 +29,7 @@ export default {
   },
   props: {
     TeamID: {
-      type: Number,
+      type: String,
       require: true
     }
   },
@@ -44,6 +44,7 @@ export default {
         this.docs = docs;
       })
       .catch(err => {
+        console.log('wrong');
         this.$message.error("请检查网络 - 暂时还无法获取团队文档")
       })
   },
