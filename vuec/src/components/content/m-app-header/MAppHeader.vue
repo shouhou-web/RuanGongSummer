@@ -20,8 +20,8 @@
       <template v-slot:right>
         <div>
           <div class="nav-right-item" v-if="token">
-            <!-- 头像 -->
             <app-search></app-search>
+            <!-- 头像 -->
             <div class="item">
               <div class="mini-avator">
                 <img class="mini-avator__inner" :src="user.imagePath" alt="" />
@@ -166,10 +166,10 @@ export default {
   computed: {
     token() {
       if (sessionStorage.getItem("user") != null) {
-        console.log("我执行了", sessionStorage.getItem("user"));
+        // console.log("我执行了", sessionStorage.getItem("user"));
         this.$store.commit("login", JSON.parse(sessionStorage.getItem("user")));
       }
-      console.log(this.$store.state.token);
+      // console.log(this.$store.state.token);
       return this.$store.state.token;
     }
   },
