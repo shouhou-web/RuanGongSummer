@@ -117,10 +117,21 @@
                   <div class="triangle"></div>
                 </div>
                 <ul class="">
-                  <li>回复我的</li>
-                  <li>@我的</li>
-                  <li>收到的赞</li>
-                  <li>系统通知</li>
+                  <li>
+                    <router-link :to="{ path: '/message' }">
+                      加入申请
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ path: '/message/application' }">
+                      团队邀请
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ path: '/message/system' }">
+                      系统通知
+                    </router-link>
+                  </li>
                 </ul>
               </div>
             </div>
