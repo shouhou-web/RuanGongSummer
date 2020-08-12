@@ -75,14 +75,6 @@
               />新建团队
             </span>
           </my-button>
-          <my-button type="text" class="nav-btn">
-            <span class="nav-item">
-              <img
-                src="@/assets/icon/home/upload.png"
-                class="option-icon"
-              />导入文档
-            </span>
-          </my-button>
         </div>
         <div class="column-divider"></div>
         <div class="Other">
@@ -130,7 +122,7 @@ export default {
 
 .nav {
   background-color: #ffffff;
-  height: 90vh;
+  height: 85vh;
   margin: 30px;
   padding: 10px 90px;
   width: 10%;
@@ -156,7 +148,7 @@ export default {
   background-color: #b8b6b6;
   border: 0;
   border-top-style: solid;
-  height: 92vh;
+  height: 87vh;
   width: 2px;
 }
 
@@ -170,7 +162,7 @@ export default {
 
 .second-nav {
   background-color: #ffffff;
-  height: 90vh;
+  height: 85vh;
   margin: 20px 30px;
   width: 65%;
 }
@@ -180,7 +172,7 @@ export default {
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  height: 90vh;
+  height: 85vh;
   margin: 30px;
   width: 13%;
 }
