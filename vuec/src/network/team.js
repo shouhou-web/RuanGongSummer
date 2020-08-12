@@ -30,3 +30,14 @@ export function addTeam(userID, teamName) {
     method: 'post'
   })
 }
+
+export function getUserIdentity(userID,teamID) {
+  return request({
+    url: "/getUserIdentity",
+    params: {
+      userID,
+      teamID
+    },
+    method: 'post'
+  })
+}

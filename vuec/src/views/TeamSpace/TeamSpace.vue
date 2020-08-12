@@ -7,20 +7,24 @@
     <div class="my-teams-space">
       <div v-for="(ateam,teamIndex) in myTeams" :key="teamIndex">
         <div class="one-team" @click="chooseTeam(ateam.teamID)" :class="{'one-team_chosen': (ateam.teamID == chosenPos)}">
-          {{teamIndex}} : {{ateam.TeamName}} : {{ateam.teamID}}
+          {{ateam.teamName}}
         </div>
       </div>
     </div>
+    <div class="member-iden">
+
+    </div>
     <div>
       <transition mode="out-in">
-        <router-view v-bind:TeamID="TeamID" class="fade-in"></router-view>
+        <TeamDoc v-bind:TeamID="TeamID" class="fade-in"></TeamDoc>
       </transition>
     </div>
   </div>
 </template>
 
 <script>
-import {getMyTeam,getTeamDocs} from "../../network/team.js";
+import {getMyTeam, getTeamDocs, getUserIdentity} from "../../network/team.js";
+import TeamDoc from "@/views/TeamSpace/TeamDoc";
 
 export default {
   name: 'TeamSpace',
@@ -29,15 +33,19 @@ export default {
       user: '',
       TeamID: '',
       myTeams: '',
+      iden: 0,// 默认成员
       chosenPos: -1
     }
   },
+  components: {
+    'TeamDoc': TeamDoc
+  },
   methods: {
     chooseTeam(teamID) {
-      console.log(teamID);
+      console.log('TeamSpace',teamID);
       this.TeamID = teamID;
       this.chosenPos = teamID;
-      this.$router.push({path: '/home/teamSpace/teamDoc?TeamID=' + teamID})
+      // this.$router.push({path: '/home/teamSpace/teamDoc?TeamID=' + teamID})
     }
   },
   created() {
@@ -49,16 +57,34 @@ export default {
       return;
     }
 
-    console.log(this.user.userID)
-
     getMyTeam(this.user.userID)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.myTeams = res
       })
       .catch(err => {
         this.$message.error("请检查网络 - 暂时无法获取你的团队")
       })
+  },
+  watch: {
+    TeamID() {
+      //0成员，1管理者，2创建者
+      getUserIdentity(this.$store.state.user.userID,this.TeamID)
+        .then(res => {
+          console.log('Iden',res);
+          this.iden = res;
+        })
+        .catch(err => {
+          this.$notify(
+            {
+              title: "获取失败",
+              message: "权限获取失败，请检查网络",
+              type: "error"
+            }
+          );
+          return;
+        })
+    }
   }
 };
 </script>
@@ -122,6 +148,9 @@ export default {
 .one-team_chosen{
   box-shadow:2px 2px 5px #b5b5b5;
   background-color: #dee9fc;
+}
+
+.member-iden{
 }
 
 .my-team-details{
