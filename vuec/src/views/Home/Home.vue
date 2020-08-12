@@ -42,13 +42,11 @@
           </my-button>
         </div>
       </div>
-      <div class="row-divider"></div>
       <div class="second-nav">
         <transition mode="out-in">
           <router-view class="fade-in"></router-view>
         </transition>
       </div>
-      <div class="row-divider"></div>
       <div class="sub-page">
         <div class="option-nav">
           <my-button type="text" class="nav-btn">
@@ -67,7 +65,7 @@
               />文档模板
             </span>
           </my-button>
-          <my-button type="text" class="nav-btn">
+          <my-button type="text" class="nav-btn" @click="addNewTeam">
             <span class="nav-item">
               <img
                 src="@/assets/icon/home/newteam.png"
@@ -82,6 +80,12 @@
         </div>
       </div>
     </div>
+    <m-hover :onShow=teamHoverOn title="创建我的团队" assureBtn="创建" cancelBtn="取消" @cancel="cancelNewTeamHover" @submit="createNewTeamHover">
+      <div class="hover-text">
+        请输入要创建的团队名称：
+      </div>
+      <input class="hover-input" placeholder="团队名称" v-model="teamName"></input>
+    </m-hover>
   </div>
 </template>
 
@@ -97,6 +101,7 @@ export default {
     return {
       user: "",
       teamName: "",
+      teamHoverOn: false,
     };
   },
   methods: {
@@ -108,6 +113,34 @@ export default {
     },
     toTeamSpace() {
       this.$router.push({ path: "/home/teamSpace" });
+    },
+    addNewTeam() {
+      this.teamHoverOn = true;
+    },
+    cancelNewTeamHover() {
+      this.teamHoverOn = false;
+    },
+    createNewTeamHover() {
+      if(!this.teamName) {
+        this.$message.error("团队名称不能为空！");
+      }
+      if(!this.user.userID) {
+        this.$message.error("请先登录！");
+      }
+      console.log(this.teamName)
+      addTeam(this.user.userID, this.teamName)
+      .then(res => {
+        console.log(res);
+        if(res === 1) {
+          this.$message.error("创建失败，请检查网络或联系管理员");
+        } else if (res === 0) {
+          this.teamHoverOn = false;
+          this.$message({
+            message: "创建成功！",
+            type: "success"
+          });
+        }
+      })
     }
   },
   components: {
@@ -118,8 +151,7 @@ export default {
     this.user = this.$store.state.user;
 
     if (!this.user.userID) {
-      this.$message.error("请先登录");
-      // this.$router.push({path: '/login?page=0'})
+      this.$message.error("请先登录！");
       return;
     }
     console.log(this.user.userID);
@@ -128,9 +160,15 @@ export default {
 </script>
 
 <style scoped>
+.test {
+  margin: 5px;
+}
+
 .main-page {
   align-items: center;
+  justify-content: center;
   display: flex;
+  margin-top: 35px;
 }
 
 .nav-btn {
@@ -141,7 +179,7 @@ export default {
 .nav {
   background-color: #ffffff;
   height: 85vh;
-  margin: 30px;
+  margin-right: 10px;
   padding: 10px 90px;
   width: 10%;
 }
@@ -162,14 +200,6 @@ export default {
   width: 24px;
 }
 
-.row-divider {
-  background-color: #b8b6b6;
-  border: 0;
-  border-top-style: solid;
-  height: 87vh;
-  width: 2px;
-}
-
 .column-divider {
   background-color: #b8b6b6;
   border: 0;
@@ -181,7 +211,8 @@ export default {
 .second-nav {
   background-color: #ffffff;
   height: 85vh;
-  margin: 20px 30px;
+  margin-left: 10px;
+  margin-right: 10px;
   width: 65%;
 }
 
@@ -191,7 +222,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 85vh;
-  margin: 30px;
+  margin-left: 10px;
   width: 13%;
 }
 
@@ -205,6 +236,29 @@ export default {
 
 .Other {
   margin-top: 20px;
+}
+
+.hover-text {
+  margin-bottom: 5px;
+  padding: 7px;
+  width: 500px;
+}
+
+.hover-input {
+  border: 1px solid #C5D9E8;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  margin-left: 20px;
+  margin-top: 10px;
+  padding: 8px 15px;
+  width: 450px;
+  transition: 0.5s;
+}
+
+.hover-input:focus {
+  border-color: #3F536E;
+  box-shadow: 2px 2px 5px 1px rgba(10, 69, 105, 0.2);
+  transition: 0.5s;
 }
 
 .fade-in {
