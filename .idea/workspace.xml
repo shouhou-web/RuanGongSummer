@@ -20,17 +20,13 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:dev-pull-and-write" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:dev-Yu" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/network/team.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/network/team.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vuec/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +52,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev-Yu" />
+        <entry key="$PROJECT_DIR$" value="dev-pull-and-write" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -272,7 +268,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="dev-pull-and-write" />
+                        <option value="dev-Yu" />
                       </list>
                     </value>
                   </entry>
