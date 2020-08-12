@@ -89,8 +89,16 @@
 import MAppHeader from "components/content/m-app-header/MAppHeader";
 import Recent from "./WorkSpace/WorkSpace";
 
+import { addTeam } from "../../network/team.js";
+
 export default {
   name: "Home",
+  data() {
+    return {
+      user: "",
+      teamName: "",
+    };
+  },
   methods: {
     toRecent() {
       this.$router.push({ path: "/home/workSpace" });
@@ -105,6 +113,16 @@ export default {
   components: {
     Recent,
     MAppHeader
+  },
+  created() {
+    this.user = this.$store.state.user;
+
+    if (!this.user.userID) {
+      this.$message.error("请先登录");
+      // this.$router.push({path: '/login?page=0'})
+      return;
+    }
+    console.log(this.user.userID);
   }
 };
 </script>
