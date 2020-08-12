@@ -78,14 +78,7 @@ const routes = [
       {
         path: "/home/teamSpace",
         name: "TeamSpace",
-        component: TeamSpace,
-        children: [
-          {
-            path: "/home/teamSpace/teamDoc",
-            name: "TeamDoc",
-            component: TeamDoc
-          }
-        ]
+        component: TeamSpace
       }
     ]
   },

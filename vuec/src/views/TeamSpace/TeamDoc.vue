@@ -1,15 +1,11 @@
 <template>
   <div>
     <div class="my-team-details">
-      <div style="margin-top: 10px;margin-left: 10px">
-        <my-button size="small" style="margin-right: 10px">新建doc</my-button>
-        <my-button size="small">退出团队</my-button>
-      </div>
       <div class="team-docs">
         <div class="doc" v-for="(adoc,docIndex) in docs" :key="docIndex">
           <input type="checkbox"></input>
           <div><img src="../../assets/image/file.svg" class="doc--img"></div>
-          <div class="doc--name">{{adoc.docID}}:{{adoc.docName}}</div>
+          <div class="doc--name">{{adoc.docTitle}}</div>
         </div>
       </div>
     </div>
@@ -17,7 +13,7 @@
 </template>
 
 <script>
-import {getTeamDocs} from "@/network/team";
+import {getTeamDocs,getUserIdentity,quitTeam,disbandTeam} from "@/network/team";
 
 export default {
   name: "TeamDoc",
@@ -36,17 +32,22 @@ export default {
   methods: {
 
   },
-  created() {
-    console.log(this.TeamID);
-    getTeamDocs(this.TeamID)
-      .then(docs => {
-        console.log(docs);
-        this.docs = docs;
-      })
-      .catch(err => {
-        console.log('wrong');
-        this.$message.error("请检查网络 - 暂时还无法获取团队文档")
-      })
+  watch: {
+    TeamID(){
+      console.log('TeamDoc',this.TeamID);
+      console.log(this.$store.state.user.userID);
+      //this.$router.push({path: "/home/teamSpace?teamID=1"})
+      getTeamDocs(this.TeamID)
+        .then(docs => {
+          console.log('docs',docs);
+          this.docs = docs;
+        })
+        .catch(err => {
+          console.log('wrong');
+          this.$message.error("请检查网络 - 暂时还无法获取团队文档");
+          return;
+        })
+    }
   },
 }
 </script>

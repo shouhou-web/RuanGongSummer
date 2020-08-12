@@ -30,3 +30,42 @@ export function addTeam(userID, teamName) {
     method: 'post'
   })
 }
+
+export function getUserIdentity(userID,teamID) {
+  return request({
+    url: "/getUserIdentity",
+    params: {
+      userID,
+      teamID
+    },
+    method: 'post'
+  })
+}
+
+export function quitTeam(userID,teamID) {
+  return request({
+    url: "/quitTeam",
+    params: {
+      userID,
+      teamID
+    },
+    method: 'post'
+  })
+}
+
+export function disbandTeam(teamID) {
+  return request({
+    url: "/disbandTeam",
+    params: {
+      teamID
+    },
+    method: 'post'
+  })
+}
+
+
+
+
+
+
+
