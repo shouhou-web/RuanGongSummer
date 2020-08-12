@@ -2,37 +2,37 @@
   <div>
     <m-header bgColor="#f7f7f7">
       <template v-slot:left>
-        <!-- 展示按钮 -->
-        <div class="back">
-          <my-button size="small">快速跳转</my-button>
-        </div>
-        <!-- 隐藏层 -->
-        <div class="back--hide">
-          <div class="triangle"></div>
-          <div class="back-item">
-            <div class="back-header">
-              返回到
+        <m-nav-dropdown position="left">
+          <template v-slot:show>
+            <my-button size="small">快速跳转</my-button>
+          </template>
+          <template v-slot:hide>
+            <div class="back-item">
+              <div class="back-header">
+                返回到
+              </div>
+              <a class="back-a" v-for="(item, index) in back" :key="index">
+                <img class="back-a__icon" :src="item.iconSrc" alt="" />
+                <div class="back-a__title">{{ item.title }}</div>
+              </a>
             </div>
-            <a class="back-a" v-for="(item, index) in back" :key="index">
-              <img class="back-a__icon" :src="item.iconSrc" alt="" />
-              <div class="back-a__title">{{ item.title }}</div>
-            </a>
-          </div>
-          <!-- 最近访问的文档。 -->
-          <div class="back-item">
-            <div class="back-header">
-              最近使用
+            <!-- 最近访问的文档。 -->
+            <div class="back-item">
+              <div class="back-header">
+                最近使用
+              </div>
+              <a class="back-a" v-for="(item, index) in recentDoc" :key="index">
+                <img
+                  class="back-a__icon"
+                  src="@/assets/icon/doc/file.png"
+                  alt=""
+                />
+                <div class="back-a__title">{{ item.docTitle }}</div>
+              </a>
             </div>
-            <a class="back-a" v-for="(item, index) in recentDoc" :key="index">
-              <img
-                class="back-a__icon"
-                src="@/assets/icon/doc/file.png"
-                alt=""
-              />
-              <div class="back-a__title">{{ item.docTitle }}</div>
-            </a>
-          </div>
-        </div>
+          </template>
+        </m-nav-dropdown>
+
         <!-- 标题 -->
         <div class="doc-title">
           <input class="doc-input" v-model="Doc.docTitle" type="text" />
@@ -100,15 +100,6 @@ export default {
 };
 </script>
 <style scoped>
-.back--hide {
-  display: none;
-  position: absolute;
-  width: 220px;
-  top: 40px;
-  left: 30px;
-  z-index: 628;
-}
-
 .triangle {
   border: 8px solid #fff;
   border-top-color: transparent;
@@ -121,6 +112,7 @@ export default {
 .back-item {
   background-color: #fff;
   padding: 8px 0;
+  width: 188px;
 }
 
 .back-header {
