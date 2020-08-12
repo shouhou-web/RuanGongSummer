@@ -23,7 +23,7 @@ const state = {
   },
   fullscreenLoading: false,
   homeMidNav: 0,
-  homeLeftNav: 0,
+  homeLeftNav: 1,
 };
 
 const store = new Vuex.Store({
