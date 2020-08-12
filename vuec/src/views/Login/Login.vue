@@ -1,5 +1,6 @@
 <template>
   <div>
+    <m-app-header></m-app-header>
     <div class="login">
       <input
         class="checkbox"
@@ -231,6 +232,7 @@
 </template>
 
 <script>
+import MAppHeader from "components/content/m-app-header/MAppHeader";
 import {emailVerification, login, register} from "../../network/user.js";
 
 export default {
@@ -250,6 +252,9 @@ export default {
       timer: null,
       btnMsg: '发送验证码'
     }
+  },
+  components:{
+    MAppHeader
   },
   methods: {
     registerSubmit() {
@@ -313,14 +318,20 @@ export default {
               this.$message.error("用户名与密码不匹配");
               return;
             } else {
+              console.log('12345')
               // 存储数据
               sessionStorage.setItem("user", JSON.stringify(res));
 
+              console.log("本地缓存", sessionStorage.getItem("user"));
+
               this.$store.commit("login", res);
-              this.$message({
-                message: "恭喜你，登录成功",
-                type: "success"
-              });
+              this.$notify(
+                {
+                  title: "成功",
+                  message: res.userName + " -- 登陆成功",
+                  type: "success"
+                }
+              );
 
               this.username = "";
               this.password = "";
@@ -432,10 +443,6 @@ p {
 
 .login-main {
   margin-top: 30px;
-}
-
-.login-btn {
-
 }
 
 .forget {

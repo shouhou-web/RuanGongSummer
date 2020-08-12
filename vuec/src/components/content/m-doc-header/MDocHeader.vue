@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import MHeader from "./MHeader.vue";
+import MHeader from "components/common/m-header/MHeader.vue";
 export default {
   name: "MDocHeader",
   components: {

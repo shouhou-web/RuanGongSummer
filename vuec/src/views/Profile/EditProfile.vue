@@ -7,7 +7,7 @@
         @blur="editUserName"
         class="input"
         type="text"
-        v-model="user.userName"
+        v-model="userName"
       />
     </editprofile-item>
     <!-- 编辑密码 -->
@@ -23,108 +23,102 @@
       </my-button>
     </editprofile-item>
     <!-- 悬浮窗部分 -->
-    <!-- 阴影 -->
-    <div
-      :class="[open ? '' : 'page-hide']"
-      @click="open = !open"
-      class="page-mask"
-    ></div>
-    <div :class="[open ? 'hover' : 'page-hide']">
-      <!-- 修改密码 -->
-      <editprofile-hover
-        @submit="submit"
-        @cancel="changeOpen"
-        v-if="editPwd"
-        title="修改密码"
-        assureBtn="确定修改"
-        cancelBtn="暂不修改"
-      >
+    <!-- 修改密码 -->
+    <m-hover
+      @submit="submit"
+      @cancel="closeAll"
+      :onShow="editPwd"
+      title="修改密码"
+      assureBtn="确定修改"
+      cancelBtn="暂不修改"
+    >
+      <input
+        class="hover-input"
+        type="password"
+        v-model="oldpwd"
+        placeholder="当前密码"
+      />
+      <input
+        class="hover-input"
+        type="password"
+        v-model="newpwd1"
+        placeholder="新密码"
+      />
+      <input
+        class="hover-input"
+        type="password"
+        v-model="newpwd2"
+        placeholder="确认新密码"
+      />
+    </m-hover>
+    <!-- 编辑邮箱 -->
+    <m-hover
+      @submit="submit"
+      @cancel="closeAll"
+      :onShow="editEmail"
+      title="修改绑定邮箱"
+      assureBtn="确定修改"
+      cancelBtn="暂不修改"
+    >
+      <input
+        class="hover-input"
+        type="text"
+        v-model="emailAddressNew"
+        placeholder="新邮箱地址"
+      />
+      <div class="group">
         <input
-          class="hover-input"
-          type="password"
-          v-model="oldpwd"
-          placeholder="当前密码"
-        />
-        <input
-          class="hover-input"
-          type="password"
-          v-model="newpwd1"
-          placeholder="新密码"
-        />
-        <input
-          class="hover-input"
-          type="password"
-          v-model="newpwd2"
-          placeholder="确认新密码"
-        />
-      </editprofile-hover>
-      <!-- 编辑邮箱 -->
-      <editprofile-hover
-        @submit="submit"
-        @cancel="changeOpen"
-        v-else-if="editEmail"
-        title="修改绑定邮箱"
-        assureBtn="确定修改"
-        cancelBtn="暂不修改"
-      >
-        <input
-          class="hover-input"
+          class="hover-input--small"
           type="text"
-          v-model="emailAddressNew"
-          placeholder="新邮箱地址"
+          v-model="newCode"
+          placeholder="验证码"
         />
-        <div class="group">
-          <input
-            class="hover-input--small"
-            type="text"
-            v-model="newCode"
-            placeholder="验证码"
-          />
-          <my-button
-            @click="sendCode(emailAddressNew)"
-            :disabled="isAddress(emailAddressNew)"
-            type="text"
-            >发送验证码</my-button
-          >
-        </div>
-      </editprofile-hover>
-      <!-- 安全验证 -->
-      <editprofile-hover
-        @submit="submit"
-        @cancel="changeOpen"
-        v-else
-        title="安全验证"
-        assureBtn="验证"
-        cancelBtn="取消"
-      >
-        <input
-          class="hover-input"
+        <my-button
+          class="group-button"
+          @click="sendCode(emailAddressNew)"
+          :disabled="isAddress(emailAddressNew)"
           type="text"
-          v-model="user.emailAddress"
-          placeholder="当前邮箱"
+          >发送验证码</my-button
+        >
+      </div>
+    </m-hover>
+    <!-- 安全验证 -->
+    <m-hover
+      @submit="submit"
+      @cancel="closeAll"
+      :onShow="editToken"
+      title="安全验证"
+      assureBtn="验证"
+      cancelBtn="取消"
+    >
+      <input
+        class="hover-input"
+        type="text"
+        v-model="user.emailAddress"
+        placeholder="当前邮箱"
+      />
+      <div class="group">
+        <input
+          class="hover-input--small"
+          type="text"
+          v-model="tokenCode"
+          placeholder="验证码"
         />
-        <div class="group">
-          <input
-            class="hover-input--small"
-            type="text"
-            v-model="tokenCode"
-            placeholder="验证码"
-          />
-          <my-button
-            @click="sendCode(user.emailAddress)"
-            :disabled="isAddress(user.emailAddress)"
-            type="text"
-            >发送验证码</my-button
-          >
-        </div>
-      </editprofile-hover>
-    </div>
+        <my-button
+          class="group-button"
+          @click="sendCode(user.emailAddress)"
+          :disabled="isAddress(user.emailAddress)"
+          type="text"
+          >发送验证码</my-button
+        >
+      </div>
+    </m-hover>
   </div>
 </template>
 
 <script>
 import editprofileItem from "./childCpn/editprofile-item";
-import editprofileHover from "./childCpn/editprofile-hover";
+import MHover from "components/common/m-hover/m-hover";
 import {
   setUserName,
   setUserPassword,
@@ -135,23 +129,28 @@ export default {
   name: "Home",
   data() {
     return {
+      userName: "", // 页面临时数据，避免直接修改vuex
       emailAddressNew: "",
       open: false, //  是否打开悬浮窗
       editPwd: false, // 悬浮窗状态
       editEmail: false, // 悬浮窗状态
+      editToken: false, // 悬浮窗状态
+      token: false, // 是否安全验证
       // 用于修改密码
       oldpwd: "",
       newpwd1: "",
       newpwd2: "",
       // 编辑邮箱
-      token: "", // 是否安全验证
       tokenCode: "", // 安全验证的验证码
       newCode: "" // 新邮箱验证码
     };
   },
   components: {
     editprofileItem,
-    editprofileHover
+    MHover
+  },
+  created() {
+    this.userName = this.$store.state.user.userName;
   },
   computed: {
     user() {
@@ -159,11 +158,13 @@ export default {
     }
   },
   methods: {
-    changeOpen() {
-      this.open = !this.open;
+    closeAll() {
+      this.editToken = false;
+      this.editPwd = false;
+      this.editEmail = false;
     },
     editUserName() {
-      setUserName(this.user.userID, this.user.userName)
+      setUserName(this.user.userID, this.userName)
         .then(res => {
           this.$notify({
             title: "成功",
@@ -171,27 +172,28 @@ export default {
             type: "success"
           });
           // 更新信息
-          this.$commit("login", this.user);
+          this.$store.commit("setUserName", this.userName);
         })
         .catch(err => {
+          console.log(err);
           this.$notify.error({
-            title: "未知错误",
+            title: "网络错误",
             message: "请稍后重试~"
           });
         });
     },
     clickPassword() {
-      this.changeOpen();
       this.editEmail = false;
       this.editPwd = true;
     },
     clickEmail() {
-      this.changeOpen();
       if (!this.token) {
+        this.editToken = true;
         this.editPwd = false;
         this.editEmail = false;
         return;
       }
+      this.editToken = false;
       this.editPwd = false;
       this.editEmail = true;
     },
@@ -235,8 +237,8 @@ export default {
             type: "success"
           });
           // 更新信息
-          this.user.userPassword = newpwd1;
-          this.$commit("login", this.user);
+          this.$store.commit("setPassword", this.newpwd1);
+          this.open = false;
         });
     },
     _checkTokenCode() {
@@ -248,6 +250,11 @@ export default {
         });
         this.token = true;
         this.editEmail = true;
+      } else {
+        this.$notify.error({
+          title: "错误",
+          message: "验证码不正确~"
+        });
       }
     },
     _changeEmail() {
@@ -261,8 +268,8 @@ export default {
                 type: "success"
               });
               // 更新信息
-              this.user.userPassword = this.emailAddressNew;
-              this.$commit("login", this.user);
+              this.$commit("setEmailAddress", this.emailAddressNew);
+              this.open = false;
             } else if (res == 1) {
               this.$notify({
                 title: "邮箱已注册",
@@ -292,33 +299,6 @@ export default {
 </script>
 
 <style scoped>
-.page-mask {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0.3;
-}
-
-.hover {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: #fff;
-  border-radius: 4px;
-  width: 375px;
-  left: 40%;
-  top: 20%;
-  z-index: 4;
-}
-
-.page-hide {
-  display: none;
-}
-
 .input,
 .hover-input,
 .hover-input--small {
@@ -341,6 +321,7 @@ export default {
 
 .hover-input {
   margin-bottom: 10px;
+  width: 360px;
 }
 
 .input:focus,
@@ -358,5 +339,9 @@ export default {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+}
+
+.group-button {
+  margin-right: 20px;
 }
 </style>

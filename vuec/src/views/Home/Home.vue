@@ -1,112 +1,105 @@
 <template>
-<div id="home">
-  <m-app-header></m-app-header>
-  <div class="main-page">
-    <div class="nav">
-      <!--      <div class="side-bar"></div>-->
-      <div class="wrap">
-        <my-button type="text" class="nav-btn" @click="toRecent" :active="isActive[0]">
-          <span class="nav-item">
-            <img src="@/assets/icon/home/ET.png" class="option-icon" />工作台
-          </span>
-        </my-button>
-        <my-button type="text" class="nav-btn" @click="toTrash" :active="isActive[1]">
-          <span class="nav-item">
-            <img
-              src="@/assets/icon/home/delete.png"
-              class="option-icon"
-            />回收站
-          </span>
-        </my-button>
-        <my-button type="text" class="nav-btn" @click="toTeamSpace" :active="isActive[2]">
-          <span class="nav-item">
-            <img
-              src="@/assets/icon/home/partner.png"
-              class="option-icon"
-            />团队空间
-          </span>
-        </my-button>
+  <div id="home">
+    <m-app-header></m-app-header>
+    <div class="main-page">
+      <div class="nav">
+        <div class="wrap">
+          <my-button
+            type="text"
+            class="nav-btn"
+            @click="toRecent"
+            :active="this.$store.state.homeLeftNav === 1"
+          >
+            <span class="nav-item">
+              <img src="@/assets/icon/home/ET.png" class="option-icon" />工作台
+            </span>
+          </my-button>
+          <my-button
+            type="text"
+            class="nav-btn"
+            @click="toTrash"
+            :active="this.$store.state.homeLeftNav === 2"
+          >
+            <span class="nav-item">
+              <img
+                src="@/assets/icon/home/delete.png"
+                class="option-icon"
+              />回收站
+            </span>
+          </my-button>
+          <my-button
+            type="text"
+            class="nav-btn"
+            @click="toTeamSpace"
+            :active="this.$store.state.homeLeftNav === 3"
+          >
+            <span class="nav-item">
+              <img
+                src="@/assets/icon/home/partner.png"
+                class="option-icon"
+              />团队空间
+            </span>
+          </my-button>
+        </div>
       </div>
-    </div>
-    <div class="divider"></div>
-    <div class="second-nav">
-      <transition mode="out-in">
-        <router-view class="fade-in"></router-view>
-      </transition>
-    </div>
-    <div class="sub-page">
-      <div class="option-nav">
-        <my-button type="text" class="nav-btn">
-          <span class="nav-item">
-            <img src="@/assets/icon/home/new.png" class="option-icon" />新建文档
-          </span>
-        </my-button>
-        <my-button type="text" class="nav-btn">
-          <span class="nav-item">
-            <img
-              src="@/assets/icon/home/sample.png"
-              class="option-icon"
-            />文档模板
-          </span>
-        </my-button>
-        <my-button type="text" class="nav-btn">
-          <span class="nav-item">
-            <img
-              src="@/assets/icon/home/newteam.png"
-              class="option-icon"
-            />新建团队
-          </span>
-        </my-button>
-        <my-button type="text" class="nav-btn">
-          <span class="nav-item">
-            <img
-              src="@/assets/icon/home/upload.png"
-              class="option-icon"
-            />导入文档
-          </span>
-        </my-button>
+      <div class="row-divider"></div>
+      <div class="second-nav">
+        <transition mode="out-in">
+          <router-view class="fade-in"></router-view>
+        </transition>
+      </div>
+      <div class="row-divider"></div>
+      <div class="sub-page">
+        <div class="option-nav">
+          <my-button type="text" class="nav-btn">
+            <span class="nav-item">
+              <img
+                src="@/assets/icon/home/new.png"
+                class="option-icon"
+              />新建文档
+            </span>
+          </my-button>
+          <my-button type="text" class="nav-btn">
+            <span class="nav-item">
+              <img
+                src="@/assets/icon/home/sample.png"
+                class="option-icon"
+              />文档模板
+            </span>
+          </my-button>
+          <my-button type="text" class="nav-btn">
+            <span class="nav-item">
+              <img
+                src="@/assets/icon/home/newteam.png"
+                class="option-icon"
+              />新建团队
+            </span>
+          </my-button>
+        </div>
+        <div class="column-divider"></div>
+        <div class="Other">
+          Other Things!
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
-import MAppHeader from "@/components/common/m-header/MAppHeader";
+import MAppHeader from "components/content/m-app-header/MAppHeader";
 import Recent from "./WorkSpace/WorkSpace";
 
 export default {
   name: "Home",
-  data() {
-    return {
-      activeIndex: -1,
-      isActive: [false, false, false]
-    };
-  },
   methods: {
     toRecent() {
-      if(this.activeIndex != 0) {
-        this.isActive[this.activeIndex] = false;
-        this.activeIndex = 0;
-        this.isActive[0] = true;
-      }
-      this.$router.push({ path: "/home/workspace/recent" });
+      this.$router.push({ path: "/home/workSpace" });
     },
     toTrash() {
-      if(this.activeIndex != 1) {
-        this.isActive[this.activeIndex] = false;
-        this.activeIndex = 1;
-        this.isActive[1] = true;
-      }
-      this.$router.push({ path: "/home/workspace/trash" });
+      this.$router.push({ path: "/home/trash" });
     },
     toTeamSpace() {
-      if(this.activeIndex != 2) {
-        this.isActive[this.activeIndex] = false;
-        this.activeIndex = 2;
-        this.isActive[2] = true;
-      }
-      this.$router.push({ path: "/home/TeamSpace" });
+      this.$router.push({ path: "/home/teamSpace" });
     }
   },
   components: {
@@ -123,28 +116,16 @@ export default {
 }
 
 .nav-btn {
-  padding: 10px;
+  padding: 13px;
   margin: 5px;
 }
 
 .nav {
   background-color: #ffffff;
-  height: 90vh;
+  height: 85vh;
   margin: 30px;
-  padding: 10px 100px;
+  padding: 10px 90px;
   width: 10%;
-}
-
-.side-bar {
-  position: absolute;
-  border: 2px solid #7c7878;
-  border-radius: 10px;
-  margin-top: -3vh;
-  margin-left: -3vh;
-  z-index: -1;
-  width: 25vh;
-  height: 100vh;
-  background-color: #ecf0f1;
 }
 
 .wrap {
@@ -163,19 +144,25 @@ export default {
   width: 24px;
 }
 
-.divider {
+.row-divider {
   background-color: #b8b6b6;
   border: 0;
   border-top-style: solid;
-  display: block;
-  height: 92vh;
-  margin: 0px 1px;
+  height: 87vh;
   width: 2px;
+}
+
+.column-divider {
+  background-color: #b8b6b6;
+  border: 0;
+  border-top-style: solid;
+  height: 1px;
+  width: 180px;
 }
 
 .second-nav {
   background-color: #ffffff;
-  height: 90vh;
+  height: 85vh;
   margin: 20px 30px;
   width: 65%;
 }
@@ -185,7 +172,8 @@ export default {
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  height: 90vh;
+  height: 85vh;
+  margin: 30px;
   width: 13%;
 }
 
@@ -194,6 +182,11 @@ export default {
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
+  padding: 10px;
+}
+
+.Other {
+  margin-top: 20px;
 }
 
 .fade-in {
@@ -201,22 +194,22 @@ export default {
   transition: opacity 0.5s;
 }
 
-.v-enter{
- opacity: 0;
+.v-enter {
+  opacity: 0;
 }
-.v-enter-active{
- transition: 0.5s;
+.v-enter-active {
+  transition: 0.5s;
 }
-.v-enter-to{
- opacity: 1;
+.v-enter-to {
+  opacity: 1;
 }
-.v-leave{
- opacity: 1;
+.v-leave {
+  opacity: 1;
 }
-.v-leave-to{
- opacity:0;
+.v-leave-to {
+  opacity: 0;
 }
-.v-leave-active{
- transition: 0.3s;
+.v-leave-active {
+  transition: 0.3s;
 }
 </style>

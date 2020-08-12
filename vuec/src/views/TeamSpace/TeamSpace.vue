@@ -5,8 +5,8 @@
       我的团队 | My Team
     </div>
     <div class="my-teams-space">
-      <div v-for="(ateam,teamIndex) in myTeams">
-        <div class="one-team" @click="chooseTeam(ateam.teamID)">
+      <div v-for="(ateam,teamIndex) in myTeams" :key="teamIndex">
+        <div class="one-team" @click="chooseTeam(ateam.teamID)" :class="{'one-team_chosen': (ateam.teamID == chosenPos)}">
           {{teamIndex}} : {{ateam.TeamName}} : {{ateam.teamID}}
         </div>
       </div>
@@ -29,13 +29,15 @@ export default {
       user: '',
       TeamID: '',
       myTeams: '',
+      chosenPos: -1
     }
   },
   methods: {
     chooseTeam(teamID) {
       console.log(teamID);
       this.TeamID = teamID;
-      this.$router.push({path: '/home/TeamSpace/TeamDoc?TeamID=' + teamID})
+      this.chosenPos = teamID;
+      this.$router.push({path: '/home/teamSpace/teamDoc?TeamID=' + teamID})
     }
   },
   created() {
@@ -63,7 +65,7 @@ export default {
 
 <style scoped>
 .teamspace{
-  height: 100vh;
+  height: 100%;
   padding-left: 30px;
 }
 
@@ -103,7 +105,7 @@ export default {
 .one-team{
   margin: 1vh;
   padding: 8px;
-  border: 2px solid #a1c4fd;
+  border: 1px solid #a1c4fd;
   background-color: white;
   border-radius: 5px;
   color: #000000;
@@ -111,11 +113,15 @@ export default {
   height: auto;
   font-family: "JetBrains Mono";
   font-size: 13px;
-  box-shadow:2px 2px 5px #b5b5b5;
+}
+
+.one-team:hover{
+  cursor: pointer;
 }
 
 .one-team_chosen{
-  background-color: #c8dbfa;
+  box-shadow:2px 2px 5px #b5b5b5;
+  background-color: #dee9fc;
 }
 
 .my-team-details{

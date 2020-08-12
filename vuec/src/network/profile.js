@@ -2,7 +2,7 @@ import { request } from "@/network/request";
 
 // 修改昵称
 export function setUserName(userID, userName) {
-  console.log(userID,userName)
+  console.log(userID, userName);
   return request({
     url: "/setUserName",
     params: {
@@ -14,12 +14,13 @@ export function setUserName(userID, userName) {
 }
 
 // 修改密码
-export function setUserPassword(userID, userPassWord) {
+export function setUserPassword(userID, userPassword) {
+  console.log(userID, userPassword);
   return request({
     url: "/setUserPassword",
     params: {
       userID,
-      userPassWord
+      userPassword
     },
     method: "post"
   });
@@ -32,6 +33,18 @@ export function setEmailAddress(userID, emailAddress) {
     params: {
       userID,
       emailAddress
+    },
+    method: "post"
+  });
+}
+
+// 修改头像路径
+export function setImagePath(userID, imagePath) {
+  return request({
+    url: "/setImagePath",
+    params: {
+      userID,
+      imagePath
     },
     method: "post"
   });

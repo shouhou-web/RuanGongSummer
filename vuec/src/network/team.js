@@ -19,3 +19,14 @@ export function getTeamDocs(teamID) {
     method: 'post'
   })
 }
+
+export function addTeam(userID, teamName) {
+  return request({
+    url: "/addTeam",
+    params: {
+      userID,
+      teamName
+    },
+    method: 'post'
+  })
+}

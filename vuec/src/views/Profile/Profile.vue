@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import MAppHeader from "components/common/m-header/MAppHeader";
+import MAppHeader from "components/content/m-app-header/MAppHeader";
 import ProfileHeader from "./childCpn/profile-header";
 export default {
   name: "Home",

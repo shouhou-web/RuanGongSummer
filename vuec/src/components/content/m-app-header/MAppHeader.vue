@@ -139,7 +139,7 @@
 </template>
 
 <script>
-import MHeader from "./MHeader.vue";
+import MHeader from "components/common/m-header/MHeader.vue";
 export default {
   name: "MAppHeader",
   components: {
@@ -161,10 +161,10 @@ export default {
   },
   computed: {
     token() {
-      // if (sessionStorage.getItem("user") != null) {
-      //   console.log("我执行了", sessionStorage.getItem("user"));
-      //   this.$store.commit("Login", JSON.parse(sessionStorage.getItem("user")));
-      // }
+      if (sessionStorage.getItem("user") != null) {
+        console.log("我执行了", sessionStorage.getItem("user"));
+        this.$store.commit("Login", JSON.parse(sessionStorage.getItem("user")));
+      }
       console.log(this.$store.state.token);
       return this.$store.state.token;
     }
@@ -184,6 +184,7 @@ export default {
     },
     logout() {
       this.$store.commit("logout");
+      this.$router.push({ path: "/home" });
     }
   }
 };

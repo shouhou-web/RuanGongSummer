@@ -100,7 +100,6 @@ export default {
   -webkit-user-select: none;
 }
 
-.l-button:focus,
 .l-button:hover {
   color: #25374f;
   border-color: #c6e2ff;
@@ -189,7 +188,6 @@ export default {
   border: 1px solid #a1c4fd;
 }
 
-.l-button--primary:focus,
 .l-button--primary:hover {
   color: #ffffff;
   border-color: #a1c4fd;
@@ -250,7 +248,6 @@ export default {
   border-color: #96bf47;
 }
 
-.l-button--success:focus,
 .l-button--success:hover {
   color: #ffffff;
   border-color: #96bf47;
@@ -310,7 +307,6 @@ export default {
   border-color: #f3a909;
 }
 
-.l-button--warning:focus,
 .l-button--warning:hover {
   color: #fff;
   border-color: #f3a909;
@@ -370,7 +366,6 @@ export default {
   border-color: #f56c6c;
 }
 
-.l-button--danger:focus,
 .l-button--danger:hover {
   color: #fff;
   border-color: #f56c6c;
@@ -430,7 +425,6 @@ export default {
   border-color: #8eacc5;
 }
 
-.l-button--info:focus,
 .l-button--info:hover {
   color: #fff;
   border-color: #8eacc5;
@@ -530,7 +524,6 @@ export default {
   padding-right: 0;
 }
 
-.l-button--text:focus,
 .l-button--text:hover {
   color: #2C405A;
   border-color: transparent;
