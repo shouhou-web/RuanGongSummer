@@ -6,7 +6,7 @@
     :autofocus="autofocus"
     :type="nativeType"
     :style="{
-      color: color,
+      'color': color,
       'background-color': bgColor,
       'border-color': bdColor
     }"
@@ -65,10 +65,6 @@ export default {
       type: Boolean,
       default: false
     },
-    countFlag: {
-      type: Boolean,
-      default: false
-    },
     loading: Boolean,
     disabled: Boolean,
     autofocus: Boolean,
@@ -77,17 +73,23 @@ export default {
     count: {
       type: Number,
       default: 0
-    },
-    countNum: {
-      type: Number,
-      default: 0
-    },
-    timer: Object
+    }
+  },
+
+  data() {
+    return {
+      countNum: {
+        type: Number,
+        default: 0
+      },
+      countFlag: false,
+      timer: null
+    };
   },
 
   methods: {
     handleClick(evt) {
-      this.Timer();
+      if (this.type === "timer") this.Timer();
       this.$emit("click", evt);
     },
     Timer() {
@@ -104,7 +106,7 @@ export default {
         }
       }, 1000);
     }
-  }
+  },
 };
 </script>
 

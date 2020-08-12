@@ -40,12 +40,12 @@
               />团队空间
             </span>
           </my-button>
-          <my-button type="timer" count=30 class="test"></my-button>
-          <my-button type="timer" count=10 size="medium" class="test"></my-button>
-          <my-button type="timer" count=1 size="small" class="test"></my-button>
-          <my-button type="timer" count=0 size="mini" class="test"></my-button>
-          <my-button type="timer" count=2 circle class="test"></my-button>
-          <my-button type="timer" count=50 round class="test"></my-button>
+          <my-button type="timer" :count="30" class="test"></my-button>
+          <my-button type="timer" :count="10" size="medium" class="test"></my-button>
+          <my-button type="timer" :count="0" size="small" class="test"></my-button>
+          <my-button type="timer" :count="1" size="mini" class="test"></my-button>
+          <my-button type="timer" :count="2" circle class="test"></my-button>
+          <my-button type="timer" :count="50" round class="test"></my-button>
         </div>
       </div>
       <div class="row-divider"></div>
