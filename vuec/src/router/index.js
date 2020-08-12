@@ -36,7 +36,7 @@ const routes = [
   {
     path: "/",
     // redirect重定向
-    redirect: "/home"
+    redirect: "/home/workSpace"
   },
   {
     path: "/home",
@@ -48,6 +48,11 @@ const routes = [
         name: "WorkSpace",
         component: WorkSpace,
         children: [
+          {
+            path: "/home/workSpace",
+            // redirect重定向
+            redirect: "/home/workSpace/recent"
+          },
           {
             path: "/home/workSpace/recent",
             name: "Recent",
