@@ -27,11 +27,10 @@
   <component name="ChangeListManager">
     <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/components/content/m-app-header/MAppHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/components/content/m-app-header/MAppHeader.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vuec/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/ForgetPwd/ForgetPwd.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/ForgetPwd/ForgetPwd.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/Login/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Login/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/store/mutations.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/store/mutations.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -358,10 +357,10 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-1157" y="197" key="SettingsEditor/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597199601950" />
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597158789002">
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597202390644">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597158789002" />
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597202390644" />
     <state x="-1766" y="92" width="1674" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1596767599481">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>

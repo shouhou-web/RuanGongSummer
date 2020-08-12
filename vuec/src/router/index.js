@@ -107,7 +107,7 @@ const routes = [
     ]
   },
   {
-    path: "/login",
+    path: "/Login",
     name: "Login",
     component: Login
   },
