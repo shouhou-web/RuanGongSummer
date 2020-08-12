@@ -260,7 +260,7 @@ p {
 .card-wrap {
   color: #a1c4fd;
   height: 400px;
-  margin-left: 35%;
+  margin: auto;
   margin-top: 80px;
   max-width: 100%;
   perspective: 800px;

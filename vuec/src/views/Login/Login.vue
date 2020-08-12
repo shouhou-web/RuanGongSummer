@@ -325,10 +325,13 @@ export default {
               console.log("本地缓存", sessionStorage.getItem("user"));
 
               this.$store.commit("login", res);
-              this.$message({
-                message: "恭喜你，登录成功",
-                type: "success"
-              });
+              this.$notify(
+                {
+                  title: "成功",
+                  message: res.userName + " -- 登陆成功",
+                  type: "success"
+                }
+              );
 
               this.username = "";
               this.password = "";

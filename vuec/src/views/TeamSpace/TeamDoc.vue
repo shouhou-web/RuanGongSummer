@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div style="margin-top: 20px;margin-left: 5px">
-      <my-button size="small" style="margin-right: 20px">新建doc</my-button>
-      <my-button size="small">退出团队</my-button>
-    </div>
     <div class="my-team-details">
+      <div style="margin-top: 10px;margin-left: 10px">
+        <my-button size="small" style="margin-right: 10px">新建doc</my-button>
+        <my-button size="small">退出团队</my-button>
+      </div>
       <div class="team-docs">
-        <div class="doc" v-for="(adoc,docIndex) in docs">
+        <div class="doc" v-for="(adoc,docIndex) in docs" :key="docIndex">
           <input type="checkbox"></input>
           <div><img src="../../assets/image/file.svg" class="doc--img"></div>
           <div class="doc--name">{{adoc.docID}}:{{adoc.docName}}</div>
@@ -46,7 +46,7 @@ export default {
       .catch(err => {
         this.$message.error("请检查网络 - 暂时还无法获取团队文档")
       })
-  }
+  },
 }
 </script>
 
