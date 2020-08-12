@@ -21,11 +21,14 @@ const mutations = {
   setImagePath(state, imagePath) {
     state.user.imagePath = imagePath;
   },
-  setUserName(state,userName) {
-    state.user.userName = userName
+  setUserName(state, userName) {
+    state.user.userName = userName;
   },
-  setPassword(state,userPassword) {
-    state.user.userPassword = userPassword
+  setPassword(state, userPassword) {
+    state.user.userPassword = userPassword;
+  },
+  setEmailAddress(state, emailAddress) {
+    state.user.emailAddress = emailAddress;
   },
   // 侧边栏active
   homemidnav(state, isActive) {

@@ -18,7 +18,7 @@ export default {
 
 <style>
 @import "assets/css/base.css";
-.loading {
-  height: 100vh;
+#app {
+  min-height: 100vh;
 }
 </style>

@@ -304,7 +304,6 @@ export default {
 .hover-input--small {
   border: 0px;
   color: #111;
-  margin: 0 20px;
 }
 
 .input {
