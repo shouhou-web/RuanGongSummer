@@ -93,6 +93,7 @@ export default {
 #suspended .main {
   display: flex;
   flex-direction: column;
+  padding: 20px 20px 0;
 }
 
 #suspended .footer {

@@ -2,8 +2,11 @@
   <div>
     <div class="wrapper--son">
       <div class="header">
-        <div @click="editImage = true" class="avator">
+        <div class="avator">
           <img class="avator__inner" :src="user.imagePath" alt="" />
+          <a @click="editImage = true" class="avator__hide" title="上传新头像">
+            <img class="avator__inner--small" src="@/assets/icon/profile/edit.png" alt="">
+          </a>
         </div>
         <div class="name">
           {{ user.userName }}
@@ -181,13 +184,41 @@ export default {
 .avator {
   width: 90px;
   height: 90px;
+  position: relative;
 }
 
-.avator img {
+.avator__inner {
   border-radius: 50%;
   border: 1px solid #ebebeb;
   height: 100%;
   width: 100%;
+}
+
+.avator__inner--small {
+  border-radius: 50%;
+  height: 40%;
+  width: 40%;
+}
+
+.avator__hide {
+  align-items: center;
+  border-radius: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.avator:hover .avator__hide {
+  opacity: 1;
+  cursor: pointer;
 }
 
 .name {
@@ -227,7 +258,7 @@ export default {
 /* --------------------悬浮窗的代码----------------------- */
 
 .avator-list {
-  padding: 30px 0 0 30px;
+  padding: 0px 0 0 25px;
   width: 490px;
   height: 470px;
   overflow: auto;
