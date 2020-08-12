@@ -42,13 +42,11 @@
           </my-button>
         </div>
       </div>
-      <div class="row-divider"></div>
       <div class="second-nav">
         <transition mode="out-in">
           <router-view class="fade-in"></router-view>
         </transition>
       </div>
-      <div class="row-divider"></div>
       <div class="sub-page">
         <div class="option-nav">
           <my-button type="text" class="nav-btn">
@@ -134,8 +132,9 @@ export default {
       .then(res => {
         console.log(res);
         if(res === 1) {
-          this.$message.error("邮箱不合法");
+          this.$message.error("创建失败，请检查网络或联系管理员");
         } else if (res === 0) {
+          this.teamHoverOn = false;
           this.$message({
             message: "创建成功！",
             type: "success"
@@ -167,7 +166,9 @@ export default {
 
 .main-page {
   align-items: center;
+  justify-content: center;
   display: flex;
+  margin-top: 35px;
 }
 
 .nav-btn {
@@ -178,7 +179,7 @@ export default {
 .nav {
   background-color: #ffffff;
   height: 85vh;
-  margin: 30px;
+  margin-right: 10px;
   padding: 10px 90px;
   width: 10%;
 }
@@ -199,14 +200,6 @@ export default {
   width: 24px;
 }
 
-.row-divider {
-  background-color: #b8b6b6;
-  border: 0;
-  border-top-style: solid;
-  height: 87vh;
-  width: 2px;
-}
-
 .column-divider {
   background-color: #b8b6b6;
   border: 0;
@@ -218,7 +211,8 @@ export default {
 .second-nav {
   background-color: #ffffff;
   height: 85vh;
-  margin: 20px 30px;
+  margin-left: 10px;
+  margin-right: 10px;
   width: 65%;
 }
 
@@ -228,7 +222,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 85vh;
-  margin: 30px;
+  margin-left: 10px;
   width: 13%;
 }
 
