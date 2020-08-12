@@ -1,10 +1,6 @@
 <template>
   <div>
     <div class="my-team-details">
-      <div style="margin-top: 10px;margin-left: 10px">
-        <my-button size="small" style="margin-right: 10px">新建doc</my-button>
-        <my-button size="small">退出团队</my-button>
-      </div>
       <div class="team-docs">
         <div class="doc" v-for="(adoc,docIndex) in docs" :key="docIndex">
           <input type="checkbox"></input>
@@ -17,7 +13,7 @@
 </template>
 
 <script>
-import {getTeamDocs,getUserIdentity} from "@/network/team";
+import {getTeamDocs,getUserIdentity,quitTeam,disbandTeam} from "@/network/team";
 
 export default {
   name: "TeamDoc",

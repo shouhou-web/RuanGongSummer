@@ -11,8 +11,14 @@
         </div>
       </div>
     </div>
-    <div class="member-iden">
-
+    <div class="member-iden" :class="{'member-iden--member':(iden == 0),'member-iden--manager':(iden == 1),'member-iden--creater':(iden == 2)}">
+      {{iden_message}}
+    </div>
+    <div style="margin-top: 10px;margin-left: 5px" v-if="iden != 2">
+      <my-button size="small" style="margin-right: 10px;margin-top: 10px">退出团队</my-button>
+    </div>
+    <div style="margin-top: 10px;margin-left: 5px" v-if="iden == 2">
+      <my-button size="small" style="margin-right: 10px;margin-top: 10px">解散团队</my-button>
     </div>
     <div>
       <transition mode="out-in">
@@ -34,7 +40,8 @@ export default {
       TeamID: '',
       myTeams: '',
       iden: 0,// 默认成员
-      chosenPos: -1
+      chosenPos: -1,
+      iden_message: '普通成员'
     }
   },
   components: {
@@ -73,6 +80,16 @@ export default {
         .then(res => {
           console.log('Iden',res);
           this.iden = res;
+          if (res == 0){
+            this.iden = 0;
+            this.iden_message = '普通成员';
+          }else if (res == 1){
+            this.iden = 1;
+            this.iden_message = '管理员';
+          }else{
+            this.iden = 2;
+            this.iden_message = '创建者';
+          }
         })
         .catch(err => {
           this.$notify(
@@ -151,6 +168,32 @@ export default {
 }
 
 .member-iden{
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  margin-top: 30px;
+  margin-left: 5px;
+  width: 100px;
+  height: 40px;
+  font-family: "JetBrains Mono";
+  box-shadow:2px 2px 5px #b5b5b5;
+  padding-top: 10px;
+  padding-left: 15px;
+}
+
+.member-iden--member{
+  background-color: #fafafa;
+}
+
+.member-iden--manager{
+  padding-left: 20px;
+  background-color: #eefdd6;
+  border: 1px solid #acfaac;
+}
+
+.member-iden--creater{
+  padding-left: 20px;
+  background-color: #d9f6f6;
+  border: 1px solid #85ddfa;
 }
 
 .my-team-details{
