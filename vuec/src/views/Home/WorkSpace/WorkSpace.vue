@@ -56,9 +56,11 @@ second-whole-page {
 }
 
 .second-nav-item {
-  font-size: 20px;
-  padding: 10px 25px;
-  margin: 20px;
+  font-size: 17px;
+  padding: 7px 20px;
+  margin-left: 10px;
+  margin-right: 5px;
+  margin-top: 20px;
 }
 
 .v-enter {

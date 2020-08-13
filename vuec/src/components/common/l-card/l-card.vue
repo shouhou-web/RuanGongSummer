@@ -1,6 +1,6 @@
 <template>
   <div class="l-card" :class="shadow ? 'is-' + shadow + '-shadow' : 'is-hover-shadow'">
-    <m-nav-dropdown position="middle" class="l-card__nav">
+    <m-nav-dropdown position="middle" :triColor="tricolor" class="l-card__nav">
       <div slot="show">
         <img class="l-card__setting" src="@/assets/icon/card/settings.png">
       </div>
@@ -23,6 +23,11 @@
 <script>
   export default {
     name: 'l-card',
+    data() {
+      return {
+        tricolor: "#DCDFE6"
+      };
+    },
     props: {
       bodyStyle: {},
       shadow: {
@@ -77,6 +82,8 @@
 .l-card__hide-main {
   align-items: center;
   background-color: #FAFBFC;
+  border: 1px solid #DCDFE6;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   width: 110px;
