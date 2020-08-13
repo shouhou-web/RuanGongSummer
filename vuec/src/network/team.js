@@ -1,5 +1,6 @@
 import {request} from "@/network/request";
 
+// 获取用户团队
 export function getMyTeam(userID) {
   return request({
     url: "/getMyTeam",
@@ -10,6 +11,7 @@ export function getMyTeam(userID) {
   })
 }
 
+// 获取团队文档
 export function getTeamDocs(teamID) {
   return request({
     url: "/getTeamDocs",
@@ -20,6 +22,7 @@ export function getTeamDocs(teamID) {
   })
 }
 
+// 新建团队
 export function addTeam(userID, teamName) {
   return request({
     url: "/addTeam",
@@ -31,6 +34,7 @@ export function addTeam(userID, teamName) {
   })
 }
 
+// 获取用户权限
 export function getUserIdentity(userID,teamID) {
   return request({
     url: "/getUserIdentity",
@@ -42,6 +46,7 @@ export function getUserIdentity(userID,teamID) {
   })
 }
 
+// 退出团队
 export function quitTeam(userID,teamID) {
   return request({
     url: "/quitTeam",
@@ -53,6 +58,7 @@ export function quitTeam(userID,teamID) {
   })
 }
 
+// 解散团队
 export function disbandTeam(teamID) {
   return request({
     url: "/disbandTeam",
@@ -63,9 +69,29 @@ export function disbandTeam(teamID) {
   })
 }
 
+// 获取团队用户集
+export function getTeamMembers(teamID) {
+  return request({
+    url: "/getTeamMembers",
+    params: {
+      teamID
+    },
+    method: 'post'
+  })
+}
 
-
-
+// 用户权限设置
+export function setAdmin(userID,teamID,userIdentity) {
+  return request({
+    url: "/setAdmin",
+    params: {
+      userID,
+      teamID,
+      userIdentity
+    },
+    method: 'post'
+  })
+}
 
 
 

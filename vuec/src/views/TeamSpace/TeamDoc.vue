@@ -33,16 +33,16 @@ export default {
   },
   watch: {
     TeamID(){
-      console.log('TeamDoc',this.TeamID);
-      console.log(this.$store.state.user.userID);
+      // console.log('TeamDoc',this.TeamID);
+      // console.log(this.$store.state.user.userID);
       //this.$router.push({path: "/home/teamSpace?teamID=1"})
       getTeamDocs(this.TeamID)
         .then(docs => {
-          console.log('docs',docs);
+          // console.log('docs',docs);
           this.docs = docs;
         })
         .catch(err => {
-          console.log('wrong');
+          // console.log('wrong');
           this.$message.error("请检查网络 - 暂时还无法获取团队文档");
           return;
         })
@@ -52,83 +52,15 @@ export default {
 </script>
 
 <style scoped>
-.teamspace{
-  height: 100vh;
-  border-left: 2px solid #a1c4fd;
-  padding-left: 30px;
-}
-
-.teamspace-header{
-  display: flex;
-  flex-direction: row;
-  margin: 5px;
-  height: 6vh;
-  width: 45vh;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 5px;
-  background-color: #a1c4fd;
-  font-size: 20px;
-  padding-top: 1.5vh;
-  text-align: center;
-  color: white;
-  font-family: "JetBrains Mono";
-  box-shadow:2px 2px 5px #838282;
-}
-
-.my-teams-space{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin: 5px;
-  height: auto;
-  width: 90vh;
-  border-radius: 5px;
-  border-bottom-left-radius: 5px;
-  background-color: white;
-  margin-top: 1.5vh;
-  box-shadow:2px 2px 5px #838282;
-}
-
-.one-team{
-  margin: 1vh;
-  padding: 8px;
-  border: 2px solid #a1c4fd;
-  background-color: white;
-  border-radius: 5px;
-  color: #000000;
-  width: auto;
-  height: auto;
-  font-family: "JetBrains Mono";
-  font-size: 13px;
-  box-shadow:2px 2px 5px #d7d7d7;
-}
-
-.one-team_chosen{
-  background-color: #c8dbfa;
-}
-
 .my-team-details{
   margin: auto;
   margin-top: 30px;
-  height: 60vh;
+  height: 70vh;
   border-radius: 5px;
-  border: 1px solid #a1c4fd;
+  border: 1px solid #eaf3fd;
   background-color: #ffffff;
   overflow: auto;
-}
-
-.team-tools{
-  display: flex;
-  flex-direction: row;
-  margin: 10px;
-  width: 30vh;
-  height: 6vh;
-  border-radius: 5px;
-  justify-content: space-around;
-  background-color: #ffffff;
-  padding-top: 2px;
+  margin-right: 30px;
 }
 
 

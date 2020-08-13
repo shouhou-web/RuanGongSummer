@@ -4,17 +4,6 @@
 <!--      <img src="../../assets/image/Team.svg" style="margin-left: 3vh;padding-bottom: 1.5vh;padding-left: 1vh;margin-right: 10px">-->
 <!--      我的团队 | My Team-->
 <!--    </div>-->
-    <div class="my-teams-space">
-      <div v-for="(ateam,teamIndex) in myTeams" :key="teamIndex">
-        <div class="one-team" @click="chooseTeam(ateam.teamID)" :class="{'one-team_chosen': (ateam.teamID == chosenPos)}">
-          {{ateam.teamName}}
-        </div>
-      </div>
-    </div>
-    <div class="member-iden" :class="{'member-iden--member':(iden == 0),'member-iden--manager':(iden == 1),'member-iden--creater':(iden == 2)}">
-      {{iden_message}}
-    </div>
-
     <div class="opt">
       <m-nav-dropdown position="left" class="l-card__nav">
         <div slot="show">
@@ -30,10 +19,27 @@
                        class="l-card__nav-btn"
                        @click="readyToDisband"
                        v-if="iden == 2">解散团队</my-button>
+            <my-button type="text"
+                       class="l-card__nav-btn"
+                       @click="readyToCooperate"
+                       v-if="iden == 2">团队协作</my-button>
           </div>
         </div>
       </m-nav-dropdown>
     </div>
+
+    <div class="my-teams-space">
+      <div v-for="(ateam,teamIndex) in myTeams" :key="teamIndex">
+        <div class="one-team" @click="chooseTeam(ateam.teamID,ateam.teamName)" :class="{'one-team_chosen': (ateam.teamID == chosenPos)}">
+          {{ateam.teamName}}
+        </div>
+      </div>
+    </div>
+<!--    <div class="member-iden" :class="{'member-iden&#45;&#45;member':(iden == 0),'member-iden&#45;&#45;manager':(iden == 1),'member-iden&#45;&#45;creater':(iden == 2)}">-->
+<!--      {{iden_message}}-->
+<!--    </div>-->
+
+
 
     <!-- 悬浮窗 -->
     <m-hover :on-show="isQuit"
@@ -57,6 +63,15 @@
       </div>
     </m-hover>
 
+    <m-hover :on-show="openCooperation"
+             :title="'团队协助:' + TeamName"
+             cancel-btn="X"
+             @cancel="cancelCooperate">
+      <div class="cooperation-search"></div>
+      <div class="cooperation-member"></div>
+      <div class="cooperation-admin"></div>
+    </m-hover>
+
     <div>
       <transition mode="out-in">
         <TeamDoc v-bind:TeamID="TeamID" class="fade-in"></TeamDoc>
@@ -66,7 +81,7 @@
 </template>
 
 <script>
-import {disbandTeam, getMyTeam, getTeamDocs, getUserIdentity, quitTeam} from "../../network/team.js";
+import {disbandTeam, getMyTeam, getTeamDocs, getUserIdentity, quitTeam, setAdmin, getTeamMembers} from "../../network/team.js";
 import TeamDoc from "@/views/TeamSpace/TeamDoc";
 
 export default {
@@ -75,22 +90,25 @@ export default {
     return {
       user: '',
       TeamID: '',
+      TeamName: '',
       myTeams: '',
+      members: '',// 团队成员
       iden: 0,// 默认成员
       chosenPos: -1,
       iden_message: '普通成员',
       isQuit: false,
       isDisband: false,
-
+      openCooperation: false
     }
   },
   components: {
     'TeamDoc': TeamDoc
   },
   methods: {
-    chooseTeam(teamID) {
-      console.log('TeamSpace',teamID);
+    chooseTeam(teamID,teamName) {
+      // console.log('TeamSpace',teamID);
       this.TeamID = teamID;
+      this.TeamName = teamName;
       this.chosenPos = teamID;
       // this.$router.push({path: '/home/teamSpace/teamDoc?TeamID=' + teamID})
     },
@@ -101,12 +119,12 @@ export default {
       this.isQuit = false;
     },
     toQuitTeam() {
-      console.log(this.$store.state.user.userID);
-      console.log(this.TeamID);
+      // console.log(this.$store.state.user.userID);
+      // console.log(this.TeamID);
 
       quitTeam(this.$store.state.user.userID,this.TeamID)
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if (res == 0){
             this.$notify.success("退出团体成功");
             this.$router.push({path: "/home/teamSpace"});
@@ -124,12 +142,12 @@ export default {
       this.isDisband = false;
     },
     toDisbandTeam() {
-      console.log(this.$store.state.user.userID);
-      console.log(this.TeamID);
+      // console.log(this.$store.state.user.userID);
+      // console.log(this.TeamID);
 
       disbandTeam(this.TeamID)
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if (res == 0){
             this.$notify.success("解散团体成功");
             this.$router.push({path: "/home/teamSpace"});
@@ -139,6 +157,12 @@ export default {
             this.isDisband = false;
           }
         })
+    },
+    readyToCooperate() {
+      this.openCooperation = true;
+    },
+    cancelCooperate() {
+      this.openCooperation = false;
     }
   },
   created() {
@@ -164,7 +188,7 @@ export default {
       //0成员，1管理者，2创建者
       getUserIdentity(this.$store.state.user.userID,this.TeamID)
         .then(res => {
-          console.log('Iden',res);
+          // console.log('Iden',res);
           this.iden = res;
           if (res == 0){
             this.iden = 0;
@@ -187,6 +211,8 @@ export default {
           );
           return;
         })
+
+
     }
   }
 };
@@ -220,7 +246,7 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 5px;
+  margin: 0px;
   height: auto;
   width: 90vh;
   border-radius: 5px;
@@ -231,15 +257,15 @@ export default {
 }
 
 .one-team{
-  margin: 1vh;
-  padding: 8px;
-  border: 1px solid #a1c4fd;
-  background-color: white;
   border-radius: 5px;
   color: #60a5dd;
   width: auto;
   height: auto;
-  font-size: 13px;
+  font-size: 17px;
+  padding: 7px 20px;
+  margin-left: 10px;
+  margin-right: 5px;
+  margin-top: 0px;
 }
 
 .one-team:hover{
@@ -410,8 +436,27 @@ export default {
 }
 
 .opt{
-  position: absolute;
-  margin-left: 58%;
-  margin-top: -8%;
+  margin-left: 95%;
+  height: 10px;
+}
+
+.cooperation-member{
+  border: 1px solid red;
+  width: 100vh;
+  height: 25vh;
+  overflow: auto;
+}
+
+.cooperation-admin{
+  border: 1px solid red;
+  width: 100vh;
+  height: 25vh;
+  overflow: auto;
+}
+
+.cooperation-search{
+  border: 1px solid red;
+  height: 40px;
+  margin-bottom: 5px;
 }
 </style>
