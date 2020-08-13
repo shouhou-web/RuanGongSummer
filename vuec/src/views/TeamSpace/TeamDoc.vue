@@ -4,13 +4,12 @@
       <div class="team-docs">
         <div class="doc" v-for="(adoc,docIndex) in docs" :key="docIndex">
           <l-card :title="adoc.docTitle" :i-d="adoc.docId">
-            <div slot="hide-content">
-              <div style="display: flex;flex-direction: column;">
-                <my-button size="small" style="margin: 5px">删除</my-button>
-                <my-button size="small" style="margin: 5px">重命名</my-button>
-                <my-button size="small" style="margin: 5px">收藏</my-button>
-                <my-button size="small" style="margin: 5px">分享</my-button>
-              </div>
+            <div slot="hide-content" class="hide-nav">
+                <my-button size="text" class="nav-btn">打开</my-button>
+                <my-button size="text" class="nav-btn">收藏</my-button>
+                <my-button size="text" class="nav-btn">重命名</my-button>
+                <my-button size="text" class="nav-btn">分享</my-button>
+                <my-button size="text-danger" class="nav-btn">删除</my-button>
             </div>
           </l-card>
         </div>
@@ -61,6 +60,18 @@ export default {
 </script>
 
 <style scoped>
+.nav-btn {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  padding: 10px 35px;
+}
+
+.hide-nav {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
 .my-team-details{
   margin: auto;
   margin-top: 30px;
