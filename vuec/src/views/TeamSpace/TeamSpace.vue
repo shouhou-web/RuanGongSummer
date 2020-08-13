@@ -4,7 +4,7 @@
 <!--      <img src="../../assets/image/Team.svg" style="margin-left: 3vh;padding-bottom: 1.5vh;padding-left: 1vh;margin-right: 10px">-->
 <!--      我的团队 | My Team-->
 <!--    </div>-->
-    <div class="opt">
+    <div class="opt" v-if="chosenPos != -1">
       <m-nav-dropdown position="left" class="l-card__nav">
         <div slot="show">
           <img class="l-card__setting" src="@/assets/image/teamopt.svg">
@@ -39,8 +39,6 @@
 <!--      {{iden_message}}-->
 <!--    </div>-->
 
-
-
     <!-- 悬浮窗 -->
     <m-hover :on-show="isQuit"
              title="是否确定要退出该团队"
@@ -66,10 +64,53 @@
     <m-hover :on-show="openCooperation"
              :title="'团队协助:' + TeamName"
              cancel-btn="X"
-             @cancel="cancelCooperate">
+             @cancel="cancelCooperate"
+             style="font-family: 'JetBrains Mono'">
       <div class="cooperation-search"></div>
-      <div class="cooperation-member"></div>
-      <div class="cooperation-admin"></div>
+      <div class="cooperation-member">
+        <div class="member-header">
+          <div class="member-name-header">团队组员名称</div>
+        </div>
+        <div class="member-header" v-for="(member,memberIndex) in members" :key="memberIndex">
+          <div class="member-name-main">{{member.userName}}</div>
+          <div class="member-email-main">18373xxx@buaa.edu.cn</div>
+          <div class="member-iden-main">
+            <div v-if="member.userIdentity == 1">
+              <my-button size="small" type="success">管理员</my-button>
+            </div>
+            <div v-if="member.userIdentity == 2">
+              <my-button size="mini" type="info">创建人</my-button>
+            </div>
+            <my-button size="small"
+                       type="text"
+                       v-if="member.userIdentity != 2"
+                       @click="setUserIden(member.userID,TeamID,1)">
+              +加入管理员
+            </my-button>
+          </div>
+        </div>
+      </div>
+      <div class="cooperation-admin">
+        <div class="member-header">
+          <div class="member-name-header">管理员名称</div>
+        </div>
+        <div class="member-header" v-for="(member,memberIndex) in members" :key="memberIndex">
+          <div class="member-name-main" v-if="member.userIdentity > 0">{{member.userName}}</div>
+          <div class="member-email-main" v-if="member.userIdentity > 0">18373xxx@buaa.edu.cn</div>
+          <div class="member-iden-main" v-if="member.userIdentity > 0">
+            <div v-if="member.userIdentity == 1">
+              <my-button size="small" type="success">管理员</my-button>
+            </div>
+            <div v-if="member.userIdentity == 2">
+              <my-button size="mini" type="info">创建人</my-button>
+            </div>
+            <my-button size="small"
+                       type="text-danger"
+                       v-if="member.userIdentity == 1"
+                       @click="setUserIden(member.userID,TeamID,0)">-取消管理员</my-button>
+          </div>
+        </div>
+      </div>
     </m-hover>
 
     <div>
@@ -83,6 +124,7 @@
 <script>
 import {disbandTeam, getMyTeam, getTeamDocs, getUserIdentity, quitTeam, setAdmin, getTeamMembers} from "../../network/team.js";
 import TeamDoc from "@/views/TeamSpace/TeamDoc";
+import LButton from "@/components/common/l-app-button/MyButton";
 
 export default {
   name: 'TeamSpace',
@@ -102,6 +144,7 @@ export default {
     }
   },
   components: {
+    LButton,
     'TeamDoc': TeamDoc
   },
   methods: {
@@ -134,6 +177,11 @@ export default {
             this.isQuit = false;
           }
         })
+        .catch(err => {
+          this.$notify.error("网络出现问题，无法退出，请检查网络情况")
+          this.isQuit = false;
+          return;
+        })
     },
     readyToDisband() {
       this.isDisband = true;
@@ -157,12 +205,35 @@ export default {
             this.isDisband = false;
           }
         })
+        .catch(err =>{
+          this.$notify.error("网络出现问题，无法解散，请检查网络情况")
+          this.isDisband = false;
+          return;
+        })
     },
     readyToCooperate() {
       this.openCooperation = true;
     },
     cancelCooperate() {
       this.openCooperation = false;
+    },
+    setUserIden(userID,teamID,userIden) {
+      console.log('userID',userID);
+      console.log('teamID',teamID);
+      console.log('userIden',userIden);
+
+      setAdmin(userID,teamID,userIden)
+        .then(res => {
+          if (res == 0) {
+            this.$notify.success("权限已修改");
+          } else {
+            this.$notify.error("出现错误，请检查网络，权限修改失败");
+          }
+        })
+        .catch(err => {
+          this.$notify.error("出现错误，请检查网络，权限修改失败");
+        })
+
     }
   },
   created() {
@@ -212,7 +283,11 @@ export default {
           return;
         })
 
-
+      getTeamMembers(this.TeamID)
+        .then(res => {
+          console.log(res);
+          this.members = res;
+        })
     }
   }
 };
@@ -441,22 +516,78 @@ export default {
 }
 
 .cooperation-member{
-  border: 1px solid red;
+  border: 1px solid #999999;
   width: 100vh;
   height: 25vh;
   overflow: auto;
+  margin-bottom: 5px;
+  border-radius: 5px;
 }
 
 .cooperation-admin{
-  border: 1px solid red;
+  border: 1px solid #999999;
   width: 100vh;
   height: 25vh;
   overflow: auto;
+  border-radius: 5px;
 }
 
 .cooperation-search{
-  border: 1px solid red;
+  border: 1px solid #999999;
   height: 40px;
   margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.member-header{
+  display: flex;
+  flex-direction: row;
+  height: 35px;
+}
+
+.member-name-header{
+  text-align: center;
+  width: 25%;
+  background-color: #e2e2e2;
+  border-radius: 5px;
+  padding-top: 8px;
+}
+
+.member-email-header{
+  text-align: center;
+  width: 55%;
+  background-color: #e2e2e2;
+  padding-top: 8px;
+}
+
+.member-iden-header{
+  text-align: center;
+  width: 10%;
+  background-color: #e2e2e2;
+  padding-top: 8px;
+}
+
+.member-name-main{
+  padding-left: 10px;
+  width: 35%;
+  padding-top: 8px;
+}
+
+.member-email-main{
+  padding-left: 10px;
+  width: 45%;
+  padding-top: 8px;
+}
+
+.member-iden-main{
+  display: flex;
+  flex-direction: row;
+  padding-left: 10px;
+  width: 20%;
+  padding-top: 8px;
+}
+
+.check{
+  margin-top: 3px;
 }
 </style>

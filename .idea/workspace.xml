@@ -31,9 +31,6 @@
   <component name="ChangeListManager">
     <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/assets/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/assets/css/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/network/team.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/network/team.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -276,7 +273,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597287026073</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="TeamSpace 协作起步">
+      <created>1597297149016</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1597297149017</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -347,7 +351,8 @@
     <MESSAGE value="团队空间完善，API编写" />
     <MESSAGE value="YDoc上线，但是没什么用" />
     <MESSAGE value="TeamSpace优化 v1" />
-    <option name="LAST_COMMIT_MESSAGE" value="TeamSpace优化 v1" />
+    <MESSAGE value="TeamSpace 协作起步" />
+    <option name="LAST_COMMIT_MESSAGE" value="TeamSpace 协作起步" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-735" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1596358814923">
@@ -414,9 +419,9 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-809" y="254" key="run.anything.popup/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596451264474" />
-    <state x="-802" y="241" width="672" height="678" key="search.everywhere.popup" timestamp="1597287008136">
+    <state x="-802" y="241" width="672" height="678" key="search.everywhere.popup" timestamp="1597297534140">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-802" y="241" width="672" height="678" key="search.everywhere.popup/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597287008136" />
+    <state x="-802" y="241" width="672" height="678" key="search.everywhere.popup/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597297534140" />
   </component>
 </project>
