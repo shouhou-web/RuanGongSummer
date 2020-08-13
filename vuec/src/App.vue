@@ -11,7 +11,14 @@ import FullscrrenLoading from "components/common/fullscreen-loading/FullscreenLo
 export default {
   name: "App",
   components: {
-    FullscrrenLoading
+    FullscrrenLoading,
+  },
+  created() {
+    if (sessionStorage.getItem("user") != null) {
+      console.log("我执行了", sessionStorage.getItem("user"));
+      this.$store.commit("login", JSON.parse(sessionStorage.getItem("user")));
+    }
+    // console.log(this.$store.state.token);
   },
 };
 </script>

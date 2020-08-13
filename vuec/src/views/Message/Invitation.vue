@@ -3,9 +3,10 @@
 </template>
 
 <script>
+import { getCommonMsg } from "network/message";
 export default {
   name: "Message",
-  components: {}
+  components: {},
 };
 </script>
 

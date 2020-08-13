@@ -2,9 +2,9 @@
   <div>
     <m-header>
       <template v-slot:left>
-        <div class="welcome">
+        <router-link :to="{ path: '/home' }" class="welcome">
           <img class="welcome__img" src="@/assets/image/logo.png" alt="" />
-        </div>
+        </router-link>
         <ul class="nav-left-ul">
           <li class="nav-left-item">
             <a class="nav-item__inner" href="#">云平台</a>
@@ -158,17 +158,17 @@ export default {
   name: "MAppHeader",
   components: {
     MHeader,
-    appSearch
+    appSearch,
   },
   props: {
     bgColor: {
       type: String,
-      default: "var(--color-main)"
-    }
+      default: "var(--color-main)",
+    },
   },
   data() {
     return {
-      user: {} // 用户数据
+      user: {}, // 用户数据
     };
   },
   created() {
@@ -176,13 +176,8 @@ export default {
   },
   computed: {
     token() {
-      if (sessionStorage.getItem("user") != null) {
-        // console.log("我执行了", sessionStorage.getItem("user"));
-        this.$store.commit("login", JSON.parse(sessionStorage.getItem("user")));
-      }
-      // console.log(this.$store.state.token);
       return this.$store.state.token;
-    }
+    },
   },
   methods: {
     toLogin(e) {
@@ -190,8 +185,8 @@ export default {
       this.$router.push({
         path: "/Login",
         query: {
-          page: e
-        }
+          page: e,
+        },
       });
     },
     toProfile() {
@@ -200,8 +195,8 @@ export default {
     logout() {
       this.$store.commit("logout");
       this.$router.push({ path: "/home" });
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

@@ -37,21 +37,29 @@
 </template>
 
 <script>
+import {
+  deleteMsg,
+  acceptMember,
+  refuseMember,
+  joinTeam,
+  refuseTeam,
+} from "network/message";
 export default {
   name: "TeamMessage",
   props: {
     message: {
       type: Object,
-      default: {}
-    }
+      default: {},
+    },
   },
-  components: {}
+  components: {},
 };
 </script>
 
 <style scoped>
 .message {
   display: flex;
+  padding-top: 24px;
   padding-bottom: 24px;
 }
 

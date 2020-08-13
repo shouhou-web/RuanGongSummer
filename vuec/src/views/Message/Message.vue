@@ -46,25 +46,25 @@ export default {
       navList: [
         {
           name: "加入申请",
-          router: "application"
+          router: "application",
         },
         {
           name: "团队邀请",
-          router: "invitation"
+          router: "invitation",
         },
 
         {
           name: "系统通知",
-          router: "system"
-        }
-      ]
+          router: "system",
+        },
+      ],
     };
   },
   methods: {
     toChild(index) {
       let target = this.navList[index].router;
       this.$router.push("/message/" + target);
-    }
+    },
   },
   computed: {
     currentIndex() {
@@ -76,8 +76,8 @@ export default {
         case "/message/system":
           return 2;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

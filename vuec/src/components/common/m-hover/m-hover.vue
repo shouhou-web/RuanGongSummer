@@ -70,7 +70,7 @@ export default {
   background-color: #fff;
   border-radius: 4px;
   top: 20%;
-  z-index: 4;
+  z-index: 1629;
 }
 
 #suspended .mask {
@@ -81,6 +81,7 @@ export default {
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0.3;
+  z-index: 1628;
 }
 
 #suspended .hide {

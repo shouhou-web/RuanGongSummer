@@ -30,7 +30,11 @@
               </div>
               <div class="down__ID">ID:{{ item.id }}</div>
             </div>
-            <my-button @click.stop="enter(item.ID)" type="primary" size="small">
+            <my-button
+              @click.stop="enter(item.id, item.name)"
+              type="primary"
+              size="small"
+            >
               {{ option }}
             </my-button>
           </li>
@@ -40,21 +44,39 @@
         </div>
       </div>
     </div>
+    <m-hover
+      @submit="submit"
+      @cancel="close"
+      :onShow="applyTeam"
+      title="申请加入团队"
+      assureBtn="确定申请"
+      cancelBtn="暂不申请"
+      ><input
+        class="hover-input"
+        type="text"
+        v-model="content"
+        placeholder="申请理由"
+      />
+    </m-hover>
   </div>
 </template>
 
 <script>
 import { searchTeam, searchDoc } from "network/search";
+import { applyTeam } from "network/message";
+
 export default {
   name: "appSearch",
   data() {
     return {
+      ID: "",
       isSearch: false, // 是否展示搜索框
       select: "文档", // 选择的搜索子项目
       searchText: "", // 搜索内容
       searchList: [],
-      type: "user", // 选中的类型
-      option: "邀请用户", // 操作提示
+      option: "编辑文档", // 操作提示
+      applyTeam: false, // 申请理由框
+      content: "", // 申请理由
     };
   },
   watch: {
@@ -74,11 +96,11 @@ export default {
   },
   methods: {
     search() {
-      console.log(userID)
+      console.log(userID);
       let userID = this.$store.state.user.userID;
       let searchText = this.searchText;
       this.isSearch = true;
-      if (this.select == '团队') {
+      if (this.select == "团队") {
         searchTeam(userID, searchText)
           .then((res) => {
             this.searchList = res;
@@ -103,7 +125,45 @@ export default {
             });
           });
     },
-    enter(ID) {},
+    enter(ID, title) {
+      if (this.select == "团队") {
+        this.ID = ID;
+        this.applyTeam = true;
+      } else {
+        this.$router.push({
+          path: "/doc",
+          query: { docID: ID, docTitle: title },
+        });
+      }
+    },
+    submit() {
+      let userID = this.$store.state.user.userID;
+      console.log("ID", this.ID);
+      applyTeam(userID, this.ID, this.content)
+        .then((res) => {
+          if (res == 0) {
+            this.$notify({
+              title: "申请提交成功",
+              message: "请等待对方审核~",
+              type: "success",
+            });
+            this.applyTeam = false;
+          } else
+            this.$notify.error({
+              title: "网络错误",
+              message: "请稍后重试~",
+            });
+        })
+        .catch((err) => {
+          this.$notify.error({
+            title: "网络错误",
+            message: "请稍后重试~",
+          });
+        });
+    },
+    close() {
+      this.applyTeam = false;
+    },
   },
 };
 </script>
@@ -179,5 +239,23 @@ export default {
 .down__ID {
   color: #ccc;
   font-size: 12px;
+}
+
+.hover-input {
+  border: 0px;
+  color: #111;
+  padding: 15px 20px;
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  width: 360px;
+}
+
+.hover-input:focus {
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+    0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+    0 0 8px rgba(102, 175, 233, 0.6);
 }
 </style>
