@@ -109,7 +109,7 @@ export default {
     return {
       user: "",
       teamName: "",
-      teamHoverOn: false,
+      teamHoverOn: false
     };
   },
   methods: {
@@ -166,22 +166,22 @@ export default {
           }
         } else {
           addDoc(this.user.userID, nowTeamID).then(res => {
-          if (res === 1) {
-            this.$message.error("创建文档失败，请检查网络或联系管理员");
-          } else {
-            this.$message({
-              message: "创建文档成功",
-              type: "success"
-            });
-            this.$router.push({
-              path: "/doc",
-              query: {
-                docID: res,
-                docTitle: ""
-              }
-            });
-          }
-        });
+            if (res === 1) {
+              this.$message.error("创建文档失败，请检查网络或联系管理员");
+            } else {
+              this.$message({
+                message: "创建文档成功",
+                type: "success"
+              });
+              this.$router.push({
+                path: "/doc",
+                query: {
+                  docID: res,
+                  docTitle: ""
+                }
+              });
+            }
+          });
         }
         addDoc(this.user.userID, nowTeamID);
       } else if (
