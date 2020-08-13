@@ -30,10 +30,6 @@
   <component name="ChangeListManager">
     <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/store/mutations.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/store/mutations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/ForgetPwd/ForgetPwd.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/ForgetPwd/ForgetPwd.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/Login/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Login/Login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,6 +71,7 @@
     <setting file="file://$PROJECT_DIR$/vuec/src/views/Home/Home.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/components/common/y-doc/y-doc.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/App.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/WorkSpace.vue" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="1fLGyCTivlgcbjypveth1jTDZUP" />
   <component name="ProjectLevelVcsManager">
@@ -290,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597302201914</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="向store中加入了hasTeam:Boolean">
+      <created>1597308555239</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1597308555239</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -363,7 +367,8 @@
     <MESSAGE value="TeamSpace优化 v1" />
     <MESSAGE value="TeamSpace 协作起步" />
     <MESSAGE value="TeamSpace 协作API编写" />
-    <option name="LAST_COMMIT_MESSAGE" value="TeamSpace 协作API编写" />
+    <MESSAGE value="向store中加入了hasTeam:Boolean" />
+    <option name="LAST_COMMIT_MESSAGE" value="向store中加入了hasTeam:Boolean" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-735" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1596358814923">
@@ -410,10 +415,10 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-1157" y="197" key="SettingsEditor/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597215693693" />
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597304361784">
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597308658496">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597304361784" />
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597308658496" />
     <state x="-1766" y="92" width="1674" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1596767599481">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>

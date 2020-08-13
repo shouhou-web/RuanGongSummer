@@ -22,7 +22,10 @@
             <my-button type="text"
                        class="l-card__nav-btn"
                        @click="readyToCooperate"
-                       v-if="iden == 2">团队协作</my-button>
+                       v-if="iden == 2">团队协作权限</my-button>
+            <my-button type="text"
+                       class="l-card__nav-btn"
+                       @click="readyToCooperate">搜索邀请</my-button>
           </div>
         </div>
         <input/>
@@ -68,7 +71,9 @@
              cancel-btn="X"
              @cancel="cancelCooperate"
              style="font-family: 'JetBrains Mono'">
-      <div class="cooperation-search"></div>
+      <div>
+        <input class="cooperation-search" v-model="searchMsg" placeholder=" 输入用户名称/邮箱"></input>
+      </div>
       <div class="cooperation-member">
         <div class="member-header">
           <div class="member-name-header">团队组员</div>
@@ -124,7 +129,8 @@
 </template>
 
 <script>
-import {disbandTeam, getMyTeam, getTeamDocs, getUserIdentity, quitTeam, setAdmin, getTeamMembers} from "../../network/team.js";
+import {disbandTeam, getMyTeam, getTeamDocs, getUserIdentity, quitTeam, setAdmin, getTeamMembers} from "@/network/team";
+import {searchAll} from "@/network/search";
 import TeamDoc from "@/views/TeamSpace/TeamDoc";
 import LButton from "@/components/common/l-app-button/MyButton";
 
@@ -142,7 +148,10 @@ export default {
       iden_message: '普通成员',
       isQuit: false,
       isDisband: false,
-      openCooperation: false
+      openCooperation: false,
+      searchMsg: '',
+      searchRes: '',
+      showRes: false
     }
   },
   components: {
@@ -299,6 +308,17 @@ export default {
         })
 
       this.$store.commit("setTeamID",this.TeamID);
+    },
+    searchMsg() {
+      console.log('changed');
+      searchAll("user",this.searchMsg)
+        .then(res => {
+          console.log(res);
+          this.searchRes = res;
+        })
+        .catch(err => {
+          this.$notify.error("请检查网络，查找失败");
+        })
     }
   }
 };
@@ -545,7 +565,7 @@ export default {
 
 .cooperation-search{
   border: 1px solid #999999;
-  height: 40px;
+  height: 30px;
   margin-bottom: 5px;
   border-radius: 5px;
 }
