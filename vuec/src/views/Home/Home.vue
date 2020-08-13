@@ -80,11 +80,18 @@
         </div>
       </div>
     </div>
-    <m-hover :onShow=teamHoverOn title="创建我的团队" assureBtn="创建" cancelBtn="取消" @cancel="cancelNewTeamHover" @submit="createNewTeamHover">
+    <m-hover
+      :onShow="teamHoverOn"
+      title="创建我的团队"
+      assureBtn="创建"
+      cancelBtn="取消"
+      @cancel="cancelNewTeamHover"
+      @submit="createNewTeamHover"
+    >
       <div class="hover-text">
         请输入要创建的团队名称：
       </div>
-      <input class="hover-input" placeholder="团队名称" v-model="teamName"></input>
+      <input class="hover-input" placeholder="团队名称" v-model="teamName" />
     </m-hover>
   </div>
 </template>
@@ -101,7 +108,7 @@ export default {
     return {
       user: "",
       teamName: "",
-      teamHoverOn: false,
+      teamHoverOn: false
     };
   },
   methods: {
@@ -121,17 +128,16 @@ export default {
       this.teamHoverOn = false;
     },
     createNewTeamHover() {
-      if(!this.teamName) {
+      if (!this.teamName) {
         this.$message.error("团队名称不能为空！");
       }
-      if(!this.user.userID) {
+      if (!this.user.userID) {
         this.$message.error("请先登录！");
       }
-      console.log(this.teamName)
-      addTeam(this.user.userID, this.teamName)
-      .then(res => {
+      console.log(this.teamName);
+      addTeam(this.user.userID, this.teamName).then(res => {
         console.log(res);
-        if(res === 1) {
+        if (res === 1) {
           this.$message.error("创建失败，请检查网络或联系管理员");
         } else if (res === 0) {
           this.teamHoverOn = false;
@@ -140,7 +146,7 @@ export default {
             type: "success"
           });
         }
-      })
+      });
     }
   },
   components: {
@@ -165,10 +171,11 @@ export default {
 }
 
 .main-page {
-  align-items: center;
+  background-color: #cce6ff;
+  height: calc(100vh - 56px);
   justify-content: center;
   display: flex;
-  margin-top: 35px;
+  padding: 35px 60px 0;
 }
 
 .nav-btn {
@@ -176,12 +183,19 @@ export default {
   margin: 5px;
 }
 
+.nav,
+.sub-page,
+.second-nav {
+  border-radius: 4px;
+  box-shadow: 0 2px 4px 0 rgba(121, 146, 185, 0.54);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
 .nav {
-  background-color: #ffffff;
   height: 85vh;
   margin-right: 10px;
   padding: 10px 90px;
-  width: 10%;
+  width: 140px;
 }
 
 .wrap {
@@ -209,26 +223,23 @@ export default {
 }
 
 .second-nav {
-  background-color: #ffffff;
   height: 85vh;
   margin-left: 10px;
   margin-right: 10px;
-  width: 65%;
+  flex: 1;
 }
 
 .sub-page {
   align-items: center;
-  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   height: 85vh;
   margin-left: 10px;
-  width: 13%;
+  width: 200px;
 }
 
 .option-nav {
   align-items: center;
-  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -245,7 +256,7 @@ export default {
 }
 
 .hover-input {
-  border: 1px solid #C5D9E8;
+  border: 1px solid #c5d9e8;
   border-radius: 20px;
   margin-bottom: 30px;
   margin-left: 20px;
@@ -256,7 +267,7 @@ export default {
 }
 
 .hover-input:focus {
-  border-color: #3F536E;
+  border-color: #3f536e;
   box-shadow: 2px 2px 5px 1px rgba(10, 69, 105, 0.2);
   transition: 0.5s;
 }
@@ -269,18 +280,23 @@ export default {
 .v-enter {
   opacity: 0;
 }
+
 .v-enter-active {
   transition: 0.5s;
 }
+
 .v-enter-to {
   opacity: 1;
 }
+
 .v-leave {
   opacity: 1;
 }
+
 .v-leave-to {
   opacity: 0;
 }
+
 .v-leave-active {
   transition: 0.3s;
 }

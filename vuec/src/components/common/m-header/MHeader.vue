@@ -46,4 +46,12 @@ export default {
   display: flex;
   height: 36px;
 }
+
+.nav-left {
+  min-width: 315px;
+}
+
+.nav-right {
+  min-width: 465px;
+}
 </style>

@@ -150,7 +150,7 @@ export default {
   border-radius: 4px;
   color: #666;
   display: flex;
-  font-style: 15px;
+  font-size: 15px;
   height: 42px;
   padding-left: 16px;
 }

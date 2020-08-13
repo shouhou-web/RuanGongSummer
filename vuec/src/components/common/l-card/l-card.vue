@@ -1,6 +1,6 @@
 <template>
   <div class="l-card" :class="shadow ? 'is-' + shadow + '-shadow' : 'is-hover-shadow'">
-    <m-nav-dropdown position="right" class="l-card__nav">
+    <m-nav-dropdown position="middle" class="l-card__nav">
       <div slot="show">
         <img class="l-card__setting" src="@/assets/icon/card/settings.png">
       </div>
@@ -13,7 +13,7 @@
         </div>
       </div>
     </m-nav-dropdown>
-    <img class="l-card__pic" alt="Picture Please!" src="@/assets/icon/card/doc.png"></img>
+    <img class="l-card__pic" alt="Picture Please!" src="@/assets/icon/card/doc.png" />
     <div class="l-card__body" :style="bodyStyle">
       <slot></slot>
     </div>

@@ -95,21 +95,20 @@ export default {
           });
         });
     },
-    enter(ID) {
-      
-    }
+    enter(ID) {}
   }
 };
 </script>
 
 <style>
 .el-input--suffix .el-input__inner {
-  width: 90px;
+  width: 80px;
 }
 
 .search {
   background-color: #fff;
   width: 315px;
+  min-width: 315px;
 }
 
 .nav-down:hover,
