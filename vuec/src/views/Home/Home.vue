@@ -289,6 +289,7 @@ export default {
   height: 85vh;
   margin-left: 10px;
   margin-right: 10px;
+  padding: 0px 80px;
   flex: 1;
 }
 

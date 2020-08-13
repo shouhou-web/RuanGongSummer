@@ -17,7 +17,6 @@ export default {
     return {
       user: "",
       myDocs: "",
-      myDocNum: 0,
       noneShow: false
     };
   },
@@ -30,8 +29,7 @@ export default {
     }
     getMyDocs(this.user.userID).then(res => {
       this.myDocs = res;
-      this.myDocNum = res.length;
-      console.log(this.myDocs);
+      console.log(this.myDocs.length);
     });
   }
 };

@@ -10,9 +10,9 @@ export function getMyDocs(userID) {
     })
 }
 
-export function getFavoriteDocs(userID) {
+export function getRecentDocs(userID) {
     return request({
-        url: "/getFavoriteDocs",
+        url: "/getRecentDocs",
         params: {
             userID
         },
