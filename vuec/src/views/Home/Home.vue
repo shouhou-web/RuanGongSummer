@@ -93,23 +93,6 @@
       </div>
       <input class="hover-input" placeholder="团队名称" v-model="teamName" />
     </m-hover>
-    <m-hover
-      :onShow="docHoverOn"
-      title="新建文档"
-      assureBtn="创建"
-      cancelBtn="取消"
-      @cancel="cancelNewDocHover"
-      @submit="createNewDocHover"
-    >
-      <div class="hover-text">
-        请输入新建文档的名称：
-      </div>
-      <input
-        class="hover-input"
-        placeholder="请输入文件名"
-        v-model="teamName"
-      />
-    </m-hover>
   </div>
 </template>
 
@@ -118,6 +101,7 @@ import MAppHeader from "components/content/m-app-header/MAppHeader";
 import Recent from "./WorkSpace/WorkSpace";
 
 import { addTeam } from "../../network/team.js";
+import { addDoc } from "../../network/home.js";
 
 export default {
   name: "Home",
@@ -126,8 +110,6 @@ export default {
       user: "",
       teamName: "",
       teamHoverOn: false,
-      docName: "",
-      docHoverOn: false
     };
   },
   methods: {
@@ -148,10 +130,10 @@ export default {
     },
     createNewTeamHover() {
       if (!this.teamName) {
-        this.$message.error("团队名称不能为空！");
+        this.$message.error("团队名称不能为空");
       }
       if (!this.user.userID) {
-        this.$message.error("请先登录！");
+        this.$message.error("请先登录");
       }
       console.log(this.teamName);
       addTeam(this.user.userID, this.teamName).then(res => {
@@ -160,18 +142,74 @@ export default {
           this.$message.error("创建失败，请检查网络或联系管理员");
         } else if (res === 0) {
           this.teamHoverOn = false;
+          this.$router.go(0);
           this.$message({
-            message: "创建成功！",
+            message: "创建团队成功",
             type: "success"
           });
         }
       });
     },
     addNewDoc() {
-      this.docHoverOn = true;
+      if (!this.user.userID) {
+        this.$message.error("请先登录！");
+      }
+      var currentPath = this.$route.path;
+      if (currentPath === "/home/teamSpace") {
+        var nowTeamID = this.$store.state.nowTeamID;
+        var hasTeam = this.$store.state.hasTeam;
+        if (nowTeamID === -1) {
+          if (!hasTeam) {
+            this.$message.error("请先创建或加入团队");
+          } else {
+            this.$message.error("请选择团队后再创建文档");
+          }
+        } else {
+          addDoc(this.user.userID, nowTeamID).then(res => {
+          if (res === 1) {
+            this.$message.error("创建文档失败，请检查网络或联系管理员");
+          } else {
+            this.$message({
+              message: "创建文档成功",
+              type: "success"
+            });
+            this.$router.push({
+              path: "/doc",
+              query: {
+                docID: res,
+                docTitle: ""
+              }
+            });
+          }
+        });
+        }
+        addDoc(this.user.userID, nowTeamID);
+      } else if (
+        currentPath === "/home/workSpace/recent" ||
+        currentPath === "/home/workSpace/iMade" ||
+        currentPath === "/home/workSpace/myCollection"
+      ) {
+        addDoc(this.user.userID, 0).then(res => {
+          if (res === 1) {
+            this.$message.error("创建文档失败，请检查网络或联系管理员");
+          } else {
+            this.$message({
+              message: "创建文档成功",
+              type: "success"
+            });
+            this.$router.push({
+              path: "/doc",
+              query: {
+                docID: res,
+                docTitle: ""
+              }
+            });
+          }
+        });
+      }
     },
-    cancelNewDocHover() {
-      this.docHoverOn = false;
+    checkNotice() {
+      this.noticeHoverOn = false;
     }
   },
   components: {

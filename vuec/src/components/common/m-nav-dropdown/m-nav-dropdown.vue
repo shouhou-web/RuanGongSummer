@@ -85,6 +85,7 @@ export default {
   align-items: center;
   flex-direction: column;
   position: absolute;
+  z-index: 628;
 }
 
 .m-nav__triangle {

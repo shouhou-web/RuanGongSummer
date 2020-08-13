@@ -9,10 +9,15 @@
               <div class="back-header">
                 返回到
               </div>
-              <a class="back-a" v-for="(item, index) in back" :key="index">
+              <router-link
+                class="back-a"
+                v-for="(item, index) in back"
+                :to="item.href"
+                :key="index"
+              >
                 <img class="back-a__icon" :src="item.iconSrc" alt="" />
                 <div class="back-a__title">{{ item.title }}</div>
-              </a>
+              </router-link>
             </div>
             <!-- 最近访问的文档。 -->
             <div class="back-item">
@@ -33,7 +38,12 @@
 
         <!-- 标题 -->
         <div class="doc-title">
-          <input class="doc-input" v-model="Doc.docTitle" type="text" />
+          <input
+            @blur="submitDocTitle"
+            class="doc-input"
+            v-model="doc.docTitle"
+            type="text"
+          />
         </div>
       </template>
       <template v-slot:right>
@@ -53,25 +63,41 @@
 
 <script>
 import MHeader from "components/common/m-header/MHeader.vue";
+import { editDocTitle } from "network/doc";
 export default {
   name: "MDocHeader",
   components: {
     MHeader
+  },
+  props: {
+    doc: {
+      type: Object,
+      default: {}
+    }
   },
   data() {
     return {
       back: [
         {
           title: "工作台",
-          iconSrc: require("@/assets/icon/doc/workspace.png")
+          iconSrc: require("@/assets/icon/doc/workspace.png"),
+          href: {
+            path: "/home/workSpace"
+          }
         },
         {
           title: "团队空间",
-          iconSrc: require("@/assets/icon/doc/teamspace.png")
+          iconSrc: require("@/assets/icon/doc/teamspace.png"),
+          href: {
+            path: "/home/teamSpace"
+          }
         },
         {
-          title: "我的桌面",
-          iconSrc: require("@/assets/icon/doc/desktop.png")
+          title: "回收站",
+          iconSrc: require("@/assets/icon/doc/desktop.png"),
+          href: {
+            path: "/home/trash"
+          }
         }
       ],
       recentDoc: [
@@ -87,14 +113,32 @@ export default {
           docID: 2,
           docTitle: "木大木大木大木大木大木大木大"
         }
-      ],
-      Doc: {
-        docID: 1,
-        docTitle: "欧拉欧拉欧拉欧拉欧拉欧拉欧拉"
-      }
+      ]
     };
   },
-  props: {}
+  methods: {
+    submitDocTitle() {
+      editDocTitle(
+        this.$store.state.user.userID,
+        this.doc.docID,
+        this.doc.docTitle
+      )
+        .then(res => {
+          if (res == 1)
+            this.$notify.error({
+              title: "网络错误",
+              message: "请稍后重试~"
+            });
+        })
+        .catch(err => {
+          console.log(err);
+          this.$notify.error({
+            title: "网络错误",
+            message: "请稍后重试~"
+          });
+        });
+    }
+  }
 };
 </script>
 <style scoped>
