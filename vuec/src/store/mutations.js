@@ -43,6 +43,9 @@ const mutations = {
   },
   setTeamID(state,teamID) {
     state.nowTeamID = teamID;
+  },
+  setHasTeam(state,hasTeam) {
+    state.hasTeam = hasTeam;
   }
 };
 

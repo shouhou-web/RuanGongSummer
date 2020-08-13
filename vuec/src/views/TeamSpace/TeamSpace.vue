@@ -4,12 +4,12 @@
 <!--      <img src="../../assets/image/Team.svg" style="margin-left: 3vh;padding-bottom: 1.5vh;padding-left: 1vh;margin-right: 10px">-->
 <!--      我的团队 | My Team-->
 <!--    </div>-->
-    <div class="opt" v-if="chosenPos != -1">
+    <div class="opt">
       <m-nav-dropdown position="left" class="l-card__nav">
         <div slot="show">
           <img class="l-card__setting" src="@/assets/image/teamopt.svg">
         </div>
-        <div slot="hide">
+        <div slot="hide" v-if="chosenPos != -1">
           <div class="l-card__hide-main">
             <my-button type="text"
                        class="l-card__nav-btn"
@@ -25,6 +25,7 @@
                        v-if="iden == 2">团队协作</my-button>
           </div>
         </div>
+        <input/>
       </m-nav-dropdown>
     </div>
 
@@ -201,6 +202,7 @@ export default {
             this.$notify.success("解散团体成功");
             this.$router.push({path: "/home/teamSpace"});
             this.isDisband = false;
+            this.$router.go(0);
           }else {
             this.$notify.error("网络出现问题，无法解散，请检查网络情况")
             this.isDisband = false;
@@ -249,7 +251,13 @@ export default {
     getMyTeam(this.user.userID)
       .then(res => {
         // console.log(res);
-        this.myTeams = res
+        this.myTeams = res;
+        // console.log(this.myTeams.length);
+        // this.chosenPos = res[0].teamID;
+        if (this.myTeams.length == 0)
+          this.$store.commit("setHasTeam",false);
+        else
+          this.$store.commit("setHasTeam",true);
       })
       .catch(err => {
         this.$message.error("请检查网络 - 暂时无法获取你的团队")

@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import mutations from "./mutations";
+import fa from "element-ui/src/locale/lang/fa";
 
 Vue.use(Vuex);
 
@@ -25,6 +26,7 @@ const state = {
   homeMidNav: 0,
   homeLeftNav: 1,
   nowTeamID: -1, //-1表示未选择团体
+  hasTeam: false, //是否有团队
 };
 
 const store = new Vuex.Store({

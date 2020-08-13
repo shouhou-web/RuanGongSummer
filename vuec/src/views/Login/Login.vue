@@ -110,8 +110,14 @@
                              type="text"
                              v-bind:class="{ 'code-style' : (code_info == 0), 'error-code-style' : (code_info == 2), 'empty-code-style' : (code_info == 3) }"
                              v-model="code">
-                      <div @click="sendCode" class="send-code">发送验证码</div>
+<!--                      <div @click="sendCode" class="send-code">发送验证码</div>-->
                     </div>
+                    <my-button type="disabled" v-if="!email" @click="warnEmail" style="margin-top: 10px">发送验证码</my-button>
+                    <my-button type="timer"
+                               :count="countNum"
+                               style="margin-top: 10px"
+                               @click="sendCode"
+                               v-if="email">{{btnMsg}}</my-button>
                   </div>
                   <a @click="registerSubmit" class="btn">Sign up</a>
                 </div>
@@ -217,8 +223,14 @@
                              type="text"
                              v-bind:class="{ 'code-style' : (code_info == 0), 'error-code-style' : (code_info == 2), 'empty-code-style' : (code_info == 3) }"
                              v-model="code">
-                      <input @click="sendCode" class="send-code" :disabled="countFlag" :value="btnMsg"/>
+                      <!--                      <div @click="sendCode" class="send-code">发送验证码</div>-->
                     </div>
+                    <my-button type="disabled" v-if="!email" @click="warnEmail" style="margin-top: 10px">发送验证码</my-button>
+                    <my-button type="timer"
+                               :count="countNum"
+                               style="margin-top: 10px"
+                               @click="sendCode"
+                               v-if="email">{{btnMsg}}</my-button>
                   </div>
                   <a @click="registerSubmit" class="btn">Sign up</a>
                 </div>
@@ -344,6 +356,9 @@ export default {
           return;
         });
     },
+    warnEmail() {
+      this.$notify.info('请填写邮箱后获取验证码');
+    },
     sendCode() {
       if (!this.email) {
         this.email_info = 2;
@@ -360,24 +375,6 @@ export default {
           this.$message.error('验证码返回错误，请检查网络');
         } else {
           this.code_confirm = res;
-
-          // 处理倒计时问题
-          this.countFlag = !this.countFlag;
-          this.timer = setInterval(
-            () => {
-              if (this.countNum > 0 && this.countNum <= 50) {
-                this.btnMsg = this.countNum + 's';
-                this.countNum --;
-              } else {
-                this.countFlag = false;
-                clearInterval(this.timer);
-                this.timer = null;
-                this.btnMsg = '发送验证码';
-                this.countNum = 50;
-              }
-            }, 1000
-          )
-
         }
       })
       .catch(err => {
@@ -684,7 +681,7 @@ p {
   padding-left: 55px;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
-  width: 50%;
+  width: 100%;
 }
 
 .error-code-style {

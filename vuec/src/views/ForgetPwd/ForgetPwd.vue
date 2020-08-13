@@ -30,10 +30,12 @@
                            v-model="code">
 <!--                    <input v-show="isShow" @click="sendCode" :disabled="countFlag" class="send-code" :value="btnMsg" />-->
                   </div>
+                  <my-button type="disabled" v-if="!email" @click="warnEmail">发送验证码</my-button>
                   <my-button type="timer"
                              :count="countNum"
                              style="margin-top: 15px"
-                             @click="sendCode">{{btnMsg}}</my-button>
+                             @click="sendCode"
+                             v-if="email">{{btnMsg}}</my-button>
                   <a v-show="isShow" @click="confirmCode" class="btn">confirm</a>
                 </div>
                 <div v-show="!isShow">
@@ -157,23 +159,25 @@ export default {
       .then(res => {
         console.log('重置密码:',res);
         if (res == 1){
-          this.$message.warning('请确保邮箱格式正确');
+          this.$notify.warning('请确保邮箱格式正确');
           return;
         }else if (res == 2){
-          this.$message.warning('两次密码不一致');
+          this.$notify.warning('两次密码不一致');
           return;
         }else if (res == 3){
-          this.$message.warning('密码格式不合法');
+          this.$notify.warning('密码格式不合法');
           return;
         }else if (res == 4){
-          this.$message.warning('邮箱暂未注册');
+          this.$notify.error('邮箱暂未注册');
           return;
         }else {
-          this.$message.success('密码修改成功');
+          this.$notify.success('密码修改成功');
           this.$router.push({path: "/login?page=0"})
         }
       })
-
+    },
+    warnEmail() {
+      this.$notify.info('请填写邮箱后获取验证码');
     }
   },
   props: {},
