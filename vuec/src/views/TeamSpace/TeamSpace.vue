@@ -621,7 +621,7 @@ export default {
 
 .opt{
   position: absolute;
-  margin-left: 57%;
+  margin-left: 50%;
   margin-top: 8px;
   height: 10px;
 }
