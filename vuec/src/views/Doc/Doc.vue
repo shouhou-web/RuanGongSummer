@@ -18,15 +18,15 @@ export default {
   name: "Doc",
   components: {
     inEditor,
-    MDocHeader
+    MDocHeader,
   },
   data() {
     return {
       doc: {
         docID: "",
         docTitle: "无标题",
-        docContent: ""
-      }
+        docContent: "",
+      },
     };
   },
   created() {
@@ -34,24 +34,26 @@ export default {
     console.log("docTitle", this.$route.query.docTitle);
     let userID = this.$store.state.user.userID;
     let docID = this.$route.query.docID;
+    let docTitle = this.$route.query.docTitle;
     if (docTitle == "")
       // 新建文档
       this.doc.docID = docID;
     else {
       getDoc(userID, docID)
-        .then(res => {
+        .then((res) => {
+          console.log(res);
           // 暂时直接赋值
           this.doc = res;
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           this.$notify.error({
             title: "网络错误",
-            message: "请稍后重试~"
+            message: "请稍后重试~",
           });
         });
     }
-  }
+  },
 };
 </script>
 

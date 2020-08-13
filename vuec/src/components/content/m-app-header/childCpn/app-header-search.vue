@@ -7,19 +7,18 @@
         class="input-with-select"
       >
         <el-select v-model="select" slot="prepend" placeholder="请选择">
-          <el-option label="用户" value="用户"></el-option>
-          <el-option label="团队" value="团队"></el-option>
           <el-option label="文档" value="文档"></el-option>
+          <el-option label="团队" value="团队"></el-option>
         </el-select>
-        <!-- <el-button
+        <el-button
           @click="search"
           slot="append"
           icon="el-icon-search"
-        ></el-button> -->
+        ></el-button>
       </el-input>
       <div class="nav-down">
-        <div @click="search" class="nav-down-header">搜索{{ select }}</div>
-        <ul v-if="searchList.length > 0">
+        <div class="nav-down-header">搜索{{ select }}</div>
+        <ul class="down-list" v-if="searchList.length > 0 && isSearch">
           <li
             class="down-wrapper"
             v-for="(item, index) in searchList"
@@ -29,16 +28,14 @@
               <div class="down__name">
                 {{ item.name }}
               </div>
-              <div class="down__ID">
-                {{ item.ID }}
-              </div>
+              <div class="down__ID">ID:{{ item.id }}</div>
             </div>
             <my-button @click.stop="enter(item.ID)" type="primary" size="small">
               {{ option }}
             </my-button>
           </li>
         </ul>
-        <div class="no-answer" v-else>
+        <div v-else-if="isSearch" class="no-answer">
           没有找到结果~
         </div>
       </div>
@@ -47,56 +44,67 @@
 </template>
 
 <script>
-import { searchAll } from "network/search";
+import { searchTeam, searchDoc } from "network/search";
 export default {
   name: "appSearch",
   data() {
     return {
-      select: "用户", // 选择的搜索子项目
+      isSearch: false, // 是否展示搜索框
+      select: "文档", // 选择的搜索子项目
       searchText: "", // 搜索内容
-      searchList: []
+      searchList: [],
+      type: "user", // 选中的类型
+      option: "邀请用户", // 操作提示
     };
   },
-  computed: {
-    option() {
-      console.log(this.select);
-      switch (this.select) {
-        case "用户":
-          return "邀请用户";
+  watch: {
+    select(newName, oldName) {
+      console.log("option");
+      this.searchList = [];
+      this.isSearch = false;
+      switch (newName) {
         case "团队":
-          return "申请加入";
+          this.option = "申请加入";
+          break;
         case "文档":
-          return "前往编辑";
+          this.option = "前往编辑";
+          break;
       }
     },
-    type() {
-      switch (this.select) {
-        case "用户":
-          return "user";
-        case "团队":
-          return "team";
-        case "文档":
-          return "doc";
-      }
-    }
   },
   methods: {
     search() {
-      console.log(this.type, this.searchText);
-      searchAll(this.type, this.searchText)
-        .then(res => {
-          this.searchList = res;
-        })
-        .catch(err => {
-          console.log(err);
-          this.$notify.error({
-            title: "网络错误",
-            message: "请稍后重试~"
+      console.log(userID)
+      let userID = this.$store.state.user.userID;
+      let searchText = this.searchText;
+      this.isSearch = true;
+      if (this.select == '团队') {
+        searchTeam(userID, searchText)
+          .then((res) => {
+            this.searchList = res;
+          })
+          .catch((err) => {
+            console.log(err);
+            this.$notify.error({
+              title: "网络错误",
+              message: "请稍后重试~",
+            });
           });
-        });
+      } else
+        searchDoc(userID, searchText)
+          .then((res) => {
+            this.searchList = res;
+          })
+          .catch((err) => {
+            console.log(err);
+            this.$notify.error({
+              title: "网络错误",
+              message: "请稍后重试~",
+            });
+          });
     },
-    enter(ID) {}
-  }
+    enter(ID) {},
+  },
 };
 </script>
 
@@ -125,7 +133,6 @@ export default {
   border-bottom-right-radius: 8px;
   position: absolute;
   width: 315px;
-  height: 410px;
   z-index: 100;
 }
 
@@ -137,14 +144,17 @@ export default {
 
 .nav-down-header {
   border-bottom: 1px solid #ebebeb;
-  cursor: pointer;
   font-size: 14px;
   text-align: center;
   padding: 5px 20px;
 }
 
-.nav-down-header:hover {
+/* .nav-down-header:hover {
   background-color: #f7f7f7;
+} */
+
+.down-list {
+  height: 450px;
 }
 
 .down-wrapper {
