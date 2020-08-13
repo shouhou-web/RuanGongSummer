@@ -45,7 +45,11 @@ export default {
       this.$router.push({ path: "/home/workSpace/myCollection" });
     }
   },
-  components: {}
+  components: {},
+  created() {
+    this.$store.state.hasTeam = false;
+    this.$store.state.nowTeamID = -1;
+  }
 };
 </script>
 

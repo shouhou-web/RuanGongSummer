@@ -8,7 +8,11 @@
 
 <script>
 export default {
-  name: "Trash"
+  name: "Trash",
+  created() {
+    this.$store.state.hasTeam = false;
+    this.$store.state.nowTeamID = -1;
+  }
 };
 </script>
 

@@ -2,6 +2,7 @@
   <div
     class="l-card"
     :class="shadow ? 'is-' + shadow + '-shadow' : 'is-hover-shadow'"
+    @click="toEditor"
   >
     <div class="l-card__top">
       <img :src="selectPath" class="l-card__select" @click="check"></img>
@@ -26,7 +27,7 @@
       src="https://assets.smcdn.cn/static/lizard-service-desktop/assets/doc_160_flat@2x.098efd4b.png"
     />
     <div class="l-card__body" :style="bodyStyle">
-      <slot></slot>
+      {{ title }}
     </div>
   </div>
 </template>
@@ -48,6 +49,15 @@ export default {
       else
         this.selectPath = require("@/assets/icon/card/square.png")
       this.isSelected = !this.isSelected
+    },
+    toEditor() {
+      this.$router.push({
+        path: "/doc",
+        query: {
+          docID: this.ID,
+          docTitle: this.title
+        }
+      });
     }
   },
   props: {
@@ -55,6 +65,8 @@ export default {
     shadow: {
       type: String
     },
+    title: "",
+    ID: ""
   }
 };
 </script>
