@@ -4,7 +4,7 @@
     :class="shadow ? 'is-' + shadow + '-shadow' : 'is-hover-shadow'"
   >
     <div class="l-card__top">
-      <img src="@/assets/icon/card/square.png" class="l-card__select"></img>
+      <img :src="selectPath" class="l-card__select" @click="check"></img>
       <m-nav-dropdown
         position="middle"
         :triColor="tricolor"
@@ -14,11 +14,8 @@
           <img class="l-card__setting" src="@/assets/icon/card/settings.png" />
         </div>
         <div slot="hide">
-          <div class="l-card__hide-main">
-            <my-button type="text" class="l-card__nav-btn">button1</my-button>
-            <my-button type="text" class="l-card__nav-btn">button2</my-button>
-            <my-button type="text" class="l-card__nav-btn">button3</my-button>
-            <my-button type="text" class="l-card__nav-btn">button4</my-button>
+          <div class="l-card__hide-content">
+            <slot name="hide-content"></slot>
           </div>
         </div>
       </m-nav-dropdown>
@@ -39,14 +36,25 @@ export default {
   name: "l-card",
   data() {
     return {
-      tricolor: "#DCDFE6"
+      tricolor: "#DCDFE6",
+      selectPath: require("@/assets/icon/card/square.png"),
+      isSelected: false
     };
+  },
+  methods: {
+    check() {
+      if(!this.isSelected)
+        this.selectPath = require("@/assets/icon/card/square-check.png")
+      else
+        this.selectPath = require("@/assets/icon/card/square.png")
+      this.isSelected = !this.isSelected
+    }
   },
   props: {
     bodyStyle: {},
     shadow: {
       type: String
-    }
+    },
   }
 };
 </script>
@@ -105,7 +113,7 @@ export default {
   margin: 10px 20px;
 }
 
-.l-card__hide-main {
+.l-card__hide-content {
   align-items: center;
   background-color: #fafbfc;
   border: 1px solid #dcdfe6;
