@@ -48,6 +48,7 @@ const routes = [
     path: "/home",
     name: "Home",
     component: Home,
+    redirect: "/home/workSpace",
     children: [
       {
         path: "/home/workSpace",

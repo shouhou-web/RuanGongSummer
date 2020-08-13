@@ -2,7 +2,6 @@
   <div
     class="l-card"
     :class="shadow ? 'is-' + shadow + '-shadow' : 'is-hover-shadow'"
-    @click="toEditor"
   >
     <div class="l-card__top">
       <img :src="selectPath" class="l-card__select" @click="check"></img>
@@ -24,6 +23,7 @@
     <img
       class="l-card__pic"
       alt="Picture Please!"
+      @click="toEditor"
       src="https://assets.smcdn.cn/static/lizard-service-desktop/assets/doc_160_flat@2x.098efd4b.png"
     />
     <div class="l-card__body" :style="bodyStyle">
@@ -68,10 +68,6 @@ export default {
     title: "",
     ID: ""
   },
-  created() {
-    if(this.title.length >= 8)
-      console.log(this.title)
-  }
 };
 </script>
 
@@ -128,6 +124,9 @@ export default {
 
 .l-card__body {
   padding: 5px 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: break-all;
 }
 
 .l-card__hide-content {

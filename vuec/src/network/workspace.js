@@ -9,3 +9,13 @@ export function getMyDocs(userID) {
         method: 'post'
     })
 }
+
+export function getRecentDocs(userID) {
+    return request({
+        url: "/getRecentDocs",
+        params: {
+            userID
+        },
+        method: 'post'
+    })
+}
