@@ -1,19 +1,30 @@
 <template>
-  <div class="l-card" :class="shadow ? 'is-' + shadow + '-shadow' : 'is-hover-shadow'">
-    <m-nav-dropdown position="middle" :triColor="tricolor" class="l-card__nav">
-      <div slot="show">
-        <img class="l-card__setting" src="@/assets/icon/card/settings.png">
-      </div>
-      <div slot="hide">
-        <div class="l-card__hide-main">
-          <my-button type="text" class="l-card__nav-btn">button1</my-button>
-          <my-button type="text" class="l-card__nav-btn">button2</my-button>
-          <my-button type="text" class="l-card__nav-btn">button3</my-button>
-          <my-button type="text" class="l-card__nav-btn">button4</my-button>
+  <div
+    class="l-card"
+    :class="shadow ? 'is-' + shadow + '-shadow' : 'is-hover-shadow'"
+  >
+    <div class="l-card__top">
+      <img :src="selectPath" class="l-card__select" @click="check"></img>
+      <m-nav-dropdown
+        position="middle"
+        :triColor="tricolor"
+        class="l-card__nav"
+      >
+        <div slot="show">
+          <img class="l-card__setting" src="@/assets/icon/card/settings.png" />
         </div>
-      </div>
-    </m-nav-dropdown>
-    <img class="l-card__pic" alt="Picture Please!" src="@/assets/icon/card/doc.png" />
+        <div slot="hide">
+          <div class="l-card__hide-content">
+            <slot name="hide-content"></slot>
+          </div>
+        </div>
+      </m-nav-dropdown>
+    </div>
+    <img
+      class="l-card__pic"
+      alt="Picture Please!"
+      src="https://assets.smcdn.cn/static/lizard-service-desktop/assets/doc_160_flat@2x.098efd4b.png"
+    />
     <div class="l-card__body" :style="bodyStyle">
       <slot></slot>
     </div>
@@ -21,51 +32,74 @@
 </template>
 
 <script>
-  export default {
-    name: 'l-card',
-    data() {
-      return {
-        tricolor: "#DCDFE6"
-      };
+export default {
+  name: "l-card",
+  data() {
+    return {
+      tricolor: "#DCDFE6",
+      selectPath: require("@/assets/icon/card/square.png"),
+      isSelected: false
+    };
+  },
+  methods: {
+    check() {
+      if(!this.isSelected)
+        this.selectPath = require("@/assets/icon/card/square-check.png")
+      else
+        this.selectPath = require("@/assets/icon/card/square.png")
+      this.isSelected = !this.isSelected
+    }
+  },
+  props: {
+    bodyStyle: {},
+    shadow: {
+      type: String
     },
-    props: {
-      bodyStyle: {},
-      shadow: {
-        type: String
-      }
-    },
-  };
+  }
+};
 </script>
-
 
 <style scoped>
 .l-card {
   align-items: center;
   border-radius: 4px;
-  border: 1px solid #C5D9E8;
-  background-color: #FAFBFC;
-  color: #303133;
+  background-color: #rgba(255, 255, 255, 0.8);
+  color: #909399;
   display: flex;
   flex-direction: column;
-  transition: 0.3s;
   overflow: hidden;
-  -webkit-transition: 0.3s;
+  transition: 0.4s;
+}
+
+.l-card:hover {
+  background-color: #e8eef8;
+  box-shadow: 0 2px 12px 0 rgba(3, 65, 165, 0.1);
+  color: #606266;
+  transition: 0.4s;
+}
+
+.l-card:hover .l-card__top {
+  opacity: 1;
+  transition: 0.4s;
 }
 
 .l-card.is-always-shadow,
-.l-card.is-hover-shadow:focus,
-.l-card.is-hover-shadow:hover {
-  -webkit-box-shadow: 0 2px 12px 0 rgba(3, 65, 165, 0.1);
-  box-shadow: 0 2px 12px 0 rgba(3, 65, 165, 0.1);
+.l-card.is-hover-shadow:focus {
 }
 
 .l-card__nav {
-  align-self: flex-end;
   margin-right: 2px;
   margin-top: 2px;
 }
 
 .l-card__setting {
+  height: 18px;
+  width: 18px;
+}
+
+.l-card__select {
+  margin-right: 2px;
+  margin-top: 1px;
   height: 18px;
   width: 18px;
 }
@@ -79,10 +113,10 @@
   margin: 10px 20px;
 }
 
-.l-card__hide-main {
+.l-card__hide-content {
   align-items: center;
-  background-color: #FAFBFC;
-  border: 1px solid #DCDFE6;
+  background-color: #fafbfc;
+  border: 1px solid #dcdfe6;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -90,13 +124,21 @@
 }
 
 .l-card__nav-btn {
-  color: #3F536E;
+  color: #3f536e;
   padding: 10px 20px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
 .l-card__nav-btn:hover {
-  color: #3F536E;
+  color: #3f536e;
+}
+
+.l-card__top {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  opacity: 0;
+  width: 100%;
 }
 </style>

@@ -1,13 +1,21 @@
 <template>
   <div>
-    <div id="show" class="nav--show">
+    <div @mouseenter="show" class="m-nav--show">
       <slot name="show"></slot>
     </div>
     <!-- 隐藏层 -->
-    <div id="hide" class="nav--hide" :style="{ 'margin-left': mlAll }">
+    <div
+      class="m-nav--hide"
+      :style="{
+        'margin-left': mlAll
+      }"
+    >
       <div
-        class="nav__triangle"
-        :style="{ 'margin-left': mlTri, 'border-bottom-color': triColor }"
+        class="m-nav__triangle"
+        :style="{
+          'margin-left': mlTri,
+          'border-bottom-color': triColor
+        }"
       ></div>
       <slot name="hide"></slot>
     </div>
@@ -29,38 +37,57 @@ export default {
   },
   data() {
     return {
-      mlAll: 0, // 隐藏层移动
-      mlTri: 0 // 三角移动
+      mlAll: 0,
+      mlTri: 0
     };
   },
-  mounted() {
-    let show = document.getElementById("show").offsetWidth;
-    let hide = document.getElementById("hide").offsetWidth;
-    if (this.position == "middle") {
-      this.mlAll = "-" + (hide / 2 - show / 2) + "px";
-    } else if (this.position == "right") {
-      this.mlAll = "-" + (hide / 3 - show / 2) + "px";
-      this.mlTri = "-" + (hide / 2 - show / 2) + "px";
-    } else if (this.position == "left") {
-      this.mlAll = "-" + ((hide * 2) / 3 - show / 2) + "px";
-      this.mlTri = -show / 2 + hide / 2 + "px";
+  computed: {
+    // hide() {
+    //   console.log("hide");
+    //   return document.getElementById("hide");
+    // },
+    // show() {
+    //   console.log("show");
+    //   return document.getElementById("show");
+    // }
+  },
+  methods: {
+    show() {
+      let showList = document.getElementsByClassName("m-nav--show");
+      let hideList = document.getElementsByClassName("m-nav--hide");
+      let show = 0,
+        hide = 0;
+      for (let i = 0; i < showList.length; i++) {
+        if (hideList[i].offsetWidth > 0) {
+          show = showList[i].offsetWidth;
+          hide = hideList[i].offsetWidth;
+        }
+      }
+      console.log(hide, show);
+      if (this.position == "middle") {
+        this.mlAll = -(hide / 2 - show / 2) + "px";
+      } else if (this.position == "right") {
+        this.mlAll = -(hide / 3 - show / 2) + "px";
+        this.mlTri = -(hide / 2 - show / 2) + "px";
+      } else if (this.position == "left") {
+        this.mlAll = -((hide * 2) / 3 - show / 2) + "px";
+        this.mlTri = -show / 2 + hide / 2 + "px";
+      }
+      console.log(this.mlTri, this.mlAll);
     }
-    console.log(this.mlTri);
   }
 };
 </script>
 
 <style>
-.nav--hide {
-  display: flex;
+.m-nav--hide {
+  display: none;
   align-items: center;
-  opacity: 0;
   flex-direction: column;
   position: absolute;
-  z-index: -628;
 }
 
-.nav__triangle {
+.m-nav__triangle {
   border: 8px solid;
   border-top-color: transparent;
   border-right-color: transparent;
@@ -69,19 +96,18 @@ export default {
 }
 
 /* ---------------隐藏层动效---------------- */
-.nav--hide:hover,
-.nav--show:hover + .nav--hide {
+.m-nav--hide:hover,
+.m-nav--show:hover + .m-nav--hide {
+  display: flex;
   animation: slowin 0.5s ease forwards;
 }
 
 @keyframes slowin {
   0% {
     opacity: 0;
-    z-index: 628;
   }
   100% {
     opacity: 1;
-    z-index: 628;
   }
 }
 </style>
