@@ -23,22 +23,22 @@ export function searchTeam(userID,searchText) {
   });
 }
 
-export function searchTeamMember(TeamID,searchText) {
+export function searchTeamMember(teamID,searchText) {
   return request({
     url: "/searchTeamMember",
     params: {
-      TeamID,
+      teamID,
       searchText
     },
     method: "post"
   });
 }
 
-export function searchOutsideUser(TeamID,searchText) {
+export function searchOutsideUser(teamID,searchText) {
   return request({
-    url: "/searchOutsideUser",
+    url: "/searchOutSideUser",
     params: {
-      TeamID,
+      teamID,
       searchText
     },
     method: "post"

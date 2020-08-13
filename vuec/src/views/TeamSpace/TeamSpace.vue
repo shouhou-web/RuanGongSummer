@@ -9,7 +9,7 @@
         <div slot="show">
           <img class="l-card__setting" src="@/assets/image/teamopt.svg">
         </div>
-        <div slot="hide" v-if="chosenPos != -1" style="border: 1px solid #ececec;border-radius: 5px">
+        <div slot="hide" v-if="chosenPos != -1" style="border: 1px solid #ececec;border-radius: 5px;width: 200px;background-color: white">
           <div class="l-card__hide-main">
             <my-button type="text"
                        class="l-card__nav-btn"
@@ -23,21 +23,12 @@
                        class="l-card__nav-btn"
                        @click="readyToCooperate"
                        v-if="iden == 2">协作权限</my-button>
-            <m-nav-dropdown>
-              <div slot="show">
-                <my-button type="text"
-                           class="l-card__nav-btn">搜索</my-button>
-              </div>
-              <div slot="hide" style="border: 1px solid #ececec;border-radius: 5px;background-color: white;">
-                <my-button type="text"
-                           class="l-card__nav-btn"
-                           @click="readyTosearch_0">搜索并邀请</my-button>
-                <my-button type="text"
-                           class="l-card__nav-btn"
-                           @click="readyTosearch_1">搜索团队成员</my-button>
-              </div>
-            </m-nav-dropdown>
-
+            <my-button type="text"
+                       class="l-card__nav-btn"
+                       @click="readyTosearch_0">搜索并邀请</my-button>
+            <my-button type="text"
+                       class="l-card__nav-btn"
+                       @click="readyTosearch_1">搜索团队成员</my-button>
           </div>
         </div>
         <input/>
@@ -131,20 +122,46 @@
     </m-hover>
 
     <m-hover :on-show="openSearch"
-             title="搜索用户"
+             :title="searchTitle"
              cancel-btn="X"
              @cancel="cancelSearch"
              style="font-family: 'JetBrains Mono'">
       <div class="userSearch">
-        <input class="cooperation-search" v-model="searchMsg" placeholder="    输入用户名称/邮箱"></input>
+        <!-- 0-邀请 1-查找-->
+        <input class="cooperation-search" v-model="searchOutsideMsg" placeholder="    输入用户名称/邮箱：0" v-if="searchType == 0"></input>
+        <input class="cooperation-search" v-model="searchMemberMsg" placeholder="    输入用户名称/邮箱：1" v-if="searchType == 1"></input>
+
         <div class="userRes">
           <div class="member-header">
             <div class="member-name-header">搜索结果</div>
           </div>
-          <div class="member-header" v-for="(userRes,resIndex) in searchRes" :key="resIndex">
-            <div class="member-name-main">{{userRes.name}}</div>
-            <div class="member-email-main">18373xxx@buaa.edu.cn</div>
+
+          <!--TODO:添加分类-->
+          <div class="member-header" v-for="(userRes,resIndex) in searchRes" :key="resIndex" v-if="searchType == 0">
+            <div class="member-name-main">{{userRes.userName}}</div>
+            <div class="member-email-main">{{userRes.emailAddress}}</div>
             <div></div>
+          </div>
+          <div class="member-header" v-for="(userRes,resIndex) in searchRes" :key="resIndex" v-if="searchType == 1">
+            <div class="member-name-main">{{userRes.userName}}</div>
+            <div class="member-email-main">{{userRes.emailAddress}}</div>
+            <div class="member-iden-main">
+              <div v-if="userRes.userIdentity == 1">
+                <my-button size="mini" type="success">管理员</my-button>
+              </div>
+              <div v-if="userRes.userIdentity == 2">
+                <my-button size="mini" type="primary">创建人</my-button>
+              </div>
+              <my-button size="mini"
+                         type="text-danger"
+                         v-if="userRes.userIdentity == 1"
+                         @click="setUserIden(userRes.userID,TeamID,0)"
+                         style="margin-left: 5px">- 取消管理权限</my-button>
+              <my-button size="mini"
+                         type="text"
+                         v-if="userRes.userIdentity == 0"
+                         @click="setUserIden(userRes.userID,TeamID,1)">+ 添加管理权限</my-button>
+            </div>
           </div>
         </div>
       </div>
@@ -179,11 +196,13 @@ export default {
       isQuit: false,
       isDisband: false,
       openCooperation: false,
-      searchMsg: '',
+      searchMemberMsg: '',
+      searchOutsideMsg: '',
       searchRes: '',
       showRes: false,
       openSearch: false,
       searchType: 0,//0 搜非团队成员，1 搜团队成员
+      searchTitle: ''
     }
   },
   components: {
@@ -281,10 +300,12 @@ export default {
     readyTosearch_0() {
       this.openSearch = true;
       this.searchType = 0;
+      this.searchTitle = "搜索/邀请用户"
     },
     readyTosearch_1() {
       this.openSearch = true;
       this.searchType = 1;
+      this.searchTitle = "搜索团队成员"
     },
     cancelSearch() {
       this.openSearch = false;
@@ -351,11 +372,20 @@ export default {
 
       this.$store.commit("setTeamID",this.TeamID);
     },
-    searchMsg() {
-      console.log('changed');
-      searchAll("user",this.searchMsg)
+    searchMemberMsg() {
+      searchTeamMember(this.TeamID,this.searchMemberMsg)
         .then(res => {
-          console.log(res);
+          console.log('member',res);
+          this.searchRes = res;
+        })
+        .catch(err => {
+          this.$notify.error("请检查网络，查找失败");
+        })
+    },
+    searchOutsideMsg() {
+      searchOutsideUser(this.TeamID,this.searchOutsideMsg)
+        .then(res => {
+          console.log('outside',res);
           this.searchRes = res;
         })
         .catch(err => {
@@ -565,11 +595,10 @@ export default {
 }
 
 .l-card__hide-main {
-  align-items: center;
+  margin: auto;
   background-color: #FAFBFC;
   display: flex;
   flex-direction: column;
-  width: 110px;
 }
 
 .l-card__nav-btn {

@@ -3,7 +3,7 @@
     <div class="my-team-details">
       <div class="team-docs">
         <div class="doc" v-for="(adoc,docIndex) in docs" :key="docIndex">
-          <l-card>{{adoc.docTitle}}</l-card>
+          <l-card :title="adoc.docTitle" :i-d="adoc.docId"></l-card>
         </div>
       </div>
     </div>
