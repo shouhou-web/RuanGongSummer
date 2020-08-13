@@ -67,6 +67,10 @@ export default {
     },
     title: "",
     ID: ""
+  },
+  created() {
+    if(this.title.length >= 8)
+      console.log(this.title)
   }
 };
 </script>
@@ -81,6 +85,7 @@ export default {
   flex-direction: column;
   overflow: hidden;
   transition: 0.4s;
+  width: 120px;
 }
 
 .l-card:hover {
@@ -122,7 +127,7 @@ export default {
 }
 
 .l-card__body {
-  margin: 10px 20px;
+  padding: 5px 20px;
 }
 
 .l-card__hide-content {

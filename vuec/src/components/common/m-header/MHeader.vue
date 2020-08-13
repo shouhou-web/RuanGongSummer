@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="nav" :style="{'background-color':bgColor}">
+    <div class="nav" :style="{ 'background-color': bgColor }">
       <div class="wrap">
         <div class="nav-left">
           <slot name="left"></slot>
@@ -19,7 +19,7 @@ export default {
   props: {
     bgColor: {
       type: String,
-      default: "var(--color-main)"
+      default: "var(--color-main)",
     },
   },
 };
@@ -41,10 +41,11 @@ export default {
 }
 
 .nav-left,
-.nav-right{
+.nav-right {
   align-items: center;
   display: flex;
   height: 36px;
+  justify-content: flex-end;
 }
 
 .nav-left {
