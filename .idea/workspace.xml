@@ -30,6 +30,8 @@
   <component name="ChangeListManager">
     <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/network/search.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/network/search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -294,7 +296,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597308555239</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="向store中加入了search">
+      <created>1597311561336</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1597311561336</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,7 +377,8 @@
     <MESSAGE value="TeamSpace 协作起步" />
     <MESSAGE value="TeamSpace 协作API编写" />
     <MESSAGE value="向store中加入了hasTeam:Boolean" />
-    <option name="LAST_COMMIT_MESSAGE" value="向store中加入了hasTeam:Boolean" />
+    <MESSAGE value="向store中加入了search" />
+    <option name="LAST_COMMIT_MESSAGE" value="向store中加入了search" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-735" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1596358814923">

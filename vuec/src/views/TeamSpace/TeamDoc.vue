@@ -38,7 +38,7 @@ export default {
       //this.$router.push({path: "/home/teamSpace?teamID=1"})
       getTeamDocs(this.TeamID)
         .then(docs => {
-          // console.log('docs',docs);
+          console.log('docs',docs);
           this.docs = docs;
         })
         .catch(err => {
