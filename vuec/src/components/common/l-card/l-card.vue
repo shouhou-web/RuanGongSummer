@@ -130,13 +130,10 @@ export default {
 }
 
 .l-card__hide-content {
-  align-items: center;
   background-color: #fafbfc;
   border: 1px solid #dcdfe6;
   border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  width: 110px;
+  width: 130px;
 }
 
 .l-card__nav-btn {
