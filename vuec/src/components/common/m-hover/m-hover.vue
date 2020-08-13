@@ -4,17 +4,17 @@
     <div :class="[onShow ? '' : 'hide']" @click="cancel" class="mask"></div>
     <div :class="[onShow ? 'show' : 'hide']">
       <div class="wrapper">
-        <div class="title">
+        <div v-if="title" class="title">
           {{ title }}
         </div>
         <div class="main">
           <slot></slot>
         </div>
         <div class="footer">
-          <my-button @click="submit" size="small">
+          <my-button v-if="assureBtn" @click="submit" size="small">
             {{ assureBtn }}
           </my-button>
-          <my-button @click="cancel" type="info" size="small">
+          <my-button v-if="cancelBtn" @click="cancel" type="info" size="small">
             {{ cancelBtn }}
           </my-button>
         </div>
@@ -31,9 +31,18 @@ export default {
       type: Boolean,
       default: false
     },
-    title: String, // 标题
-    assureBtn: String, // 确定按钮文字
-    cancelBtn: String // 取消按钮文字
+    title: {
+      type: String,
+      default: null
+    }, // 标题
+    assureBtn: {
+      type: String,
+      default: null
+    }, // 确定按钮文字
+    cancelBtn: {
+      type: String,
+      default: null
+    } // 取消按钮文字
   },
   methods: {
     submit() {
