@@ -20,8 +20,8 @@
       <template v-slot:right>
         <div>
           <div class="nav-right-item" v-if="token">
-            <!-- 头像 -->
             <app-search></app-search>
+            <!-- 头像 -->
             <div class="item">
               <div class="mini-avator">
                 <img class="mini-avator__inner" :src="user.imagePath" alt="" />
@@ -117,10 +117,21 @@
                   <div class="triangle"></div>
                 </div>
                 <ul class="">
-                  <li>回复我的</li>
-                  <li>@我的</li>
-                  <li>收到的赞</li>
-                  <li>系统通知</li>
+                  <li>
+                    <router-link :to="{ path: '/message' }">
+                      加入申请
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ path: '/message/application' }">
+                      团队邀请
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ path: '/message/system' }">
+                      系统通知
+                    </router-link>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -166,10 +177,10 @@ export default {
   computed: {
     token() {
       if (sessionStorage.getItem("user") != null) {
-        console.log("我执行了", sessionStorage.getItem("user"));
+        // console.log("我执行了", sessionStorage.getItem("user"));
         this.$store.commit("login", JSON.parse(sessionStorage.getItem("user")));
       }
-      console.log(this.$store.state.token);
+      // console.log(this.$store.state.token);
       return this.$store.state.token;
     }
   },

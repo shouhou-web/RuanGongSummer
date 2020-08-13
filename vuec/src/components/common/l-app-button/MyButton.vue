@@ -2,16 +2,20 @@
   <button
     class="l-button"
     @click="handleClick"
-    :disabled="disabled"
+    :disabled="disabled || countFlag"
     :autofocus="autofocus"
     :type="nativeType"
-    :style="{'color': color, 'background-color': bgColor, 'border-color': bdColor}"
+    :style="{
+      'color': color,
+      'background-color': bgColor,
+      'border-color': bdColor
+    }"
     :class="[
       type ? 'l-button--' + type : '',
       size ? 'l-button--' + size : '',
       {
-        'is-active' : active,
-        'is-disabled': disabled,
+        'is-active': active,
+        'is-disabled': disabled || countFlag,
         'is-loading': loading,
         'is-round': round,
         'is-circle': circle
@@ -20,6 +24,7 @@
   >
     <i class="el-icon-loading" v-if="loading"></i>
     <i :class="icon" v-if="icon && !loading"></i>
+    <span v-if="countFlag"> {{ countNum }}s </span>
     <span v-if="$slots.default">
       <slot></slot>
     </span>
@@ -33,44 +38,74 @@ export default {
   props: {
     type: {
       type: String,
-      default: "default",
+      default: "default"
     },
     size: String,
     icon: {
       type: String,
-      default: "",
+      default: ""
     },
     nativeType: {
       type: String,
-      default: "button",
+      default: "button"
     },
     color: {
       type: String,
-      default: "",
+      default: ""
     },
     bgColor: {
       type: String,
-      default: "",
+      default: ""
     },
     bdColor: {
       type: String,
-      default: "",
+      default: ""
     },
     active: {
       type: Boolean,
-      default: false,
+      default: false
     },
     loading: Boolean,
     disabled: Boolean,
     autofocus: Boolean,
     round: Boolean,
     circle: Boolean,
+    count: {
+      type: Number,
+      default: 0
+    }
+  },
+
+  data() {
+    return {
+      countNum: {
+        type: Number,
+        default: 0
+      },
+      countFlag: false,
+      timer: null
+    };
   },
 
   methods: {
     handleClick(evt) {
+      if (this.type === "timer") this.Timer();
       this.$emit("click", evt);
     },
+    Timer() {
+      this.countNum = this.count;
+      this.countFlag = !this.countFlag;
+      this.timer = setInterval(() => {
+        if (this.countNum > 0 && this.countNum <= this.count) {
+          this.countNum--;
+          console.log(this.countNum);
+        } else {
+          clearInterval(this.timer);
+          this.timer = null;
+          this.countFlag = false;
+        }
+      }, 1000);
+    }
   },
 };
 </script>
@@ -478,16 +513,78 @@ export default {
   border-color: #c5daeb;
 }
 
-.l-button--medium {
-  padding: 10px 20px;
-  font-size: 14px;
-  border-radius: 4px;
+.l-button--timer {
+  color: #fff;
+  background-color: #bfc5c9;
+  border-color: #bfc5c9;
 }
 
-.l-button--mini,
+.l-button--timer:hover {
+  color: #fff;
+  border-color: #bfc5c9;
+  box-shadow: 2px 2px 5px 1px rgba(177, 179, 180, 0.5);
+  transition: 0.5s;
+}
+
+.l-button--timer.is-active {
+  color: #fff;
+  border-color: #bfc5c9;
+  box-shadow: 2px 2px 5px 1px rgba(177, 179, 180, 0.5);
+  transition: 0.5s;
+}
+
+.l-button--timer:active {
+  outline: 0;
+}
+
+.l-button--timer::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: radial-gradient(
+    circle,
+    rgb(169, 177, 182) 10%,
+    transparent 10%
+  );
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform 0.4s, opacity 1s;
+}
+
+.l-button--timer:active::after {
+  opacity: 0.3;
+  transform: scale(0, 0);
+  transition: 0s;
+}
+
+.l-button--timer.is-disabled,
+.l-button--timer.is-disabled:active,
+.l-button--timer.is-disabled:focus,
+.l-button--timer.is-disabled:hover {
+  color: #fff;
+  background-color: #e0e6eb;
+  border-color: #e0e6eb;
+}
+
+.l-button--medium {
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 10px 15px;
+}
+
 .l-button--small {
   font-size: 12px;
   border-radius: 3px;
+}
+
+.l-button--mini {
+  border-radius: 3px;
+  font-size: 10px;
 }
 
 .l-button--medium.is-round {
@@ -500,7 +597,7 @@ export default {
 
 .l-button--small,
 .l-button--small.is-round {
-  padding: 9px 15px;
+  padding: 9px 13px;
 }
 
 .l-button--small.is-circle {
@@ -509,7 +606,7 @@ export default {
 
 .l-button--mini,
 .l-button--mini.is-round {
-  padding: 7px 15px;
+  padding: 7px 10px;
 }
 
 .l-button--mini.is-circle {
@@ -525,14 +622,14 @@ export default {
 }
 
 .l-button--text:hover {
-  color: #2C405A;
+  color: #2c405a;
   border-color: transparent;
   background-color: transparent;
 }
 
 .l-button--text.is-active,
 .l-button--text:active {
-  color: #2C405A;
+  color: #2c405a;
   border-color: transparent;
   background-color: transparent;
 }

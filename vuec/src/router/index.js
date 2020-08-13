@@ -16,17 +16,23 @@ const EditProfile = () => import("views/Profile/EditProfile.vue");
 // 工作台二级导航栏
 const WorkSpace = () => import("views/Home/WorkSpace/WorkSpace.vue");
 const TeamSpace = () => import("views/TeamSpace/TeamSpace.vue");
-const TeamDoc = () => import("views/TeamSpace/TeamDoc.vue");
 
 const Recent = () => import("views/Home/WorkSpace/Recent/Recent.vue"); // 最近浏览界面
 const IMade = () => import("views/Home/WorkSpace/IMade/IMade.vue"); // 我的创建界面
 const MyCollection = () =>
   import("views/Home/WorkSpace/MyCollection/MyCollection.vue"); // 我的收藏界面
 
-const Trash = () => import("views/Home/Trash/Trash.vue"); // 回收站界面
+// 回收站界面
+const Trash = () => import("views/Home/Trash/Trash.vue");
 
 // 文档编辑
 const Doc = () => import("views/Doc/Doc.vue");
+
+// 消息组件
+const Message = () => import("views/Message/Message.vue");
+const Invitation = () => import("views/Message/Invitation.vue");
+const Application = () => import("views/Message/Application.vue");
+const System = () => import("views/Message/System.vue");
 
 //1.安装插件
 Vue.use(VueRouter);
@@ -113,6 +119,33 @@ const routes = [
     path: "/doc",
     name: "Doc",
     component: Doc
+  },
+  {
+    path: "/message",
+    name: "Message",
+    component: Message,
+    children: [
+      {
+        path: "/",
+        // redirect重定向
+        redirect: "/message/application"
+      },
+      {
+        path: "/message/application",
+        name: "Application",
+        component: Application
+      },
+      {
+        path: "/message/invitation",
+        name: "Invitation",
+        component: Invitation
+      },
+      {
+        path: "/message/system",
+        name: "System",
+        component: System
+      }
+    ]
   }
 ];
 

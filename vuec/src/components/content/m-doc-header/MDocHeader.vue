@@ -2,11 +2,9 @@
   <div>
     <m-header bgColor="#f7f7f7">
       <template v-slot:left>
-        <m-nav-dropdown position="left">
-          <template v-slot:show>
-            <my-button size="small">快速跳转</my-button>
-          </template>
-          <template v-slot:hide>
+        <m-nav-dropdown position="middle">
+          <my-button slot="show" size="small">快速跳转</my-button>
+          <div slot="hide">
             <div class="back-item">
               <div class="back-header">
                 返回到
@@ -30,7 +28,7 @@
                 <div class="back-a__title">{{ item.docTitle }}</div>
               </a>
             </div>
-          </template>
+          </div>
         </m-nav-dropdown>
 
         <!-- 标题 -->
