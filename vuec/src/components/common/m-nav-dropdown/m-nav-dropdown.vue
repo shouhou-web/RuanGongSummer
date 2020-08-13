@@ -5,7 +5,10 @@
     </div>
     <!-- 隐藏层 -->
     <div id="hide" class="nav--hide" :style="{ 'margin-left': mlAll }">
-      <div class="nav__triangle" :style="{ 'margin-left': mlTri }"></div>
+      <div
+        class="nav__triangle"
+        :style="{ 'margin-left': mlTri, 'border-bottom-color': triColor }"
+      ></div>
       <slot name="hide"></slot>
     </div>
   </div>
@@ -15,6 +18,10 @@
 export default {
   name: "MNavDropDown",
   props: {
+    triColor: {
+      type: String,
+      default: "#fff"
+    },
     position: {
       type: String,
       default: "middle"
@@ -54,7 +61,7 @@ export default {
 }
 
 .nav__triangle {
-  border: 8px solid #fff;
+  border: 8px solid;
   border-top-color: transparent;
   border-right-color: transparent;
   border-left-color: transparent;
