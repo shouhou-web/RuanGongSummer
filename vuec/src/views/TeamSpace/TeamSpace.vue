@@ -9,7 +9,7 @@
         <div slot="show">
           <img class="l-card__setting" src="@/assets/image/teamopt.svg">
         </div>
-        <div slot="hide" v-if="chosenPos != -1" style="border: 1px solid #ececec;border-radius: 5px;width: 200px;background-color: white">
+        <div slot="hide" v-if="chosenPos != -1" style="border: 1px solid #ececec;border-radius: 5px;background-color: white">
           <div class="l-card__hide-main">
             <my-button type="text"
                        class="l-card__nav-btn"
@@ -68,7 +68,6 @@
         注意：解散该团体后，所有团队文件将彻底销毁
       </div>
     </m-hover>
-
     <m-hover :on-show="openCooperation"
              :title="'团队协作:' + TeamName"
              cancel-btn="X"
@@ -120,7 +119,6 @@
         </div>
       </div>
     </m-hover>
-
     <m-hover :on-show="openSearch"
              :title="searchTitle"
              cancel-btn="X"
@@ -172,6 +170,7 @@
         <TeamDoc v-bind:TeamID="TeamID" class="fade-in"></TeamDoc>
       </transition>
     </div>
+
   </div>
 </template>
 
@@ -289,6 +288,11 @@ export default {
         .then(res => {
           if (res == 0) {
             this.$notify.success("权限已修改");
+            getTeamMembers(teamID)
+              .then(res => {
+                console.log(res);
+                this.members = res;
+              })
           } else {
             this.$notify.error("出现错误，请检查网络，权限修改失败");
           }
@@ -330,7 +334,8 @@ export default {
           this.$store.commit("setHasTeam",false);
         else {
           this.$store.commit("setHasTeam",true);
-          this.chosenPos = res[0].teamID;
+          // this.chosenPos = res[0].teamID;
+          this.chooseTeam(res[0].teamID,res[0].teamName);
         }
       })
       .catch(err => {
@@ -615,7 +620,9 @@ export default {
 }
 
 .opt{
-  margin-left: 95%;
+  position: absolute;
+  margin-left: 57%;
+  margin-top: 8px;
   height: 10px;
 }
 
