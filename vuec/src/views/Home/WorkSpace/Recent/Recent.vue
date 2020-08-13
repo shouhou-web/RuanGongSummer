@@ -1,17 +1,23 @@
 <template>
+<div>
   <div class="docs">
-    <l-card class="doc">Title here</l-card>
-    <l-card class="doc">Title here</l-card>
-    <l-card class="doc">Title here</l-card>
-    <l-card class="doc">Title here</l-card>
+
   </div>
+</div>
 </template>
 
 <script>
+import { getFavoriteDocs } from "../../../../network/workspace.js";
 
 export default {
   name: "Recent",
-  components: {
+  data() {
+    return {
+
+    };
+  },
+  created() {
+
   }
 };
 </script>

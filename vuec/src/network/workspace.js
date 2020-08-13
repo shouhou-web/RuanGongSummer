@@ -9,3 +9,13 @@ export function getMyDocs(userID) {
         method: 'post'
     })
 }
+
+export function getFavoriteDocs(userID) {
+    return request({
+        url: "/getFavoriteDocs",
+        params: {
+            userID
+        },
+        method: 'post'
+    })
+}
