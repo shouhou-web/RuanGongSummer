@@ -28,11 +28,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/network/search.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/network/search.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" afterDir="false" />
-    </list>
+    <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -302,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597311561336</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="l-card使用，团队空间搜索完善">
+      <created>1597321831903</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1597321831903</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -377,7 +380,8 @@
     <MESSAGE value="TeamSpace 协作API编写" />
     <MESSAGE value="向store中加入了hasTeam:Boolean" />
     <MESSAGE value="向store中加入了search" />
-    <option name="LAST_COMMIT_MESSAGE" value="向store中加入了search" />
+    <MESSAGE value="l-card使用，团队空间搜索完善" />
+    <option name="LAST_COMMIT_MESSAGE" value="l-card使用，团队空间搜索完善" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-735" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1596358814923">

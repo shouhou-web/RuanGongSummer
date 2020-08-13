@@ -80,7 +80,7 @@
         </div>
         <div class="member-header" v-for="(member,memberIndex) in members" :key="memberIndex">
           <div class="member-name-main">{{member.userName}}</div>
-          <div class="member-email-main">18373xxx@buaa.edu.cn</div>
+          <div class="member-email-main">{{member.emailAddress}}</div>
           <div class="member-iden-main">
             <div v-if="member.userIdentity == 1">
               <my-button size="mini" type="success">管理员</my-button>
@@ -103,7 +103,7 @@
         </div>
         <div class="member-header" v-for="(member,memberIndex) in members" :key="memberIndex">
           <div class="member-name-main" v-if="member.userIdentity > 0">{{member.userName}}</div>
-          <div class="member-email-main" v-if="member.userIdentity > 0">18373xxx@buaa.edu.cn</div>
+          <div class="member-email-main" v-if="member.userIdentity > 0">{{member.emailAddress}}</div>
           <div class="member-iden-main" v-if="member.userIdentity > 0">
             <div v-if="member.userIdentity == 1">
               <my-button size="mini" type="success">管理员</my-button>
@@ -128,8 +128,8 @@
              style="font-family: 'JetBrains Mono'">
       <div class="userSearch">
         <!-- 0-邀请 1-查找-->
-        <input class="cooperation-search" v-model="searchOutsideMsg" placeholder="    输入用户名称/邮箱：0" v-if="searchType == 0"></input>
-        <input class="cooperation-search" v-model="searchMemberMsg" placeholder="    输入用户名称/邮箱：1" v-if="searchType == 1"></input>
+        <input class="cooperation-search" v-model="searchOutsideMsg" placeholder="    输入用户名称/邮箱" v-if="searchType == 0"></input>
+        <input class="cooperation-search" v-model="searchMemberMsg" placeholder="    输入用户名称/邮箱" v-if="searchType == 1"></input>
 
         <div class="userRes">
           <div class="member-header">
