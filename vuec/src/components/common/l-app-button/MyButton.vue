@@ -6,7 +6,7 @@
     :autofocus="autofocus"
     :type="nativeType"
     :style="{
-      'color': color,
+      color: color,
       'background-color': bgColor,
       'border-color': bdColor
     }"
@@ -106,7 +106,7 @@ export default {
         }
       }, 1000);
     }
-  },
+  }
 };
 </script>
 
@@ -638,5 +638,66 @@ export default {
 .l-button--text.is-disabled:focus,
 .l-button--text.is-disabled:hover {
   border-color: transparent;
+}
+
+.l-button--text-danger {
+  border-color: transparent;
+  color: #f56c6c;
+  background: 0 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.l-button--text-danger:hover {
+  color: #f56c6c;
+  border-color: transparent;
+  background-color: transparent;
+  box-shadow: 2px 2px 5px 1px rgba(223, 103, 55, 0.4);
+  transition: 0.5s;
+}
+
+.l-button--text-danger.is-active {
+  color: #fff;
+  border-color: #f56c6c;
+  box-shadow: 2px 2px 5px 1px rgba(241, 125, 78, 0.4);
+  transition: 0.5s;
+}
+
+.l-button--text-danger:active {
+  outline: 0;
+}
+
+.l-button--text-danger::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: radial-gradient(
+    circle,
+    rgb(206, 48, 8) 10%,
+    transparent 10%
+  );
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform 0.4s, opacity 1s;
+}
+
+.l-button--text-danger:active::after {
+  opacity: 0.3;
+  transform: scale(0, 0);
+  transition: 0s;
+}
+
+.l-button--text-danger.is-disabled,
+.l-button--text-danger.is-disabled:active,
+.l-button--text-danger.is-disabled:focus,
+.l-button--text-danger.is-disabled:hover {
+  color: #fff;
+  background-color: #fab6b6;
+  border-color: #fab6b6;
 }
 </style>

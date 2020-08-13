@@ -104,7 +104,11 @@
       <div class="hover-text">
         请输入新建文档的名称：
       </div>
-      <input class="hover-input" placeholder="请输入文件名" v-model="teamName" />
+      <input
+        class="hover-input"
+        placeholder="请输入文件名"
+        v-model="teamName"
+      />
     </m-hover>
   </div>
 </template>
