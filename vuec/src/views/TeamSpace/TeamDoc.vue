@@ -3,7 +3,16 @@
     <div class="my-team-details">
       <div class="team-docs">
         <div class="doc" v-for="(adoc,docIndex) in docs" :key="docIndex">
-          <l-card :title="adoc.docTitle" :i-d="adoc.docId"></l-card>
+          <l-card :title="adoc.docTitle" :i-d="adoc.docId">
+            <div slot="hide-content">
+              <div style="display: flex;flex-direction: column;">
+                <my-button size="small" style="margin: 5px">删除</my-button>
+                <my-button size="small" style="margin: 5px">重命名</my-button>
+                <my-button size="small" style="margin: 5px">收藏</my-button>
+                <my-button size="small" style="margin: 5px">分享</my-button>
+              </div>
+            </div>
+          </l-card>
         </div>
       </div>
     </div>
