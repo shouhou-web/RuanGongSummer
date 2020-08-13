@@ -70,7 +70,7 @@
     </m-hover>
 
     <m-hover :on-show="openCooperation"
-             :title="'团队协助:' + TeamName"
+             :title="'团队协作:' + TeamName"
              cancel-btn="X"
              @cancel="cancelCooperate"
              style="font-family: 'JetBrains Mono'">
@@ -140,7 +140,7 @@
           <div class="member-header" v-for="(userRes,resIndex) in searchRes" :key="resIndex" v-if="searchType == 0">
             <div class="member-name-main">{{userRes.userName}}</div>
             <div class="member-email-main">{{userRes.emailAddress}}</div>
-            <div></div>
+            <my-button type="info" size="mini" style="height: 25px;margin-left: 100px">邀请</my-button>
           </div>
           <div class="member-header" v-for="(userRes,resIndex) in searchRes" :key="resIndex" v-if="searchType == 1">
             <div class="member-name-main">{{userRes.userName}}</div>
@@ -328,8 +328,10 @@ export default {
         // this.chosenPos = res[0].teamID;
         if (this.myTeams.length == 0)
           this.$store.commit("setHasTeam",false);
-        else
+        else {
           this.$store.commit("setHasTeam",true);
+          this.chosenPos = res[0].teamID;
+        }
       })
       .catch(err => {
         this.$message.error("请检查网络 - 暂时无法获取你的团队")
