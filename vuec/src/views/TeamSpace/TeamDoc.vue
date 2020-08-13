@@ -21,6 +21,7 @@ export default {
     return {
       teamID: '',
       docs: '',
+      docstyle: 0
     }
   },
   props: {
