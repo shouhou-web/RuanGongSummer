@@ -35,6 +35,7 @@
         </div>
       </div>
     </div>
+
 <!--    <div class="member-iden" :class="{'member-iden&#45;&#45;member':(iden == 0),'member-iden&#45;&#45;manager':(iden == 1),'member-iden&#45;&#45;creater':(iden == 2)}">-->
 <!--      {{iden_message}}-->
 <!--    </div>-->
@@ -69,7 +70,7 @@
       <div class="cooperation-search"></div>
       <div class="cooperation-member">
         <div class="member-header">
-          <div class="member-name-header">团队组员名称</div>
+          <div class="member-name-header">团队组员</div>
         </div>
         <div class="member-header" v-for="(member,memberIndex) in members" :key="memberIndex">
           <div class="member-name-main">{{member.userName}}</div>
@@ -79,7 +80,7 @@
               <my-button size="small" type="success">管理员</my-button>
             </div>
             <div v-if="member.userIdentity == 2">
-              <my-button size="mini" type="info">创建人</my-button>
+              <my-button size="mini" type="primary">创建人</my-button>
             </div>
             <my-button size="small"
                        type="text"
@@ -92,7 +93,7 @@
       </div>
       <div class="cooperation-admin">
         <div class="member-header">
-          <div class="member-name-header">管理员名称</div>
+          <div class="member-name-header">管理员</div>
         </div>
         <div class="member-header" v-for="(member,memberIndex) in members" :key="memberIndex">
           <div class="member-name-main" v-if="member.userIdentity > 0">{{member.userName}}</div>
@@ -102,7 +103,7 @@
               <my-button size="small" type="success">管理员</my-button>
             </div>
             <div v-if="member.userIdentity == 2">
-              <my-button size="mini" type="info">创建人</my-button>
+              <my-button size="mini" type="primary">创建人</my-button>
             </div>
             <my-button size="small"
                        type="text-danger"
@@ -288,6 +289,8 @@ export default {
           console.log(res);
           this.members = res;
         })
+
+      this.$store.commit("setTeamID",this.TeamID);
     }
   }
 };

@@ -24,6 +24,7 @@ const state = {
   fullscreenLoading: false,
   homeMidNav: 0,
   homeLeftNav: 1,
+  nowTeamID: -1, //-1表示未选择团体
 };
 
 const store = new Vuex.Store({

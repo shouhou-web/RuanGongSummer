@@ -28,8 +28,12 @@
                            type="text"
                            v-bind:class="{ 'code-style' : (code_info == 0), 'success-code-style' : (code_info == 1), 'error-code-style' : (code_info == 2), 'empty-code-style' : (code_info == 3) }"
                            v-model="code">
-                    <input v-show="isShow" @click="sendCode" :disabled="countFlag" class="send-code" :value="btnMsg" />
+<!--                    <input v-show="isShow" @click="sendCode" :disabled="countFlag" class="send-code" :value="btnMsg" />-->
                   </div>
+                  <my-button type="timer"
+                             :count="countNum"
+                             style="margin-top: 15px"
+                             @click="sendCode">{{btnMsg}}</my-button>
                   <a v-show="isShow" @click="confirmCode" class="btn">confirm</a>
                 </div>
                 <div v-show="!isShow">
@@ -99,7 +103,7 @@ export default {
       emailVerification(this.email)
       .then(res => {
         console.log('验证码：',res);
-
+        this.btnMsg = '';
         if (res === 0){
           this.$message.error('验证码返回错误，请检查网络');
         } else {
@@ -389,7 +393,7 @@ p {
   padding-left: 55px;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
-  width: 50%;
+  width: 100%;
 }
 
 .error-code-style {
@@ -409,7 +413,7 @@ p {
   padding-left: 55px;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
-  width: 50%;
+  width: 100%;
 }
 
 .empty-code-style {
@@ -429,7 +433,7 @@ p {
   padding-left: 55px;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
-  width: 50%;
+  width: 100%;
 }
 
 .success-code-style {
@@ -449,7 +453,7 @@ p {
   padding-left: 55px;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
-  width: 50%;
+  width: 100%;
 }
 
 .send-code {
@@ -581,7 +585,7 @@ p {
   justify-content: center;
   letter-spacing: 1px;
   margin-bottom: 30px;
-  margin-left: 35%;
+  margin-left: 33%;
   margin-top: 30px;
   padding: 0 30px;
   text-align: center;

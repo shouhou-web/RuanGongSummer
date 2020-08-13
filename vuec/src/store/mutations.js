@@ -40,6 +40,9 @@ const mutations = {
     if (isActive !== state.homeLeftNav) {
       state.homeLeftNav = isActive;
     }
+  },
+  setTeamID(state,teamID) {
+    state.nowTeamID = teamID;
   }
 };
 
