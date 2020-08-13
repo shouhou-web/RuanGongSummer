@@ -49,7 +49,7 @@
       </div>
       <div class="sub-page">
         <div class="option-nav">
-          <my-button type="text" class="nav-btn">
+          <my-button type="text" class="nav-btn" @click="addNewDoc">
             <span class="nav-item">
               <img
                 src="@/assets/icon/home/new.png"
@@ -93,6 +93,23 @@
       </div>
       <input class="hover-input" placeholder="团队名称" v-model="teamName" />
     </m-hover>
+    <m-hover
+      :onShow="docHoverOn"
+      title="新建文档"
+      assureBtn="创建"
+      cancelBtn="取消"
+      @cancel="cancelNewDocHover"
+      @submit="createNewDocHover"
+    >
+      <div class="hover-text">
+        请输入新建文档的名称：
+      </div>
+      <input
+        class="hover-input"
+        placeholder="请输入文件名"
+        v-model="teamName"
+      />
+    </m-hover>
   </div>
 </template>
 
@@ -108,7 +125,9 @@ export default {
     return {
       user: "",
       teamName: "",
-      teamHoverOn: false
+      teamHoverOn: false,
+      docName: "",
+      docHoverOn: false
     };
   },
   methods: {
@@ -147,6 +166,12 @@ export default {
           });
         }
       });
+    },
+    addNewDoc() {
+      this.docHoverOn = true;
+    },
+    cancelNewDocHover() {
+      this.docHoverOn = false;
     }
   },
   components: {
