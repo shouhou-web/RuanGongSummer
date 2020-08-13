@@ -1,9 +1,9 @@
 <template>
   <div class="teamspace">
-    <div class="teamspace-header">
-      <img src="../../assets/image/Team.svg" style="margin-left: 3vh;padding-bottom: 1.5vh;padding-left: 1vh;margin-right: 10px">
-      我的团队 | My Team
-    </div>
+<!--    <div class="teamspace-header">-->
+<!--      <img src="../../assets/image/Team.svg" style="margin-left: 3vh;padding-bottom: 1.5vh;padding-left: 1vh;margin-right: 10px">-->
+<!--      我的团队 | My Team-->
+<!--    </div>-->
     <div class="my-teams-space">
       <div v-for="(ateam,teamIndex) in myTeams" :key="teamIndex">
         <div class="one-team" @click="chooseTeam(ateam.teamID)" :class="{'one-team_chosen': (ateam.teamID == chosenPos)}">
@@ -14,15 +14,25 @@
     <div class="member-iden" :class="{'member-iden--member':(iden == 0),'member-iden--manager':(iden == 1),'member-iden--creater':(iden == 2)}">
       {{iden_message}}
     </div>
-    <div style="margin-top: 10px;margin-left: 5px" v-if="iden != 2">
-      <my-button size="small"
-                 style="margin-right: 10px;margin-top: 10px"
-                 @click="readyToQuit">退出团队</my-button>
-    </div>
-    <div style="margin-top: 10px;margin-left: 5px" v-if="iden == 2">
-      <my-button size="small"
-                 style="margin-right: 10px;margin-top: 10px"
-                 @click="readyToDisband">解散团队</my-button>
+
+    <div class="opt">
+      <m-nav-dropdown position="left" class="l-card__nav">
+        <div slot="show">
+          <img class="l-card__setting" src="@/assets/image/teamopt.svg">
+        </div>
+        <div slot="hide">
+          <div class="l-card__hide-main">
+            <my-button type="text"
+                       class="l-card__nav-btn"
+                       @click="readyToQuit"
+                       v-if="iden != 2">退出团队</my-button>
+            <my-button type="text"
+                       class="l-card__nav-btn"
+                       @click="readyToDisband"
+                       v-if="iden == 2">解散团队</my-button>
+          </div>
+        </div>
+      </m-nav-dropdown>
     </div>
 
     <!-- 悬浮窗 -->
@@ -70,7 +80,8 @@ export default {
       chosenPos: -1,
       iden_message: '普通成员',
       isQuit: false,
-      isDisband: false
+      isDisband: false,
+
     }
   },
   components: {
@@ -202,7 +213,6 @@ export default {
   padding-top: 1.5vh;
   text-align: center;
   color: white;
-  font-family: "JetBrains Mono";
   box-shadow:2px 2px 5px #838282;
 }
 
@@ -215,9 +225,9 @@ export default {
   width: 90vh;
   border-radius: 5px;
   border-bottom-left-radius: 5px;
-  background-color: white;
+  /*background-color: white;*/
   margin-top: 1.5vh;
-  box-shadow:2px 2px 5px #a5a5a5;
+  /*box-shadow:2px 2px 5px #a5a5a5;*/
 }
 
 .one-team{
@@ -226,10 +236,9 @@ export default {
   border: 1px solid #a1c4fd;
   background-color: white;
   border-radius: 5px;
-  color: #000000;
+  color: #60a5dd;
   width: auto;
   height: auto;
-  font-family: "JetBrains Mono";
   font-size: 13px;
 }
 
@@ -238,8 +247,10 @@ export default {
 }
 
 .one-team_chosen{
-  box-shadow:2px 2px 5px #b5b5b5;
-  background-color: #dee9fc;
+  color: #4a4a4c;
+  border-color: #c6e2ff;
+  box-shadow: 2px 3px 5px 1px rgba(29, 120, 223, 0.2);
+  transition: 0.5s;
 }
 
 .member-iden{
@@ -249,7 +260,6 @@ export default {
   margin-left: 5px;
   width: 100px;
   height: 40px;
-  font-family: "JetBrains Mono";
   box-shadow:2px 2px 5px #b5b5b5;
   padding-top: 10px;
   padding-left: 15px;
@@ -320,7 +330,6 @@ export default {
   width: auto;
   height: auto;
   text-align: center;
-  font-family: "JetBrains Mono";
   font-size: 12px;
 }
 
@@ -351,5 +360,58 @@ export default {
 .fade-in {
   opacity: 1;
   transition: opacity 0.5s;
+}
+
+.l-card {
+  align-items: center;
+  color: #303133;
+  transition: 0.3s;
+  overflow: hidden;
+  -webkit-transition: 0.3s;
+}
+
+.l-card__nav {
+  align-self: flex-end;
+  margin-right: 2px;
+  margin-top: 2px;
+}
+
+.l-card__setting {
+  height: 18px;
+  width: 18px;
+}
+
+.l-card__pic {
+  width: 80px;
+  height: 80px;
+}
+
+.l-card__body {
+  margin: 10px 20px;
+}
+
+.l-card__hide-main {
+  align-items: center;
+  background-color: #FAFBFC;
+  display: flex;
+  flex-direction: column;
+  width: 110px;
+}
+
+.l-card__nav-btn {
+  color: #3F536E;
+  padding: 10px 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.l-card__nav-btn:hover {
+  color: #3F536E;
+}
+
+.opt{
+  position: absolute;
+  margin-left: 58%;
+  margin-top: -8%;
 }
 </style>

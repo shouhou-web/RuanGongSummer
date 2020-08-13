@@ -3,9 +3,7 @@
     <div class="my-team-details">
       <div class="team-docs">
         <div class="doc" v-for="(adoc,docIndex) in docs" :key="docIndex">
-          <input type="checkbox"></input>
-          <div><img src="../../assets/image/file.svg" class="doc--img"></div>
-          <div class="doc--name">{{adoc.docTitle}}</div>
+          <l-card>{{adoc.docTitle}}</l-card>
         </div>
       </div>
     </div>
@@ -112,12 +110,13 @@ export default {
 }
 
 .my-team-details{
-  margin: 5px;
+  margin: auto;
   margin-top: 30px;
-  height: auto;
+  height: 60vh;
   border-radius: 5px;
   border: 1px solid #a1c4fd;
   background-color: #ffffff;
+  overflow: auto;
 }
 
 .team-tools{
