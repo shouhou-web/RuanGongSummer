@@ -5,11 +5,13 @@
         <l-card :ID="doc.docID" :title="doc.docTitle"></l-card>
       </div>
     </div>
+    <l-show-none></l-show-none>
   </div>
 </template>
 
 <script>
 import { getMyDocs } from "../../../../network/workspace.js";
+import LShowNone from "components/content/l-show-none/LShowNone";
 
 export default {
   name: "IMade",
@@ -19,6 +21,9 @@ export default {
       myDocs: "",
       noneShow: false
     };
+  },
+  components: {
+    LShowNone
   },
   created() {
     this.user = this.$store.state.user;
