@@ -141,7 +141,7 @@ export default {
   background-color: #fafbfc;
   border: 1px solid #dcdfe6;
   border-radius: 4px;
-  width: 130px;
+  padding: 5px 8px;
 }
 
 .l-card__nav-btn {

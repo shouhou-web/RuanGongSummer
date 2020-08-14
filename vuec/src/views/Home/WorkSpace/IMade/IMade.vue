@@ -8,7 +8,7 @@
             <my-button type="text" class="nav-btn">收藏</my-button>
             <my-button type="text" class="nav-btn">重命名</my-button>
             <my-button type="text" class="nav-btn">分享</my-button>
-            <my-button type="text-danger" class="nav-btn">删除</my-button>
+            <my-button type="text-danger" class="nav-btn" @click="deleteDoc">删除</my-button>
           </div>
         </l-card>
       </div>
@@ -18,7 +18,8 @@
 </template>
 
 <script>
-import { getMyDocs } from "../../../../network/workspace.js";
+import { getMyDocs } from "network/workspace.js";
+import { deleteDoc } from "network/workspace.js";
 
 export default {
   name: "IMade",
@@ -31,6 +32,9 @@ export default {
     };
   },
   methods: {
+    deleteDoc() {
+      
+    }
   },
   created() {
     this.user = this.$store.state.user;
