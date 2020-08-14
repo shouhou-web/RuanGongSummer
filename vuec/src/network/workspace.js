@@ -51,3 +51,15 @@ export function getFavoriteDocs(userID) {
     method: "post"
   });
 }
+
+export function editDocTitle(userID, docID, docTitle) {
+  return request({
+    url: "/editDocTitle",
+    params: {
+      userID,
+      docID,
+      docTitle
+    },
+    method: "post"
+  });
+}
