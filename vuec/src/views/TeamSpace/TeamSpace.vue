@@ -11,7 +11,7 @@
         </div>
         <div slot="hide" v-if="chosenPos != -1" style="border: 1px solid #ececec;border-radius: 5px;background-color: white">
           <div class="l-card__hide-main">
-            <my-button type="textdanger"
+            <my-button type="text-danger"
                        class="l-card__nav-btn"
                        @click="readyToQuit"
                        v-if="iden != 2">退出团队</my-button>
@@ -201,7 +201,7 @@ export default {
       showRes: false,
       openSearch: false,
       searchType: 0,//0 搜非团队成员，1 搜团队成员
-      searchTitle: ''
+      searchTitle: '',
     }
   },
   components: {
@@ -328,7 +328,9 @@ export default {
       .then(res => {
         // console.log(res);
         this.myTeams = res;
-        // console.log(this.myTeams.length);
+        // this.chosenPos = 0;
+        console.log(this.myTeams)
+        console.log(this.myTeams.length);
         // this.chosenPos = res[0].teamID;
         if (this.myTeams.length == 0)
           this.$store.commit("setHasTeam",false);
