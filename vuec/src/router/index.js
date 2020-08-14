@@ -33,6 +33,7 @@ const Message = () => import("views/Message/Message.vue");
 const Invitation = () => import("views/Message/Invitation.vue");
 const Application = () => import("views/Message/Application.vue");
 const System = () => import("views/Message/System.vue");
+const Comment = () => import("views/Message/Comment.vue");
 
 //1.安装插件
 Vue.use(VueRouter);
@@ -145,6 +146,11 @@ const routes = [
         path: "/message/system",
         name: "System",
         component: System
+      },
+      {
+        path: "/message/comment",
+        name: "System",
+        component: Comment
       }
     ]
   }

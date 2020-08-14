@@ -23,7 +23,13 @@
           <div class="message__time">
             {{ message.createTime }}
           </div>
-          <div v-if="message.isRead == 0">
+          <div v-if="message.isRead == 2" class="message__isread">
+            已同意
+          </div>
+          <div v-else-if="message.isRead == 3" class="message__isread">
+            已拒绝
+          </div>
+          <div v-else>
             <my-button
               @click="open('accept')"
               class="my-button"
@@ -40,12 +46,6 @@
             >
               拒绝
             </my-button>
-          </div>
-          <div v-else-if="message.isRead == 1" class="message__isread">
-            已同意
-          </div>
-          <div v-else class="message__isread">
-            已拒绝
           </div>
         </div>
       </div>
@@ -175,9 +175,11 @@ export default {
               message: "已拒绝对方的邀请",
               type: "success",
             });
+            this.message.isRead = 3;
           }
         })
         .catch((err) => {
+          console.log(err)
           this.$notify.error({
             title: "网络错误",
             message: "请稍后重试~",
@@ -200,6 +202,7 @@ export default {
               message: "已拒绝申请",
               type: "success",
             });
+            this.message.isRead = 3;
           }
         })
         .catch((err) => {
@@ -225,6 +228,7 @@ export default {
               message: "已加入团队",
               type: "success",
             });
+            this.message.isRead = 2;
           }
         })
         .catch((err) => {
@@ -250,6 +254,7 @@ export default {
               message: "已通过该申请",
               type: "success",
             });
+            this.message.isRead = 2;
           }
         })
         .catch((err) => {

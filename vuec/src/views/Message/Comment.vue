@@ -2,24 +2,23 @@
   <div>
     <ul class="message-list">
       <li v-for="(item, index) in messageList" :key="index">
-        <common-message
-          type="invitation"
+        <comment-message
           @delete="deleteItem(index)"
           :message="item"
-        ></common-message>
+        ></comment-message>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import { getCommonMsg } from "network/message";
-import commonMessage from "./childCpn/common-message";
+import { getCommentMsg } from "network/message";
+import CommentMessage from "./childCpn/comment-message";
 export default {
   name: "Application",
   created() {
     console.log(this.$store.state.user.userID);
-    getCommonMsg(0, this.$store.state.user.userID).then((res) => {
+    getCommentMsg(this.$store.state.user.userID).then((res) => {
       console.log("res", res);
       this.messageList = res;
     });
@@ -36,7 +35,7 @@ export default {
     };
   },
   components: {
-    commonMessage,
+    CommentMessage,
   },
 };
 </script>
