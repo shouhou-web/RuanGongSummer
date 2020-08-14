@@ -67,6 +67,7 @@ export default {
   },
   methods: {
     addToChosen(docID) {
+      console.log(docID);
       this.chosenDocs.push(docID);
       console.log('被选中Doc',this.chosenDocs);
     },
