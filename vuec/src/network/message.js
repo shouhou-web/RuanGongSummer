@@ -12,6 +12,17 @@ export function getCommonMsg(type, userID) {
   });
 }
 
+// 获取评论消息
+export function getCommentMsg(userID) {
+  return request({
+    url: "/getCommentMsg",
+    params: {
+      userID
+    },
+    method: "post"
+  });
+}
+
 // 获取系统消息
 export function getSystemMsg(userID) {
   return request({
@@ -104,11 +115,12 @@ export function joinTeam(userID, targetUserID, teamID, msgID) {
 }
 
 // 拒绝邀请
-export function refuseTeam(userID, teamID, msgID) {
+export function refuseTeam(userID, targetUserID, teamID, msgID) {
   return request({
     url: "/refuseTeam",
     params: {
       userID,
+      targetUserID,
       teamID,
       msgID
     },

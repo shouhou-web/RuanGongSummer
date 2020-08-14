@@ -1,9 +1,12 @@
 <template>
   <div
     class="l-card"
-    :class="shadow ? 'is-' + shadow + '-shadow' : 'is-hover-shadow'"
+    :class="[
+      shadow ? 'is-' + shadow + '-shadow' : 'is-hover-shadow',
+      isSelected ? 'is-checked' : ''
+    ]"
   >
-    <div class="l-card__top">
+    <div class="l-card__top" :class="isSelected ? 'still' : ''">
       <img :src="selectPath" class="l-card__select" @click="check" />
       <m-nav-dropdown
         position="middle"
@@ -92,6 +95,13 @@ export default {
   width: 120px;
 }
 
+.l-card.is-checked {
+  background-color: #e8eef8;
+  box-shadow: 0 2px 12px 0 rgba(3, 65, 165, 0.1);
+  color: #606266;
+  transition: 0.4s;
+}
+
 .l-card:hover {
   background-color: #e8eef8;
   box-shadow: 0 2px 12px 0 rgba(3, 65, 165, 0.1);
@@ -161,5 +171,11 @@ export default {
   display: flex;
   opacity: 0;
   width: 100%;
+  transition: 0.4s;
+}
+
+.l-card__top.still {
+  opacity: 1;
+  transition: 0.4s;
 }
 </style>

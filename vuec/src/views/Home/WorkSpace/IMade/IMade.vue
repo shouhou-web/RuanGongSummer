@@ -4,8 +4,12 @@
       <div v-for="doc in myDocs" :key="doc.docID" class="doc">
         <l-card :ID="doc.docID" :title="doc.docTitle">
           <div slot="hide-content" class="hide-nav">
-            <my-button type="text" class="nav-btn">打开</my-button>
-            <my-button type="text" class="nav-btn">收藏</my-button>
+            <my-button
+              type="text"
+              class="nav-btn"
+              @click="toCollectDoc(doc.docID)"
+              >收藏</my-button
+            >
             <my-button type="text" class="nav-btn">重命名</my-button>
             <my-button type="text" class="nav-btn">分享</my-button>
             <my-button
@@ -37,6 +41,7 @@
 <script>
 import { getMyDocs } from "network/workspace.js";
 import { deleteDoc } from "network/workspace.js";
+import { collectDoc } from "network/workspace.js";
 
 export default {
   name: "IMade",
@@ -45,7 +50,6 @@ export default {
       user: "",
       myDocs: "",
       noneShow: false,
-      check: true,
       docDeleteHoverOn: false,
       docToDeleteID: ""
     };
@@ -63,9 +67,27 @@ export default {
         if (res === 1) {
           this.$message.error("删除文档失败，请检查网络或联系管理员");
         } else {
-          this.$router.go(0);
+          this.docDeleteHoverOn = false;
           this.$message({
             message: "删除文档成功",
+            type: "success"
+          });
+          getMyDocs(this.user.userID).then(res => {
+            this.myDocs = res;
+            if (res.length === 0) this.noneShow = true;
+          });
+        }
+      });
+    },
+    toCollectDoc(docID) {
+      collectDoc(this.user.userID, docID).then(res => {
+        console.log(res);
+        if (res === 1) {
+          this.$message.error("收藏文档失败，请检查网络或联系管理员");
+        } else {
+          this.docDeleteHoverOn = false;
+          this.$message({
+            message: "收藏文档成功",
             type: "success"
           });
         }

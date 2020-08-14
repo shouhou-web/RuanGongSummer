@@ -222,7 +222,6 @@ export default {
       this.$message.error("请先登录！");
       return;
     }
-    console.log(this.user.userID);
   }
 };
 </script>
