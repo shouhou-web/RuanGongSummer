@@ -2,7 +2,7 @@
   <div>
     <div v-if="!noneShow" class="docs">
       <div v-for="doc in myDocs" :key="doc.docID" class="doc">
-        <l-card :ID="doc.docID" :title="doc.docTitle" @check="test">
+        <l-card :ID="doc.docID" :title="doc.docTitle">
           <div slot="hide-content" class="hide-nav">
             <my-button type="text" class="nav-btn">打开</my-button>
             <my-button type="text" class="nav-btn">收藏</my-button>
@@ -31,9 +31,6 @@ export default {
     };
   },
   methods: {
-    test(docID) {
-      console.log(docID);
-    }
   },
   created() {
     this.user = this.$store.state.user;
