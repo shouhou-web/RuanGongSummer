@@ -1,4 +1,5 @@
 import { request } from "@/network/request";
+const qs = require('qs');
 
 // 获取团队
 export function getDoc(userID, docID) {

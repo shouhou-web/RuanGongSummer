@@ -29,9 +29,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020_8_7_11_31_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020_8_7_11_31__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/components/common/l-card/l-card.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/components/common/l-card/l-card.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/network/doc.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/network/doc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +67,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/vuec/src/views/Profile/EditProfile.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/network/doc.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/Login/Login.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/ForgetPwd/ForgetPwd.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" root0="SKIP_INSPECTION" />
@@ -337,7 +341,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597374840204</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="doc API的编写">
+      <created>1597396366910</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1597396366910</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -389,7 +400,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="听取mgg的意见去掉了el-ui的布局标签，尝试自己写css的第一天，害怕" />
     <MESSAGE value="第一次组件+vue.config.js的补充（虽然那个组件啥用没有）" />
     <MESSAGE value="一次失败的尝试，完成了login和register的模拟，但是没法保存，回头试试mgg的方法" />
     <MESSAGE value="在自己尝试后发现一个安全而且还不错的登录样式（放在register.vue里面了，那个class绑定的登录样式在login.vue里面）" />
@@ -414,7 +424,8 @@
     <MESSAGE value="l-card使用，团队空间搜索完善" />
     <MESSAGE value="一些bug" />
     <MESSAGE value="teamspace前端样式适配" />
-    <option name="LAST_COMMIT_MESSAGE" value="teamspace前端样式适配" />
+    <MESSAGE value="doc API的编写" />
+    <option name="LAST_COMMIT_MESSAGE" value="doc API的编写" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-735" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1596358814923">
@@ -457,10 +468,10 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-647" y="158" key="RollbackChangesDialog/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596608792846" />
-    <state x="-1157" y="197" key="SettingsEditor" timestamp="1597377293778">
+    <state x="-1157" y="197" key="SettingsEditor" timestamp="1597396753620">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1157" y="197" key="SettingsEditor/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597377293778" />
+    <state x="-1157" y="197" key="SettingsEditor/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597396753620" />
     <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597393452527">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>

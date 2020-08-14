@@ -138,7 +138,10 @@
           <div class="member-header" v-for="(userRes,resIndex) in searchRes" :key="resIndex" v-if="searchType == 0">
             <div class="member-name-main">{{userRes.userName}}</div>
             <div class="member-email-main">{{userRes.emailAddress}}</div>
-            <my-button type="info" size="mini" style="height: 25px;margin-left: 100px">邀请</my-button>
+            <my-button type="info"
+                       size="mini"
+                       style="height: 25px;margin-left: 100px"
+                       @click="inviteMemberToTeam(userRes.userID)">邀请</my-button>
           </div>
           <div class="member-header" v-for="(userRes,resIndex) in searchRes" :key="resIndex" v-if="searchType == 1">
             <div class="member-name-main">{{userRes.userName}}</div>
@@ -179,6 +182,7 @@ import {disbandTeam, getMyTeam, getTeamDocs, getUserIdentity, quitTeam, setAdmin
 import {searchOutsideUser,searchTeamMember} from "@/network/search";
 import TeamDoc from "@/views/TeamSpace/TeamDoc";
 import LButton from "@/components/common/l-app-button/MyButton";
+import {inviteMember} from "@/network/message";
 
 export default {
   name: 'TeamSpace',
@@ -314,6 +318,20 @@ export default {
     cancelSearch() {
       this.openSearch = false;
     },
+    inviteMemberToTeam(targetUserID) {
+      var msg = this.$store.state.user.userName + "邀请你加入" + this.TeamName;
+      inviteMember(this.$store.state.user.userID,this.TeamID,targetUserID,msg)
+        .then(res => {
+          if (res == 0) {
+            this.$notify.success("邀请已发送");
+          } else {
+            this.$notify.error("请检查网络情况，邀请发送失败");
+          }
+        })
+        .catch(err => {
+          this.$notify.error("请检查网络情况，邀请发送失败");
+        })
+    }
   },
   created() {
     this.user = this.$store.state.user;

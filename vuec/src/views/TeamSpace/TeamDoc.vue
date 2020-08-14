@@ -48,6 +48,7 @@
 <script>
 import {getTeamDocs,getUserIdentity,quitTeam,disbandTeam} from "@/network/team";
 import {docBatchDelete,docBatchFavorite} from "@/network/doc";
+const qs = require('qs');
 
 export default {
   name: "TeamDoc",
@@ -83,8 +84,8 @@ export default {
       }
     },
     batchDelete() {
-      console.log(this.chosenDocs);
-      docBatchDelete(this.chosenDocs,this.$store.state.user.userID)
+      var chosen_Docs = qs.stringify(this.chosenDocs, { indices: false });
+      docBatchDelete(chosen_Docs,this.$store.state.user.userID)
         .then(res => {
           if (res == 0) {
             this.$notify.success("批量删除成功");
@@ -101,7 +102,9 @@ export default {
         })
     },
     batchFavorite() {
-      docBatchFavorite(this.chosenDocs,this.$store.state.user.userID)
+      var chosen_Docs = qs.stringify(this.chosenDocs, { indices: false });
+      console.log(chosen_Docs);
+      docBatchFavorite(chosen_Docs,this.$store.state.user.userID)
         .then(res => {
           if (res == 0) {
             this.$notify.success("批量收藏成功");
