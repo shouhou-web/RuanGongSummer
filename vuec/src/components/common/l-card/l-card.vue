@@ -45,11 +45,14 @@ export default {
   methods: {
     check() {
       if (this.canCheck) {
-        if (!this.isSelected)
+        if (!this.isSelected) {
           this.selectPath = require("@/assets/icon/card/square-check.png");
-        else this.selectPath = require("@/assets/icon/card/square.png");
+          this.$emit("addDoc", this.ID);
+        } else {
+          this.selectPath = require("@/assets/icon/card/square.png");
+          this.$emit("cancelDoc", this.ID);
+        }
         this.isSelected = !this.isSelected;
-        this.$emit('check', this.ID);
       } else {
         return;
       }
