@@ -24,3 +24,27 @@ export function editDocTitle(userID,docID,docTitle) {
     method: "post"
   });
 }
+
+// 批量删除文档
+export function docBatchDelete(docIDs,userID) {
+  return request({
+    url: "/docBatchDelete",
+    params: {
+      docIDs,
+      userID
+    },
+    method: "post"
+  })
+}
+
+// 批量收藏文档
+export function docBatchFavorite(docIDs,userID) {
+  return request({
+    url: "/docBatchFavorite",
+    params: {
+      docIDs,
+      userID
+    },
+    method: "post"
+  })
+}

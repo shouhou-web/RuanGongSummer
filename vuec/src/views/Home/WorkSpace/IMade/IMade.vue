@@ -8,12 +8,29 @@
             <my-button type="text" class="nav-btn">收藏</my-button>
             <my-button type="text" class="nav-btn">重命名</my-button>
             <my-button type="text" class="nav-btn">分享</my-button>
-            <my-button type="text-danger" class="nav-btn" @click="deleteDoc">删除</my-button>
+            <my-button
+              type="text-danger"
+              class="nav-btn"
+              @click="deleteNotice(doc.docID)"
+              >删除</my-button
+            >
           </div>
         </l-card>
       </div>
     </div>
     <l-show-none v-else></l-show-none>
+    <m-hover
+      :onShow="docDeleteHoverOn"
+      title="删除文档"
+      assureBtn="确认"
+      cancelBtn="手滑了"
+      @cancel="cancelDelete"
+      @submit="deleteDoc"
+    >
+      <div class="hover-text">
+        删除文档后可以在回收站中还原文档，确认要删除该文档吗？
+      </div>
+    </m-hover>
   </div>
 </template>
 
@@ -28,12 +45,31 @@ export default {
       user: "",
       myDocs: "",
       noneShow: false,
-      check: true
+      check: true,
+      docDeleteHoverOn: false,
+      docToDeleteID: ""
     };
   },
   methods: {
+    deleteNotice(docID) {
+      this.docDeleteHoverOn = true;
+      this.docToDeleteID = docID;
+    },
+    cancelDelete() {
+      this.docDeleteHoverOn = false;
+    },
     deleteDoc() {
-      
+      deleteDoc(this.user.userID, this.docToDeleteID).then(res => {
+        if (res === 1) {
+          this.$message.error("删除文档失败，请检查网络或联系管理员");
+        } else {
+          this.$router.go(0);
+          this.$message({
+            message: "删除文档成功",
+            type: "success"
+          });
+        }
+      });
     }
   },
   created() {
@@ -45,7 +81,7 @@ export default {
     }
     getMyDocs(this.user.userID).then(res => {
       this.myDocs = res;
-      console.log(this.myDocs.length);
+      if (res.length === 0) this.noneShow = true;
     });
   }
 };
@@ -74,5 +110,10 @@ export default {
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+
+.hover-text {
+  margin: 0 auto;
+  width: 100%;
 }
 </style>
