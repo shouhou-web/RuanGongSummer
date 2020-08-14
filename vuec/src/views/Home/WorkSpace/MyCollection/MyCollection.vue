@@ -17,7 +17,7 @@
         </l-card>
       </div>
     </div>
-    <l-show-none v-else></l-show-none>
+    <l-show-none v-else style="height: 70vh"></l-show-none>
     <m-hover
       :onShow="docDeleteHoverOn"
       title="删除文档"

@@ -5,7 +5,7 @@
         <l-card :ID="doc.docID" :title="doc.docTitle"></l-card>
       </div>
     </div>
-    <l-show-none v-else></l-show-none>
+    <l-show-none v-else style="height: 70vh"></l-show-none>
   </div>
 </template>
 

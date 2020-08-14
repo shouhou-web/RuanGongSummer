@@ -29,12 +29,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020_8_7_11_31_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020_8_7_11_31__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/network/doc.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/network/doc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/IMade/IMade.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/IMade/IMade.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/MyCollection/MyCollection.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/MyCollection/MyCollection.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/Recent/Recent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/Recent/Recent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/WorkSpace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/WorkSpace.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/Trash/Trash.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Trash/Trash.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -348,7 +348,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597396366910</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="doc API的编写">
+      <created>1597415256461</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1597415256462</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
