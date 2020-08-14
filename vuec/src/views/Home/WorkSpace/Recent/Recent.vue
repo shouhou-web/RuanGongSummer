@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { getRecentDocs } from "../../../../network/workspace.js";
+import { getRecentDocs } from "network/workspace.js";
 
 export default {
   name: "Recent",

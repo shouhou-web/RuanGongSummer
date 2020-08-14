@@ -23,7 +23,7 @@ const MyCollection = () =>
   import("views/Home/WorkSpace/MyCollection/MyCollection.vue"); // 我的收藏界面
 
 // 回收站界面
-const Trash = () => import("views/Home/Trash/Trash.vue");
+const Trash = () => import("views/Trash/Trash.vue");
 
 // 文档编辑
 const Doc = () => import("views/Doc/Doc.vue");
