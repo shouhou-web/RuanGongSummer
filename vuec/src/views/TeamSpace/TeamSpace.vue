@@ -11,11 +11,11 @@
         </div>
         <div slot="hide" v-if="chosenPos != -1" style="border: 1px solid #ececec;border-radius: 5px;background-color: white">
           <div class="l-card__hide-main">
-            <my-button type="text"
+            <my-button type="textdanger"
                        class="l-card__nav-btn"
                        @click="readyToQuit"
                        v-if="iden != 2">退出团队</my-button>
-            <my-button type="text"
+            <my-button type="text-danger"
                        class="l-card__nav-btn"
                        @click="readyToDisband"
                        v-if="iden == 2">解散团队</my-button>
@@ -609,21 +609,19 @@ export default {
 }
 
 .l-card__nav-btn {
-  color: #3F536E;
   padding: 10px 20px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
 .l-card__nav-btn:hover {
-  color: #3F536E;
 }
 
 .opt{
-  position: absolute;
+  float: right;
   height: 10px;
   margin-top: 5px;
-  margin-left: 1256px;
+  margin-right: 30px;
 }
 
 .cooperation-member{
