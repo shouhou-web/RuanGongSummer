@@ -48,6 +48,7 @@
       @submit="submit"
       @cancel="close"
       :onShow="applyTeam"
+      :width="400"
       title="申请加入团队"
       assureBtn="确定申请"
       cancelBtn="暂不申请"
@@ -247,7 +248,6 @@ export default {
   padding: 15px 20px;
   font-size: 15px;
   line-height: 1.5;
-  margin-bottom: 10px;
   width: 360px;
 }
 

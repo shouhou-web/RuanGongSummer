@@ -4,7 +4,7 @@
     :class="shadow ? 'is-' + shadow + '-shadow' : 'is-hover-shadow'"
   >
     <div class="l-card__top">
-      <img :src="selectPath" class="l-card__select" @click="check"></img>
+      <img :src="selectPath" class="l-card__select" @click="check"/>
       <m-nav-dropdown
         position="middle"
         :triColor="tricolor"
@@ -75,7 +75,6 @@ export default {
 .l-card {
   align-items: center;
   border-radius: 4px;
-  background-color: #rgba(255, 255, 255, 0.8);
   color: #909399;
   display: flex;
   flex-direction: column;

@@ -1,6 +1,6 @@
 <template>
-  <div class>
-    <div>
+  <div>
+    <div class="second-nav-list">
       <my-button
         type="text"
         class="second-nav-item"
@@ -57,6 +57,10 @@ export default {
 second-whole-page {
   display: flex;
   flex-direction: column;
+}
+
+.second-nav-list {
+  padding-left: 20px;
 }
 
 .second-nav-item {

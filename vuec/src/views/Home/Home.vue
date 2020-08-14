@@ -233,11 +233,11 @@ export default {
 }
 
 .main-page {
-  background-color: #cce6ff;
+  background-color: var(--color-background-main);
   height: calc(100vh - 56px);
   justify-content: center;
   display: flex;
-  padding: 35px 60px 0;
+  padding: 35px 50px 0;
 }
 
 .nav-btn {
@@ -246,7 +246,12 @@ export default {
 }
 
 .nav,
-.sub-page,
+.sub-page {
+  border-radius: 4px;
+  box-shadow: 0 2px 4px 0 rgba(121, 146, 185, 0.54);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 .second-nav {
   border-radius: 4px;
   box-shadow: 0 2px 4px 0 rgba(121, 146, 185, 0.54);

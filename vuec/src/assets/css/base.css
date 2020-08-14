@@ -8,7 +8,8 @@
   --color-main: #a1c4fd;
   --color-high-text: #ff5777;
   --color-tint: #ff8198;
-  --color-background-main: #f4f5f7; /* 主界面 */
+  --color-background-main: #cce6ff; /* 主界面 */
+  --color-background-old: #f4f5f7;
   --font-size: 14px;
   --line-height: 1.5;
 }

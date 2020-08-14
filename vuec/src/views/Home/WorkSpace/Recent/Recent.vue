@@ -5,7 +5,7 @@
         <l-card :ID="doc.docID" :title="doc.docTitle"></l-card>
       </div>
     </div>
-    <l-show-none></l-show-none>
+    <l-show-none v-else></l-show-none>
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
     return {
       user: "",
       myDocs: "",
-      noneShow: false
+      noneShow: true
     };
   },
   components: {

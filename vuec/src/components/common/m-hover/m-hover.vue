@@ -2,7 +2,7 @@
   <div id="suspended">
     <!-- 阴影 -->
     <div :class="[onShow ? '' : 'hide']" @click="cancel" class="mask"></div>
-    <div :class="[onShow ? 'show' : 'hide']">
+    <div :class="[onShow ? 'show' : 'hide']" :style="{ left: left }">
       <div class="wrapper">
         <div v-if="title" class="title">
           {{ title }}
@@ -29,20 +29,30 @@ export default {
   props: {
     onShow: {
       type: Boolean,
-      default: false
+      default: false,
+    },
+    width: {
+      // 如果自己不能居中，需要传入宽度
+      type: Number,
+      default: 0,
     },
     title: {
       type: String,
-      default: null
+      default: null,
     }, // 标题
     assureBtn: {
       type: String,
-      default: null
+      default: null,
     }, // 确定按钮文字
     cancelBtn: {
       type: String,
-      default: null
-    } // 取消按钮文字
+      default: null,
+    }, // 取消按钮文字
+  },
+  computed: {
+    left() {
+      return "calc(50% - " + this.width / 2 + "px)";
+    },
   },
   methods: {
     submit() {
@@ -50,8 +60,8 @@ export default {
     },
     cancel() {
       this.$emit("cancel");
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -63,12 +73,14 @@ export default {
 }
 
 #suspended .show {
-  position: fixed;
+  background-color: #fff;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #fff;
-  border-radius: 4px;
+  min-width: 350px;
+  opacity: 1;
+  position: fixed;
   top: 20%;
   z-index: 1629;
 }
@@ -85,7 +97,9 @@ export default {
 }
 
 #suspended .hide {
-  display: none;
+  position: fixed;
+  opacity: 0;
+  z-index: -1629;
 }
 
 #suspended .wrapper {
@@ -103,12 +117,12 @@ export default {
 #suspended .main {
   display: flex;
   flex-direction: column;
-  padding: 20px 20px 0;
+  padding: 20px;
 }
 
 #suspended .footer {
   display: flex;
   justify-content: space-around;
-  margin: 10px 30px 20px;
+  margin: 20px 30px;
 }
 </style>

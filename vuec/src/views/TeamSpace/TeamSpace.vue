@@ -126,8 +126,8 @@
              style="font-family: 'JetBrains Mono'">
       <div class="userSearch">
         <!-- 0-邀请 1-查找-->
-        <input class="cooperation-search" v-model="searchOutsideMsg" placeholder="    输入用户名称/邮箱" v-if="searchType == 0"></input>
-        <input class="cooperation-search" v-model="searchMemberMsg" placeholder="    输入用户名称/邮箱" v-if="searchType == 1"></input>
+        <input class="cooperation-search" v-model="searchOutsideMsg" placeholder="    输入用户名称/邮箱" v-if="searchType == 0"/>
+        <input class="cooperation-search" v-model="searchMemberMsg" placeholder="    输入用户名称/邮箱" v-if="searchType == 1"/>
 
         <div class="userRes">
           <div class="member-header">
@@ -621,9 +621,9 @@ export default {
 
 .opt{
   position: absolute;
-  margin-left: 50%;
-  margin-top: 8px;
   height: 10px;
+  margin-top: 5px;
+  margin-left: 1256px;
 }
 
 .cooperation-member{

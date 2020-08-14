@@ -2,7 +2,7 @@
   <div :class="{'doc':(docStyle == 0),'file':(docStyle == 1),'doc_pointed':isPointed}"
        @mousemove="isPointed = true"
        @mouseleave="isPointed = false">
-    <input type="checkbox"></input>
+    <input type="checkbox"/>
     <img v-if="!marked" src="../../../assets/image/mark.svg" :class="{'file-mark':(docStyle == 1),'doc-mark':(docStyle == 0)}">
     <img v-if="marked" src="../../../assets/image/marked.svg" :class="{'file-mark':(docStyle == 1),'doc-mark':(docStyle == 0)}">
     <div @click=toDoc>

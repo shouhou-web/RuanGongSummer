@@ -13,7 +13,7 @@
         </l-card>
       </div>
     </div>
-    <l-show-none></l-show-none>
+    <l-show-none v-else></l-show-none>
   </div>
 </template>
 
