@@ -1,8 +1,11 @@
 <template>
-  <div id="message">
+  <div>
     <ul class="message-list">
       <li v-for="(item, index) in messageList" :key="index">
-        <team-message :message="item"></team-message>
+        <common-message
+          :message="item"
+          @delete="deleteItem(index)"
+        ></common-message>
       </li>
     </ul>
   </div>
@@ -10,32 +13,29 @@
 
 <script>
 import { getCommonMsg } from "network/message";
-import teamMessage from "./childCpn/team-message";
+import commonMessage from "./childCpn/common-message";
 export default {
-  name: "Message",
+  name: "Application",
   created() {
-    console.log(this.$store.state.user.userID)
+    console.log(this.$store.state.user.userID);
     getCommonMsg(1, this.$store.state.user.userID).then((res) => {
       console.log("res", res);
       this.messageList = res;
     });
   },
+  methods: {
+    deleteItem(index) {
+      console.log("itemIndex", index);
+      this.messageList.splice(index,1)
+    },
+  },
   data() {
     return {
-      messageList: [
-        {
-          userImagePath:
-            "https://img-static.mihoyo.com/communityweb/upload/0e16987863d21f5344d4d1d85af4f665.png",
-          userName: "守候",
-          content: "我特别特别相加你的团队！！万望同意orz",
-          createTime: "2020年8月9日 12:17",
-          teamName: "北航软工",
-        },
-      ],
+      messageList: [], // 消息列表
     };
   },
   components: {
-    teamMessage,
+    commonMessage,
   },
 };
 </script>
@@ -43,9 +43,10 @@ export default {
 <style scoped>
 .message-list {
   background-color: #fff;
+  box-shadow: 0 2px 4px 0 rgba(121, 146, 185, 0.54);
   border-radius: 4px;
   margin-bottom: 10px;
-  padding: 0 16px 24px;
-  height: calc(100vh - 152px);
+  padding: 0 16px;
+  height: calc(100vh - 128px);
 }
 </style>

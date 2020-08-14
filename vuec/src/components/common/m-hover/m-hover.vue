@@ -73,19 +73,6 @@ export default {
   align-items: center;
 }
 
-#suspended .show {
-  background-color: #fff;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-width: 350px;
-  opacity: 1;
-  position: fixed;
-  top: 20%;
-  z-index: 1629;
-}
-
 #suspended .mask {
   position: fixed;
   width: 100vw;
@@ -97,6 +84,17 @@ export default {
   z-index: 1628;
 }
 
+#suspended .show {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 350px;
+  opacity: 1;
+  position: fixed;
+  top: 20%;
+  z-index: 1629;
+}
+
 #suspended .hide {
   position: fixed;
   opacity: 0;
@@ -105,14 +103,16 @@ export default {
 
 #suspended .wrapper {
   background-color: #fff;
+  border-radius: 12px;
 }
 
 #suspended .title {
   border-bottom: 1px solid #f0f0f0;
   font-size: 16px;
   font-weight: bold;
+  letter-spacing: 1px;
   text-align: center;
-  padding: 20px 30px;
+  padding: 15px 30px;
 }
 
 #suspended .main {
