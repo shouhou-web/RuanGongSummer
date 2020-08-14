@@ -27,7 +27,7 @@
       <div class="team-docs">
         <div class="doc" v-for="(adoc,docIndex) in docs" :key="docIndex">
           <l-card :title="adoc.docTitle"
-                  :i-d="adoc.docId"
+                  :i-d="adoc.docID"
                   :can-check="adoc.creatorID == $store.state.user.userID"
                   @addDoc="addToChosen"
                   @cancelDoc="cancelChosen">
@@ -67,6 +67,7 @@ export default {
   },
   methods: {
     addToChosen(docID) {
+      console.log(docID);
       this.chosenDocs.push(docID);
       console.log('被选中Doc',this.chosenDocs);
     },
