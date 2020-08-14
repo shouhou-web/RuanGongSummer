@@ -11,7 +11,6 @@
 
 <script>
 import { getRecentDocs } from "../../../../network/workspace.js";
-import LShowNone from "components/content/l-show-none/LShowNone";
 
 export default {
   name: "Recent",
@@ -21,9 +20,6 @@ export default {
       myDocs: "",
       noneShow: true
     };
-  },
-  components: {
-    LShowNone
   },
   created() {
     this.user = this.$store.state.user;

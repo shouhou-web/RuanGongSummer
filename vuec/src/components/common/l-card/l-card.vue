@@ -4,7 +4,7 @@
     :class="shadow ? 'is-' + shadow + '-shadow' : 'is-hover-shadow'"
   >
     <div class="l-card__top">
-      <img :src="selectPath" class="l-card__select" @click="check"/>
+      <img :src="selectPath" class="l-card__select" @click="check" />
       <m-nav-dropdown
         position="middle"
         :triColor="tricolor"
@@ -44,11 +44,15 @@ export default {
   },
   methods: {
     check() {
-      if(!this.isSelected)
-        this.selectPath = require("@/assets/icon/card/square-check.png")
-      else
-        this.selectPath = require("@/assets/icon/card/square.png")
-      this.isSelected = !this.isSelected
+      if (this.canCheck) {
+        if (!this.isSelected)
+          this.selectPath = require("@/assets/icon/card/square-check.png");
+        else this.selectPath = require("@/assets/icon/card/square.png");
+        this.isSelected = !this.isSelected;
+        this.$emit('check', this.ID);
+      } else {
+        return;
+      }
     },
     toEditor() {
       this.$router.push({
@@ -62,12 +66,14 @@ export default {
   },
   props: {
     bodyStyle: {},
-    shadow: {
-      type: String
+    shadow: "",
+    canCheck: {
+      type: Boolean,
+      default: true
     },
     title: "",
     ID: ""
-  },
+  }
 };
 </script>
 
