@@ -51,7 +51,8 @@ export default {
   },
   computed: {
     left() {
-      return "calc(50% - " + this.width / 2 + "px)";
+      if (this.width != 0) return "calc(50% - " + this.width / 2 + "px)";
+      else return "auto";
     },
   },
   methods: {
