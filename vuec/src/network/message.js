@@ -12,6 +12,17 @@ export function getCommonMsg(type, userID) {
   });
 }
 
+// 获取系统消息
+export function getSystemMsg(userID) {
+  return request({
+    url: "/getSystemMsg",
+    params: {
+      userID
+    },
+    method: "post"
+  });
+}
+
 // 删除消息
 export function deleteMsg(msgID) {
   return request({
@@ -37,11 +48,12 @@ export function applyTeam(userID, targetTeamID, content) {
 }
 
 // 同意他人申请
-export function acceptMember(userID, teamID, msgID) {
+export function acceptMember(userID, targetUserID, teamID, msgID) {
   return request({
-    url: "/accpetMember",
+    url: "/acceptMember",
     params: {
       userID,
+      targetUserID,
       teamID,
       msgID
     },
@@ -50,11 +62,12 @@ export function acceptMember(userID, teamID, msgID) {
 }
 
 // 拒绝他人申请
-export function refuseMember(userID, teamID, msgID) {
+export function refuseMember(userID, targetUserID, teamID, msgID) {
   return request({
     url: "/refuseMember",
     params: {
       userID,
+      targetUserID,
       teamID,
       msgID
     },
@@ -77,11 +90,12 @@ export function inviteMember(userID, teamID, targetUserID, content) {
 }
 
 // 接受邀请
-export function joinTeam(userID, teamID, msgID) {
+export function joinTeam(userID, targetUserID, teamID, msgID) {
   return request({
     url: "/joinTeam",
     params: {
       userID,
+      targetUserID,
       teamID,
       msgID
     },

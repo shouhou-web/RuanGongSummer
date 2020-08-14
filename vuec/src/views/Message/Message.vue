@@ -161,8 +161,5 @@ export default {
 
 .content-main--inner {
   border-radius: 4px;
-  box-shadow: 0 2px 4px 0 rgba(121, 146, 185, 0.54);
-  background-color: #fff;
-  height: calc(100vh - 128px);
 }
 </style>

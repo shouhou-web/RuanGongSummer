@@ -7,13 +7,13 @@
         </router-link>
         <ul class="nav-left-ul">
           <li class="nav-left-item">
-            <a class="nav-item__inner" href="#">云平台</a>
-          </li>
-          <li class="nav-left-item">
-            <a class="nav-item__inner" href="#">课程中心</a>
-          </li>
-          <li class="nav-left-item">
             <a class="nav-item__inner" href="#">Github</a>
+          </li>
+          <li class="nav-left-item">
+            <a class="nav-item__inner" href="#">带得栏</a>
+          </li>
+          <li class="nav-left-item">
+            <a class="nav-item__inner" href="#">码云</a>
           </li>
         </ul>
       </template>
@@ -117,21 +117,27 @@
                   <div class="triangle"></div>
                 </div>
                 <ul class="">
-                  <li>
-                    <router-link :to="{ path: '/message' }">
+                  <router-link class="message-item" :to="{ path: '/message' }">
+                    <li>
                       加入申请
-                    </router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{ path: '/message/application' }">
+                    </li>
+                  </router-link>
+                  <router-link
+                    class="message-item"
+                    :to="{ path: '/message/invitation' }"
+                  >
+                    <li>
                       团队邀请
-                    </router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{ path: '/message/system' }">
+                    </li>
+                  </router-link>
+                  <router-link
+                    class="message-item"
+                    :to="{ path: '/message/system' }"
+                  >
+                    <li>
                       系统通知
-                    </router-link>
-                  </li>
+                    </li>
+                  </router-link>
                 </ul>
               </div>
             </div>
@@ -207,7 +213,8 @@ export default {
 }
 
 .nav-left-item {
-  margin-left: 15px;
+  margin-left: 20px;
+  min-width: 30px;
 }
 
 .nav-item__inner {
@@ -219,6 +226,7 @@ export default {
 .welcome {
   height: 36px;
   width: 110px;
+  min-width: 110px;
 }
 
 .welcome__img {
@@ -233,7 +241,7 @@ export default {
 .nav-right .item {
   display: flex;
   position: relative;
-  margin-left: 36px;
+  margin-left: 20px;
   cursor: pointer;
 }
 
