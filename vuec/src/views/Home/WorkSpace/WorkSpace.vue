@@ -1,22 +1,5 @@
 <template>
   <div>
-    <div class="opt">
-      <m-nav-dropdown position="left" class="l-card__nav">
-        <div slot="show">
-          <img class="l-card__setting" src="@/assets/image/teamopt.svg">
-        </div>
-        <div slot="hide" style="border: 1px solid #ececec;border-radius: 5px;background-color: white">
-          <div class="l-card__hide-main">
-            <my-button type="text-danger"
-                       class="l-card__nav-btn">自己加就行</my-button>
-            <my-button type="text"
-                       class="l-card__nav-btn">自己加就行</my-button>
-          </div>
-        </div>
-        <input/>
-      </m-nav-dropdown>
-    </div>
-
     <div class="second-nav-list">
       <my-button
         type="text"
@@ -105,55 +88,5 @@ second-whole-page {
 }
 .v-leave-active {
   transition: 0.3s;
-}
-.opt{
-  float: right;
-  height: 10px;
-  margin-top: 5px;
-  margin-right: 30px;
-}
-
-.l-card {
-  align-items: center;
-  color: #303133;
-  transition: 0.3s;
-  overflow: hidden;
-  -webkit-transition: 0.3s;
-}
-
-.l-card__nav {
-  align-self: flex-end;
-  margin-right: 2px;
-  margin-top: 2px;
-}
-
-.l-card__setting {
-  height: 18px;
-  width: 18px;
-}
-
-.l-card__pic {
-  width: 80px;
-  height: 80px;
-}
-
-.l-card__body {
-  margin: 10px 20px;
-}
-
-.l-card__hide-main {
-  margin: auto;
-  background-color: #FAFBFC;
-  display: flex;
-  flex-direction: column;
-}
-
-.l-card__nav-btn {
-  padding: 10px 20px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.l-card__nav-btn:hover {
 }
 </style>
