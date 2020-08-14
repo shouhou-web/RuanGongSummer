@@ -241,7 +241,7 @@ export default {
 .nav-right .item {
   display: flex;
   position: relative;
-  margin-left: 20px;
+  margin-left: 25px;
   cursor: pointer;
 }
 

@@ -53,7 +53,7 @@ export default {
 }
 
 .nav-right {
-  min-width: 490px;
+  min-width: 510px;
   justify-content: flex-start;
 }
 </style>
