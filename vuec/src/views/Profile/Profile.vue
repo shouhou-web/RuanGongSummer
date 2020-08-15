@@ -2,6 +2,7 @@
   <div>
     <m-app-header></m-app-header>
     <div class="wrapper">
+      <div class="profile-mask"></div>
       <div class="header">
         <profile-header></profile-header>
       </div>
@@ -34,7 +35,7 @@ export default {
   name: "Home",
   components: {
     MAppHeader,
-    ProfileHeader
+    ProfileHeader,
   },
   computed: {
     user() {
@@ -42,12 +43,22 @@ export default {
     },
     isEditProfile() {
       return this.$route.path == "/profile/editProfile";
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
+.profile-mask {
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 100vh;
+  left: 0;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
 .wrapper {
   border-radius: 8px;
   background-color: #fff;

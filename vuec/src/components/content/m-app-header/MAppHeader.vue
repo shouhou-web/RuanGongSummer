@@ -469,8 +469,8 @@ export default {
 
 .msg-num {
   background-color: var(--color-main);
-  margin-top: -40px;
-  margin-left: 45px;
+  margin-top: -35px;
+  margin-left: 60px;
 }
 
 .msg-num--main {

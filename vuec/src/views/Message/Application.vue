@@ -46,6 +46,7 @@ export default {
   box-shadow: 0 2px 4px 0 rgba(121, 146, 185, 0.54);
   border-radius: 4px;
   margin-bottom: 10px;
+  overflow: auto;
   padding: 0 16px;
   height: calc(100vh - 128px);
 }

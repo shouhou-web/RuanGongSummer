@@ -51,5 +51,6 @@ export default {
   border-radius: 4px;
   margin-bottom: 10px;
   height: calc(100vh - 128px);
+  overflow: auto;
 }
 </style>
