@@ -70,7 +70,7 @@ export default {
       docToDeleteID: "",
       docRenameHoverOn: false,
       docToRenameID: "",
-      newDocTitle: ""
+      newDocTitle: "",
     };
   },
   methods: {

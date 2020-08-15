@@ -1,8 +1,17 @@
 <template>
   <div>
-    <div v-if="!noneShow" class="docs">
-      <div v-for="doc in myDocs" :key="doc.docID" class="doc">
-        <l-card :ID="doc.docID" :title="doc.docTitle">
+    <div v-if="!noneShow" class="docs" @click="test">
+      <div
+        v-for="doc in myDocs"
+        :key="doc.docID"
+        class="doc"
+        @click.stop="testtest"
+      >
+        <l-card
+          :ID="doc.docID"
+          :title="doc.docTitle"
+          :forceUnchecked="testForce"
+        >
           <div slot="hide-content" class="hide-nav">
             <my-button
               type="text"
@@ -76,10 +85,20 @@ export default {
       docToDeleteID: "",
       docRenameHoverOn: false,
       docToRenameID: "",
-      newDocTitle: ""
+      newDocTitle: "",
+
+      testForce: false
     };
   },
   methods: {
+    test() {
+      console.log(this.testForce + "IMade");
+      this.testForce = true; // 选中多个文件后点击父组件其他位置会让testForce变为true，从而强行更改样式
+    },
+    testtest() {
+      console.log(this.testForce + "IMade");
+      this.testForce = false; // 在选中后点击其他card的部分只会将testForce保持为false，并且可以在取消多选后再多选是将testForce置为false，方便触发下一次的样式改变
+    },
     cancelRename() {
       this.docRenameHoverOn = false;
     },

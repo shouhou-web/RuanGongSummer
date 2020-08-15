@@ -70,6 +70,15 @@ export default {
       });
     }
   },
+  watch: {
+    forceUnchecked: {
+      handler: function(val, oldval) {
+        if(val == true) {
+          this.check();
+        }
+      }
+    }
+  },
   props: {
     bodyStyle: {},
     shadow: "",
@@ -78,7 +87,8 @@ export default {
       default: true
     },
     title: "",
-    ID: ""
+    ID: "",
+    forceUnchecked: false
   }
 };
 </script>
