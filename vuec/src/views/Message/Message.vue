@@ -162,7 +162,7 @@ export default {
 }
 
 .content-main {
-  padding: 10px;
+  padding: 10px 10px 0;
 }
 
 .content-main--inner {
