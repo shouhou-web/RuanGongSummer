@@ -73,7 +73,7 @@ export default {
   watch: {
     forceUnchecked: {
       handler: function(val, oldval) {
-        if(val == true) {
+        if (val == false && this.isSelected) {
           this.check();
         }
       }

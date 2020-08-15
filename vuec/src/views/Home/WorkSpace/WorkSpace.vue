@@ -24,8 +24,16 @@
       >
       <div class="align-icon-outer">
         <div class="align-icon-inner">
-          <img src="@/assets/icon/home/block.svg" class="align-icon" @click="toBlock" />
-          <img src="@/assets/icon/home/list.svg" class="align-icon" @click="toList" />
+          <img
+            src="@/assets/icon/home/block.svg"
+            class="align-icon"
+            @click="toBlock"
+          />
+          <img
+            src="@/assets/icon/home/list.svg"
+            class="align-icon"
+            @click="toList"
+          />
         </div>
       </div>
     </div>

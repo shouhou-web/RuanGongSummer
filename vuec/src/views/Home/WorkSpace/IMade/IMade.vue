@@ -1,9 +1,33 @@
 <template>
   <div>
     <div v-if="!noneShow">
-      <div v-if="alignStyle" class="docs-block">
-        <div v-for="doc in myDocs" :key="doc.docID" class="doc">
-          <l-card :ID="doc.docID" :title="doc.docTitle">
+      <div class="test">
+        <m-nav-dropdown v-if="batchDocs.length" triColor="#DCDFE6">
+          <div slot="show">
+            <img src="@/assets/icon/home/more.svg" class="align-icon" />
+          </div>
+          <div slot="hide" class="batch-nav">
+            <my-button type="text" class="nav-btn">批量收藏</my-button>
+            <my-button type="text-danger" class="nav-btn" @click="batchDelete"
+              >批量删除</my-button
+            >
+          </div>
+        </m-nav-dropdown>
+      </div>
+      <div v-if="alignStyle" class="docs-block" @click="cancelBatch">
+        <div
+          v-for="doc in myDocs"
+          :key="doc.docID"
+          class="doc"
+          @click.stop="confirmBatch"
+        >
+          <l-card
+            :ID="doc.docID"
+            :title="doc.docTitle"
+            :forceUnchecked="batchOrNot"
+            @addDoc="addToBatchDocs"
+            @cancelDoc="removeFromBatchDocs"
+          >
             <div slot="hide-content" class="hide-nav">
               <my-button
                 type="text"
@@ -28,17 +52,19 @@
           </l-card>
         </div>
       </div>
-      <div v-else class="docs-list">
+      <div v-else class="docs-list" @click="cancelBatch">
         <div
           v-for="doc in myDocs"
           :key="doc.docID"
           class="doc"
+          @click.stop="confirmBatch"
         >
           <l-lcard
             :ID="doc.docID"
             :title="doc.docTitle"
             :time="doc.lastEditTime"
             :creatorID="user.userID"
+            :forceUnchecked="batchOrNot"
           >
             <div slot="hide-content" class="hide-nav">
               <my-button
@@ -75,7 +101,19 @@
       @submit="deleteDoc"
     >
       <div class="hover-text">
-        删除文档后可以在回收站中还原文档，确认要删除该文档吗？
+        被删除的文档后可以在回收站中还原文档，确认要删除该文档吗？
+      </div>
+    </m-hover>
+    <m-hover
+      :onShow="batchDocDeleteHoverOn"
+      title="批量删除文档"
+      assureBtn="确认"
+      cancelBtn="手滑了"
+      @cancel="cancelBatchDelete"
+      @submit="deleteBatchDoc"
+    >
+      <div class="hover-text">
+        被删除的文档后可以在回收站中还原文档，确认要删除该文档吗？
       </div>
     </m-hover>
     <m-hover
@@ -105,6 +143,8 @@ import { getMyDocs } from "network/doc.js";
 import { deleteDoc } from "network/doc.js";
 import { collectDoc } from "network/doc.js";
 import { editDocTitle } from "network/doc.js";
+import { docBatchDelete, docBatchFavorite } from "@/network/doc";
+const qs = require("qs");
 
 export default {
   name: "IMade",
@@ -115,12 +155,61 @@ export default {
       noneShow: false,
       docDeleteHoverOn: false,
       docToDeleteID: "",
+      batchDocDeleteHoverOn: false,
+
       docRenameHoverOn: false,
       docToRenameID: "",
-      newDocTitle: ""
+      newDocTitle: "",
+      batchOrNot: true,
+      batchDocs: []
     };
   },
   methods: {
+    cancelBatch() {
+      this.batchOrNot = false;
+    },
+    confirmBatch() {
+      this.batchOrNot = true;
+    },
+    addToBatchDocs(docID) {
+      this.batchDocs.push(docID);
+    },
+    removeFromBatchDocs(docID) {
+      for (var i = 0; i < this.batchDocs.length; i++) {
+        if (this.batchDocs[i] == docID) {
+          this.batchDocs.splice(i, 1);
+          return;
+        }
+      }
+    },
+    batchDelete() {
+      this.batchDocDeleteHoverOn = true;
+    },
+    cancelBatchDelete() {
+      this.batchDocDeleteHoverOn = false;
+    },
+    deleteBatchDoc() {
+      var chosen_Docs = qs.stringify(this.batchDocs, { indices: false });
+      docBatchDelete(chosen_Docs, this.user.userID)
+        .then(res => {
+          if (res == 0) {
+            this.batchDocDeleteHoverOn = false;
+            this.$notify.success("批量删除成功");
+            getMyDocs(this.user.userID).then(res => {
+              this.myDocs = res;
+              if (res.length === 0) this.noneShow = true;
+            });
+          } else {
+            this.$notify.error("请检查网络，删除失败");
+            return;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          this.$notify.error("请检查网络，删除失败");
+          return;
+        });
+    },
     cancelRename() {
       this.docRenameHoverOn = false;
     },
@@ -213,6 +302,11 @@ export default {
 </script>
 
 <style scoped>
+.test {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .docs-block {
   display: flex;
   flex-wrap: wrap;
@@ -239,6 +333,16 @@ export default {
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+
+.batch-nav {
+  align-items: center;
+  background-color: #fafbfc;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 8px;
 }
 
 .hover-whole {
