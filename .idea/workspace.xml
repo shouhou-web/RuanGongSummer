@@ -22,8 +22,9 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:dev-pull-and-write" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/dev" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
@@ -359,7 +360,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597459165127</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="团队空间优化">
+      <created>1597480578829</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1597480578830</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -381,7 +389,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="dev-pull-and-write" />
+                        <option value="origin/dev" />
                       </list>
                     </value>
                   </entry>
@@ -411,7 +419,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="一次失败的尝试，完成了login和register的模拟，但是没法保存，回头试试mgg的方法" />
     <MESSAGE value="在自己尝试后发现一个安全而且还不错的登录样式（放在register.vue里面了，那个class绑定的登录样式在login.vue里面）" />
     <MESSAGE value="push了一个登录注册页的残次品" />
     <MESSAGE value="push了一个登录注册页的残次品plus" />
@@ -436,7 +443,8 @@
     <MESSAGE value="teamspace前端样式适配" />
     <MESSAGE value="doc API的编写" />
     <MESSAGE value="工作台优化" />
-    <option name="LAST_COMMIT_MESSAGE" value="工作台优化" />
+    <MESSAGE value="团队空间优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="团队空间优化" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-735" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1596358814923">

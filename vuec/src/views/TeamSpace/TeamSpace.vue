@@ -175,9 +175,7 @@
       :on-show="openSearch"
       :title="searchTitle"
       cancel-btn="X"
-      @cancel="cancelSearch"
-      style="font-family: 'JetBrains Mono';"
-    >
+      @cancel="cancelSearch">
       <div class="userSearch">
         <!-- 0-邀请 1-查找-->
         <input
