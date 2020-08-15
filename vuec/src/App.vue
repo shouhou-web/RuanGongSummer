@@ -18,7 +18,6 @@ export default {
       console.log("我执行了", sessionStorage.getItem("user"));
       this.$store.commit("login", JSON.parse(sessionStorage.getItem("user")));
     }
-    // console.log(this.$store.state.token);
   },
 };
 </script>

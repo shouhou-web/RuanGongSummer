@@ -1,5 +1,16 @@
 import { request } from "@/network/request";
 
+// 获取全部未读消息数量
+export function getAllMsgNum(userID) {
+  return request({
+    url: "/getAllMsgNum",
+    params: {
+      userID
+    },
+    method: "post"
+  });
+}
+
 // 获取团队消息和邀请消息
 export function getCommonMsg(type, userID) {
   return request({

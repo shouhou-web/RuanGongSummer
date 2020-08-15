@@ -2,7 +2,6 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import mutations from "./mutations";
-import fa from "element-ui/src/locale/lang/fa";
 
 Vue.use(Vuex);
 

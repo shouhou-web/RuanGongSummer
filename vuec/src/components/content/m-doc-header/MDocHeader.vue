@@ -78,19 +78,57 @@
             </m-nav-dropdown>
           </div>
         </div>
-      </template>
-      <m-hover
-        :onShow="isCooperation"
-        title="协作"
-        assureBtn="确认"
-        cancelBtn="取消"
-        @submit="submit"
-        @cancel="cancel"
-      >
-      <div class="cooperation">
 
-      </div>
-      </m-hover>
+        <m-hover
+          :onShow="isCooperation"
+          assureBtn="确认"
+          cancelBtn="取消"
+          :width="350"
+          @submit="submit"
+          @cancel="cancel"
+        >
+          <div class="cooperation">
+            <div class="cooperation-header">
+              <span class="cooperation__header1">团队成员</span>
+              <span class="cooperation__header2">其他用户</span>
+            </div>
+            <div class="cooperation-list">
+              <ul>
+                <li v-for="(item, index) in identityList" :key="index">
+                  <my-button
+                    class="item-wrapper"
+                    type="text"
+                    :active="item.docIdentity == docIdentity"
+                  >
+                    <label class="cooperation-item">
+                      <input
+                        name="type"
+                        type="radio"
+                        :value="item.docIdentity"
+                        v-model="docIdentity"
+                      />
+                      <span
+                        class="cooperation__name1"
+                        :class="[
+                          item.docIdentity == docIdentity ? 'name--blue' : '',
+                        ]"
+                        >{{ item.name1 }}</span
+                      >
+                      <span
+                        class="cooperation__name1"
+                        :class="[
+                          item.docIdentity == docIdentity ? 'name--blue' : '',
+                        ]"
+                        >{{ item.name2 }}</span
+                      >
+                    </label>
+                  </my-button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </m-hover>
+      </template>
     </m-header>
   </div>
 </template>
@@ -121,6 +159,35 @@ export default {
   },
   data() {
     return {
+      isCooperation: false, // 是否编辑权限
+      docIdentity: 0, // 文档权限
+      identityList: [
+        {
+          docIdentity: 4,
+          name1: "不可读",
+          name2: "不可读",
+        },
+        {
+          docIdentity: 3,
+          name1: "不可读",
+          name2: "可读",
+        },
+        {
+          docIdentity: 2,
+          name1: "不可读",
+          name2: "可读写",
+        },
+        {
+          docIdentity: 1,
+          name1: "可读",
+          name2: "可写",
+        },
+        {
+          docIdentity: 0,
+          name1: "可读",
+          name2: "可读写",
+        },
+      ],
       // 返回跳转
       back: [
         {
@@ -151,14 +218,15 @@ export default {
   },
   methods: {
     // 打开协作框
-    openCooperation(){
+    openCooperation() {
+      console.log(123);
       this.isCooperation = true;
     },
     // 监听确定事件
-    submit(){},
+    submit() {},
     // 取消悬浮窗展示
-    cancel(){
-      this.isCooperation = false
+    cancel() {
+      this.isCooperation = false;
     },
     // 修改帖子标题
     submitDocTitle() {
@@ -288,5 +356,54 @@ export default {
 
 .other-item--red {
   color: var(--color-tint);
+}
+
+.cooperation-header {
+  align-items: center;
+  display: flex;
+  padding: 0px 50px 0;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.cooperation__header1,
+.cooperation__header2 {
+  margin-left: 30px;
+}
+
+.cooperation-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-wrapper {
+  width: 100%;
+}
+
+.cooperation-item {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  text-align: center;
+  padding: 10px 0;
+  width: 300px;
+}
+
+.cooperation-item input {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 50px;
+}
+
+.cooperation__name1,
+.cooperation__name2 {
+  color: #000;
+  margin-left: 30px;
+  width: 64px;
+}
+
+.name--blue {
+  color: #409eff;
 }
 </style>

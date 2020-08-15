@@ -108,8 +108,13 @@
             </div>
             <!-- 消息 -->
             <div class="item">
-              <div class="">
-                <a class="nav-item__inner" href="#">消息</a>
+              <div class="item-message-a">
+                <a class="nav-item__inner" href="#">
+                  消息
+                  <span v-if="allMsgNum.all" class="msg-num--main">
+                    {{ allMsgNum.all }}
+                  </span>
+                </a>
               </div>
               <!-- 隐藏层 -->
               <div class="message--show message--hide">
@@ -120,6 +125,9 @@
                   <router-link class="message-item" :to="{ path: '/message' }">
                     <li>
                       加入申请
+                      <span v-if="allMsgNum.invitation" class="msg-num">
+                        {{ allMsgNum.application }}
+                      </span>
                     </li>
                   </router-link>
                   <router-link
@@ -128,6 +136,20 @@
                   >
                     <li>
                       团队邀请
+                      <span v-if="allMsgNum.application" class="msg-num">
+                        {{ allMsgNum.invitation }}
+                      </span>
+                    </li>
+                  </router-link>
+                  <router-link
+                    class="message-item"
+                    :to="{ path: '/message/comment' }"
+                  >
+                    <li>
+                      回复我的
+                      <span v-if="allMsgNum.reply" class="msg-num">
+                        {{ allMsgNum.reply }}
+                      </span>
                     </li>
                   </router-link>
                   <router-link
@@ -136,6 +158,9 @@
                   >
                     <li>
                       系统通知
+                      <span v-if="allMsgNum.system" class="msg-num">
+                        {{ allMsgNum.system }}
+                      </span>
                     </li>
                   </router-link>
                 </ul>
@@ -160,6 +185,7 @@
 <script>
 import MHeader from "components/common/m-header/MHeader.vue";
 import appSearch from "./childCpn/app-header-search";
+import { getAllMsgNum } from "network/message";
 export default {
   name: "MAppHeader",
   components: {
@@ -175,10 +201,15 @@ export default {
   data() {
     return {
       user: {}, // 用户数据
+      allMsgNum: {},
     };
   },
   created() {
     this.user = this.$store.state.user;
+    getAllMsgNum(this.$store.state.user.userID).then((res) => {
+      console.log(res);
+      this.allMsgNum = res;
+    });
   },
   computed: {
     token() {
@@ -292,7 +323,7 @@ export default {
 
 .message--show li {
   font-size: 14px;
-  padding: 20px;
+  padding: 15px;
 }
 
 .avator--show {
@@ -401,6 +432,51 @@ export default {
 .option__content,
 .exit-content {
   margin-left: 15px;
+}
+
+/* --------------消息的数目定位------------- */
+
+.message-item {
+  line-height: 18px;
+}
+
+.nav-item__inner,
+.message-item li {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.msg-num--main,
+.msg-num {
+  /* border: 1px solid #fff; */
+  border-radius: 10px;
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  height: 18px;
+  line-height: 18px;
+  padding: 0 6px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.msg-num--main,
+.msg-num {
+  position: absolute;
+  /* margin: -10px -20px 0 0; */
+}
+
+.msg-num {
+  background-color: var(--color-main);
+  margin-top: -40px;
+  margin-left: 45px;
+}
+
+.msg-num--main {
+  background-color: var(--color-tint);
+  margin-top: -20px;
+  margin-left: 45px;
 }
 
 /* ---------------隐藏层动效---------------- */
