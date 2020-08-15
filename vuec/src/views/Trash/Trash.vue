@@ -1,24 +1,69 @@
 <template>
   <div>
+    <div class="second-nav-list">
+      <div class="align-icon-outer">
+        <div class="align-icon-inner">
+          <img
+            src="@/assets/icon/home/block.svg"
+            class="align-icon"
+            @click="toBlock"
+          />
+          <img
+            src="@/assets/icon/home/list.svg"
+            class="align-icon"
+            @click="toList"
+          />
+        </div>
+      </div>
+    </div>
     <div
       v-if="!noneShow"
-      class="docs"
-      style="background-color: white;height: 80vh;margin: 20px;margin-left: 45px;overflow: auto;"
+      style="height: 80vh;margin: 20px;margin-left: 45px;overflow: auto;"
     >
-      <div v-for="doc in myDeletedDocs" :key="doc.docID" class="doc">
-        <l-card :ID="doc.docID" :title="doc.docTitle">
-          <div slot="hide-content" class="hide-nav">
-            <my-button type="text" class="nav-btn" @click="toRecover(doc.docID)"
-              >还原</my-button
-            >
-            <my-button
-              type="text-danger"
-              class="nav-btn"
-              @click="absoluteDeleteNotice(doc.docID)"
-              >彻底删除</my-button
-            >
-          </div>
-        </l-card>
+      <div v-if="alignStyle" class="docs-block">
+        <div v-for="doc in myDeletedDocs" :key="doc.docID" class="doc">
+          <l-card :ID="doc.docID" :title="doc.docTitle">
+            <div slot="hide-content" class="hide-nav">
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="toRecover(doc.docID)"
+                >还原</my-button
+              >
+              <my-button
+                type="text-danger"
+                class="nav-btn"
+                @click="absoluteDeleteNotice(doc.docID)"
+                >彻底删除</my-button
+              >
+            </div>
+          </l-card>
+        </div>
+      </div>
+      <div v-else class="docs-list">
+        <div v-for="doc in myDeletedDocs" :key="doc.docID" class="doc">
+          <l-lcard
+            :ID="doc.docID"
+            :title="doc.docTitle"
+            :time="doc.lastEditTime"
+            :creatorID="user.userID"
+          >
+            <div slot="hide-content" class="hide-nav">
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="toRecover(doc.docID)"
+                >还原</my-button
+              >
+              <my-button
+                type="text-danger"
+                class="nav-btn"
+                @click="absoluteDeleteNotice(doc.docID)"
+                >彻底删除</my-button
+              >
+            </div>
+          </l-lcard>
+        </div>
       </div>
     </div>
     <l-show-none v-else></l-show-none>
@@ -50,10 +95,19 @@ export default {
       myDeletedDocs: "",
       noneShow: false,
       docAbsoluteDeleteHoverOn: false,
-      docToAbsoluteDeleteID: ""
+      docToAbsoluteDeleteID: "",
+      alignStyle: true
     };
   },
   methods: {
+    toBlock() {
+      console.log(this.alignStyle);
+      this.alignStyle = true;
+    },
+    toList() {
+      console.log(this.alignStyle);
+      this.alignStyle = false;
+    },
     toRecover(docID) {
       recoverDoc(this.user.userID, docID).then(res => {
         if (res === 1) {
@@ -114,9 +168,14 @@ export default {
 </script>
 
 <style scoped>
-.docs {
+.docs-block {
   display: flex;
   flex-wrap: wrap;
+}
+
+.docs-list {
+  display: flex;
+  flex-direction: column;
 }
 
 .doc {
@@ -135,5 +194,31 @@ export default {
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+
+.second-nav-list {
+  /* background-color: #fff;
+  box-shadow: var(--box-shadow); */
+  align-items: center;
+  border-radius: 12px;
+  display: flex;
+  margin: 10px 20px;
+  padding: 10px 0;
+}
+
+.align-icon-outer {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.align-icon-inner {
+  align-items: center;
+  display: flex;
+}
+
+.align-icon {
+  margin-right: 2px;
+  margin-left: 2px;
 }
 </style>

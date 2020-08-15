@@ -22,10 +22,16 @@
         @click="toMyColletion"
         >我的收藏</my-button
       >
+      <div class="align-icon-outer">
+        <div class="align-icon-inner">
+          <img src="@/assets/icon/home/block.svg" class="align-icon" @click="toBlock" />
+          <img src="@/assets/icon/home/list.svg" class="align-icon" @click="toList" />
+        </div>
+      </div>
     </div>
     <div class="second-nav-main">
       <transition mode="out-in">
-        <router-view></router-view>
+        <router-view :alignStyle="listOrBlock"></router-view>
       </transition>
     </div>
   </div>
@@ -34,7 +40,18 @@
 <script>
 export default {
   name: "WorkSpace",
+  data() {
+    return {
+      listOrBlock: true
+    };
+  },
   methods: {
+    toBlock() {
+      this.listOrBlock = true;
+    },
+    toList() {
+      this.listOrBlock = false;
+    },
     toRecent() {
       this.$router.push({ path: "/home/workSpace/recent" });
     },
@@ -43,13 +60,13 @@ export default {
     },
     toMyColletion() {
       this.$router.push({ path: "/home/workSpace/myCollection" });
-    },
+    }
   },
   components: {},
   created() {
     this.$store.state.hasTeam = false;
     this.$store.state.nowTeamID = -1;
-  },
+  }
 };
 </script>
 
@@ -62,7 +79,9 @@ second-whole-page {
 .second-nav-list {
   /* background-color: #fff;
   box-shadow: var(--box-shadow); */
+  align-items: center;
   border-radius: 12px;
+  display: flex;
   margin: 10px 20px;
   padding: 10px 0;
 }
@@ -80,6 +99,22 @@ second-whole-page {
   overflow: auto;
   height: 73vh;
   margin: 20px;
+}
+
+.align-icon-outer {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.align-icon-inner {
+  align-items: center;
+  display: flex;
+}
+
+.align-icon {
+  margin-right: 2px;
+  margin-left: 2px;
 }
 
 .v-enter {

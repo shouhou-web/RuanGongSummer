@@ -1,36 +1,68 @@
 <template>
   <div>
-    <div v-if="!noneShow" class="docs" @click="test">
-      <div
-        v-for="doc in myDocs"
-        :key="doc.docID"
-        class="doc"
-        @click.stop="testtest"
-      >
-        <l-card
-          :ID="doc.docID"
-          :title="doc.docTitle"
-          :forceUnchecked="testForce"
+    <div v-if="!noneShow">
+      <div v-if="alignStyle" class="docs-block">
+        <div v-for="doc in myDocs" :key="doc.docID" class="doc">
+          <l-card :ID="doc.docID" :title="doc.docTitle">
+            <div slot="hide-content" class="hide-nav">
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="toCollectDoc(doc.docID)"
+                >收藏</my-button
+              >
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="toRename(doc.docID)"
+                >重命名</my-button
+              >
+              <my-button type="text" class="nav-btn">分享</my-button>
+              <my-button
+                type="text-danger"
+                class="nav-btn"
+                @click="deleteNotice(doc.docID)"
+                >删除</my-button
+              >
+            </div>
+          </l-card>
+        </div>
+      </div>
+      <div v-else class="docs-list">
+        <div
+          v-for="doc in myDocs"
+          :key="doc.docID"
+          class="doc"
         >
-          <div slot="hide-content" class="hide-nav">
-            <my-button
-              type="text"
-              class="nav-btn"
-              @click="toCollectDoc(doc.docID)"
-              >收藏</my-button
-            >
-            <my-button type="text" class="nav-btn" @click="toRename(doc.docID)"
-              >重命名</my-button
-            >
-            <my-button type="text" class="nav-btn">分享</my-button>
-            <my-button
-              type="text-danger"
-              class="nav-btn"
-              @click="deleteNotice(doc.docID)"
-              >删除</my-button
-            >
-          </div>
-        </l-card>
+          <l-lcard
+            :ID="doc.docID"
+            :title="doc.docTitle"
+            :time="doc.lastEditTime"
+            :creatorID="user.userID"
+          >
+            <div slot="hide-content" class="hide-nav">
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="toCollectDoc(doc.docID)"
+                >收藏</my-button
+              >
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="toRename(doc.docID)"
+                >重命名</my-button
+              >
+              <my-button type="text" class="nav-btn">分享</my-button>
+              <my-button
+                type="text-danger"
+                class="nav-btn"
+                @click="deleteNotice(doc.docID)"
+                >删除</my-button
+              >
+            </div>
+          </l-lcard>
+        </div>
       </div>
     </div>
     <l-show-none v-else style="height: 70vh"></l-show-none>
@@ -85,20 +117,10 @@ export default {
       docToDeleteID: "",
       docRenameHoverOn: false,
       docToRenameID: "",
-      newDocTitle: "",
-
-      testForce: false
+      newDocTitle: ""
     };
   },
   methods: {
-    test() {
-      console.log(this.testForce + "IMade");
-      this.testForce = true; // 选中多个文件后点击父组件其他位置会让testForce变为true，从而强行更改样式
-    },
-    testtest() {
-      console.log(this.testForce + "IMade");
-      this.testForce = false; // 在选中后点击其他card的部分只会将testForce保持为false，并且可以在取消多选后再多选是将testForce置为false，方便触发下一次的样式改变
-    },
     cancelRename() {
       this.docRenameHoverOn = false;
     },
@@ -180,15 +202,25 @@ export default {
       this.myDocs = res;
       if (res.length === 0) this.noneShow = true;
     });
+  },
+  props: {
+    alignStyle: {
+      type: Boolean,
+      default: true
+    }
   }
 };
 </script>
 
 <style scoped>
-.docs {
+.docs-block {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
+}
+
+.docs-list {
+  display: flex;
+  flex-direction: column;
 }
 
 .doc {
