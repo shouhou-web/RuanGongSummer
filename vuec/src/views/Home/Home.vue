@@ -101,7 +101,7 @@ import MAppHeader from "components/content/m-app-header/MAppHeader";
 import Recent from "./WorkSpace/WorkSpace";
 
 import { addTeam } from "../../network/team.js";
-import { addDoc } from "../../network/home.js";
+import { addDoc } from "../../network/doc.js";
 
 export default {
   name: "Home",

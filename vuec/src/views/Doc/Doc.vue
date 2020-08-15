@@ -1,7 +1,7 @@
 <template>
   <div id="doc">
     <div class="header">
-      <m-doc-header :doc="doc"></m-doc-header>
+      <m-doc-header :doc="doc" @toRecent="toRecent"></m-doc-header>
     </div>
     <div class="editor">
       <in-editor></in-editor>
@@ -38,7 +38,13 @@ export default {
     if (docTitle == "")
       // 新建文档
       this.doc.docID = docID;
-    else {
+    else this._getDoc(userID, docID);
+  },
+  methods: {
+    toRecent(item) {
+      this._getDoc(this.$store.state.user.userID, item.docID);
+    },
+    _getDoc(userID, docID) {
       getDoc(userID, docID)
         .then((res) => {
           console.log(res);
@@ -52,7 +58,7 @@ export default {
             message: "请稍后重试~",
           });
         });
-    }
+    },
   },
 };
 </script>

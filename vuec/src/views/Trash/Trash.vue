@@ -38,9 +38,9 @@
 </template>
 
 <script>
-import { getDeletedDocs } from "network/trash.js";
-import { deleteDoc } from "network/trash.js";
-import { recoverDoc } from "network/trash.js";
+import { getDeletedDocs } from "network/doc.js";
+import { deleteDoc } from "network/doc.js";
+import { recoverDoc } from "network/doc.js";
 
 export default {
   name: "Trash",

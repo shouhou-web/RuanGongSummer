@@ -55,9 +55,9 @@
 </template>
 
 <script>
-import { getFavoriteDocs } from "network/workspace.js";
-import { deleteDoc } from "network/workspace.js";
-import { editDocTitle } from "network/workspace.js";
+import { getFavoriteDocs } from "network/doc.js";
+import { deleteDoc } from "network/doc.js";
+import { editDocTitle } from "network/doc.js";
 
 export default {
   name: "MyCollection",

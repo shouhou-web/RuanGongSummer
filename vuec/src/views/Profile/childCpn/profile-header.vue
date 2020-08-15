@@ -64,7 +64,7 @@
 
 <script>
 import MHover from "components/common/m-hover/m-hover";
-import { setImagePath } from "network/profile";
+import { setImagePath } from "network/user";
 export default {
   name: "ProfileHeader",
   components: {

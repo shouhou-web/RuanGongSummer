@@ -2,7 +2,7 @@
   <div>
     <m-header bgColor="#f7f7f7">
       <template v-slot:left>
-        <m-nav-dropdown position="middle">
+        <m-nav-dropdown position="right">
           <my-button slot="show" size="small">快速跳转</my-button>
           <div slot="hide">
             <div class="back-item">
@@ -20,11 +20,16 @@
               </router-link>
             </div>
             <!-- 最近访问的文档。 -->
-            <div class="back-item">
+            <div v-if="recentDoc.length > 0" class="back-item">
               <div class="back-header">
                 最近使用
               </div>
-              <a class="back-a" v-for="(item, index) in recentDoc" :key="index">
+              <a
+                @click="toRecent(item)"
+                class="back-a"
+                v-for="(item, index) in recentDoc"
+                :key="index"
+              >
                 <img
                   class="back-a__icon"
                   src="@/assets/icon/doc/file.png"
@@ -47,16 +52,45 @@
         </div>
       </template>
       <template v-slot:right>
-        <div class="team">
-          <my-button size="small">协作</my-button>
-        </div>
-        <div class="share">
-          <my-button size="small">分享</my-button>
-        </div>
-        <div class="other">
-          <my-button size="small">其他操作</my-button>
+        <div class="doc-right-nav">
+          <div class="team">
+            <my-button @click="openCooperation" size="small">协作</my-button>
+          </div>
+          <div class="share">
+            <my-button size="small">分享</my-button>
+          </div>
+          <div class="other">
+            <m-nav-dropdown position="middle">
+              <my-button slot="show" size="small">其他操作</my-button>
+              <div slot="hide">
+                <ul class="other-list">
+                  <li class="other-item">
+                    收藏文档
+                  </li>
+                  <li class="other-item">
+                    分享文档
+                  </li>
+                  <li class="other-item other-item--red">
+                    删除文档
+                  </li>
+                </ul>
+              </div>
+            </m-nav-dropdown>
+          </div>
         </div>
       </template>
+      <m-hover
+        :onShow="isCooperation"
+        title="协作"
+        assureBtn="确认"
+        cancelBtn="取消"
+        @submit="submit"
+        @cancel="cancel"
+      >
+      <div class="cooperation">
+
+      </div>
+      </m-hover>
     </m-header>
   </div>
 </template>
@@ -64,81 +98,95 @@
 <script>
 import MHeader from "components/common/m-header/MHeader.vue";
 import { editDocTitle } from "network/doc";
+import { getRecentDocs } from "network/doc";
 export default {
   name: "MDocHeader",
   components: {
-    MHeader
+    MHeader,
   },
   props: {
     doc: {
+      // 文档对象
       type: Object,
-      default: {}
-    }
+      default: {},
+    },
+  },
+  created() {
+    getRecentDocs(this.$store.state.user.userID).then((res) => {
+      this.recentDoc = res;
+      if (res.length > 10) {
+        this.recentDoc = res.slice(0, 9);
+      }
+    });
   },
   data() {
     return {
+      // 返回跳转
       back: [
         {
           title: "工作台",
           iconSrc: require("@/assets/icon/doc/workspace.png"),
           href: {
-            path: "/home/workSpace"
-          }
+            path: "/home/workSpace",
+          },
         },
         {
           title: "团队空间",
           iconSrc: require("@/assets/icon/doc/teamspace.png"),
           href: {
-            path: "/home/teamSpace"
-          }
+            path: "/home/teamSpace",
+          },
         },
         {
           title: "回收站",
           iconSrc: require("@/assets/icon/doc/desktop.png"),
           href: {
-            path: "/home/trash"
-          }
-        }
+            path: "/home/trash",
+          },
+        },
       ],
-      recentDoc: [
-        {
-          docID: 1,
-          docTitle: "这里放近期的文档"
-        },
-        {
-          docID: 1,
-          docTitle: "欧拉欧拉欧拉欧拉欧拉欧拉欧拉"
-        },
-        {
-          docID: 2,
-          docTitle: "木大木大木大木大木大木大木大"
-        }
-      ]
+      // 近期文档
+      recentDoc: [],
     };
   },
   methods: {
+    // 打开协作框
+    openCooperation(){
+      this.isCooperation = true;
+    },
+    // 监听确定事件
+    submit(){},
+    // 取消悬浮窗展示
+    cancel(){
+      this.isCooperation = false
+    },
+    // 修改帖子标题
     submitDocTitle() {
       editDocTitle(
         this.$store.state.user.userID,
         this.doc.docID,
         this.doc.docTitle
       )
-        .then(res => {
+        .then((res) => {
           if (res == 1)
             this.$notify.error({
               title: "网络错误",
-              message: "请稍后重试~"
+              message: "请稍后重试~",
             });
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           this.$notify.error({
             title: "网络错误",
-            message: "请稍后重试~"
+            message: "请稍后重试~",
           });
         });
-    }
-  }
+    },
+    // 跳转到近期浏览
+    toRecent(item) {
+      this.$emit("toRecent", item);
+    },
+  },
 };
 </script>
 <style scoped>
@@ -206,25 +254,39 @@ export default {
   border-bottom: 1px solid var(--color-main);
 }
 
+.doc-right-nav {
+  display: flex;
+  justify-content: flex-end;
+  width: 95%;
+}
+
 .team,
 .share,
 .other {
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
-/* ---------------隐藏层动效---------------- */
-.back--hide:hover,
-.back:hover + .back--hide {
-  display: block;
-  animation: slowin 0.5s ease forwards;
+.other-list {
+  background-color: #fff;
+  padding: 8px 0;
 }
 
-@keyframes slowin {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.other-item {
+  align-items: center;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  font-size: 12px;
+  height: 32px;
+  line-height: 32px;
+  padding: 10px 25px;
+}
+
+.other-item:hover {
+  background-color: #f4f4f4;
+}
+
+.other-item--red {
+  color: var(--color-tint);
 }
 </style>

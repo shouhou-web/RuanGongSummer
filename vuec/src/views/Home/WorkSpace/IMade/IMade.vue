@@ -69,10 +69,10 @@
 </template>
 
 <script>
-import { getMyDocs } from "network/workspace.js";
-import { deleteDoc } from "network/workspace.js";
-import { collectDoc } from "network/workspace.js";
-import { editDocTitle } from "network/workspace.js";
+import { getMyDocs } from "network/doc.js";
+import { deleteDoc } from "network/doc.js";
+import { collectDoc } from "network/doc.js";
+import { editDocTitle } from "network/doc.js";
 
 export default {
   name: "IMade",

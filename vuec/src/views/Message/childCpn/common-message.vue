@@ -179,7 +179,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
           this.$notify.error({
             title: "网络错误",
             message: "请稍后重试~",
@@ -229,6 +229,11 @@ export default {
               type: "success",
             });
             this.message.isRead = 2;
+          } else {
+            this.$notify.error({
+              title: "网络错误",
+              message: "请稍后重试~",
+            });
           }
         })
         .catch((err) => {

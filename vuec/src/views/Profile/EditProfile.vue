@@ -123,7 +123,7 @@ import {
   setUserName,
   setUserPassword,
   setEmailAddress
-} from "network/profile.js";
+} from "network/user.js";
 import { emailVerification } from "network/user.js";
 export default {
   name: "Home",
