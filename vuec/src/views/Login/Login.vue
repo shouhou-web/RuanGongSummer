@@ -306,6 +306,7 @@ export default {
               message: "注册成功,请登录",
               type: "success"
             });
+            this.$router.push({path: '/Login?page=0'});
           }
         })
         .catch(err => {
