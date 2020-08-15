@@ -251,7 +251,7 @@
       </div>
     </m-hover>
 
-    <div>
+    <div style="margin: 20px">
       <transition mode="out-in">
         <TeamDoc v-bind:TeamID="TeamID" class="fade-in"></TeamDoc>
       </transition>
@@ -325,7 +325,7 @@ export default {
           // console.log(res);
           if (res == 0) {
             this.$notify.success("退出团体成功");
-            this.$router.push({ path: "/home/teamSpace" });
+            this.getMyTeamInPage();
             this.isQuit = false;
           } else {
             this.$notify.error("网络出现问题，无法退出，请检查网络情况");
@@ -353,7 +353,7 @@ export default {
           // console.log(res);
           if (res == 0) {
             this.$notify.success("解散团体成功");
-            this.$router.push({ path: "/home/teamSpace" });
+            this.getMyTeamInPage();
             this.isDisband = false;
             this.$router.go(0);
           } else {
@@ -426,6 +426,26 @@ export default {
           this.$notify.error("请检查网络情况，邀请发送失败");
         });
     },
+    getMyTeamInPage() {
+      getMyTeam(this.$store.state.user.userID)
+        .then((res) => {
+          // console.log(res);
+          this.myTeams = res;
+          // this.chosenPos = 0;
+          console.log(this.myTeams);
+          console.log(this.myTeams.length);
+          // this.chosenPos = res[0].teamID;
+          if (this.myTeams.length == 0) this.$store.commit("setHasTeam", false);
+          else {
+            this.$store.commit("setHasTeam", true);
+            // this.chosenPos = res[0].teamID;
+            this.chooseTeam(res[0].teamID, res[0].teamName);
+          }
+        })
+        .catch((err) => {
+          this.$message.error("请检查网络 - 暂时无法获取你的团队");
+        });
+    }
   },
   created() {
     this.user = this.$store.state.user;
@@ -567,6 +587,10 @@ export default {
 
 .one-team:hover {
   cursor: pointer;
+  color: #4a4a4c;
+  border-color: #c6e2ff;
+  box-shadow: 2px 3px 5px 1px rgba(29, 120, 223, 0.2);
+  transition: 0.5s;
 }
 
 .one-team_chosen {

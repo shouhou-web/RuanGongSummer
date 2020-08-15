@@ -5,14 +5,17 @@
     </div>
     <div class="my-team-details" v-else>
       <div class="opt" v-if="chosenDocs.length > 0">
-        <m-nav-dropdown position="left" class="l-card__nav">
+        <m-nav-dropdown position="left" class="l-card__nav more-opt">
           <div slot="show">
-            <img class="l-card__setting" src="@/assets/image/teamopt.svg" />
+            <div>
+              <my-button size="medium" type="text" style="padding: 10px">更多操作</my-button>
+            </div>
           </div>
           <div
             slot="hide"
             style="
-              border: 1px solid #ececec;
+              border: 1px solid #e7e7e7;
+              margin-top: -70px;
               border-radius: 5px;
               background-color: white;
             "
@@ -98,8 +101,6 @@ export default {
           this.chosenDocs.splice(i, 1);
           console.log("被选中Doc(删除后)", this.chosenDocs);
           return;
-        } else {
-          this.$notify.warning("数据错误");
         }
       }
     },
@@ -179,18 +180,15 @@ export default {
 
 .my-team-details {
   margin: auto;
-  margin-top: 30px;
   height: 70vh;
   border-radius: 5px;
   overflow: auto;
-  margin-right: 30px;
 }
 
 .team-docs {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 15px;
   height: auto;
   border-radius: 5px;
 }
@@ -198,7 +196,6 @@ export default {
 .doc {
   width: 130px;
   height: 160px;
-  margin: 10px;
   padding: 5px;
 }
 
@@ -265,5 +262,11 @@ export default {
   height: 10px;
   margin-top: 5px;
   margin-right: 10px;
+}
+
+.more-opt{
+  position: fixed;
+  margin-top: -70px;
+  margin-left: -10%;
 }
 </style>

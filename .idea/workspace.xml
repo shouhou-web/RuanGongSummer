@@ -22,9 +22,8 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/dev" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:dev-pull-and-write" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
@@ -353,7 +352,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597415256462</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="工作台优化">
+      <created>1597459165127</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1597459165127</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -375,7 +381,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/dev" />
+                        <option value="dev-pull-and-write" />
                       </list>
                     </value>
                   </entry>
@@ -405,7 +411,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="第一次组件+vue.config.js的补充（虽然那个组件啥用没有）" />
     <MESSAGE value="一次失败的尝试，完成了login和register的模拟，但是没法保存，回头试试mgg的方法" />
     <MESSAGE value="在自己尝试后发现一个安全而且还不错的登录样式（放在register.vue里面了，那个class绑定的登录样式在login.vue里面）" />
     <MESSAGE value="push了一个登录注册页的残次品" />
@@ -430,7 +435,8 @@
     <MESSAGE value="一些bug" />
     <MESSAGE value="teamspace前端样式适配" />
     <MESSAGE value="doc API的编写" />
-    <option name="LAST_COMMIT_MESSAGE" value="doc API的编写" />
+    <MESSAGE value="工作台优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="工作台优化" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-735" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1596358814923">
@@ -465,10 +471,10 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state width="1815" height="289" key="GridCell.Tab.0.right/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597134499307" />
-    <state x="-1307" y="294" key="MultipleFileMergeDialog" timestamp="1597283265547">
+    <state x="-1307" y="294" key="MultipleFileMergeDialog" timestamp="1597459183240">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1307" y="294" key="MultipleFileMergeDialog/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597283265547" />
+    <state x="-1307" y="294" key="MultipleFileMergeDialog/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597459183240" />
     <state x="-647" y="158" key="RollbackChangesDialog" timestamp="1596608792846">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
