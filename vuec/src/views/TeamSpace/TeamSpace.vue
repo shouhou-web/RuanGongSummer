@@ -232,7 +232,7 @@ export default {
 
       quitTeam(this.$store.state.user.userID,this.TeamID)
         .then(res => {
-          // console.log(res);
+          console.log(res);
           if (res == 0){
             this.$notify.success("退出团体成功");
             this.$router.push({path: "/home/teamSpace"});

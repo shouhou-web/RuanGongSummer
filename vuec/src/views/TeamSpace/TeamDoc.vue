@@ -88,6 +88,7 @@ export default {
       docBatchDelete(chosen_Docs,this.$store.state.user.userID)
         .then(res => {
           if (res == 0) {
+            console.log(res);
             this.$notify.success("批量删除成功");
             this.$router.go(0);
           } else {
