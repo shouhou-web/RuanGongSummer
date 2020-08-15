@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!noneShow" class="docs" style="background-color: white">
+    <div v-if="!noneShow" class="docs">
       <div v-for="doc in myDocs" :key="doc.docID" class="doc">
         <l-card :ID="doc.docID" :title="doc.docTitle">
           <div slot="hide-content" class="hide-nav">

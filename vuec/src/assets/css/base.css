@@ -6,10 +6,14 @@
   --image-background: linear-gradient(90deg, #a1c4fd, #c2e9fb);
   --color-text: #212121;
   --color-main: #a1c4fd;
+  /* --color-main: #ff8198; */
   --color-high-text: #ff5777;
   --color-tint: #ff8198;
-  --color-background-main: #cce6ff; /* 主界面 */
-  --color-background-old: #f4f5f7;
+  --color-background-main: #cce6ff;
+  /* --color-background-main: #fadbd9; */
+  /* --color-background-main: #f4f5f7; */
+  /* --box-shadow: 0 2px 4px 0 rgba(121, 146, 185, 0.54); */
+  --box-shadow: 0 2px 12px rgba(225, 225, 225, 0.5);
   --font-size: 14px;
   --line-height: 1.5;
 }

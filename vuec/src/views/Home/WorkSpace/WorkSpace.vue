@@ -23,7 +23,7 @@
         >我的收藏</my-button
       >
     </div>
-    <div style="overflow: auto;height: 73vh;margin: 20px">
+    <div class="second-nav-main">
       <transition mode="out-in">
         <router-view></router-view>
       </transition>
@@ -43,13 +43,13 @@ export default {
     },
     toMyColletion() {
       this.$router.push({ path: "/home/workSpace/myCollection" });
-    }
+    },
   },
   components: {},
   created() {
     this.$store.state.hasTeam = false;
     this.$store.state.nowTeamID = -1;
-  }
+  },
 };
 </script>
 
@@ -60,15 +60,26 @@ second-whole-page {
 }
 
 .second-nav-list {
-  padding-left: 20px;
+  /* background-color: #fff;
+  box-shadow: var(--box-shadow); */
+  border-radius: 12px;
+  margin: 10px 20px;
+  padding: 10px 0;
 }
 
 .second-nav-item {
   font-size: 17px;
   padding: 7px 20px;
-  margin-left: 10px;
-  margin-right: 5px;
-  margin-top: 20px;
+  margin-left: 15px;
+}
+
+.second-nav-main {
+  /* background-color: #fff;
+  box-shadow: var(--box-shadow);
+  border-radius: 12px; */
+  overflow: auto;
+  height: 73vh;
+  margin: 20px;
 }
 
 .v-enter {
