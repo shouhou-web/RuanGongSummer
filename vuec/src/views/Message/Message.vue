@@ -89,7 +89,7 @@ export default {
 
 <style scoped>
 #message {
-  background-color: #cce6ff;
+  background-color: var(--color-background-main);
 }
 
 .main {

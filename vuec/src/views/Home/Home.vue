@@ -109,7 +109,7 @@ export default {
     return {
       user: "",
       teamName: "",
-      teamHoverOn: false
+      teamHoverOn: false,
     };
   },
   methods: {
@@ -136,7 +136,7 @@ export default {
         this.$message.error("请先登录");
       }
       console.log(this.teamName);
-      addTeam(this.user.userID, this.teamName).then(res => {
+      addTeam(this.user.userID, this.teamName).then((res) => {
         console.log(res);
         if (res === 1) {
           this.$message.error("创建失败，请检查网络或联系管理员");
@@ -145,7 +145,7 @@ export default {
           this.$router.go(0);
           this.$message({
             message: "创建团队成功",
-            type: "success"
+            type: "success",
           });
         }
       });
@@ -165,20 +165,20 @@ export default {
             this.$message.error("请选择团队后再创建文档");
           }
         } else {
-          addDoc(this.user.userID, nowTeamID).then(res => {
+          addDoc(this.user.userID, nowTeamID).then((res) => {
             if (res === 1) {
               this.$message.error("创建文档失败，请检查网络或联系管理员");
             } else {
               this.$message({
                 message: "创建文档成功",
-                type: "success"
+                type: "success",
               });
               this.$router.push({
                 path: "/doc",
                 query: {
                   docID: res,
-                  docTitle: ""
-                }
+                  docTitle: "",
+                },
               });
             }
           });
@@ -188,20 +188,20 @@ export default {
         currentPath === "/home/workSpace/iMade" ||
         currentPath === "/home/workSpace/myCollection"
       ) {
-        addDoc(this.user.userID, 0).then(res => {
+        addDoc(this.user.userID, 0).then((res) => {
           if (res === 1) {
             this.$message.error("创建文档失败，请检查网络或联系管理员");
           } else {
             this.$message({
               message: "创建文档成功",
-              type: "success"
+              type: "success",
             });
             this.$router.push({
               path: "/doc",
               query: {
                 docID: res,
-                docTitle: ""
-              }
+                docTitle: "",
+              },
             });
           }
         });
@@ -209,11 +209,11 @@ export default {
     },
     checkNotice() {
       this.noticeHoverOn = false;
-    }
+    },
   },
   components: {
     Recent,
-    MAppHeader
+    MAppHeader,
   },
   created() {
     this.user = this.$store.state.user;
@@ -222,21 +222,25 @@ export default {
       this.$message.error("请先登录！");
       return;
     }
-  }
+  },
 };
 </script>
 
 <style scoped>
+#home {
+  --height: calc(100vh - 56px);
+}
+
 .test {
   margin: 5px;
 }
 
 .main-page {
   background-color: var(--color-background-main);
-  height: calc(100vh - 56px);
+  height: var(--height);
   justify-content: center;
   display: flex;
-  padding: 35px 50px 0;
+  padding: 0px 50px;
 }
 
 .nav-btn {
@@ -247,19 +251,16 @@ export default {
 .nav,
 .sub-page {
   border-radius: 4px;
-  box-shadow: 0 2px 4px 0 rgba(121, 146, 185, 0.54);
   background-color: rgba(255, 255, 255, 0.5);
 }
 
 .second-nav {
   border-radius: 4px;
-  box-shadow: 0 2px 4px 0 rgba(121, 146, 185, 0.54);
   background-color: rgba(255, 255, 255, 0.8);
 }
 
 .nav {
-  height: 85vh;
-  margin-right: 10px;
+  height: var(--height);
   padding: 10px 90px;
   width: 140px;
 }
@@ -289,9 +290,7 @@ export default {
 }
 
 .second-nav {
-  height: 85vh;
-  margin-left: 10px;
-  margin-right: 10px;
+  height: var(--height);
   flex: 1;
 }
 
@@ -299,8 +298,7 @@ export default {
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 85vh;
-  margin-left: 10px;
+  height: var(--height);
   width: 200px;
 }
 

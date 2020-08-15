@@ -20,3 +20,14 @@ export function getDeletedDocs(userID) {
     method: "post"
   });
 }
+
+export function recoverDoc(userID, docID) {
+  return request({
+    url: "/recoverDoc",
+    params: {
+      userID,
+      docID
+    },
+    method: "post"
+  });
+}

@@ -1,10 +1,16 @@
 <template>
   <div>
-    <div v-if="!noneShow" class="docs" style="background-color: white;height: 80vh;margin: 20px;margin-left: 45px;overflow: auto;">
+    <div
+      v-if="!noneShow"
+      class="docs"
+      style="background-color: white;height: 80vh;margin: 20px;margin-left: 45px;overflow: auto;"
+    >
       <div v-for="doc in myDeletedDocs" :key="doc.docID" class="doc">
         <l-card :ID="doc.docID" :title="doc.docTitle">
           <div slot="hide-content" class="hide-nav">
-            <my-button type="text" class="nav-btn">还原</my-button>
+            <my-button type="text" class="nav-btn" @click="toRecover(doc.docID)"
+              >还原</my-button
+            >
             <my-button
               type="text-danger"
               class="nav-btn"
@@ -34,6 +40,7 @@
 <script>
 import { getDeletedDocs } from "network/trash.js";
 import { deleteDoc } from "network/trash.js";
+import { recoverDoc } from "network/trash.js";
 
 export default {
   name: "Trash",
@@ -47,6 +54,22 @@ export default {
     };
   },
   methods: {
+    toRecover(docID) {
+      recoverDoc(this.user.userID, docID).then(res => {
+        if (res === 1) {
+          this.$message.error("恢复文档失败，请检查网络或联系管理员");
+        } else {
+          this.$message({
+            message: "恢复成功",
+            type: "success"
+          });
+        }
+        getDeletedDocs(this.user.userID).then(res => {
+          this.myDeletedDocs = res;
+          if (res.length === 0) this.noneShow = true;
+        });
+      });
+    },
     absoluteDeleteNotice(docID) {
       this.docToAbsoluteDeleteID = docID;
       this.docAbsoluteDeleteHoverOn = true;
