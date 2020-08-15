@@ -107,15 +107,18 @@
       @cancel="cancelCooperate"
       style="font-family: 'JetBrains Mono';"
     >
+      <div class="member-header">
+        <div class="member-name-header">团队组员</div>
+      </div>
       <div class="cooperation-member">
-        <div class="member-header">
-          <div class="member-name-header">团队组员</div>
-        </div>
         <div
           class="member-header"
           v-for="(member, memberIndex) in members"
           :key="memberIndex"
         >
+          <div>
+            <img :src="member.imagePath" class="user-img">
+          </div>
           <div class="member-name-main">{{ member.userName }}</div>
           <div class="member-email-main">{{ member.emailAddress }}</div>
           <div class="member-iden-main">
@@ -136,15 +139,19 @@
           </div>
         </div>
       </div>
+      <div class="member-header">
+        <div class="member-name-header">管理员</div>
+      </div>
       <div class="cooperation-admin">
-        <div class="member-header">
-          <div class="member-name-header">管理员</div>
-        </div>
+
         <div
           class="member-header"
           v-for="(member, memberIndex) in members"
           :key="memberIndex"
         >
+          <div>
+            <img :src="member.imagePath" class="user-img">
+          </div>
           <div class="member-name-main" v-if="member.userIdentity > 0">
             {{ member.userName }}
           </div>
@@ -181,21 +188,20 @@
         <input
           class="cooperation-search"
           v-model="searchOutsideMsg"
-          placeholder="    输入用户名称/邮箱"
+          placeholder="输入用户名称/邮箱"
           v-if="searchType == 0"
         />
         <input
           class="cooperation-search"
           v-model="searchMemberMsg"
-          placeholder="    输入用户名称/邮箱"
+          placeholder="输入用户名称/邮箱"
           v-if="searchType == 1"
+          style="padding-left: 5px"
         />
-
+        <div class="member-header">
+          <div class="member-name-header">搜索结果</div>
+        </div>
         <div class="userRes">
-          <div class="member-header">
-            <div class="member-name-header">搜索结果</div>
-          </div>
-
           <!--TODO:添加分类-->
           <div
             class="member-header"
@@ -203,12 +209,15 @@
             :key="resIndex"
             v-if="searchType == 0"
           >
+            <div>
+              <img :src="userRes.imagePath" class="user-img">
+            </div>
             <div class="member-name-main">{{ userRes.userName }}</div>
             <div class="member-email-main">{{ userRes.emailAddress }}</div>
             <my-button
               type="info"
               size="mini"
-              style="height: 25px; margin-left: 100px;"
+              style="height: 25px; margin-left: 10px;"
               @click="inviteMemberToTeam(userRes.userID)"
               >邀请</my-button
             >
@@ -219,6 +228,9 @@
             :key="resIndex"
             v-if="searchType == 1"
           >
+            <div>
+              <img :src="userRes.imagePath" class="user-img">
+            </div>
             <div class="member-name-main">{{ userRes.userName }}</div>
             <div class="member-email-main">{{ userRes.emailAddress }}</div>
             <div class="member-iden-main">
@@ -755,7 +767,7 @@ export default {
 }
 
 .cooperation-member {
-  border: 1px solid #999999;
+  border: 1px solid #cce6ff;
   width: 100vh;
   height: 25vh;
   overflow: auto;
@@ -764,7 +776,7 @@ export default {
 }
 
 .cooperation-admin {
-  border: 1px solid #999999;
+  border: 1px solid #cce6ff;
   width: 100vh;
   height: 25vh;
   overflow: auto;
@@ -772,7 +784,7 @@ export default {
 }
 
 .cooperation-search {
-  border: 1px solid #999999;
+  border: 1px solid #cce6ff;
   margin-left: 37%;
   height: 30px;
   border-radius: 5px;
@@ -787,8 +799,10 @@ export default {
 .member-name-header {
   text-align: center;
   width: 25%;
-  background-color: #e2e2e2;
-  border-radius: 5px;
+  color: #409eff;
+  background-color: #cce6ff;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
   padding-top: 8px;
 }
 
@@ -838,11 +852,25 @@ export default {
 
 .userRes {
   width: 100%;
-  height: 85%;
+  height: 80%;
   margin: auto;
-  margin-top: 3%;
   overflow: auto;
   border-radius: 5px;
-  border: 1px solid #999999;
+  border: 1px solid #cce6ff;
+  padding-top: 10px;
+}
+
+.user-img{
+  width: 30px;
+  border: 1px solid #a8d8ee;
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-top: 3px;
+}
+input::-ms-input-placeholder{
+  text-align: center;
+}
+input::-webkit-input-placeholder{
+  text-align: center;
 }
 </style>
