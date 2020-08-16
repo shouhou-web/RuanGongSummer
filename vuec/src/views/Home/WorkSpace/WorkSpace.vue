@@ -24,6 +24,16 @@
       >
       <div class="align-icon-outer">
         <div class="align-icon-inner">
+          <m-nav-dropdown v-if="showMoreOrNot" triColor="#DCDFE6">
+            <div slot="show">
+              <img src="@/assets/icon/home/more.svg" class="align-icon" />
+            </div>
+            <div slot="hide" class="batch-nav">
+              <my-button type="text-danger" class="nav-btn" @click="callBatchDelete"
+                >批量删除</my-button
+              >
+            </div>
+          </m-nav-dropdown>
           <img
             src="@/assets/icon/home/block.svg"
             class="align-icon"
@@ -39,7 +49,7 @@
     </div>
     <div class="second-nav-main">
       <transition mode="out-in">
-        <router-view :alignStyle="listOrBlock"></router-view>
+        <router-view ref="mychild" :alignStyle="listOrBlock" @showMore="show" @hideMore="hide"></router-view>
       </transition>
     </div>
   </div>
@@ -50,10 +60,17 @@ export default {
   name: "WorkSpace",
   data() {
     return {
-      listOrBlock: true
+      listOrBlock: true,
+      showMoreOrNot: false
     };
   },
   methods: {
+    show() {
+      this.showMoreOrNot = true;
+    },
+    hide() {
+      this.showMoreOrNot = false;
+    },
     toBlock() {
       this.listOrBlock = true;
     },
@@ -68,7 +85,10 @@ export default {
     },
     toMyColletion() {
       this.$router.push({ path: "/home/workSpace/myCollection" });
-    }
+    },
+    callBatchDelete() {
+      this.$refs.mychild.batchDelete();
+    },
   },
   components: {},
   created() {
@@ -105,7 +125,7 @@ second-whole-page {
   box-shadow: var(--box-shadow);
   border-radius: 12px; */
   overflow: auto;
-  height: 73vh;
+  height: 80vh;
   margin: 20px;
 }
 
@@ -121,8 +141,32 @@ second-whole-page {
 }
 
 .align-icon {
+  cursor: pointer;
   margin-right: 2px;
   margin-left: 2px;
+  width: 20px;
+}
+
+.hide-nav {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.batch-nav {
+  align-items: center;
+  background-color: #fafbfc;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 8px;
+}
+
+.nav-btn {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  padding: 10px 35px;
 }
 
 .v-enter {

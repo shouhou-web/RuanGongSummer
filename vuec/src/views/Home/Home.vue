@@ -142,6 +142,7 @@ export default {
           this.$message.error("创建失败，请检查网络或联系管理员");
         } else if (res === 0) {
           this.teamHoverOn = false;
+          this.teamName = "";
           this.$router.go(0);
           this.$message({
             message: "创建团队成功",

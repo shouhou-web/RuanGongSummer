@@ -1,19 +1,6 @@
 <template>
   <div>
     <div v-if="!noneShow">
-      <div class="test">
-        <m-nav-dropdown v-if="batchDocs.length" triColor="#DCDFE6">
-          <div slot="show">
-            <img src="@/assets/icon/home/more.svg" class="align-icon" />
-          </div>
-          <div slot="hide" class="batch-nav">
-            <my-button type="text" class="nav-btn">批量收藏</my-button>
-            <my-button type="text-danger" class="nav-btn" @click="batchDelete"
-              >批量删除</my-button
-            >
-          </div>
-        </m-nav-dropdown>
-      </div>
       <div v-if="alignStyle" class="docs-block" @click="cancelBatch">
         <div
           v-for="doc in myDocs"
@@ -65,6 +52,8 @@
             :time="doc.lastEditTime"
             :creatorID="user.userID"
             :forceUnchecked="batchOrNot"
+            @addDoc="addToBatchDocs"
+            @cancelDoc="removeFromBatchDocs"
           >
             <div slot="hide-content" class="hide-nav">
               <my-button
@@ -156,7 +145,6 @@ export default {
       docDeleteHoverOn: false,
       docToDeleteID: "",
       batchDocDeleteHoverOn: false,
-
       docRenameHoverOn: false,
       docToRenameID: "",
       newDocTitle: "",
@@ -173,14 +161,16 @@ export default {
     },
     addToBatchDocs(docID) {
       this.batchDocs.push(docID);
+      this.$emit("showMore");
     },
     removeFromBatchDocs(docID) {
       for (var i = 0; i < this.batchDocs.length; i++) {
         if (this.batchDocs[i] == docID) {
           this.batchDocs.splice(i, 1);
-          return;
+          break;
         }
       }
+      if (this.batchDocs.length === 0) this.$emit("hideMore");
     },
     batchDelete() {
       this.batchDocDeleteHoverOn = true;
@@ -194,6 +184,7 @@ export default {
         .then(res => {
           if (res == 0) {
             this.batchDocDeleteHoverOn = false;
+            this.$emit("hideMore");
             this.$notify.success("批量删除成功");
             getMyDocs(this.user.userID).then(res => {
               this.myDocs = res;
@@ -229,6 +220,7 @@ export default {
             this.$message.error("重命名文档失败，请检查网络或联系管理员");
           } else {
             this.docRenameHoverOn = false;
+            this.newDocTitle = "";
             this.$message({
               message: "重命名文档成功",
               type: "success"
@@ -302,11 +294,6 @@ export default {
 </script>
 
 <style scoped>
-.test {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .docs-block {
   display: flex;
   flex-wrap: wrap;
@@ -318,9 +305,10 @@ export default {
 }
 
 .doc {
-  margin-left: 20px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-left: 30px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .nav-btn {
@@ -333,16 +321,6 @@ export default {
   align-items: center;
   display: flex;
   flex-direction: column;
-}
-
-.batch-nav {
-  align-items: center;
-  background-color: #fafbfc;
-  border: 1px solid #dcdfe6;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  padding: 5px 8px;
 }
 
 .hover-whole {

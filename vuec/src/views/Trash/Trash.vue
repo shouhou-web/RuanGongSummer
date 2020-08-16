@@ -3,6 +3,25 @@
     <div class="second-nav-list">
       <div class="align-icon-outer">
         <div class="align-icon-inner">
+          <m-nav-dropdown v-if="showMoreOrNot" triColor="#DCDFE6">
+            <div slot="show">
+              <img src="@/assets/icon/home/more.svg" class="align-icon" />
+            </div>
+            <div slot="hide" class="batch-nav">
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="batchRecover"
+                >批量还原</my-button
+              >
+              <my-button
+                type="text-danger"
+                class="nav-btn"
+                @click="batchAbsoluteDelete"
+                >批量彻底删除</my-button
+              >
+            </div>
+          </m-nav-dropdown>
           <img
             src="@/assets/icon/home/block.svg"
             class="align-icon"
@@ -20,9 +39,20 @@
       v-if="!noneShow"
       style="height: 80vh;margin: 20px;margin-left: 45px;overflow: auto;"
     >
-      <div v-if="alignStyle" class="docs-block">
-        <div v-for="doc in myDeletedDocs" :key="doc.docID" class="doc">
-          <l-card :ID="doc.docID" :title="doc.docTitle">
+      <div v-if="alignStyle" class="docs-block" @click="cancelBatch">
+        <div
+          v-for="doc in myDeletedDocs"
+          :key="doc.docID"
+          class="doc"
+          @click.stop="confirmBatch"
+        >
+          <l-card
+            :ID="doc.docID"
+            :title="doc.docTitle"
+            :forceUnchecked="batchOrNot"
+            @addDoc="addToBatchDocs"
+            @cancelDoc="removeFromBatchDocs"
+          >
             <div slot="hide-content" class="hide-nav">
               <my-button
                 type="text"
@@ -40,13 +70,21 @@
           </l-card>
         </div>
       </div>
-      <div v-else class="docs-list">
-        <div v-for="doc in myDeletedDocs" :key="doc.docID" class="doc">
+      <div v-else class="docs-list" @click="cancelBatch">
+        <div
+          v-for="doc in myDeletedDocs"
+          :key="doc.docID"
+          class="doc"
+          @click.stop="confirmBatch"
+        >
           <l-lcard
             :ID="doc.docID"
             :title="doc.docTitle"
             :time="doc.lastEditTime"
             :creatorID="user.userID"
+            :forceUnchecked="batchOrNot"
+            @addDoc="addToBatchDocs"
+            @cancelDoc="removeFromBatchDocs"
           >
             <div slot="hide-content" class="hide-nav">
               <my-button
@@ -79,6 +117,18 @@
         彻底删除文档将永久删除文档，确认要彻底删除该文档吗？
       </div>
     </m-hover>
+    <m-hover
+      :onShow="batchDocAbsoluteDeleteHoverOn"
+      title="批量彻底删除文档"
+      assureBtn="确认"
+      cancelBtn="手滑了"
+      @cancel="cancelBatchAbsoluteDelete"
+      @submit="absoluteDeleteBatchDoc"
+    >
+      <div class="hover-text">
+        彻底删除文档将永久删除文档，确认要批量彻底删除文档吗？
+      </div>
+    </m-hover>
   </div>
 </template>
 
@@ -86,6 +136,8 @@
 import { getDeletedDocs } from "network/doc.js";
 import { deleteDoc } from "network/doc.js";
 import { recoverDoc } from "network/doc.js";
+import { docBatchDelete, docBatchRecover } from "@/network/doc";
+const qs = require("qs");
 
 export default {
   name: "Trash",
@@ -96,7 +148,11 @@ export default {
       noneShow: false,
       docAbsoluteDeleteHoverOn: false,
       docToAbsoluteDeleteID: "",
-      alignStyle: true
+      alignStyle: true,
+      batchDocAbsoluteDeleteHoverOn: false,
+      batchOrNot: true,
+      batchDocs: [],
+      showMoreOrNot: false
     };
   },
   methods: {
@@ -128,6 +184,9 @@ export default {
       this.docToAbsoluteDeleteID = docID;
       this.docAbsoluteDeleteHoverOn = true;
     },
+    cancelAbsoluteDelete() {
+      this.docAbsoluteDeleteHoverOn = false;
+    },
     absoluteDeleteDoc() {
       deleteDoc(this.user.userID, this.docToAbsoluteDeleteID).then(res => {
         if (res === 1) {
@@ -145,9 +204,76 @@ export default {
         }
       });
     },
-    cancelAbsoluteDelete() {
-      this.docAbsoluteDeleteHoverOn = false;
-    }
+    cancelBatch() {
+      this.batchOrNot = false;
+    },
+    confirmBatch() {
+      this.batchOrNot = true;
+    },
+    addToBatchDocs(docID) {
+      this.batchDocs.push(docID);
+      this.showMoreOrNot = true;
+    },
+    removeFromBatchDocs(docID) {
+      for (var i = 0; i < this.batchDocs.length; i++) {
+        if (this.batchDocs[i] == docID) {
+          this.batchDocs.splice(i, 1);
+          break;
+        }
+      }
+      if (this.batchDocs.length === 0) this.showMoreOrNot = false;
+    },
+    batchAbsoluteDelete() {
+      this.batchDocAbsoluteDeleteHoverOn = true;
+    },
+    cancelBatchAbsoluteDelete() {
+      this.batchDocAbsoluteDeleteHoverOn = false;
+    },
+    absoluteDeleteBatchDoc() {
+      var chosen_Docs = qs.stringify(this.batchDocs, { indices: false });
+      docBatchDelete(chosen_Docs, this.user.userID)
+        .then(res => {
+          if (res == 0) {
+            this.batchDocAbsoluteDeleteHoverOn = false;
+            this.showMoreOrNot = false;
+            this.$notify.success("批量彻底删除成功");
+            getDeletedDocs(this.user.userID).then(res => {
+              this.myDeletedDocs = res;
+              if (res.length === 0) this.noneShow = true;
+            });
+          } else {
+            this.$notify.error("请检查网络，删除失败");
+            return;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          this.$notify.error("请检查网络，删除失败");
+          return;
+        });
+    },
+    batchRecover() {
+      var chosen_Docs = qs.stringify(this.batchDocs, { indices: false });
+      docBatchRecover(chosen_Docs, this.user.userID)
+        .then(res => {
+          if (res == 0) {
+            this.showMoreOrNot = false;
+            this.$notify.success("批量还原成功");
+            getDeletedDocs(this.user.userID).then(res => {
+              this.myDeletedDocs = res;
+              if (res.length === 0) this.noneShow = true;
+            });
+          } else {
+            this.$notify.error("请检查网络，删除失败");
+            return;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          this.$notify.error("请检查网络，删除失败");
+          return;
+        });
+    },
   },
   created() {
     this.$store.state.hasTeam = false;
@@ -196,6 +322,16 @@ export default {
   flex-direction: column;
 }
 
+.batch-nav {
+  align-items: center;
+  background-color: #fafbfc;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 8px;
+}
+
 .second-nav-list {
   /* background-color: #fff;
   box-shadow: var(--box-shadow); */
@@ -218,7 +354,9 @@ export default {
 }
 
 .align-icon {
+  cursor: pointer;
   margin-right: 2px;
   margin-left: 2px;
+  width: 20px;
 }
 </style>
