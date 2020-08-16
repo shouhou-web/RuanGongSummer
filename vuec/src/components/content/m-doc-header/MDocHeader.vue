@@ -82,16 +82,22 @@
         <!-- 分享 -->
         <m-hover :on-show="openShare" title="分享此文档链接" :width="350">
           <div>
-            <input type="text"
-                   id="input"
-                   :value="shareSrc"
-                   class="input-share" readonly="">
-            <br>
-            <span v-clipboard:copy="shareSrc"
-                  v-clipboard:success="onCopy"
-                  v-clipboard:error="onCopyError" class="button-share">
-          复制
-        </span>
+            <input
+              type="text"
+              id="input"
+              :value="shareSrc"
+              class="input-share"
+              readonly=""
+            />
+            <br />
+            <span
+              v-clipboard:copy="shareSrc"
+              v-clipboard:success="onCopy"
+              v-clipboard:error="onCopyError"
+              class="button-share"
+            >
+              复制
+            </span>
           </div>
         </m-hover>
 
@@ -233,7 +239,7 @@ export default {
       // 打开分享hover
       openShare: false,
       // 分享信息
-      shareSrc: ''
+      shareSrc: "",
     };
   },
   methods: {
@@ -272,6 +278,7 @@ export default {
     },
     // 跳转到近期浏览
     toRecent(item) {
+      console.log("child:toRecent");
       this.$emit("toRecent", item);
     },
     // 复制
@@ -282,12 +289,12 @@ export default {
       console.log(toDoc);
     },
     onCopy() {
-      this.$message.success('复制成功！');
+      this.$message.success("复制成功！");
       this.openShare = false;
     },
     onCopyError() {
-      this.$message.error('复制失败');
-    }
+      this.$message.error("复制失败");
+    },
   },
 };
 </script>
@@ -441,14 +448,14 @@ export default {
   color: #409eff;
 }
 
-.input-share{
+.input-share {
   border: 1px solid #91c4f1;
   border-radius: 5px;
   width: 100%;
   padding: 10px;
 }
 
-.button-share{
+.button-share {
   position: fixed;
   margin-top: 10px;
   margin-left: 120px;

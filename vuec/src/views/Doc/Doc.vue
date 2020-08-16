@@ -4,7 +4,10 @@
       <m-doc-header :doc="doc" @toRecent="toRecent"></m-doc-header>
     </div>
     <div class="editor">
-      <in-editor v-model="doc.docContent" :disabled="disabled"></in-editor>
+      <in-editor
+        :disabled="disabled"
+        :doc="doc"
+      ></in-editor>
     </div>
     <m-hover
       title="登录"
@@ -54,7 +57,7 @@ export default {
         docTitle: "无标题",
         docContent: "",
       },
-      disabled: true, // 是否禁用
+      disabled: false, // 是否禁用
       // login相关
       openLogin: false,
       name: "", // 账号
@@ -126,9 +129,9 @@ export default {
     // 完整流程
     _index(userID, docID) {
       // 获取doc数据
-      _getDoc(userID, docID);
+      this._getDoc(userID, docID);
       // 获取权限
-      // _getDocLimit(userID, docID);
+      this._getDocLimit(userID, docID);
     },
     // 获取doc数据
     _getDoc(userID, docID) {
@@ -162,7 +165,13 @@ export default {
     },
     // 跳转到最近的文档
     toRecent(item) {
+      console.log("father:toRecent");
       this._getDoc(this.$store.state.user.userID, item.docID);
+      this.$router.push({
+        path: "/doc",
+        query: { docID: item.docID, docTitle: item.docTitle },
+      });
+      
     },
   },
 };
