@@ -16,9 +16,9 @@
       src="https://assets.smcdn.cn/static/lizard-service-desktop/assets/doc_160_flat@2x.098efd4b.png"
     />
     <img
-      v-if="hasCollected"
       class="l-lcard__sign"
       src="@/assets/icon/card/sign.svg"
+      :class="hasCollected ? '' : 'hide'"
     />
     <div class="l-lcard__body" :style="bodyStyle">
       {{ title }}
@@ -186,6 +186,12 @@ export default {
 
 .l-lcard__sign {
   width: 20px;
+  transition: 0.4s;
+}
+
+.l-lcard__sign.hide {
+  opacity: 0;
+  transition: 0.4s;
 }
 
 .l-lcard__body {

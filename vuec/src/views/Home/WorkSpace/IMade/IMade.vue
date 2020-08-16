@@ -12,7 +12,7 @@
             :ID="doc.docID"
             :title="doc.docTitle"
             :forceUnchecked="batchOrNot"
-            :hasCollected="doc.isFavorite"
+            :hasCollected="doc.isFavorite === 1"
             @addDoc="addToBatchDocs"
             @cancelDoc="removeFromBatchDocs"
           >
@@ -64,7 +64,7 @@
             :ID="doc.docID"
             :title="doc.docTitle"
             :time="doc.lastEditTime"
-            :hasCollected="doc.isFavorite"
+            :hasCollected="doc.isFavorite === 1"
             :creatorID="user.userID"
             :forceUnchecked="batchOrNot"
             @addDoc="addToBatchDocs"
@@ -72,10 +72,18 @@
           >
             <div slot="hide-content" class="hide-nav">
               <my-button
+                v-if="!doc.isFavorite"
                 type="text"
                 class="nav-btn"
                 @click="toCollectDoc(doc.docID)"
                 >收藏</my-button
+              >
+              <my-button
+                v-if="doc.isFavorite"
+                type="text"
+                class="nav-btn"
+                @click="toCancelCollect(doc.docID)"
+                >取消收藏</my-button
               >
               <my-button
                 type="text"
@@ -224,19 +232,19 @@ export default {
           if (res == 0) {
             this.batchDocDeleteHoverOn = false;
             this.$emit("hideMore");
-            this.$notify.success("批量删除成功");
+            this.$message.success("批量删除成功");
             getMyDocs(this.user.userID).then(res => {
               this.myDocs = res;
               if (res.length === 0) this.noneShow = true;
             });
           } else {
-            this.$notify.error("请检查网络，删除失败");
+            this.$message.error("请检查网络，删除失败");
             return;
           }
         })
         .catch(err => {
           console.log(err);
-          this.$notify.error("请检查网络，删除失败");
+          this.$message.error("请检查网络，删除失败");
           return;
         });
     },

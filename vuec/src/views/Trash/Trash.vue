@@ -236,19 +236,19 @@ export default {
           if (res == 0) {
             this.batchDocAbsoluteDeleteHoverOn = false;
             this.showMoreOrNot = false;
-            this.$notify.success("批量彻底删除成功");
+            this.$message.success("批量彻底删除成功");
             getDeletedDocs(this.user.userID).then(res => {
               this.myDeletedDocs = res;
               if (res.length === 0) this.noneShow = true;
             });
           } else {
-            this.$notify.error("请检查网络，删除失败");
+            this.$message.error("请检查网络，删除失败");
             return;
           }
         })
         .catch(err => {
           console.log(err);
-          this.$notify.error("请检查网络，删除失败");
+          this.$message.error("请检查网络，删除失败");
           return;
         });
     },
@@ -258,19 +258,22 @@ export default {
         .then(res => {
           if (res == 0) {
             this.showMoreOrNot = false;
-            this.$notify.success("批量还原成功");
+            this.$message({
+              message: "批量还原成功",
+              type: "success"
+            });
             getDeletedDocs(this.user.userID).then(res => {
               this.myDeletedDocs = res;
               if (res.length === 0) this.noneShow = true;
             });
           } else {
-            this.$notify.error("请检查网络，删除失败");
+            this.$message.error("请检查网络，删除失败");
             return;
           }
         })
         .catch(err => {
           console.log(err);
-          this.$notify.error("请检查网络，删除失败");
+          this.$message.error("请检查网络，删除失败");
           return;
         });
     },
@@ -358,5 +361,10 @@ export default {
   margin-right: 2px;
   margin-left: 2px;
   width: 20px;
+}
+
+.hover-text {
+  margin: 0 auto;
+  padding: 20px;
 }
 </style>

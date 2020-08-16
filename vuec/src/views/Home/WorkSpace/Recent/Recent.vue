@@ -13,20 +13,28 @@
             :title="doc.docTitle"
             :hasCollected="doc.isFavorite === 1"
             :forceUnchecked="batchOrNot"
-            @addDoc="addToBatchDocs"
+            @addDoc="addToBatchDocs($event, doc.creatorID)"
             @cancelDoc="removeFromBatchDocs"
           >
             <div slot="hide-content" class="hide-nav">
               <my-button
+                v-if="!doc.isFavorite"
                 type="text"
                 class="nav-btn"
                 @click="toCollectDoc(doc.docID)"
                 >收藏</my-button
               >
               <my-button
+                v-if="doc.isFavorite"
                 type="text"
                 class="nav-btn"
-                @click="toRename(doc.docID)"
+                @click="toCancelCollect(doc.docID)"
+                >取消收藏</my-button
+              >
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="toRename(doc.docID, doc.creatorID)"
                 >重命名</my-button
               >
               <my-button
@@ -38,7 +46,7 @@
               <my-button
                 type="text-danger"
                 class="nav-btn"
-                @click="deleteNotice(doc.docID)"
+                @click="deleteNotice(doc.docID, doc.creatorID)"
                 >删除</my-button
               >
             </div>
@@ -57,29 +65,37 @@
             :title="doc.docTitle"
             :time="doc.lastEditTime"
             :hasCollected="doc.isFavorite === 1"
-            :creatorID="user.userID"
+            :creatorID="doc.creatorID"
             :forceUnchecked="batchOrNot"
-            @addDoc="addToBatchDocs"
+            @addDoc="addToBatchDocs($event, doc.creatorID)"
             @cancelDoc="removeFromBatchDocs"
           >
             <div slot="hide-content" class="hide-nav">
               <my-button
+                v-if="!doc.isFavorite"
                 type="text"
                 class="nav-btn"
                 @click="toCollectDoc(doc.docID)"
                 >收藏</my-button
               >
               <my-button
+                v-if="doc.isFavorite"
                 type="text"
                 class="nav-btn"
-                @click="toRename(doc.docID)"
+                @click="toCancelCollect(doc.docID)"
+                >取消收藏</my-button
+              >
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="toRename(doc.docID, doc.creatorID)"
                 >重命名</my-button
               >
               <my-button type="text" class="nav-btn">分享</my-button>
               <my-button
                 type="text-danger"
                 class="nav-btn"
-                @click="deleteNotice(doc.docID)"
+                @click="deleteNotice(doc.docID, doc.creatorID)"
                 >删除</my-button
               >
             </div>
@@ -179,18 +195,36 @@ export default {
       batchOrNot: true,
       batchDocs: [],
       shareSrc: "",
-      openShare: false
+      openShare: false,
+      canBatchDelete: true
     };
   },
   methods: {
+    toCancelCollect(docID) {
+      cancelCollectDoc(this.user.userID, docID).then(res => {
+        if (res === 0) {
+            this.$message({
+              message: "取消收藏成功",
+              type: "success"
+            });
+          getRecentDocs(this.user.userID).then(res => {
+            this.myRecentDocs = res;
+            if (res.length === 0) this.noneShow = true;
+          });
+        } else {
+          this.$message.error("请检查网络，取消收藏失败");
+        }
+      });
+    },
     cancelBatch() {
       this.batchOrNot = false;
     },
     confirmBatch() {
       this.batchOrNot = true;
     },
-    addToBatchDocs(docID) {
-      this.batchDocs.push(docID);
+    addToBatchDocs($event, creatorID) {
+      if (creatorID !== this.user.userID) this.canBatchDelete = false;
+      this.batchDocs.push($event);
       this.$emit("showMore");
     },
     removeFromBatchDocs(docID) {
@@ -200,7 +234,10 @@ export default {
           break;
         }
       }
-      if (this.batchDocs.length === 0) this.$emit("hideMore");
+      if (this.batchDocs.length === 0) {
+        this.$emit("hideMore");
+        this.canBatchDelete = true;
+      }
     },
     batchDelete() {
       this.batchDocDeleteHoverOn = true;
@@ -209,35 +246,53 @@ export default {
       this.batchDocDeleteHoverOn = false;
     },
     deleteBatchDoc() {
+      if (!this.canBatchDelete) {
+        this.batchDocDeleteHoverOn = false;
+        this.batchOrNot = false;
+        this.canBatchDelete = true;
+        this.$emit("hideMore");
+        this.$message.error("批量删除失败，选择的文档中有其他用户的文档");
+        getRecentDocs(this.user.userID).then(res => {
+          this.myRecentDocs = res;
+          if (res.length === 0) this.noneShow = true;
+        });
+        return;
+      }
       var chosen_Docs = qs.stringify(this.batchDocs, { indices: false });
       docBatchDelete(chosen_Docs, this.user.userID)
         .then(res => {
           if (res == 0) {
             this.batchDocDeleteHoverOn = false;
             this.$emit("hideMore");
-            this.$notify.success("批量删除成功");
+            this.$message({
+              message: "批量删除成功",
+              type: "success"
+            });
             getRecentDocs(this.user.userID).then(res => {
               this.myRecentDocs = res;
               if (res.length === 0) this.noneShow = true;
             });
           } else {
-            this.$notify.error("请检查网络，删除失败");
+            this.$message.error("请检查网络，删除失败");
             return;
           }
         })
         .catch(err => {
           console.log(err);
-          this.$notify.error("请检查网络，删除失败");
+          this.$message.error("请检查网络，删除失败");
           return;
         });
     },
     cancelRename() {
       this.docRenameHoverOn = false;
     },
-    toRename(docID) {
-      if(this.user)
-      this.docRenameHoverOn = true;
-      this.docToRenameID = docID;
+    toRename(docID, creatorID) {
+      if (creatorID === this.user.userID) {
+        this.docRenameHoverOn = true;
+        this.docToRenameID = docID;
+      } else {
+        this.$message.error("无法重命名他人创建得文档");
+      }
     },
     renameDoc() {
       if (this.newDocTitle.length === 0) {
@@ -246,7 +301,6 @@ export default {
       }
       editDocTitle(this.user.userID, this.docToRenameID, this.newDocTitle).then(
         res => {
-          console.log(this.newDocTitle);
           if (res === 1) {
             this.$message.error("重命名文档失败，请检查网络或联系管理员");
           } else {
@@ -263,9 +317,13 @@ export default {
         }
       );
     },
-    deleteNotice(docID) {
-      this.docDeleteHoverOn = true;
-      this.docToDeleteID = docID;
+    deleteNotice(docID, creatorID) {
+      if (creatorID === this.user.userID) {
+        this.docDeleteHoverOn = true;
+        this.docToDeleteID = docID;
+      } else {
+        this.$message.error("无法删除他人创建得文档");
+      }
     },
     cancelDelete() {
       this.docDeleteHoverOn = false;
@@ -298,6 +356,10 @@ export default {
             message: "收藏文档成功",
             type: "success"
           });
+          getRecentDocs(this.user.userID).then(res => {
+            this.myRecentDocs = res;
+            if (res.length === 0) this.noneShow = true;
+          });
         }
       });
     },
@@ -322,11 +384,6 @@ export default {
   },
   created() {
     this.user = this.$store.state.user;
-
-    if (!this.user.userID) {
-      this.$message.error("请先登录");
-      return;
-    }
     getRecentDocs(this.user.userID).then(res => {
       this.myRecentDocs = res;
       console.log(res);

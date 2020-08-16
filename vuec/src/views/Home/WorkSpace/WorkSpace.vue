@@ -29,8 +29,18 @@
               <img src="@/assets/icon/home/more.svg" class="align-icon" />
             </div>
             <div slot="hide" class="batch-nav">
-              <my-button type="text-danger" class="nav-btn" @click="callBatchDelete"
+              <my-button
+                type="text-danger"
+                class="nav-btn"
+                @click="callBatchDelete"
                 >批量删除</my-button
+              >
+              <my-button
+                v-if="this.$route.path === '/home/workSpace/myCollection'"
+                type="text-danger"
+                class="nav-btn"
+                @click="callBatchCancelCollect"
+                >批量取消收藏</my-button
               >
             </div>
           </m-nav-dropdown>
@@ -49,7 +59,12 @@
     </div>
     <div class="second-nav-main">
       <transition mode="out-in">
-        <router-view ref="mychild" :alignStyle="listOrBlock" @showMore="show" @hideMore="hide"></router-view>
+        <router-view
+          ref="mychild"
+          :alignStyle="listOrBlock"
+          @showMore="show"
+          @hideMore="hide"
+        ></router-view>
       </transition>
     </div>
   </div>
@@ -89,6 +104,9 @@ export default {
     callBatchDelete() {
       this.$refs.mychild.batchDelete();
     },
+    callBatchCancelCollect() {
+      this.$refs.mychild.cancelBatchDoc();
+    }
   },
   components: {},
   created() {

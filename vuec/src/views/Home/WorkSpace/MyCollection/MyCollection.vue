@@ -12,6 +12,7 @@
             :ID="doc.docID"
             :title="doc.docTitle"
             :forceUnchecked="batchOrNot"
+            hasCollected
             @addDoc="addToBatchDocs($event, doc.creatorID)"
             @cancelDoc="removeFromBatchDocs"
           >
@@ -55,13 +56,19 @@
             :ID="doc.docID"
             :title="doc.docTitle"
             :time="doc.lastEditTime"
-            :creatorID="user.userID"
+            :creatorID="doc.creatorID"
             :forceUnchecked="batchOrNot"
-            @addDoc="addToBatchDocs"
+            hasCollected
+            @addDoc="addToBatchDocs($event, doc.creatorID)"
             @cancelDoc="removeFromBatchDocs"
           >
             <div slot="hide-content" class="hide-nav">
-              <my-button type="text" class="nav-btn">移出收藏</my-button>
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="toCancelCollect(doc.docID)"
+                >移出收藏</my-button
+              >
               <my-button
                 type="text"
                 class="nav-btn"
@@ -153,6 +160,7 @@ import { deleteDoc } from "network/doc.js";
 import { editDocTitle } from "network/doc.js";
 import { cancelCollectDoc } from "network/doc.js";
 import { docBatchCancelCollect } from "@/network/doc";
+import { docBatchDelete } from "@/network/doc";
 const qs = require("qs");
 
 export default {
@@ -179,13 +187,16 @@ export default {
     toCancelCollect(docID) {
       cancelCollectDoc(this.user.userID, docID).then(res => {
         if (res === 0) {
-          this.$notify.success("批量取消收藏成功");
+            this.$message({
+              message: "取消收藏成功",
+              type: "success"
+            });
           getFavoriteDocs(this.user.userID).then(res => {
             this.myCollection = res;
             if (res.length === 0) this.noneShow = true;
           });
         } else {
-          this.$notify.error("请检查网络，批量取消收藏失败");
+          this.$message.error("请检查网络，取消收藏失败");
         }
       });
     },
@@ -196,7 +207,7 @@ export default {
       this.batchOrNot = true;
     },
     addToBatchDocs($event, creatorID) {
-      if ($event !== this.user.userID) this.canBatchDelete = false;
+      if (creatorID !== this.user.userID) this.canBatchDelete = false;
       this.batchDocs.push($event);
       this.$emit("showMore");
     },
@@ -219,11 +230,12 @@ export default {
       this.batchDocDeleteHoverOn = false;
     },
     deleteBatchDoc() {
-      if (this.canBatchDelete) {
+      if (!this.canBatchDelete) {
         this.batchDocDeleteHoverOn = false;
+        this.batchOrNot = false;
+        this.canBatchDelete = true;
         this.$emit("hideMore");
-        this.$notify.error("批量删除失败，选择的文档中有其他用户的文档");
-        this.canBatchDelete;
+        this.$message.error("批量删除失败，选择的文档中有其他用户的文档");
         getFavoriteDocs(this.user.userID).then(res => {
           this.myCollection = res;
           if (res.length === 0) this.noneShow = true;
@@ -236,19 +248,48 @@ export default {
           if (res == 0) {
             this.batchDocDeleteHoverOn = false;
             this.$emit("hideMore");
-            this.$notify.success("批量删除成功");
+            this.$message({
+              message: "批量删除成功",
+              type: "success"
+            });
             getFavoriteDocs(this.user.userID).then(res => {
               this.myCollection = res;
               if (res.length === 0) this.noneShow = true;
             });
           } else {
-            this.$notify.error("请检查网络，删除失败");
+            this.$message.error("请检查网络，删除失败");
             return;
           }
         })
         .catch(err => {
           console.log(err);
-          this.$notify.error("请检查网络，删除失败");
+          this.$message.error("请检查网络，删除失败");
+          return;
+        });
+    },
+    cancelBatchDoc() {
+      console.log("yes");
+      var chosen_Docs = qs.stringify(this.batchDocs, { indices: false });
+      docBatchCancelCollect(chosen_Docs, this.user.userID)
+        .then(res => {
+          if (res == 0) {
+            this.$emit("hideMore");
+            this.$message({
+              message: "批量取消收藏成功",
+              type: "success"
+            });
+            getFavoriteDocs(this.user.userID).then(res => {
+              this.myCollection = res;
+              if (res.length === 0) this.noneShow = true;
+            });
+          } else {
+            this.$message.error("请检查网络，批量取消收藏失败");
+            return;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          this.$message.error("请检查网络，批量取消收藏失败");
           return;
         });
     },
@@ -260,7 +301,7 @@ export default {
         this.docRenameHoverOn = true;
         this.docToRenameID = docID;
       } else {
-        this.$notify.error("无法重命名他人创建得文档");
+        this.$message.error("无法重命名他人创建得文档");
       }
     },
     renameDoc() {
@@ -292,7 +333,7 @@ export default {
         this.docDeleteHoverOn = true;
         this.docToDeleteID = docID;
       } else {
-        this.$notify.error("无法删除他人创建得文档");
+        this.$message.error("无法删除他人创建得文档");
       }
     },
     cancelDelete() {
