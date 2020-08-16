@@ -4,43 +4,7 @@
       <l-show-none></l-show-none>
     </div>
     <div class="my-team-details" v-else>
-      <div class="opt" v-if="chosenDocs.length > 0">
-        <m-nav-dropdown position="left" class="l-card__nav more-opt">
-          <div slot="show">
-            <div>
-              <my-button size="medium" type="text" style="padding: 10px">更多操作</my-button>
-            </div>
-          </div>
-          <div
-            slot="hide"
-            style="
-              border: 1px solid #e7e7e7;
-              margin-top: -70px;
-              border-radius: 5px;
-              background-color: white;
-            "
-          >
-            <div class="l-card__hide-main">
-              <my-button
-                type="text-danger"
-                size="medium"
-                class="l-card__nav-btn"
-                @click="batchDelete"
-                >删除 {{ chosenDocs.length }} 个文档</my-button
-              >
-              <my-button
-                type="text"
-                size="medium"
-                class="l-card__nav-btn"
-                @click="batchFavorite"
-                >收藏 {{ chosenDocs.length }} 个文档</my-button
-              >
-            </div>
-          </div>
-          <input />
-        </m-nav-dropdown>
-      </div>
-      <div class="team-docs">
+      <div class="docs-block" v-if="alignStyle">
         <div class="doc" v-for="(adoc, docIndex) in docs" :key="docIndex">
           <l-card
             :title="adoc.docTitle"
@@ -59,23 +23,48 @@
           </l-card>
         </div>
       </div>
+      <div class="docs-list" v-else>
+        <div class="doc" v-for="(adoc, docIndex) in docs" :key="docIndex">
+          <l-lcard
+            :title="adoc.docTitle"
+            :i-d="adoc.docID"
+            :can-check="adoc.creatorID == $store.state.user.userID"
+            :time="adoc.lastEditTime"
+            :creator-i-d="adoc.creatorID"
+            @addDoc="addToChosen"
+            @cancelDoc="cancelChosen"
+          >
+            <div slot="hide-content" class="hide-nav">
+              <my-button size="text" class="nav-btn">打开</my-button>
+              <my-button size="text" class="nav-btn">收藏</my-button>
+              <my-button size="text" class="nav-btn">重命名</my-button>
+              <my-button size="text" class="nav-btn" @click="shareDoc(adoc.docID,adoc.docTitle)">分享</my-button>
+              <my-button size="text-danger" class="nav-btn">删除</my-button>
+            </div>
+          </l-lcard>
+        </div>
+      </div>
     </div>
 
-    <m-hover :on-show="openShare"
-             title="分享此文档链接">
+    <m-hover :on-show="openShare" title="分享此文档链接">
       <div>
         <input type="text"
                id="input"
-               :value="shareSrc" class="input-share">
+               :value="shareSrc"
+               class="input-share" readonly="">
         <br>
-        <button type="button" id="button" @click="copySrc" class="button-share">复制链接</button>
+        <span v-clipboard:copy="shareSrc"
+              v-clipboard:success="onCopy"
+              v-clipboard:error="onCopyError" class="button-share">
+          复制
+        </span>
       </div>
     </m-hover>
   </div>
 </template>
 
 <script>
-import {getTeamDocs, getUserIdentity, quitTeam, disbandTeam,} from "@/network/team";
+import { getTeamDocs, getUserIdentity, quitTeam, disbandTeam,} from "@/network/team";
 import { docBatchDelete, docBatchFavorite } from "@/network/doc";
 const qs = require("qs");
 
@@ -88,7 +77,8 @@ export default {
       docstyle: 0,
       chosenDocs: [],
       shareSrc: '',
-      openShare: false
+      openShare: false,
+      chosenNum: 0
     };
   },
   props: {
@@ -96,6 +86,10 @@ export default {
       type: String,
       require: true,
     },
+    alignStyle: {
+      type: Boolean,
+      default: true
+    }
   },
   methods: {
     addToChosen(docID) {
@@ -161,13 +155,12 @@ export default {
     cancelShare() {
       this.openShare = false;
     },
-    copySrc() {
-      button.addEventListener('click', function(){
-        input.select();
-        document.execCommand('copy');
-      })
-      this.$message.success('复制成功');
+    onCopy() {
+      this.$message.success('复制成功！');
       this.openShare = false;
+    },
+    onCopyError() {
+      this.$message.error('复制失败');
     }
   },
   watch: {
@@ -177,6 +170,7 @@ export default {
       //this.$router.push({path: "/home/teamSpace?teamID=1"})
       if (this.chosenDocs.length != 0) this.$notify.info("批量操作已刷新");
       this.chosenDocs = []; //清除数据
+      this.chosenNum = 0;
       getTeamDocs(this.TeamID)
         .then((docs) => {
           console.log("docs", docs);
@@ -188,6 +182,11 @@ export default {
           return;
         });
     },
+    chosenDocs() {
+      this.chosenNum = this.chosenDocs.length;
+      // console.log(this.chosenNum);
+      this.$emit('chosen-change',this.chosenNum);
+    }
   },
 };
 </script>
@@ -221,9 +220,9 @@ export default {
 }
 
 .doc {
-  width: 130px;
-  height: 160px;
-  padding: 5px;
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .doc--img {
@@ -298,16 +297,16 @@ export default {
 }
 
 .input-share{
-  border: 1px solid #e3e3e3;
+  border: 1px solid #91c4f1;
   border-radius: 5px;
   width: 100%;
-  padding: 5px;
+  padding: 10px;
 }
 
 .button-share{
   position: fixed;
   margin-top: 10px;
-  margin-left: 100px;
+  margin-left: 120px;
   background: #ffffff;
   border: 1px solid #d8e3ec;
   border-radius: 7px;
@@ -326,5 +325,15 @@ export default {
   border-color: #c6e2ff;
   box-shadow: 2px 3px 5px 1px rgba(29, 120, 223, 0.2);
   transition: 0.5s;
+}
+
+.docs-block {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.docs-list {
+  display: flex;
+  flex-direction: column;
 }
 </style>

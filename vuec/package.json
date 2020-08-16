@@ -33,6 +33,7 @@
     "postcss-loader": "^3.0.0",
     "raw-loader": "^0.5.1",
     "vue": "^2.6.11",
+    "vue-clipboard2": "^0.3.1",
     "vue-router": "^3.3.4",
     "vuex": "^3.4.0"
   },

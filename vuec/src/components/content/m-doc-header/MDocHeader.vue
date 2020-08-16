@@ -57,7 +57,7 @@
             <my-button @click="openCooperation" size="small">协作</my-button>
           </div>
           <div class="share">
-            <my-button size="small">分享</my-button>
+            <my-button size="small" @click="openCopy">分享</my-button>
           </div>
           <div class="other">
             <m-nav-dropdown position="middle">
@@ -67,7 +67,7 @@
                   <li class="other-item">
                     收藏文档
                   </li>
-                  <li class="other-item">
+                  <li class="other-item" @click="openCopy">
                     分享文档
                   </li>
                   <li class="other-item other-item--red">
@@ -78,6 +78,22 @@
             </m-nav-dropdown>
           </div>
         </div>
+
+        <!-- 分享 -->
+        <m-hover :on-show="openShare" title="分享此文档链接" :width="350">
+          <div>
+            <input type="text"
+                   id="input"
+                   :value="shareSrc"
+                   class="input-share" readonly="">
+            <br>
+            <span v-clipboard:copy="shareSrc"
+                  v-clipboard:success="onCopy"
+                  v-clipboard:error="onCopyError" class="button-share">
+          复制
+        </span>
+          </div>
+        </m-hover>
 
         <m-hover
           :onShow="isCooperation"
@@ -214,6 +230,10 @@ export default {
       ],
       // 近期文档
       recentDoc: [],
+      // 打开分享hover
+      openShare: false,
+      // 分享信息
+      shareSrc: ''
     };
   },
   methods: {
@@ -254,6 +274,20 @@ export default {
     toRecent(item) {
       this.$emit("toRecent", item);
     },
+    // 复制
+    openCopy() {
+      this.openShare = true;
+      var toDoc = window.location.href;
+      this.shareSrc = toDoc;
+      console.log(toDoc);
+    },
+    onCopy() {
+      this.$message.success('复制成功！');
+      this.openShare = false;
+    },
+    onCopyError() {
+      this.$message.error('复制失败');
+    }
   },
 };
 </script>
@@ -405,5 +439,29 @@ export default {
 
 .name--blue {
   color: #409eff;
+}
+
+.input-share{
+  border: 1px solid #91c4f1;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+}
+
+.button-share{
+  position: fixed;
+  margin-top: 10px;
+  margin-left: 120px;
+  background: #ffffff;
+  border: 1px solid #d8e3ec;
+  border-radius: 7px;
+  color: #60a5dd;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1;
+  padding: 12px 20px;
+  text-align: center;
+  transition: ease-in-out 0.5s;
 }
 </style>

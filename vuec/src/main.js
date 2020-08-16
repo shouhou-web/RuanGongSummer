@@ -4,6 +4,7 @@ import router from "./router";
 import ElementUI from "element-ui";
 import store from "./store/index";
 import "element-ui/lib/theme-chalk/index.css";
+import VueClipboard from "vue-clipboard2";
 
 import MAppHeader from "components/content/m-app-header/MAppHeader";
 import MyButton from "components/common/l-app-button/MyButton";
@@ -15,6 +16,7 @@ import LShowNone from "components/content/l-show-none/LShowNone"
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
+Vue.use(VueClipboard);
 
 Vue.component("MAppHeader", MAppHeader); // 全局导航栏
 Vue.component("MyButton", MyButton); // 自定义按钮
