@@ -103,51 +103,36 @@
 
         <m-hover
           :onShow="isCooperation"
+          title="权限设置"
           assureBtn="确认"
           cancelBtn="取消"
           :width="350"
           @submit="submit"
           @cancel="cancel"
         >
-          <div class="cooperation">
-            <div class="cooperation-header">
-              <span class="cooperation__header1">团队成员</span>
-              <span class="cooperation__header2">其他用户</span>
+          <div class="hover-div"></div>
+          <div class="hover-line">
+            <div class="hover-title">
+              其他用户
             </div>
-            <div class="cooperation-list">
-              <ul>
-                <li v-for="(item, index) in identityList" :key="index">
-                  <my-button
-                    class="item-wrapper"
-                    type="text"
-                    :active="item.docIdentity == docIdentity"
-                  >
-                    <label class="cooperation-item">
-                      <input
-                        name="type"
-                        type="radio"
-                        :value="item.docIdentity"
-                        v-model="docIdentity"
-                      />
-                      <span
-                        class="cooperation__name1"
-                        :class="[
-                          item.docIdentity == docIdentity ? 'name--blue' : '',
-                        ]"
-                        >{{ item.name1 }}</span
-                      >
-                      <span
-                        class="cooperation__name1"
-                        :class="[
-                          item.docIdentity == docIdentity ? 'name--blue' : '',
-                        ]"
-                        >{{ item.name2 }}</span
-                      >
-                    </label>
-                  </my-button>
-                </li>
-              </ul>
+            <my-button :active="isOtherCant" @click="otherCant" type="text"
+              >不可读</my-button
+            >
+            <my-button :active="isOtherCan" @click="otherCan" type="text"
+              >可读</my-button
+            >
+          </div>
+          <div class="hover-div"></div>
+          <div v-if="doc.teamName" class="hover-line">
+            <div class="hover-title">
+              团队成员
             </div>
+            <my-button :active="isTeamRead" @click="teamRead" type="text"
+              >可读</my-button
+            >
+            <my-button :active="isTeamWrite" @click="teamWrite" type="text"
+              >可写</my-button
+            >
           </div>
         </m-hover>
       </template>
@@ -157,8 +142,7 @@
 
 <script>
 import MHeader from "components/common/m-header/MHeader.vue";
-import { editDocTitle } from "network/doc";
-import { getRecentDocs } from "network/doc";
+import { editDocTitle, getRecentDocs, setDocLimit } from "network/doc";
 export default {
   name: "MDocHeader",
   components: {
@@ -171,7 +155,7 @@ export default {
       default: {},
     },
   },
-  created() {
+  mounted() {
     getRecentDocs(this.$store.state.user.userID).then((res) => {
       this.recentDoc = res;
       if (res.length > 10) {
@@ -179,37 +163,15 @@ export default {
       }
     });
   },
+  computed: {},
   data() {
     return {
+      isOtherCan: false,
+      isOtherCant: false,
+      isTeamRead: false,
+      isTeamWrite: false,
       isCooperation: false, // 是否编辑权限
       docIdentity: 0, // 文档权限
-      identityList: [
-        {
-          docIdentity: 4,
-          name1: "不可读",
-          name2: "不可读",
-        },
-        {
-          docIdentity: 3,
-          name1: "不可读",
-          name2: "可读",
-        },
-        {
-          docIdentity: 2,
-          name1: "不可读",
-          name2: "可读写",
-        },
-        {
-          docIdentity: 1,
-          name1: "可读",
-          name2: "可读",
-        },
-        {
-          docIdentity: 0,
-          name1: "可读",
-          name2: "可读写",
-        },
-      ],
       // 返回跳转
       back: [
         {
@@ -242,14 +204,113 @@ export default {
       shareSrc: "",
     };
   },
+  watch: {
+    doc(val) {
+      console.log("docLimit", val.docLimit);
+      switch (val.docLimit) {
+        case 0:
+          this.isOtherCan = true;
+          this.isTeamRead = true;
+          this.isTeamWrite = true;
+          break;
+        case 1:
+          this.isOtherCant = true;
+          this.isTeamRead = true;
+          this.isTeamWrite = true;
+          console.log(1)
+          break;
+        case 2:
+          this.isOtherCan = true;
+          this.isTeamRead = true;
+          this.isTeamWrite = false;
+          console.log(233);
+          break;
+        case 3:
+          this.isOtherCant = true;
+          this.isTeamRead = true;
+          this.isTeamWrite = false;
+          break;
+        case 4:
+          this.isOtherCant = true;
+          break;
+      }
+    },
+  },
   methods: {
+    otherCan() {
+      this.isOtherCan = !this.isOtherCan;
+      if (this.isOtherCan) {
+        this.isOtherCant = false;
+        this.isTeamRead = true;
+      }
+    },
+    otherCant() {
+      this.isOtherCant = !this.isOtherCant;
+      if (this.isOtherCant) {
+        this.isOtherCan = false;
+        this.isOtherCant = true;
+      }
+    },
+    teamRead() {
+      if (!this.isTeamWrite) this.isTeamRead = !this.isTeamRead;
+      if (!this.isTeamRead) {
+        this.isOtherCan = false;
+        this.isOtherCant = true;
+      }
+    },
+    teamWrite() {
+      this.isTeamWrite = !this.isTeamWrite;
+      if (this.isTeamWrite) this.isTeamRead = true;
+    },
     // 打开协作框
     openCooperation() {
-      console.log(123);
       this.isCooperation = true;
     },
     // 监听确定事件
-    submit() {},
+    submit() {
+      let docLimit = this.doc.docLimit;
+      if (
+        this.isOtherCan == true &&
+        this.isTeamRead == true &&
+        this.isTeamWrite == true
+      )
+        docLimit = 0;
+      else if (
+        this.isOtherCant == true &&
+        this.isTeamRead == true &&
+        this.isTeamWrite == true
+      )
+        docLimit = 1;
+      else if (
+        this.isOtherCan == true &&
+        this.isTeamRead == true &&
+        this.isTeamWrite == false
+      )
+        docLimit = 2;
+      else if (
+        this.isOtherCant == true &&
+        this.isTeamRead == true &&
+        this.isTeamWrite == false
+      )
+        docLimit = 3;
+      else docLimit = 4;
+      setDocLimit(this.$store.state.user.userID, this.doc.docID, docLimit).then(
+        (res) => {
+          if (res == 0) {
+            this.$notify({
+              title: "成功",
+              message: "修改文档权限成功",
+              type: "success",
+            });
+            this.isCooperation = false;
+          } else
+            this.$notify.error({
+              title: "网络错误",
+              message: "请稍后重试~",
+            });
+        }
+      );
+    },
     // 取消悬浮窗展示
     cancel() {
       this.isCooperation = false;
@@ -470,5 +531,23 @@ export default {
   padding: 12px 20px;
   text-align: center;
   transition: ease-in-out 0.5s;
+}
+
+.hover-line {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  margin: 5px 0;
+  width: 100%;
+}
+
+.hover-line button {
+  padding: 10px;
+}
+
+.hover-div {
+  background-color: var(--color-main);
+  margin: 5px auto;
+  width: 90%;
 }
 </style>
