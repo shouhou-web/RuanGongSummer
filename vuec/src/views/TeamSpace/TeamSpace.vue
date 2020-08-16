@@ -18,6 +18,41 @@
       </div>
 
       <div class="opt">
+        <div v-if="openMoreOpt" style="margin-right: 10px">
+          <m-nav-dropdown position="left" class="l-card__nav more-opt">
+            <div slot="show">
+              <div>
+                <my-button size="medium" type="primary" style="padding: 5px">批量操作</my-button>
+              </div>
+            </div>
+            <div
+              slot="hide"
+              style="
+              border: 1px solid #e7e7e7;
+              border-radius: 5px;
+              background-color: white;
+            "
+            >
+              <div class="l-card__hide-main">
+                <my-button
+                  type="text-danger"
+                  size="medium"
+                  class="l-card__nav-btn"
+                  @click="useBatchDelete"
+                >删除{{chosenCount}}个文档</my-button
+                >
+                <my-button
+                  type="text"
+                  size="medium"
+                  class="l-card__nav-btn"
+                  @click="useBatchFavorite"
+                >收藏{{chosenCount}}个文档</my-button
+                >
+              </div>
+            </div>
+            <input />
+          </m-nav-dropdown>
+        </div>
         <m-nav-dropdown position="left" class="l-card__nav">
           <div slot="show">
             <img class="l-card__setting" src="@/assets/image/teamopt.svg" />
@@ -37,38 +72,48 @@
                 class="l-card__nav-btn"
                 @click="readyToQuit"
                 v-if="iden != 2"
-                >退出团队</my-button
+              >退出团队</my-button
               >
               <my-button
                 type="text-danger"
                 class="l-card__nav-btn"
                 @click="readyToDisband"
                 v-if="iden == 2"
-                >解散团队</my-button
+              >解散团队</my-button
               >
               <my-button
                 type="text"
                 class="l-card__nav-btn"
                 @click="readyToCooperate"
                 v-if="iden == 2"
-                >协作权限</my-button
+              >协作权限</my-button
               >
               <my-button
                 type="text"
                 class="l-card__nav-btn"
                 @click="readyTosearch_0"
-                >搜索并邀请</my-button
+              >搜索并邀请</my-button
               >
               <my-button
                 type="text"
                 class="l-card__nav-btn"
                 @click="readyTosearch_1"
-                >搜索团队成员</my-button
+              >搜索团队成员</my-button
               >
             </div>
           </div>
           <input />
         </m-nav-dropdown>
+        <img
+          src="@/assets/icon/home/block.svg"
+          class="icon-style"
+          @click="toBlock"
+        />
+        <img
+          src="@/assets/icon/home/list.svg"
+          class="icon-style"
+          @click="toList"
+        />
       </div>
     </div>
     <!--    <div class="member-iden" :class="{'member-iden&#45;&#45;member':(iden == 0),'member-iden&#45;&#45;manager':(iden == 1),'member-iden&#45;&#45;creater':(iden == 2)}">-->
@@ -184,20 +229,24 @@
       cancel-btn="X"
       @cancel="cancelSearch">
       <div class="userSearch">
-        <!-- 0-邀请 1-查找-->
-        <input
-          class="cooperation-search"
-          v-model="searchOutsideMsg"
-          placeholder="输入用户名称/邮箱"
-          v-if="searchType == 0"
-        />
-        <input
-          class="cooperation-search"
-          v-model="searchMemberMsg"
-          placeholder="输入用户名称/邮箱"
-          v-if="searchType == 1"
-          style="padding-left: 5px"
-        />
+        <div>
+          <!-- 0-邀请 1-查找-->
+          <input
+            class="cooperation-search"
+            v-model="searchOutsideMsg"
+            placeholder="输入用户名称/邮箱"
+            v-if="searchType == 0"
+            style="padding-left: 5px;"
+          />
+          <input
+            class="cooperation-search"
+            v-model="searchMemberMsg"
+            placeholder="输入用户名称/邮箱"
+            v-if="searchType == 1"
+            style="padding-left: 5px"
+          />
+        </div>
+
         <div class="member-header">
           <div class="member-name-header">搜索结果</div>
         </div>
@@ -263,7 +312,12 @@
 
     <div style="margin: 20px">
       <transition mode="out-in">
-        <TeamDoc v-bind:TeamID="TeamID" class="fade-in"></TeamDoc>
+        <TeamDoc v-bind:TeamID="TeamID"
+                 class="fade-in"
+                 :align-style="listOrBlock"
+                 @chosen-change="changeMoreOpt"
+                 ref="teamdoc">
+        </TeamDoc>
       </transition>
     </div>
   </div>
@@ -306,6 +360,9 @@ export default {
       openSearch: false,
       searchType: 0, //0 搜非团队成员，1 搜团队成员
       searchTitle: "",
+      listOrBlock: true,
+      openMoreOpt: false,
+      chosenCount: 0
     };
   },
   components: {
@@ -313,6 +370,27 @@ export default {
     TeamDoc: TeamDoc,
   },
   methods: {
+    useBatchDelete() {
+      this.$refs.teamdoc.batchDelete();
+    },
+    useBatchFavorite() {
+      this.$refs.teamdoc.batchFavorite();
+    },
+    changeMoreOpt(data) {
+      console.log('子传父',data);
+      this.chosenCount = data;
+      if (data > 0){
+        this.openMoreOpt = true;
+      } else {
+        this.openMoreOpt = false;
+      }
+    },
+    toBlock() {
+      this.listOrBlock = true;
+    },
+    toList() {
+      this.listOrBlock = false;
+    },
     chooseTeam(teamID, teamName) {
       // console.log('TeamSpace',teamID);
       this.TeamID = teamID;
@@ -487,6 +565,8 @@ export default {
   },
   watch: {
     TeamID() {
+      this.searchOutsideMsg = '';
+      this.searchMemberMsg = '';
       //0成员，1管理者，2创建者
       getUserIdentity(this.$store.state.user.userID, this.TeamID)
         .then((res) => {
@@ -578,7 +658,7 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
   height: auto;
-  width: 95%;
+  width: 90%;
   border-radius: 5px;
   border-bottom-left-radius: 5px;
 }
@@ -728,13 +808,13 @@ export default {
 
 .l-card__nav {
   align-self: flex-end;
-  margin-right: 2px;
+  margin-right: 10px;
   margin-top: 2px;
 }
 
 .l-card__setting {
-  height: 18px;
-  width: 18px;
+  height: 16px;
+  width: 16px;
 }
 
 .l-card__pic {
@@ -763,7 +843,8 @@ export default {
 }
 
 .opt {
-  height: 10px;
+  display: flex;
+  flex-direction: row;
 }
 
 .cooperation-member {
@@ -785,7 +866,7 @@ export default {
 
 .cooperation-search {
   border: 1px solid #cce6ff;
-  margin-left: 37%;
+  margin: auto;
   height: 30px;
   border-radius: 5px;
 }
@@ -872,5 +953,10 @@ input::-ms-input-placeholder{
 }
 input::-webkit-input-placeholder{
   text-align: center;
+}
+
+.icon-style{
+  margin-right: 10px;
+  cursor: pointer;
 }
 </style>

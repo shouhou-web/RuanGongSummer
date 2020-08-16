@@ -1,19 +1,6 @@
 <template>
   <div>
     <div v-if="!noneShow">
-      <div class="test">
-        <m-nav-dropdown v-if="batchDocs.length" triColor="#DCDFE6">
-          <div slot="show">
-            <img src="@/assets/icon/home/more.svg" class="align-icon" />
-          </div>
-          <div slot="hide" class="batch-nav">
-            <my-button type="text" class="nav-btn">批量收藏</my-button>
-            <my-button type="text-danger" class="nav-btn" @click="batchDelete"
-              >批量删除</my-button
-            >
-          </div>
-        </m-nav-dropdown>
-      </div>
       <div v-if="alignStyle" class="docs-block" @click="cancelBatch">
         <div
           v-for="doc in myDocs"
@@ -41,7 +28,9 @@
                 @click="toRename(doc.docID)"
                 >重命名</my-button
               >
-              <my-button type="text" class="nav-btn">分享</my-button>
+              <my-button type="text"
+                         class="nav-btn"
+                         @click="shareDoc(doc.docID,doc.docTitle)">分享</my-button>
               <my-button
                 type="text-danger"
                 class="nav-btn"
@@ -65,6 +54,8 @@
             :time="doc.lastEditTime"
             :creatorID="user.userID"
             :forceUnchecked="batchOrNot"
+            @addDoc="addToBatchDocs"
+            @cancelDoc="removeFromBatchDocs"
           >
             <div slot="hide-content" class="hide-nav">
               <my-button
@@ -135,6 +126,20 @@
         />
       </div>
     </m-hover>
+    <m-hover :on-show="openShare" title="分享此文档链接">
+      <div>
+        <input type="text"
+               id="input"
+               :value="shareSrc"
+               class="input-share" readonly="">
+        <br>
+        <span v-clipboard:copy="shareSrc"
+              v-clipboard:success="onCopy"
+              v-clipboard:error="onCopyError" class="button-share">
+          复制
+        </span>
+      </div>
+    </m-hover>
   </div>
 </template>
 
@@ -156,12 +161,13 @@ export default {
       docDeleteHoverOn: false,
       docToDeleteID: "",
       batchDocDeleteHoverOn: false,
-
       docRenameHoverOn: false,
       docToRenameID: "",
       newDocTitle: "",
       batchOrNot: true,
-      batchDocs: []
+      batchDocs: [],
+      shareSrc: '',
+      openShare: false,
     };
   },
   methods: {
@@ -173,14 +179,16 @@ export default {
     },
     addToBatchDocs(docID) {
       this.batchDocs.push(docID);
+      this.$emit("showMore");
     },
     removeFromBatchDocs(docID) {
       for (var i = 0; i < this.batchDocs.length; i++) {
         if (this.batchDocs[i] == docID) {
           this.batchDocs.splice(i, 1);
-          return;
+          break;
         }
       }
+      if (this.batchDocs.length === 0) this.$emit("hideMore");
     },
     batchDelete() {
       this.batchDocDeleteHoverOn = true;
@@ -194,6 +202,7 @@ export default {
         .then(res => {
           if (res == 0) {
             this.batchDocDeleteHoverOn = false;
+            this.$emit("hideMore");
             this.$notify.success("批量删除成功");
             getMyDocs(this.user.userID).then(res => {
               this.myDocs = res;
@@ -229,6 +238,7 @@ export default {
             this.$message.error("重命名文档失败，请检查网络或联系管理员");
           } else {
             this.docRenameHoverOn = false;
+            this.newDocTitle = "";
             this.$message({
               message: "重命名文档成功",
               type: "success"
@@ -278,6 +288,24 @@ export default {
           });
         }
       });
+    },
+    shareDoc(docID,docTitle) {
+      var toDoc = window.location.href;
+      toDoc = toDoc.substring(0,toDoc.length - 15);
+      toDoc = toDoc + '/doc?docID=' + docID + '&docTitle=' + docTitle;
+      console.log(toDoc);
+      this.shareSrc = toDoc;
+      this.openShare = true;
+    },
+    cancelShare() {
+      this.openShare = false;
+    },
+    onCopy() {
+      this.$message.success('复制成功！');
+      this.openShare = false;
+    },
+    onCopyError() {
+      this.$message.error('复制失败');
     }
   },
   created() {
@@ -302,11 +330,6 @@ export default {
 </script>
 
 <style scoped>
-.test {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .docs-block {
   display: flex;
   flex-wrap: wrap;
@@ -318,9 +341,10 @@ export default {
 }
 
 .doc {
-  margin-left: 20px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-left: 30px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .nav-btn {
@@ -333,16 +357,6 @@ export default {
   align-items: center;
   display: flex;
   flex-direction: column;
-}
-
-.batch-nav {
-  align-items: center;
-  background-color: #fafbfc;
-  border: 1px solid #dcdfe6;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  padding: 5px 8px;
 }
 
 .hover-whole {
@@ -372,4 +386,36 @@ export default {
   box-shadow: 2px 2px 5px 1px rgba(10, 69, 105, 0.2);
   transition: 0.5s;
 }
+
+.input-share{
+  border: 1px solid #91c4f1;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+}
+
+.button-share{
+  position: fixed;
+  margin-top: 10px;
+  margin-left: 120px;
+  background: #ffffff;
+  border: 1px solid #d8e3ec;
+  border-radius: 7px;
+  color: #60a5dd;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1;
+  padding: 12px 20px;
+  text-align: center;
+  transition: ease-in-out 0.5s;
+}
+
+.button-share:hover{
+  color: #25374f;
+  border-color: #c6e2ff;
+  box-shadow: 2px 3px 5px 1px rgba(29, 120, 223, 0.2);
+  transition: 0.5s;
+}
+
 </style>

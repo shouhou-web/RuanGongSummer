@@ -30,8 +30,9 @@
   <component name="ChangeListManager">
     <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/Login/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Login/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/IMade/IMade.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/IMade/IMade.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/MyCollection/MyCollection.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/MyCollection/MyCollection.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/Recent/Recent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/Recent/Recent.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,12 +65,14 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/vuec/src/views/Profile/EditProfile.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/IMade/IMade.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/network/doc.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/Login/Login.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/ForgetPwd/ForgetPwd.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/assets/image/forget.svg" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/components/content/m-doc-header/MDocHeader.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/Home/Home.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/components/common/y-doc/y-doc.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/App.vue" root0="SKIP_INSPECTION" />
@@ -366,7 +369,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597480578830</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="分享功能的完善 / 使用vue的自带剪切板">
+      <created>1597562186014</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1597562186015</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -418,7 +428,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="在自己尝试后发现一个安全而且还不错的登录样式（放在register.vue里面了，那个class绑定的登录样式在login.vue里面）" />
     <MESSAGE value="push了一个登录注册页的残次品" />
     <MESSAGE value="push了一个登录注册页的残次品plus" />
     <MESSAGE value="小改动" />
@@ -443,7 +452,8 @@
     <MESSAGE value="doc API的编写" />
     <MESSAGE value="工作台优化" />
     <MESSAGE value="团队空间优化" />
-    <option name="LAST_COMMIT_MESSAGE" value="团队空间优化" />
+    <MESSAGE value="分享功能的完善 / 使用vue的自带剪切板" />
+    <option name="LAST_COMMIT_MESSAGE" value="分享功能的完善 / 使用vue的自带剪切板" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-735" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1596358814923">
@@ -490,10 +500,10 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-1157" y="197" key="SettingsEditor/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597396753620" />
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597483375532">
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597496465759">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597483375532" />
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597496465759" />
     <state x="-1766" y="92" width="1674" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1596767599481">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
