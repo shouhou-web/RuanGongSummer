@@ -1,16 +1,16 @@
 import { request } from "@/network/request";
-const qs = require('qs');
+const qs = require("qs");
 
 // 新建文档
 export function addDoc(userID, teamID) {
   return request({
-      url: "/addDoc",
-      params: {
-          userID,
-          teamID
-      },
-      method: 'post'
-  })
+    url: "/addDoc",
+    params: {
+      userID,
+      teamID
+    },
+    method: "post"
+  });
 }
 
 // 获取文档内容
@@ -25,8 +25,56 @@ export function getDoc(userID, docID) {
   });
 }
 
+// 获取文档权限
+export function getDocLimit(userID, docID) {
+  return request({
+    url: "/getDocLimit",
+    params: {
+      userID,
+      docID
+    },
+    method: "post"
+  });
+}
+
+// 获得文档editState状态（并上锁）
+export function tryEditDoc(docID) {
+  return request({
+    url: "/tryEditDoc",
+    params: {
+      docID
+    },
+    method: "post"
+  });
+}
+
+// 完成编辑文档
+export function completeEditDoc(userID, docID) {
+  return request({
+    url: "/completeEditDoc",
+    params: {
+      userID,
+      docID
+    },
+    method: "post"
+  });
+}
+
+// 设置文档权限
+export function setDocLimit(userID, docID, docLimit) {
+  return request({
+    url: "/setDocLimit",
+    params: {
+      userID,
+      docID,
+      docLimit
+    },
+    method: "post"
+  });
+}
+
 // 修改文档标题
-export function editDocTitle(userID,docID,docTitle) {
+export function editDocTitle(userID, docID, docTitle) {
   return request({
     url: "/editDocTitle",
     params: {
@@ -38,6 +86,17 @@ export function editDocTitle(userID,docID,docTitle) {
   });
 }
 
+// 修改文档内容
+export function editDoc(docID, docContent) {
+  return request({
+    url: "/editDocTitle",
+    params: {
+      docID,
+      docContent
+    },
+    method: "post"
+  });
+}
 
 // 删除文档
 export function deleteDoc(userID, docID) {
@@ -52,7 +111,7 @@ export function deleteDoc(userID, docID) {
 }
 
 // 批量删除文档
-export function docBatchDelete(docIDs,userID) {
+export function docBatchDelete(docIDs, userID) {
   return request({
     url: "/docBatchDelete",
     params: {
@@ -60,7 +119,7 @@ export function docBatchDelete(docIDs,userID) {
       userID
     },
     method: "post"
-  })
+  });
 }
 
 // 获取回收站的文档
@@ -106,7 +165,7 @@ export function docBatchRecover(docIDs, userID) {
       userID
     },
     method: "post"
-  })
+  });
 }
 
 // 收藏文档
@@ -122,7 +181,7 @@ export function collectDoc(userID, docID) {
 }
 
 // 批量收藏文档
-export function docBatchFavorite(docIDs,userID) {
+export function docBatchFavorite(docIDs, userID) {
   return request({
     url: "/docBatchFavorite",
     params: {
@@ -130,7 +189,7 @@ export function docBatchFavorite(docIDs,userID) {
       userID
     },
     method: "post"
-  })
+  });
 }
 
 // 获取收藏的文档
