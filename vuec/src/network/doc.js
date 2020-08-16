@@ -97,6 +97,18 @@ export function recoverDoc(userID, docID) {
   });
 }
 
+// 批量恢复文档
+export function docBatchRecover(docIDs, userID) {
+  return request({
+    url: "/docBatchRecover",
+    params: {
+      docIDs,
+      userID
+    },
+    method: "post"
+  })
+}
+
 // 收藏文档
 export function collectDoc(userID, docID) {
   return request({

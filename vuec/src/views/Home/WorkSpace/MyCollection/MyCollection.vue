@@ -1,22 +1,73 @@
 <template>
   <div>
-    <div v-if="!noneShow" class="docs">
-      <div v-for="doc in myCollection" :key="doc.docID" class="doc">
-        <l-card :ID="doc.docID" :title="doc.docTitle">
-          <div slot="hide-content" class="hide-nav">
-            <my-button type="text" class="nav-btn">移出收藏</my-button>
-            <my-button type="text" class="nav-btn" @click="toRename(doc.docID)"
-              >重命名</my-button
-            >
-            <my-button type="text" class="nav-btn">分享</my-button>
-            <my-button
-              type="text-danger"
-              class="nav-btn"
-              @click="deleteNotice(doc.docID)"
-              >删除</my-button
-            >
-          </div>
-        </l-card>
+    <div v-if="!noneShow">
+      <div v-if="alignStyle" class="docs" @click="cancelBatch">
+        <div
+          v-for="doc in myCollection"
+          :key="doc.docID"
+          class="doc"
+          @click.stop="confirmBatch"
+        >
+          <l-card
+            :ID="doc.docID"
+            :title="doc.docTitle"
+            :forceUnchecked="batchOrNot"
+            @addDoc="addToBatchDocs"
+            @cancelDoc="removeFromBatchDocs"
+          >
+            <div slot="hide-content" class="hide-nav">
+              <my-button type="text" class="nav-btn">移出收藏</my-button>
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="toRename(doc.docID)"
+                >重命名</my-button
+              >
+              <my-button type="text" class="nav-btn">分享</my-button>
+              <my-button
+                type="text-danger"
+                class="nav-btn"
+                @click="deleteNotice(doc.docID)"
+                >删除</my-button
+              >
+            </div>
+          </l-card>
+        </div>
+      </div>
+      <div v-else class="docs" @click="cancelBatch">
+        <div
+          v-for="doc in myCollection"
+          :key="doc.docID"
+          class="doc"
+          @click.stop="confirmBatch"
+        >
+          <l-card
+            :ID="doc.docID"
+            :title="doc.docTitle"
+            :time="doc.lastEditTime"
+            :creatorID="user.userID"
+            :forceUnchecked="batchOrNot"
+            @addDoc="addToBatchDocs"
+            @cancelDoc="removeFromBatchDocs"
+          >
+            <div slot="hide-content" class="hide-nav">
+              <my-button type="text" class="nav-btn">移出收藏</my-button>
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="toRename(doc.docID)"
+                >重命名</my-button
+              >
+              <my-button type="text" class="nav-btn">分享</my-button>
+              <my-button
+                type="text-danger"
+                class="nav-btn"
+                @click="deleteNotice(doc.docID)"
+                >删除</my-button
+              >
+            </div>
+          </l-card>
+        </div>
       </div>
     </div>
     <l-show-none v-else style="height: 70vh"></l-show-none>
@@ -30,6 +81,18 @@
     >
       <div class="hover-text">
         删除文档后可以在回收站中还原文档，确认要删除该文档吗？
+      </div>
+    </m-hover>
+    <m-hover
+      :onShow="batchDocDeleteHoverOn"
+      title="批量删除文档"
+      assureBtn="确认"
+      cancelBtn="手滑了"
+      @cancel="cancelBatchDelete"
+      @submit="deleteBatchDoc"
+    >
+      <div class="hover-text">
+        被删除的文档后可以在回收站中还原文档，确认要删除该文档吗？
       </div>
     </m-hover>
     <m-hover
@@ -58,6 +121,8 @@
 import { getFavoriteDocs } from "network/doc.js";
 import { deleteDoc } from "network/doc.js";
 import { editDocTitle } from "network/doc.js";
+import { docBatchDelete} from "@/network/doc";
+const qs = require("qs");
 
 export default {
   name: "MyCollection",
@@ -68,12 +133,63 @@ export default {
       noneShow: false,
       docDeleteHoverOn: false,
       docToDeleteID: "",
+      batchDocDeleteHoverOn: false,
       docRenameHoverOn: false,
       docToRenameID: "",
       newDocTitle: "",
+      batchOrNot: true,
+      batchDocs: []
     };
   },
   methods: {
+    cancelBatch() {
+      this.batchOrNot = false;
+    },
+    confirmBatch() {
+      this.batchOrNot = true;
+    },
+    addToBatchDocs(docID) {
+      this.batchDocs.push(docID);
+      this.$emit("showMore");
+    },
+    removeFromBatchDocs(docID) {
+      for (var i = 0; i < this.batchDocs.length; i++) {
+        if (this.batchDocs[i] == docID) {
+          this.batchDocs.splice(i, 1);
+          break;
+        }
+      }
+      if (this.batchDocs.length === 0) this.$emit("hideMore");
+    },
+    batchDelete() {
+      this.batchDocDeleteHoverOn = true;
+    },
+    cancelBatchDelete() {
+      this.batchDocDeleteHoverOn = false;
+    },
+    deleteBatchDoc() {
+      var chosen_Docs = qs.stringify(this.batchDocs, { indices: false });
+      docBatchDelete(chosen_Docs, this.user.userID)
+        .then(res => {
+          if (res == 0) {
+            this.batchDocDeleteHoverOn = false;
+            this.$emit("hideMore");
+            this.$notify.success("批量删除成功");
+            getFavoriteDocs(this.user.userID).then(res => {
+              this.myCollection = res;
+              if (res.length === 0) this.noneShow = true;
+            });
+          } else {
+            this.$notify.error("请检查网络，删除失败");
+            return;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          this.$notify.error("请检查网络，删除失败");
+          return;
+        });
+    },
     cancelRename() {
       this.docRenameHoverOn = false;
     },
@@ -141,6 +257,12 @@ export default {
       this.myCollection = res;
       if (res.length === 0) this.noneShow = true;
     });
+  },
+  props: {
+    alignStyle: {
+      type: Boolean,
+      default: true
+    }
   }
 };
 </script>
@@ -154,7 +276,8 @@ export default {
 .doc {
   margin-left: 30px;
   margin-right: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .nav-btn {
