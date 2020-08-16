@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="!noneShow">
-      <div v-if="alignStyle" class="docs" @click="cancelBatch">
+      <div v-if="alignStyle" class="docs-block" @click="cancelBatch">
         <div
           v-for="doc in myCollection"
           :key="doc.docID"
@@ -34,14 +34,14 @@
           </l-card>
         </div>
       </div>
-      <div v-else class="docs" @click="cancelBatch">
+      <div v-else class="docs-list" @click="cancelBatch">
         <div
           v-for="doc in myCollection"
           :key="doc.docID"
           class="doc"
           @click.stop="confirmBatch"
         >
-          <l-card
+          <l-lcard
             :ID="doc.docID"
             :title="doc.docTitle"
             :time="doc.lastEditTime"
@@ -66,7 +66,7 @@
                 >删除</my-button
               >
             </div>
-          </l-card>
+          </l-lcard>
         </div>
       </div>
     </div>
@@ -268,9 +268,14 @@ export default {
 </script>
 
 <style scoped>
-.docs {
+.docs-block {
   display: flex;
   flex-wrap: wrap;
+}
+
+.docs-list {
+  display: flex;
+  flex-direction: column;
 }
 
 .doc {
