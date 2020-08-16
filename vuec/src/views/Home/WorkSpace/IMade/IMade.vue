@@ -12,15 +12,24 @@
             :ID="doc.docID"
             :title="doc.docTitle"
             :forceUnchecked="batchOrNot"
+            :hasCollected="doc.isFavorite"
             @addDoc="addToBatchDocs"
             @cancelDoc="removeFromBatchDocs"
           >
             <div slot="hide-content" class="hide-nav">
               <my-button
+                v-if="!doc.isFavorite"
                 type="text"
                 class="nav-btn"
                 @click="toCollectDoc(doc.docID)"
                 >收藏</my-button
+              >
+              <my-button
+                v-if="doc.isFavorite"
+                type="text"
+                class="nav-btn"
+                @click="toCancelCollect(doc.docID)"
+                >取消收藏</my-button
               >
               <my-button
                 type="text"
@@ -28,9 +37,12 @@
                 @click="toRename(doc.docID)"
                 >重命名</my-button
               >
-              <my-button type="text"
-                         class="nav-btn"
-                         @click="shareDoc(doc.docID,doc.docTitle)">分享</my-button>
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="shareDoc(doc.docID, doc.docTitle)"
+                >分享</my-button
+              >
               <my-button
                 type="text-danger"
                 class="nav-btn"
@@ -52,6 +64,7 @@
             :ID="doc.docID"
             :title="doc.docTitle"
             :time="doc.lastEditTime"
+            :hasCollected="doc.isFavorite"
             :creatorID="user.userID"
             :forceUnchecked="batchOrNot"
             @addDoc="addToBatchDocs"
@@ -128,14 +141,20 @@
     </m-hover>
     <m-hover :on-show="openShare" title="分享此文档链接">
       <div>
-        <input type="text"
-               id="input"
-               :value="shareSrc"
-               class="input-share" readonly="">
-        <br>
-        <span v-clipboard:copy="shareSrc"
-              v-clipboard:success="onCopy"
-              v-clipboard:error="onCopyError" class="button-share">
+        <input
+          type="text"
+          id="input"
+          :value="shareSrc"
+          class="input-share"
+          readonly=""
+        />
+        <br />
+        <span
+          v-clipboard:copy="shareSrc"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onCopyError"
+          class="button-share"
+        >
           复制
         </span>
       </div>
@@ -148,6 +167,7 @@ import { getMyDocs } from "network/doc.js";
 import { deleteDoc } from "network/doc.js";
 import { collectDoc } from "network/doc.js";
 import { editDocTitle } from "network/doc.js";
+import { cancelCollectDoc } from "network/doc.js";
 import { docBatchDelete, docBatchFavorite } from "@/network/doc";
 const qs = require("qs");
 
@@ -166,8 +186,9 @@ export default {
       newDocTitle: "",
       batchOrNot: true,
       batchDocs: [],
-      shareSrc: '',
+      shareSrc: "",
       openShare: false,
+      favoriteStatus: false
     };
   },
   methods: {
@@ -286,13 +307,33 @@ export default {
             message: "收藏文档成功",
             type: "success"
           });
+          getMyDocs(this.user.userID).then(res => {
+            this.myDocs = res;
+            if (res.length === 0) this.noneShow = true;
+          });
         }
       });
     },
-    shareDoc(docID,docTitle) {
+    toCancelCollect(docID) {
+      cancelCollectDoc(this.user.userID, docID).then(res => {
+        if(res === 0 ) {
+          this.$message({
+            message: "取消收藏文档成功",
+            type: "success"
+          });
+          getMyDocs(this.user.userID).then(res => {
+            this.myDocs = res;
+            if (res.length === 0) this.noneShow = true;
+          });
+        } else {
+          this.$message.error("取消收藏文档失败，请检查网络或联系管理员");
+        }
+      })
+    },
+    shareDoc(docID, docTitle) {
       var toDoc = window.location.href;
-      toDoc = toDoc.substring(0,toDoc.length - 15);
-      toDoc = toDoc + '/doc?docID=' + docID + '&docTitle=' + docTitle;
+      toDoc = toDoc.substring(0, toDoc.length - 15);
+      toDoc = toDoc + "/doc?docID=" + docID + "&docTitle=" + docTitle;
       console.log(toDoc);
       this.shareSrc = toDoc;
       this.openShare = true;
@@ -301,11 +342,11 @@ export default {
       this.openShare = false;
     },
     onCopy() {
-      this.$message.success('复制成功！');
+      this.$message.success("复制成功！");
       this.openShare = false;
     },
     onCopyError() {
-      this.$message.error('复制失败');
+      this.$message.error("复制失败");
     }
   },
   created() {
@@ -387,14 +428,14 @@ export default {
   transition: 0.5s;
 }
 
-.input-share{
+.input-share {
   border: 1px solid #91c4f1;
   border-radius: 5px;
   width: 100%;
   padding: 10px;
 }
 
-.button-share{
+.button-share {
   position: fixed;
   margin-top: 10px;
   margin-left: 120px;
@@ -411,11 +452,10 @@ export default {
   transition: ease-in-out 0.5s;
 }
 
-.button-share:hover{
+.button-share:hover {
   color: #25374f;
   border-color: #c6e2ff;
   box-shadow: 2px 3px 5px 1px rgba(29, 120, 223, 0.2);
   transition: 0.5s;
 }
-
 </style>

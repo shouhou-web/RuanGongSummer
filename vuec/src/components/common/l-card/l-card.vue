@@ -23,12 +23,19 @@
         </div>
       </m-nav-dropdown>
     </div>
-    <img
-      class="l-card__pic"
-      alt="Picture Please!"
-      @click="toEditor"
-      src="https://assets.smcdn.cn/static/lizard-service-desktop/assets/doc_160_flat@2x.098efd4b.png"
-    />
+    <span class="l-card__main">
+      <img
+        v-if="hasCollected"
+        class="l-card__sign"
+        src="@/assets/icon/card/sign.svg"
+      />
+      <img
+        class="l-card__pic"
+        alt="Picture Please!"
+        @click="toEditor"
+        src="https://assets.smcdn.cn/static/lizard-service-desktop/assets/doc_160_flat@2x.098efd4b.png"
+      />
+    </span>
     <div class="l-card__body" :style="bodyStyle">
       {{ title }}
     </div>
@@ -88,7 +95,14 @@ export default {
     },
     title: "",
     ID: "",
-    forceUnchecked: false
+    forceUnchecked: {
+      type: Boolean,
+      default: false
+    },
+    hasCollected: {
+      type: Boolean,
+      default: false
+    }
   }
 };
 </script>
@@ -136,6 +150,17 @@ export default {
 .l-card__setting {
   height: 18px;
   width: 18px;
+}
+
+.l-card__main {
+  position: relative;
+}
+
+.l-card__sign {
+  width: 18px;
+  position: absolute;
+  left: 15px;
+  top: 2px;
 }
 
 .l-card__select {

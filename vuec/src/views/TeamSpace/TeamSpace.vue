@@ -315,6 +315,7 @@
         <TeamDoc v-bind:TeamID="TeamID"
                  class="fade-in"
                  :align-style="listOrBlock"
+                 :iden="iden"
                  @chosen-change="changeMoreOpt"
                  ref="teamdoc">
         </TeamDoc>

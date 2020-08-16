@@ -12,10 +12,11 @@ export function getMyTeam(userID) {
 }
 
 // 获取团队文档
-export function getTeamDocs(teamID) {
+export function getTeamDocs(userID,teamID) {
   return request({
     url: "/getTeamDocs",
     params: {
+      userID,
       teamID
     },
     method: 'post'
