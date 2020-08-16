@@ -9,6 +9,12 @@
             </div>
             <div slot="hide" class="batch-nav">
               <my-button
+                type="text"
+                class="nav-btn"
+                @click="batchRecover"
+                >批量还原</my-button
+              >
+              <my-button
                 type="text-danger"
                 class="nav-btn"
                 @click="batchAbsoluteDelete"
@@ -130,7 +136,7 @@
 import { getDeletedDocs } from "network/doc.js";
 import { deleteDoc } from "network/doc.js";
 import { recoverDoc } from "network/doc.js";
-import { docBatchDelete } from "@/network/doc";
+import { docBatchDelete, docBatchRecover } from "@/network/doc";
 const qs = require("qs");
 
 export default {
@@ -227,7 +233,6 @@ export default {
       var chosen_Docs = qs.stringify(this.batchDocs, { indices: false });
       docBatchDelete(chosen_Docs, this.user.userID)
         .then(res => {
-            console.log(res);
           if (res == 0) {
             this.batchDocAbsoluteDeleteHoverOn = false;
             this.showMoreOrNot = false;
@@ -246,7 +251,29 @@ export default {
           this.$notify.error("请检查网络，删除失败");
           return;
         });
-    }
+    },
+    batchRecover() {
+      var chosen_Docs = qs.stringify(this.batchDocs, { indices: false });
+      docBatchRecover(chosen_Docs, this.user.userID)
+        .then(res => {
+          if (res == 0) {
+            this.showMoreOrNot = false;
+            this.$notify.success("批量还原成功");
+            getDeletedDocs(this.user.userID).then(res => {
+              this.myDeletedDocs = res;
+              if (res.length === 0) this.noneShow = true;
+            });
+          } else {
+            this.$notify.error("请检查网络，删除失败");
+            return;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          this.$notify.error("请检查网络，删除失败");
+          return;
+        });
+    },
   },
   created() {
     this.$store.state.hasTeam = false;
