@@ -213,3 +213,15 @@ export function getMyDocs(userID) {
     method: "post"
   });
 }
+
+// 获取文档的被收藏情况
+export function favoriteOrNot(userID, docID) {
+  return request({
+    url: "/favoriteOrNot",
+    params: {
+      userID,
+      docID
+    },
+    method: "post"
+  })
+}
