@@ -1,22 +1,35 @@
 <template>
-  <ckeditor class="wrapper" :editor="editor" :value="editorData"></ckeditor>
+  <ckeditor
+    class="ck-content"
+    :editor="editor"
+    v-model="editorData"
+    :disabled="disabled"
+    @focus="onFocus"
+    @blur="onBlur"
+  ></ckeditor>
 </template>
 
 <script>
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import ClassicEditor from "./core/ckeditor.js";
 import CKEditor from "@ckeditor/ckeditor5-vue";
+import "./assets/content-styles.css"
 
 export default {
   name: "inEditor",
   props: {
     value: {
       type: String,
-      default: ""
+      default: "",
     },
     placeholder: {
       type: String,
-      default: "请输入内容"
-    }
+      default: "请输入内容",
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -25,8 +38,8 @@ export default {
       editorData: "",
       editorConfig: {
         // 可以控制编辑器的提示文本
-        placeholder: this.placeholder
-      }
+        placeholder: this.placeholder,
+      },
     };
   },
   watch: {
@@ -45,7 +58,7 @@ export default {
         // 编辑器内容发生变化时，告知外部，实现 v-model 双向监听效果
         this.$emit("input", val);
       }
-    }
+    },
   },
   created() {
     // 编辑器组件创建时将外部传入的值直接赋予编辑器
@@ -53,8 +66,16 @@ export default {
   },
   components: {
     // 编辑器组件的局部注册方式
-    ckeditor: CKEditor.component
-  }
+    ckeditor: CKEditor.component,
+  },
+  methods: {
+    onFocus() {
+      console.log("focus");
+    },
+    onBlur() {
+      console.log("blur");
+    },
+  },
 };
 </script>
 
