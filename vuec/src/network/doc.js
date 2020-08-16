@@ -89,7 +89,7 @@ export function editDocTitle(userID, docID, docTitle) {
 // 修改文档内容
 export function editDoc(docID, docContent) {
   return request({
-    url: "/editDocTitle",
+    url: "/editDoc",
     params: {
       docID,
       docContent

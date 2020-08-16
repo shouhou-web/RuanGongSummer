@@ -63,7 +63,7 @@ export default {
           hide = hideList[i].offsetWidth;
         }
       }
-      console.log(hide, show);
+      // console.log(hide, show);
       if (this.position == "middle") {
         this.mlAll = -(hide / 2 - show / 2) + "px";
       } else if (this.position == "right") {
@@ -73,7 +73,7 @@ export default {
         this.mlAll = -((hide * 2) / 3 - show / 2) + "px";
         this.mlTri = -show / 2 + hide / 2 + "px";
       }
-      console.log(this.mlTri, this.mlAll);
+      // console.log(this.mlTri, this.mlAll);
     }
   }
 };
