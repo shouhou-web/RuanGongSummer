@@ -15,6 +15,11 @@
       @click="toEditor"
       src="https://assets.smcdn.cn/static/lizard-service-desktop/assets/doc_160_flat@2x.098efd4b.png"
     />
+    <img
+      v-if="hasCollected"
+      class="l-lcard__sign"
+      src="@/assets/icon/card/sign.svg"
+    />
     <div class="l-lcard__body" :style="bodyStyle">
       {{ title }}
     </div>
@@ -99,7 +104,14 @@ export default {
     time: "",
     creatorID: "",
     ID: "",
-    forceUnchecked: false
+    forceUnchecked: {
+      type: Boolean,
+      default: false
+    },
+    hasCollected: {
+      type: Boolean,
+      default: true
+    }
   }
 };
 </script>
@@ -172,14 +184,18 @@ export default {
   width: 40px;
 }
 
+.l-lcard__sign {
+  width: 20px;
+}
+
 .l-lcard__body {
   overflow: hidden;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 20px;
-  padding-right: 20px;
+  padding-right: 0px;
   white-space: nowrap;
-  width: 60%;
+  width: 55%;
 }
 
 .l-lcard__time {

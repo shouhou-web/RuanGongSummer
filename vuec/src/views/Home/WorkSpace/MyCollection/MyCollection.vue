@@ -12,24 +12,32 @@
             :ID="doc.docID"
             :title="doc.docTitle"
             :forceUnchecked="batchOrNot"
-            @addDoc="addToBatchDocs"
+            @addDoc="addToBatchDocs($event, doc.creatorID)"
             @cancelDoc="removeFromBatchDocs"
           >
             <div slot="hide-content" class="hide-nav">
-              <my-button type="text" class="nav-btn">移出收藏</my-button>
               <my-button
                 type="text"
                 class="nav-btn"
-                @click="toRename(doc.docID)"
+                @click="toCancelCollect(doc.docID)"
+                >移出收藏</my-button
+              >
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="toRename(doc.docID, doc.creatorID)"
                 >重命名</my-button
               >
-              <my-button type="text"
-                         class="nav-btn"
-                         @click="shareDoc(doc.docID,doc.docTitle)">分享</my-button>
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="shareDoc(doc.docID, doc.docTitle)"
+                >分享</my-button
+              >
               <my-button
                 type="text-danger"
                 class="nav-btn"
-                @click="deleteNotice(doc.docID)"
+                @click="deleteNotice(doc.docID, doc.creatorID)"
                 >删除</my-button
               >
             </div>
@@ -57,14 +65,14 @@
               <my-button
                 type="text"
                 class="nav-btn"
-                @click="toRename(doc.docID)"
+                @click="toRename(doc.docID, doc.creatorID)"
                 >重命名</my-button
               >
               <my-button type="text" class="nav-btn">分享</my-button>
               <my-button
                 type="text-danger"
                 class="nav-btn"
-                @click="deleteNotice(doc.docID)"
+                @click="deleteNotice(doc.docID, doc.creatorID)"
                 >删除</my-button
               >
             </div>
@@ -118,14 +126,20 @@
     </m-hover>
     <m-hover :on-show="openShare" title="分享此文档链接">
       <div>
-        <input type="text"
-               id="input"
-               :value="shareSrc"
-               class="input-share" readonly="">
-        <br>
-        <span v-clipboard:copy="shareSrc"
-              v-clipboard:success="onCopy"
-              v-clipboard:error="onCopyError" class="button-share">
+        <input
+          type="text"
+          id="input"
+          :value="shareSrc"
+          class="input-share"
+          readonly=""
+        />
+        <br />
+        <span
+          v-clipboard:copy="shareSrc"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onCopyError"
+          class="button-share"
+        >
           复制
         </span>
       </div>
@@ -137,7 +151,8 @@
 import { getFavoriteDocs } from "network/doc.js";
 import { deleteDoc } from "network/doc.js";
 import { editDocTitle } from "network/doc.js";
-import { docBatchDelete} from "@/network/doc";
+import { cancelCollectDoc } from "network/doc.js";
+import { docBatchCancelCollect } from "@/network/doc";
 const qs = require("qs");
 
 export default {
@@ -155,19 +170,34 @@ export default {
       newDocTitle: "",
       batchOrNot: true,
       batchDocs: [],
-      shareSrc: '',
+      shareSrc: "",
       openShare: false,
+      canBatchDelete: true
     };
   },
   methods: {
+    toCancelCollect(docID) {
+      cancelCollectDoc(this.user.userID, docID).then(res => {
+        if (res === 0) {
+          this.$notify.success("批量取消收藏成功");
+          getFavoriteDocs(this.user.userID).then(res => {
+            this.myCollection = res;
+            if (res.length === 0) this.noneShow = true;
+          });
+        } else {
+          this.$notify.error("请检查网络，批量取消收藏失败");
+        }
+      });
+    },
     cancelBatch() {
       this.batchOrNot = false;
     },
     confirmBatch() {
       this.batchOrNot = true;
     },
-    addToBatchDocs(docID) {
-      this.batchDocs.push(docID);
+    addToBatchDocs($event, creatorID) {
+      if ($event !== this.user.userID) this.canBatchDelete = false;
+      this.batchDocs.push($event);
       this.$emit("showMore");
     },
     removeFromBatchDocs(docID) {
@@ -177,7 +207,10 @@ export default {
           break;
         }
       }
-      if (this.batchDocs.length === 0) this.$emit("hideMore");
+      if (this.batchDocs.length === 0) {
+        this.$emit("hideMore");
+        this.canBatchDelete = true;
+      }
     },
     batchDelete() {
       this.batchDocDeleteHoverOn = true;
@@ -186,6 +219,17 @@ export default {
       this.batchDocDeleteHoverOn = false;
     },
     deleteBatchDoc() {
+      if (this.canBatchDelete) {
+        this.batchDocDeleteHoverOn = false;
+        this.$emit("hideMore");
+        this.$notify.error("批量删除失败，选择的文档中有其他用户的文档");
+        this.canBatchDelete;
+        getFavoriteDocs(this.user.userID).then(res => {
+          this.myCollection = res;
+          if (res.length === 0) this.noneShow = true;
+        });
+        return;
+      }
       var chosen_Docs = qs.stringify(this.batchDocs, { indices: false });
       docBatchDelete(chosen_Docs, this.user.userID)
         .then(res => {
@@ -211,9 +255,13 @@ export default {
     cancelRename() {
       this.docRenameHoverOn = false;
     },
-    toRename(docID) {
-      this.docRenameHoverOn = true;
-      this.docToRenameID = docID;
+    toRename(docID, creatorID) {
+      if (creatorID === this.user.userID) {
+        this.docRenameHoverOn = true;
+        this.docToRenameID = docID;
+      } else {
+        this.$notify.error("无法重命名他人创建得文档");
+      }
     },
     renameDoc() {
       if (this.newDocTitle.length === 0) {
@@ -239,9 +287,13 @@ export default {
         }
       );
     },
-    deleteNotice(docID) {
-      this.docDeleteHoverOn = true;
-      this.docToDeleteID = docID;
+    deleteNotice(docID, creatorID) {
+      if (creatorID === this.user.userID) {
+        this.docDeleteHoverOn = true;
+        this.docToDeleteID = docID;
+      } else {
+        this.$notify.error("无法删除他人创建得文档");
+      }
     },
     cancelDelete() {
       this.docDeleteHoverOn = false;
@@ -263,10 +315,10 @@ export default {
         }
       });
     },
-    shareDoc(docID,docTitle) {
+    shareDoc(docID, docTitle) {
       var toDoc = window.location.href;
-      toDoc = toDoc.substring(0,toDoc.length - 15);
-      toDoc = toDoc + '/doc?docID=' + docID + '&docTitle=' + docTitle;
+      toDoc = toDoc.substring(0, toDoc.length - 15);
+      toDoc = toDoc + "/doc?docID=" + docID + "&docTitle=" + docTitle;
       console.log(toDoc);
       this.shareSrc = toDoc;
       this.openShare = true;
@@ -275,11 +327,11 @@ export default {
       this.openShare = false;
     },
     onCopy() {
-      this.$message.success('复制成功！');
+      this.$message.success("复制成功！");
       this.openShare = false;
     },
     onCopyError() {
-      this.$message.error('复制失败');
+      this.$message.error("复制失败");
     }
   },
   created() {
@@ -361,14 +413,14 @@ export default {
   transition: 0.5s;
 }
 
-.input-share{
+.input-share {
   border: 1px solid #91c4f1;
   border-radius: 5px;
   width: 100%;
   padding: 10px;
 }
 
-.button-share{
+.button-share {
   position: fixed;
   margin-top: 10px;
   margin-left: 120px;
@@ -385,7 +437,7 @@ export default {
   transition: ease-in-out 0.5s;
 }
 
-.button-share:hover{
+.button-share:hover {
   color: #25374f;
   border-color: #c6e2ff;
   box-shadow: 2px 3px 5px 1px rgba(29, 120, 223, 0.2);

@@ -203,6 +203,30 @@ export function getFavoriteDocs(userID) {
   });
 }
 
+// 取消收藏
+export function cancelCollectDoc(userID, docID) {
+  return request({
+    url: "/cancelCollectDoc",
+    params: {
+      userID,
+      docID
+    },
+    method: "post"
+  });
+}
+
+// 批量取消收藏
+export function docBatchCancelCollect(docIDs, userID) {
+  return request({
+    url: "/docBatchCancelCollect",
+    params: {
+      docIDs,
+      userID
+    },
+    method: "post"
+  });
+}
+
 // 获取我的文档
 export function getMyDocs(userID) {
   return request({

@@ -11,6 +11,7 @@
           <l-card
             :ID="doc.docID"
             :title="doc.docTitle"
+            :hasCollected="doc.isFavorite === 1"
             :forceUnchecked="batchOrNot"
             @addDoc="addToBatchDocs"
             @cancelDoc="removeFromBatchDocs"
@@ -28,9 +29,12 @@
                 @click="toRename(doc.docID)"
                 >重命名</my-button
               >
-              <my-button type="text"
-                         class="nav-btn"
-                         @click="shareDoc(doc.docID,doc.docTitle)">分享</my-button>
+              <my-button
+                type="text"
+                class="nav-btn"
+                @click="shareDoc(doc.docID, doc.docTitle)"
+                >分享</my-button
+              >
               <my-button
                 type="text-danger"
                 class="nav-btn"
@@ -52,6 +56,7 @@
             :ID="doc.docID"
             :title="doc.docTitle"
             :time="doc.lastEditTime"
+            :hasCollected="doc.isFavorite === 1"
             :creatorID="user.userID"
             :forceUnchecked="batchOrNot"
             @addDoc="addToBatchDocs"
@@ -128,14 +133,20 @@
     </m-hover>
     <m-hover :on-show="openShare" title="分享此文档链接">
       <div>
-        <input type="text"
-               id="input"
-               :value="shareSrc"
-               class="input-share" readonly="">
-        <br>
-        <span v-clipboard:copy="shareSrc"
-              v-clipboard:success="onCopy"
-              v-clipboard:error="onCopyError" class="button-share">
+        <input
+          type="text"
+          id="input"
+          :value="shareSrc"
+          class="input-share"
+          readonly=""
+        />
+        <br />
+        <span
+          v-clipboard:copy="shareSrc"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onCopyError"
+          class="button-share"
+        >
           复制
         </span>
       </div>
@@ -148,7 +159,8 @@ import { getRecentDocs } from "network/doc.js";
 import { deleteDoc } from "network/doc.js";
 import { collectDoc } from "network/doc.js";
 import { editDocTitle } from "network/doc.js";
-import { docBatchDelete, docBatchFavorite } from "@/network/doc";
+import { cancelCollectDoc } from "network/doc.js";
+import { docBatchDelete } from "network/doc";
 const qs = require("qs");
 
 export default {
@@ -166,8 +178,8 @@ export default {
       newDocTitle: "",
       batchOrNot: true,
       batchDocs: [],
-      shareSrc: '',
-      openShare: false,
+      shareSrc: "",
+      openShare: false
     };
   },
   methods: {
@@ -223,6 +235,7 @@ export default {
       this.docRenameHoverOn = false;
     },
     toRename(docID) {
+      if(this.user)
       this.docRenameHoverOn = true;
       this.docToRenameID = docID;
     },
@@ -288,10 +301,10 @@ export default {
         }
       });
     },
-    shareDoc(docID,docTitle) {
+    shareDoc(docID, docTitle) {
       var toDoc = window.location.href;
-      toDoc = toDoc.substring(0,toDoc.length - 15);
-      toDoc = toDoc + '/doc?docID=' + docID + '&docTitle=' + docTitle;
+      toDoc = toDoc.substring(0, toDoc.length - 15);
+      toDoc = toDoc + "/doc?docID=" + docID + "&docTitle=" + docTitle;
       console.log(toDoc);
       this.shareSrc = toDoc;
       this.openShare = true;
@@ -300,11 +313,11 @@ export default {
       this.openShare = false;
     },
     onCopy() {
-      this.$message.success('复制成功！');
+      this.$message.success("复制成功！");
       this.openShare = false;
     },
     onCopyError() {
-      this.$message.error('复制失败');
+      this.$message.error("复制失败");
     }
   },
   created() {
@@ -316,7 +329,8 @@ export default {
     }
     getRecentDocs(this.user.userID).then(res => {
       this.myRecentDocs = res;
-      console.log(this.myRecentDocs);
+      console.log(res);
+      if (res.length === 0) this.noneShow = true;
     });
   },
   props: {
@@ -386,14 +400,14 @@ export default {
   transition: 0.5s;
 }
 
-.input-share{
+.input-share {
   border: 1px solid #91c4f1;
   border-radius: 5px;
   width: 100%;
   padding: 10px;
 }
 
-.button-share{
+.button-share {
   position: fixed;
   margin-top: 10px;
   margin-left: 120px;
@@ -410,7 +424,7 @@ export default {
   transition: ease-in-out 0.5s;
 }
 
-.button-share:hover{
+.button-share:hover {
   color: #25374f;
   border-color: #c6e2ff;
   box-shadow: 2px 3px 5px 1px rgba(29, 120, 223, 0.2);
