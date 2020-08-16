@@ -76,7 +76,7 @@ export default {
 #suspended .mask {
   position: fixed;
   width: 100vw;
-  height: calc(100vh - 56px);
+  height: 100vh;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);

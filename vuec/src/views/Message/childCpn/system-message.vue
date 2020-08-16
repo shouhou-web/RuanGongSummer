@@ -116,6 +116,7 @@ export default {
               type: "success",
             });
             this.$emit("delete");
+            this.cancel();
           }
         })
         .catch((err) => {

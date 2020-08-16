@@ -180,7 +180,7 @@ export default {
         {
           docIdentity: 1,
           name1: "可读",
-          name2: "可写",
+          name2: "可读",
         },
         {
           docIdentity: 0,
