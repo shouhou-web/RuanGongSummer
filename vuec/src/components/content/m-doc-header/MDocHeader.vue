@@ -115,24 +115,24 @@
             <div class="hover-title">
               其他用户
             </div>
-            <my-button :active="isOtherCant" @click="otherCant" type="text"
-              >不可读</my-button
-            >
-            <my-button :active="isOtherCan" @click="otherCan" type="text"
-              >可读</my-button
-            >
+            <my-button :active="isOtherCant" @click="otherCant" type="text">
+              不可读
+            </my-button>
+            <my-button :active="isOtherCan" @click="otherCan" type="text">
+              可读
+            </my-button>
           </div>
           <div class="hover-div"></div>
           <div v-if="doc.teamName" class="hover-line">
             <div class="hover-title">
               团队成员
             </div>
-            <my-button :active="isTeamRead" @click="teamRead" type="text"
-              >可读</my-button
-            >
-            <my-button :active="isTeamWrite" @click="teamWrite" type="text"
-              >可写</my-button
-            >
+            <my-button :active="isTeamRead" @click="teamRead" type="text">
+              可读
+            </my-button>
+            <my-button :active="isTeamWrite" @click="teamWrite" type="text">
+              可写
+            </my-button>
           </div>
         </m-hover>
       </template>
@@ -217,7 +217,7 @@ export default {
           this.isOtherCant = true;
           this.isTeamRead = true;
           this.isTeamWrite = true;
-          console.log(1)
+          console.log(1);
           break;
         case 2:
           this.isOtherCan = true;

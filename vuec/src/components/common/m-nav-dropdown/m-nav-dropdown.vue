@@ -7,14 +7,14 @@
     <div
       class="m-nav--hide"
       :style="{
-        'margin-left': mlAll
+        'margin-left': mlAll,
       }"
     >
       <div
         class="m-nav__triangle"
         :style="{
           'margin-left': mlTri,
-          'border-bottom-color': triColor
+          'border-bottom-color': triColor,
         }"
       ></div>
       <slot name="hide"></slot>
@@ -28,17 +28,17 @@ export default {
   props: {
     triColor: {
       type: String,
-      default: "#fff"
+      default: "#fff",
     },
     position: {
       type: String,
-      default: "middle"
-    }
+      default: "middle",
+    },
   },
   data() {
     return {
       mlAll: 0,
-      mlTri: 0
+      mlTri: 0,
     };
   },
   computed: {
@@ -61,6 +61,8 @@ export default {
         if (hideList[i].offsetWidth > 0) {
           show = showList[i].offsetWidth;
           hide = hideList[i].offsetWidth;
+          console.log("top", document.documentElement.scrollTop);
+          break;
         }
       }
       // console.log(hide, show);
@@ -74,12 +76,17 @@ export default {
         this.mlTri = -show / 2 + hide / 2 + "px";
       }
       // console.log(this.mlTri, this.mlAll);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style>
+.m-nav--show {
+  align-items: center;
+  display: flex;
+}
+
 .m-nav--hide {
   display: none;
   align-items: center;
