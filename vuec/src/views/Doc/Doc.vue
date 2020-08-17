@@ -9,7 +9,7 @@
         :doc="doc"
       ></in-editor>
     </div>
-    
+
     <m-hover
       title="登录"
       assureBtn="登录"
@@ -172,7 +172,7 @@ export default {
         path: "/doc",
         query: { docID: item.docID, docTitle: item.docTitle },
       });
-      
+
     },
   },
 };
@@ -181,7 +181,7 @@ export default {
 <style scoped>
 .editor {
   margin: 50px auto 0;
-  width: 80vw;
+  width: 60vw;
   height: 80vh;
 }
 
