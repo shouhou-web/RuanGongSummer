@@ -10,7 +10,7 @@
         >
           <l-card
             :ID="doc.docID"
-            :title="doc.docTitle"
+            :title="doc.previewTitle"
             :forceUnchecked="batchOrNot"
             :hasCollected="doc.isFavorite === 1"
             @addDoc="addToBatchDocs"
@@ -148,7 +148,7 @@
       </div>
     </m-hover>
     <m-hover :on-show="openShare" title="分享此文档链接">
-      <div>
+      <div style="padding: 20px">
         <input
           type="text"
           id="input"
@@ -259,6 +259,9 @@ export default {
       if (this.newDocTitle.length === 0) {
         this.$message.error("文档标题不能为空");
         return;
+      } else if (this.newDocTitle.length > 20) {
+        this.$message.error("文档标题不能超过20字节");
+        return;
       }
       editDocTitle(this.user.userID, this.docToRenameID, this.newDocTitle).then(
         res => {
@@ -324,7 +327,7 @@ export default {
     },
     toCancelCollect(docID) {
       cancelCollectDoc(this.user.userID, docID).then(res => {
-        if(res === 0 ) {
+        if (res === 0) {
           this.$message({
             message: "取消收藏文档成功",
             type: "success"
@@ -336,7 +339,7 @@ export default {
         } else {
           this.$message.error("取消收藏文档失败，请检查网络或联系管理员");
         }
-      })
+      });
     },
     shareDoc(docID, docTitle) {
       var toDoc = window.location.href;

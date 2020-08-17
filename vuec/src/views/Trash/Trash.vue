@@ -4,7 +4,7 @@
       <div class="align-icon-outer">
         <div class="align-icon-inner">
           <m-nav-dropdown v-if="showMoreOrNot" triColor="#DCDFE6">
-            <div slot="show">
+            <div style="height=20px" slot="show">
               <img src="@/assets/icon/home/more.svg" class="align-icon" />
             </div>
             <div slot="hide" class="batch-nav">
@@ -361,6 +361,7 @@ export default {
   margin-right: 2px;
   margin-left: 2px;
   width: 20px;
+  height: 20px;
 }
 
 .hover-text {

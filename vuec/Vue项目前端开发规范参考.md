@@ -123,7 +123,7 @@ html示例：
 .list{}			/* 块级标签 */
 .list_select{}	/* 块级标签的修饰 */
 .list__item{}	/* 块级标签的子元素 */
-.list__item_active{}	/* 块级标签子元素的修饰 */
+.list__item--active{}	/* 块级标签子元素的修饰 */
 ```
 
 - 修饰器的使用顺序
