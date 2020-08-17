@@ -60,10 +60,12 @@
             <my-button size="small" @click="openCopy">分享</my-button>
           </div>
           <div class="share">
-            <my-button size="small" @click="isOpenComment = !isOpenComment">评论</my-button>
+            <my-button size="small" @click="isOpenComment = !isOpenComment, isOpenHistory = false"
+              >评论</my-button
+            >
           </div>
           <div class="share">
-            <my-button size="small">历史</my-button>
+            <my-button size="small" @click="isOpenHistory = !isOpenHistory, isOpenComment = false">历史</my-button>
           </div>
           <div class="other">
             <m-nav-dropdown position="middle">
@@ -146,28 +148,33 @@
     <div class="side-bar" v-if="isOpenComment">
       <doc-comment :doc="doc"></doc-comment>
     </div>
+    <div class="side-bar" v-if="isOpenHistory">
+      <m-doc-history :docID="doc.docID"></m-doc-history>
+    </div>
   </div>
 </template>
 
 <script>
 import MHeader from "components/common/m-header/MHeader.vue";
 import docComment from "@/components/content/m-doc-header/childCpn/docComment";
+import MDocHistory from "@/components/content/m-doc-header/childCpn/m-doc-history";
 import { editDocTitle, getRecentDocs, setDocLimit } from "network/doc";
 export default {
   name: "MDocHeader",
   components: {
     MHeader,
-    docComment
+    docComment,
+    MDocHistory
   },
   props: {
     doc: {
       // 文档对象
       type: Object,
-      default: {},
-    },
+      default: {}
+    }
   },
   mounted() {
-    getRecentDocs(this.$store.state.user.userID).then((res) => {
+    getRecentDocs(this.$store.state.user.userID).then(res => {
       this.recentDoc = res;
       if (res.length > 10) {
         this.recentDoc = res.slice(0, 9);
@@ -183,6 +190,7 @@ export default {
       isTeamWrite: false,
       isCooperation: false, // 是否编辑权限
       isOpenComment: false,
+      isOpenHistory: false,
       docIdentity: 0, // 文档权限
       // 返回跳转
       back: [
@@ -190,30 +198,30 @@ export default {
           title: "工作台",
           iconSrc: require("@/assets/icon/doc/workspace.png"),
           href: {
-            path: "/home/workSpace",
-          },
+            path: "/home/workSpace"
+          }
         },
         {
           title: "团队空间",
           iconSrc: require("@/assets/icon/doc/teamspace.png"),
           href: {
-            path: "/home/teamSpace",
-          },
+            path: "/home/teamSpace"
+          }
         },
         {
           title: "回收站",
           iconSrc: require("@/assets/icon/doc/desktop.png"),
           href: {
-            path: "/home/trash",
-          },
-        },
+            path: "/home/trash"
+          }
+        }
       ],
       // 近期文档
       recentDoc: [],
       // 打开分享hover
       openShare: false,
       // 分享信息
-      shareSrc: "",
+      shareSrc: ""
     };
   },
   watch: {
@@ -246,7 +254,7 @@ export default {
           this.isOtherCant = true;
           break;
       }
-    },
+    }
   },
   methods: {
     otherCan() {
@@ -307,18 +315,18 @@ export default {
         docLimit = 3;
       else docLimit = 4;
       setDocLimit(this.$store.state.user.userID, this.doc.docID, docLimit).then(
-        (res) => {
+        res => {
           if (res == 0) {
             this.$notify({
               title: "成功",
               message: "修改文档权限成功",
-              type: "success",
+              type: "success"
             });
             this.isCooperation = false;
           } else
             this.$notify.error({
               title: "网络错误",
-              message: "请稍后重试~",
+              message: "请稍后重试~"
             });
         }
       );
@@ -334,18 +342,18 @@ export default {
         this.doc.docID,
         this.doc.docTitle
       )
-        .then((res) => {
+        .then(res => {
           if (res == 1)
             this.$notify.error({
               title: "网络错误",
-              message: "请稍后重试~",
+              message: "请稍后重试~"
             });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           this.$notify.error({
             title: "网络错误",
-            message: "请稍后重试~",
+            message: "请稍后重试~"
           });
         });
     },
@@ -367,10 +375,10 @@ export default {
     },
     onCopyError() {
       this.$message.error("复制失败");
-    },
+    }
   },
   created() {
-    console.log('HEADER CREATED');
+    console.log("HEADER CREATED");
   }
 };
 </script>
@@ -566,7 +574,7 @@ export default {
   width: 90%;
 }
 
-.side-bar{
+.side-bar {
   width: 20%;
   height: 100vh;
   position: fixed;
@@ -577,7 +585,7 @@ export default {
   padding-left: 1vh;
 }
 
-.switch-type{
+.switch-type {
   width: 10vh;
   height: 4vh;
   margin-bottom: 2vh;

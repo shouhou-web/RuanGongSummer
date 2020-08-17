@@ -249,3 +249,14 @@ export function favoriteOrNot(userID, docID) {
     method: "post"
   })
 }
+
+// 获取文档操作历史记录
+export function getDocHistory(docID) {
+  return request({
+    url: "/getDocHistory",
+    params: {
+      docID
+    },
+    method: "post"
+  })
+}
