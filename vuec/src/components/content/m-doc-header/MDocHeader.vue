@@ -59,6 +59,12 @@
           <div class="share">
             <my-button size="small" @click="openCopy">分享</my-button>
           </div>
+          <div class="share">
+            <my-button size="small" @click="isOpenComment = !isOpenComment">评论</my-button>
+          </div>
+          <div class="share">
+            <my-button size="small" @click="">历史</my-button>
+          </div>
           <div class="other">
             <m-nav-dropdown position="middle">
               <my-button slot="show" size="small">其他操作</my-button>
@@ -137,16 +143,21 @@
         </m-hover>
       </template>
     </m-header>
+    <div class="side-bar" v-if="isOpenComment">
+      <doc-comment :doc="doc"></doc-comment>
+    </div>
   </div>
 </template>
 
 <script>
 import MHeader from "components/common/m-header/MHeader.vue";
+import docComment from "@/components/content/m-doc-header/childCpn/docComment";
 import { editDocTitle, getRecentDocs, setDocLimit } from "network/doc";
 export default {
   name: "MDocHeader",
   components: {
     MHeader,
+    docComment
   },
   props: {
     doc: {
@@ -171,6 +182,7 @@ export default {
       isTeamRead: false,
       isTeamWrite: false,
       isCooperation: false, // 是否编辑权限
+      isOpenComment: false,
       docIdentity: 0, // 文档权限
       // 返回跳转
       back: [
@@ -357,6 +369,9 @@ export default {
       this.$message.error("复制失败");
     },
   },
+  created() {
+    console.log('HEADER CREATED');
+  }
 };
 </script>
 <style scoped>
@@ -549,5 +564,23 @@ export default {
   background-color: var(--color-main);
   margin: 5px auto;
   width: 90%;
+}
+
+.side-bar{
+  width: 20%;
+  height: 100vh;
+  position: fixed;
+  overflow: auto;
+  margin-left: 80%;
+  padding-top: 9vh;
+  padding-bottom: 8vh;
+  padding-left: 1vh;
+}
+
+.switch-type{
+  width: 10vh;
+  height: 4vh;
+  margin-bottom: 2vh;
+  margin-left: 35%;
 }
 </style>

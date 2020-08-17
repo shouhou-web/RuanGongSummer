@@ -23,12 +23,20 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:dev-Yu" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:dev-pull-and-write" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改" />
+    <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
+      <change afterPath="$PROJECT_DIR$/vuec/src/assets/image/reply.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vuec/src/assets/image/return.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vuec/src/components/content/m-doc-header/childCpn/docComment.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vuec/src/network/comment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/components/content/m-doc-header/MDocHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/components/content/m-doc-header/MDocHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/Doc/Doc.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Doc/Doc.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,6 +70,8 @@
     <setting file="file://$PROJECT_DIR$/vuec/src/views/Profile/EditProfile.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/IMade/IMade.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/network/doc.js" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/network/comment.js" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/components/content/m-doc-header/childCpn/docComment.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/Login/Login.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/ForgetPwd/ForgetPwd.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" root0="SKIP_INSPECTION" />
@@ -380,7 +390,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597586973075</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="开辟新大陆（不是">
+      <created>1597631208976</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1597631208976</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -432,7 +449,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="push了一个登录注册页的残次品plus" />
     <MESSAGE value="小改动" />
     <MESSAGE value="主题颜色替换了一下" />
     <MESSAGE value="删除杂项，修改名称，登录注册路由合并到login-register上" />
@@ -457,7 +473,8 @@
     <MESSAGE value="团队空间优化" />
     <MESSAGE value="分享功能的完善 / 使用vue的自带剪切板" />
     <MESSAGE value="团队空间七零八碎完善" />
-    <option name="LAST_COMMIT_MESSAGE" value="团队空间七零八碎完善" />
+    <MESSAGE value="开辟新大陆（不是" />
+    <option name="LAST_COMMIT_MESSAGE" value="开辟新大陆（不是" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1240" y="330" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1597621826597">
@@ -504,10 +521,10 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-647" y="158" key="RollbackChangesDialog/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596608792846" />
-    <state x="-1157" y="197" key="SettingsEditor" timestamp="1597626817824">
+    <state x="-1157" y="197" key="SettingsEditor" timestamp="1597632050025">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1157" y="197" key="SettingsEditor/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597626817824" />
+    <state x="-1157" y="197" key="SettingsEditor/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597632050025" />
     <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597631089126">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>

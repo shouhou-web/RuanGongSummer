@@ -171,7 +171,7 @@ export default {
         path: "/doc",
         query: { docID: item.docID, docTitle: item.docTitle },
       });
-      
+
     },
   },
 };
@@ -180,7 +180,7 @@ export default {
 <style scoped>
 .editor {
   margin: 50px auto 0;
-  width: 80vw;
+  width: 60vw;
   height: 80vh;
 }
 
