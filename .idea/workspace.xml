@@ -22,21 +22,13 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/dev" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:dev-Yu" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
-      <change afterPath="$PROJECT_DIR$/vuec/npm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/network/doc.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/network/doc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/network/team.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/network/team.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" afterDir="false" />
-    </list>
+    <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,7 +53,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev-Yu" />
+        <entry key="$PROJECT_DIR$" value="dev-pull-and-write" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -79,6 +71,7 @@
     <setting file="file://$PROJECT_DIR$/vuec/src/views/Home/Home.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/components/common/y-doc/y-doc.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/App.vue" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vuec/src/views/Doc/Doc.vue" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/WorkSpace.vue" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="1fLGyCTivlgcbjypveth1jTDZUP" />
@@ -133,6 +126,7 @@
       <workItem from="1596768925726" duration="680000" />
       <workItem from="1596769620660" duration="10000" />
       <workItem from="1596769631963" duration="941000" />
+      <workItem from="1597621786260" duration="3763000" />
     </task>
     <task id="LOCAL-00001" summary="看了看🐎佬的项目，大概看了一下App.vue的结构">
       <created>1596016363239</created>
@@ -379,7 +373,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597562186015</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="团队空间七零八碎完善">
+      <created>1597586973075</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1597586973075</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,7 +402,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/dev" />
+                        <option value="dev-pull-and-write" />
                       </list>
                     </value>
                   </entry>
@@ -431,7 +432,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="push了一个登录注册页的残次品" />
     <MESSAGE value="push了一个登录注册页的残次品plus" />
     <MESSAGE value="小改动" />
     <MESSAGE value="主题颜色替换了一下" />
@@ -456,9 +456,14 @@
     <MESSAGE value="工作台优化" />
     <MESSAGE value="团队空间优化" />
     <MESSAGE value="分享功能的完善 / 使用vue的自带剪切板" />
-    <option name="LAST_COMMIT_MESSAGE" value="分享功能的完善 / 使用vue的自带剪切板" />
+    <MESSAGE value="团队空间七零八碎完善" />
+    <option name="LAST_COMMIT_MESSAGE" value="团队空间七零八碎完善" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="-1240" y="330" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1597621826597">
+      <screen x="-1858" y="0" width="1858" height="1080" />
+    </state>
+    <state x="-1240" y="330" key="#com.intellij.fileTypes.FileTypeChooser/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597621826597" />
     <state x="-735" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1596358814923">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
@@ -499,14 +504,14 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-647" y="158" key="RollbackChangesDialog/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1596608792846" />
-    <state x="-1157" y="197" key="SettingsEditor" timestamp="1597396753620">
+    <state x="-1157" y="197" key="SettingsEditor" timestamp="1597626817824">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1157" y="197" key="SettingsEditor/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597396753620" />
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597562943786">
+    <state x="-1157" y="197" key="SettingsEditor/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597626817824" />
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597631089126">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597562943786" />
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597631089126" />
     <state x="-1766" y="92" width="1674" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1596767599481">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
