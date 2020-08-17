@@ -63,7 +63,7 @@
             <my-button size="small" @click="isOpenComment = !isOpenComment">评论</my-button>
           </div>
           <div class="share">
-            <my-button size="small" @click="">历史</my-button>
+            <my-button size="small">历史</my-button>
           </div>
           <div class="other">
             <m-nav-dropdown position="middle">

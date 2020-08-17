@@ -97,8 +97,7 @@ export default {
 
 #suspended .hide {
   position: fixed;
-  opacity: 0;
-  z-index: -1629;
+  display: none;
 }
 
 #suspended .wrapper {
