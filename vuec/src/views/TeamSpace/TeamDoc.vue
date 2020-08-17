@@ -10,6 +10,7 @@
             :title="adoc.docTitle"
             :i-d="adoc.docID"
             :can-check="adoc.creatorID == $store.state.user.userID"
+            :hasCollected="adoc.isFavorite === 1"
             @addDoc="addToChosen"
             @cancelDoc="cancelChosen"
           >
@@ -47,6 +48,7 @@
             :can-check="adoc.creatorID == $store.state.user.userID"
             :time="adoc.lastEditTime"
             :creator-i-d="adoc.creatorID"
+            :hasCollected="adoc.isFavorite === 1"
             @addDoc="addToChosen"
             @cancelDoc="cancelChosen"
           >
