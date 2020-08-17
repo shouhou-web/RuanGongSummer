@@ -7,7 +7,7 @@
         </router-link>
         <ul class="nav-left-ul">
           <li class="nav-left-item">
-            <a class="nav-item__inner" href="#">Pornhub</a>
+            <a class="nav-item__inner" href="#">Github</a>
           </li>
           <li class="nav-left-item">
             <a class="nav-item__inner" href="#">带得栏</a>
