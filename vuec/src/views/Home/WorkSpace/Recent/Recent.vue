@@ -10,7 +10,7 @@
         >
           <l-card
             :ID="doc.docID"
-            :title="doc.docTitle"
+            :title="doc.previewTitle"
             :hasCollected="doc.isFavorite === 1"
             :forceUnchecked="batchOrNot"
             @addDoc="addToBatchDocs($event, doc.creatorID)"
@@ -148,7 +148,7 @@
       </div>
     </m-hover>
     <m-hover :on-show="openShare" title="分享此文档链接">
-      <div>
+      <div style="padding: 20px">
         <input
           type="text"
           id="input"
@@ -203,10 +203,10 @@ export default {
     toCancelCollect(docID) {
       cancelCollectDoc(this.user.userID, docID).then(res => {
         if (res === 0) {
-            this.$message({
-              message: "取消收藏成功",
-              type: "success"
-            });
+          this.$message({
+            message: "取消收藏成功",
+            type: "success"
+          });
           getRecentDocs(this.user.userID).then(res => {
             this.myRecentDocs = res;
             if (res.length === 0) this.noneShow = true;
@@ -297,6 +297,9 @@ export default {
     renameDoc() {
       if (this.newDocTitle.length === 0) {
         this.$message.error("文档标题不能为空");
+        return;
+      } else if (this.newDocTitle.length > 20) {
+        this.$message.error("文档标题不能超过20字节");
         return;
       }
       editDocTitle(this.user.userID, this.docToRenameID, this.newDocTitle).then(
@@ -467,7 +470,7 @@ export default {
 .button-share {
   position: fixed;
   margin-top: 10px;
-  margin-left: 120px;
+  margin-left: 100px;
   background: #ffffff;
   border: 1px solid #d8e3ec;
   border-radius: 7px;
