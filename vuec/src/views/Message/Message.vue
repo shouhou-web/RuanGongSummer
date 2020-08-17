@@ -45,10 +45,6 @@ export default {
     return {
       navList: [
         {
-          name: "评论我的",
-          router: "comment",
-        },
-        {
           name: "加入申请",
           router: "application",
         },
@@ -56,7 +52,10 @@ export default {
           name: "团队邀请",
           router: "invitation",
         },
-
+        {
+          name: "回复我的",
+          router: "comment",
+        },
         {
           name: "系统通知",
           router: "system",
@@ -73,11 +72,11 @@ export default {
   computed: {
     currentIndex() {
       switch (this.$route.path) {
-        case "/message/comment":
-          return 0;
         case "/message/application":
-          return 1;
+          return 0;
         case "/message/invitation":
+          return 1;
+        case "/message/comment":
           return 2;
         case "/message/system":
           return 3;

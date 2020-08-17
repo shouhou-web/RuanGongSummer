@@ -21,11 +21,14 @@ const state = {
     // userState: 0, //0正常，1被禁
     // isNew: 0 //0正常，1还没看新手上路
   },
+  teamNum: 0,
+  collaboratorNum: 0,
+  docNum: 0,
   fullscreenLoading: false,
   homeMidNav: 0,
   homeLeftNav: 1,
   nowTeamID: -1, //-1表示未选择团体
-  hasTeam: false, //是否有团队
+  hasTeam: false //是否有团队
 };
 
 const store = new Vuex.Store({

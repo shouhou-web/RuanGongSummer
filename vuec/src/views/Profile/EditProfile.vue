@@ -73,13 +73,17 @@
           v-model="newCode"
           placeholder="验证码"
         />
-        <my-button
-          class="group-button"
-          @click="sendCode(emailAddressNew)"
-          :disabled="isAddress(emailAddressNew)"
-          type="text"
-          >发送验证码</my-button
-        >
+        <div class="group-button">
+          <my-button
+            class="group-button"
+            @click="sendCode(emailAddressNew)"
+            :disabled="isAddress(emailAddressNew)"
+            :count="60"
+            type="timer"
+          >
+            发送验证码
+          </my-button>
+        </div>
       </div>
     </m-hover>
     <!-- 安全验证 -->
@@ -104,13 +108,16 @@
           v-model="tokenCode"
           placeholder="验证码"
         />
-        <my-button
-          class="group-button"
-          @click="sendCode(user.emailAddress)"
-          :disabled="isAddress(user.emailAddress)"
-          type="text"
-          >发送验证码</my-button
-        >
+        <div class="group-button">
+          <my-button
+            @click="sendCode(user.emailAddress)"
+            :disabled="isAddress(user.emailAddress)"
+            :count="60"
+            type="timer"
+          >
+            发送验证码
+          </my-button>
+        </div>
       </div>
     </m-hover>
   </div>
@@ -119,11 +126,7 @@
 <script>
 import editprofileItem from "./childCpn/editprofile-item";
 import MHover from "components/common/m-hover/m-hover";
-import {
-  setUserName,
-  setUserPassword,
-  setEmailAddress
-} from "network/user.js";
+import { setUserName, setUserPassword, setEmailAddress } from "network/user.js";
 import { emailVerification } from "network/user.js";
 export default {
   name: "Home",
@@ -142,12 +145,12 @@ export default {
       newpwd2: "",
       // 编辑邮箱
       tokenCode: "", // 安全验证的验证码
-      newCode: "" // 新邮箱验证码
+      newCode: "", // 新邮箱验证码
     };
   },
   components: {
     editprofileItem,
-    MHover
+    MHover,
   },
   created() {
     this.userName = this.$store.state.user.userName;
@@ -155,7 +158,7 @@ export default {
   computed: {
     user() {
       return this.$store.state.user;
-    }
+    },
   },
   methods: {
     closeAll() {
@@ -165,20 +168,20 @@ export default {
     },
     editUserName() {
       setUserName(this.user.userID, this.userName)
-        .then(res => {
+        .then((res) => {
           this.$notify({
             title: "成功",
             message: "修改昵称成功",
-            type: "success"
+            type: "success",
           });
           // 更新信息
           this.$store.commit("setUserName", this.userName);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           this.$notify.error({
             title: "网络错误",
-            message: "请稍后重试~"
+            message: "请稍后重试~",
           });
         });
     },
@@ -200,18 +203,18 @@ export default {
     // 发送验证码
     sendCode(e) {
       emailVerification(e)
-        .then(res => {
+        .then((res) => {
           this.code = res;
           this.$notify({
             title: "成功",
             message: "验证码发送成功",
-            type: "success"
+            type: "success",
           });
         })
-        .catch(err => {
+        .catch((err) => {
           this.$notify.error({
             title: "未知错误",
-            message: "请稍后重试~"
+            message: "请稍后重试~",
           });
         });
     },
@@ -230,11 +233,11 @@ export default {
         this.$message.error("两次密码填写不一致");
       // 发送修改密码
       else
-        setUserPassword(this.user.userID, this.newpwd1).then(res => {
+        setUserPassword(this.user.userID, this.newpwd1).then((res) => {
           this.$notify({
             title: "成功",
             message: "修改密码成功",
-            type: "success"
+            type: "success",
           });
           // 更新信息
           this.$store.commit("setPassword", this.newpwd1);
@@ -246,26 +249,26 @@ export default {
         this.$notify({
           title: "成功",
           message: "安全验证成功",
-          type: "success"
+          type: "success",
         });
         this.token = true;
         this.editEmail = true;
       } else {
         this.$notify.error({
           title: "错误",
-          message: "验证码不正确~"
+          message: "验证码不正确~",
         });
       }
     },
     _changeEmail() {
       if (this.code == this.newCode) {
         setEmailAddress(this.user.userID, this.emailAddressNew)
-          .then(res => {
+          .then((res) => {
             if (res == 0) {
               this.$notify({
                 title: "成功",
                 message: "邮箱注册成功",
-                type: "success"
+                type: "success",
               });
               // 更新信息
               this.$commit("setEmailAddress", this.emailAddressNew);
@@ -274,18 +277,18 @@ export default {
               this.$notify({
                 title: "邮箱已注册",
                 message: "该邮箱已经被注册过",
-                type: "warning"
+                type: "warning",
               });
             } else
               this.$notify.error({
                 title: "未知错误",
-                message: "请稍后重试~"
+                message: "请稍后重试~",
               });
           })
-          .catch(err => {
+          .catch((err) => {
             this.$notify.error({
               title: "未知错误",
-              message: "请稍后重试~"
+              message: "请稍后重试~",
             });
           });
       }
@@ -293,8 +296,8 @@ export default {
     isAddress(e) {
       //   console.log(e);
       return e.indexOf("@") == -1;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -324,6 +327,10 @@ export default {
   width: 360px;
 }
 
+.hover-input--small {
+  margin-right: 10px;
+}
+
 .input:focus,
 .hover-input--small:focus,
 .hover-input:focus {
@@ -342,6 +349,6 @@ export default {
 }
 
 .group-button {
-  margin-right: 20px;
+  min-width: 140px;
 }
 </style>

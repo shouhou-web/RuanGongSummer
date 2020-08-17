@@ -31,7 +31,18 @@ export default {
   },
   data() {
     return {
-      messageList: [], // 消息列表
+      messageList: [
+        {
+          msgID: "123465",
+          userID: "123456",
+          userName: "守候123",
+          imagePath: "https://assets.smcdn.cn/static/unmd5/default-avatar-moke.2.png",
+          createTime: "21小时前",
+          ID: "",
+          content: "这里是评论内容",
+          isRead: false,
+        },
+      ], // 消息列表
     };
   },
   components: {

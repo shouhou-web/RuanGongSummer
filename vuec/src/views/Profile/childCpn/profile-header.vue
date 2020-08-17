@@ -5,7 +5,11 @@
         <div class="avator">
           <img class="avator__inner" :src="user.imagePath" alt="" />
           <a @click="editImage = true" class="avator__hide" title="上传新头像">
-            <img class="avator__inner--small" src="@/assets/icon/profile/edit.png" alt="">
+            <img
+              class="avator__inner--small"
+              src="@/assets/icon/profile/edit.png"
+              alt=""
+            />
           </a>
         </div>
         <div class="name">
@@ -16,7 +20,7 @@
       <div class="main">
         <div class="main-item">
           <div class="num">
-            3
+            {{ $store.state.teamNum }}
           </div>
           <div class="label">
             团队
@@ -24,15 +28,15 @@
         </div>
         <div class="main-item border-left">
           <div class="num">
-            1
+            {{ $store.state.docNum }}
           </div>
           <div class="label">
-            已完成
+            已编辑
           </div>
         </div>
         <div class="main-item border-left">
           <div class="num">
-            15
+            {{ $store.state.collaboratorNum }}
           </div>
           <div class="label">
             协作成员
@@ -68,7 +72,7 @@ import { setImagePath } from "network/user";
 export default {
   name: "ProfileHeader",
   components: {
-    MHover
+    MHover,
   },
   data() {
     return {
@@ -120,32 +124,32 @@ export default {
         "https://img-static.mihoyo.com/communityweb/upload/a57113d5e6173a05f7980c978c5a2bd6.png",
         "https://img-static.mihoyo.com/communityweb/upload/38a67cbf6a0bf5feadde8bde74025041.png",
         "https://img-static.mihoyo.com/communityweb/upload/ec4e226f47a169749d96433dd63f391e.png",
-        "https://img-static.mihoyo.com/communityweb/upload/52de23f1b1a060e4ccaa8b24c1305dd9.png"
-      ]
+        "https://img-static.mihoyo.com/communityweb/upload/52de23f1b1a060e4ccaa8b24c1305dd9.png",
+      ],
     };
   },
   methods: {
     submit() {
       setImagePath(this.user.userID, this.imagePath)
-        .then(res => {
+        .then((res) => {
           if (res == 0) {
             this.$notify({
               title: "成功",
               message: "修改头像成功",
-              type: "success"
+              type: "success",
             });
             this.$store.commit("setImagePath", this.imagePath);
             this.close();
           } else
             this.$notify.error({
               title: "网络错误",
-              message: "请稍后重试~"
+              message: "请稍后重试~",
             });
         })
-        .catch(err => {
+        .catch((err) => {
           this.$notify.error({
             title: "网络错误",
-            message: "请稍后重试~"
+            message: "请稍后重试~",
           });
         });
     },
@@ -154,16 +158,16 @@ export default {
     },
     imgClick(src) {
       this.imagePath = src;
-    }
+    },
   },
   computed: {
     user() {
       return this.$store.state.user;
-    }
+    },
   },
   created() {
     this.imagePath = this.$store.state.imagePath;
-  }
+  },
 };
 </script>
 

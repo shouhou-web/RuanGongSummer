@@ -2,6 +2,9 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "../store/index";
 
+// 欢迎页
+const Index = () => import('views/Index.vue')
+
 // 首页相关组件
 const Home = () => import("views/Home/Home.vue");
 
@@ -42,8 +45,10 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
+    name: "Index",
+    component: Index
     // redirect重定向
-    redirect: "/home/workSpace"
+    // redirect: "/home/workSpace"
   },
   {
     path: "/home",

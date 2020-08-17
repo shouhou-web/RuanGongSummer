@@ -41,15 +41,15 @@
                       团队
                     </div>
                     <div class="account__content">
-                      3
+                      {{ $store.state.teamNum }}
                     </div>
                   </div>
                   <div class="account-item">
                     <div class="account__header">
-                      已完成
+                      已编辑
                     </div>
                     <div class="account__content">
-                      1
+                      {{ $store.state.docNum }}
                     </div>
                   </div>
                   <div class="account-item">
@@ -57,7 +57,7 @@
                       协作成员
                     </div>
                     <div class="account__content">
-                      15
+                      {{ $store.state.collaboratorNum }}
                     </div>
                   </div>
                 </div>
@@ -167,7 +167,7 @@
               </div>
             </div>
           </div>
-          <div class="nav-right-item" v-else>
+          <!-- <div class="nav-right-item" v-if="token">
             <app-search></app-search>
             <div class="item">
               <a @click="toLogin(0)" class="nav-item__inner">登录</a>
@@ -175,7 +175,7 @@
             <div class="item">
               <a @click="toLogin(1)" class="nav-item__inner">注册</a>
             </div>
-          </div>
+          </div> -->
         </div>
       </template>
     </m-header>
@@ -186,6 +186,7 @@
 import MHeader from "components/common/m-header/MHeader.vue";
 import appSearch from "./childCpn/app-header-search";
 import { getAllMsgNum } from "network/message";
+import { getUserAchievement } from "network/user";
 export default {
   name: "MAppHeader",
   components: {
@@ -218,7 +219,7 @@ export default {
   },
   methods: {
     toLogin(e) {
-      console.log(e);
+      // console.log(e);
       this.$router.push({
         path: "/Login",
         query: {
@@ -231,7 +232,7 @@ export default {
     },
     logout() {
       this.$store.commit("logout");
-      this.$router.push({ path: "/home" });
+      this.$router.push({ path: "/" });
     },
   },
 };
@@ -243,26 +244,33 @@ export default {
   display: flex;
 }
 
+.nav-left-ul {
+  height: 20px;
+  align-items: center;
+}
+
 .nav-left-item {
   margin-left: 20px;
   min-width: 30px;
+  height: 14px;
+  line-height: 14px;
 }
 
 .nav-item__inner {
   color: #fff;
   display: inline-block;
-  height: 30px;
 }
 
 .welcome {
-  height: 36px;
-  width: 110px;
-  min-width: 110px;
+  align-items: center;
+  display: flex;
+  margin-bottom: 3px;
 }
 
 .welcome__img {
-  height: 100%;
-  width: 100%;
+  height: 30px;
+  width: 150px;
+  min-width: 150px;
 }
 
 .nav-right {

@@ -18,20 +18,22 @@
       </div>
 
       <div class="opt">
-        <div v-if="openMoreOpt" style="margin-right: 10px">
+        <div v-if="openMoreOpt" style="margin-right: 10px;">
           <m-nav-dropdown position="left" class="l-card__nav more-opt">
             <div slot="show">
               <div>
-                <my-button size="medium" type="primary" style="padding: 5px">批量操作</my-button>
+                <my-button size="medium" type="primary" style="padding: 5px;"
+                  >批量操作</my-button
+                >
               </div>
             </div>
             <div
               slot="hide"
               style="
-              border: 1px solid #e7e7e7;
-              border-radius: 5px;
-              background-color: white;
-            "
+                border: 1px solid #e7e7e7;
+                border-radius: 5px;
+                background-color: white;
+              "
             >
               <div class="l-card__hide-main">
                 <my-button
@@ -39,21 +41,21 @@
                   size="medium"
                   class="l-card__nav-btn"
                   @click="useBatchDelete"
-                >删除{{chosenCount}}个文档</my-button
+                  >删除{{ chosenCount }}个文档</my-button
                 >
                 <my-button
                   type="text"
                   size="medium"
                   class="l-card__nav-btn"
                   @click="useBatchFavorite"
-                >收藏{{chosenCount}}个文档</my-button
+                  >收藏{{ chosenCount }}个文档</my-button
                 >
               </div>
             </div>
             <input />
           </m-nav-dropdown>
         </div>
-        <m-nav-dropdown position="left" class="l-card__nav">
+        <m-nav-dropdown triColor="#DCDFE6" position="left" class="l-card__nav">
           <div slot="show">
             <img class="l-card__setting" src="@/assets/image/teamopt.svg" />
           </div>
@@ -72,33 +74,33 @@
                 class="l-card__nav-btn"
                 @click="readyToQuit"
                 v-if="iden != 2"
-              >退出团队</my-button
+                >退出团队</my-button
               >
               <my-button
                 type="text-danger"
                 class="l-card__nav-btn"
                 @click="readyToDisband"
                 v-if="iden == 2"
-              >解散团队</my-button
+                >解散团队</my-button
               >
               <my-button
                 type="text"
                 class="l-card__nav-btn"
                 @click="readyToCooperate"
                 v-if="iden == 2"
-              >协作权限</my-button
+                >协作权限</my-button
               >
               <my-button
                 type="text"
                 class="l-card__nav-btn"
                 @click="readyTosearch_0"
-              >搜索并邀请</my-button
+                >搜索并邀请</my-button
               >
               <my-button
                 type="text"
                 class="l-card__nav-btn"
                 @click="readyTosearch_1"
-              >搜索团队成员</my-button
+                >搜索团队成员</my-button
               >
             </div>
           </div>
@@ -162,7 +164,7 @@
           :key="memberIndex"
         >
           <div>
-            <img :src="member.imagePath" class="user-img">
+            <img :src="member.imagePath" class="user-img" />
           </div>
           <div class="member-name-main">{{ member.userName }}</div>
           <div class="member-email-main">{{ member.emailAddress }}</div>
@@ -188,14 +190,13 @@
         <div class="member-name-header">管理员</div>
       </div>
       <div class="cooperation-admin">
-
         <div
           class="member-header"
           v-for="(member, memberIndex) in members"
           :key="memberIndex"
         >
           <div>
-            <img :src="member.imagePath" class="user-img">
+            <img :src="member.imagePath" class="user-img" />
           </div>
           <div class="member-name-main" v-if="member.userIdentity > 0">
             {{ member.userName }}
@@ -227,7 +228,8 @@
       :on-show="openSearch"
       :title="searchTitle"
       cancel-btn="X"
-      @cancel="cancelSearch">
+      @cancel="cancelSearch"
+    >
       <div class="userSearch">
         <div>
           <!-- 0-邀请 1-查找-->
@@ -243,7 +245,7 @@
             v-model="searchMemberMsg"
             placeholder="输入用户名称/邮箱"
             v-if="searchType == 1"
-            style="padding-left: 5px"
+            style="padding-left: 5px;"
           />
         </div>
 
@@ -259,7 +261,7 @@
             v-if="searchType == 0"
           >
             <div>
-              <img :src="userRes.imagePath" class="user-img">
+              <img :src="userRes.imagePath" class="user-img" />
             </div>
             <div class="member-name-main">{{ userRes.userName }}</div>
             <div class="member-email-main">{{ userRes.emailAddress }}</div>
@@ -278,7 +280,7 @@
             v-if="searchType == 1"
           >
             <div>
-              <img :src="userRes.imagePath" class="user-img">
+              <img :src="userRes.imagePath" class="user-img" />
             </div>
             <div class="member-name-main">{{ userRes.userName }}</div>
             <div class="member-email-main">{{ userRes.emailAddress }}</div>
@@ -310,14 +312,16 @@
       </div>
     </m-hover>
 
-    <div style="margin: 20px">
+    <div style="margin: 20px;">
       <transition mode="out-in">
-        <TeamDoc v-bind:TeamID="TeamID"
-                 class="fade-in"
-                 :align-style="listOrBlock"
-                 :iden="iden"
-                 @chosen-change="changeMoreOpt"
-                 ref="teamdoc">
+        <TeamDoc
+          v-bind:TeamID="TeamID"
+          class="fade-in"
+          :align-style="listOrBlock"
+          :iden="iden"
+          @chosen-change="changeMoreOpt"
+          ref="teamdoc"
+        >
         </TeamDoc>
       </transition>
     </div>
@@ -363,7 +367,7 @@ export default {
       searchTitle: "",
       listOrBlock: true,
       openMoreOpt: false,
-      chosenCount: 0
+      chosenCount: 0,
     };
   },
   components: {
@@ -378,9 +382,9 @@ export default {
       this.$refs.teamdoc.batchFavorite();
     },
     changeMoreOpt(data) {
-      console.log('子传父',data);
+      console.log("子传父", data);
       this.chosenCount = data;
-      if (data > 0){
+      if (data > 0) {
         this.openMoreOpt = true;
       } else {
         this.openMoreOpt = false;
@@ -534,7 +538,7 @@ export default {
         .catch((err) => {
           this.$message.error("请检查网络 - 暂时无法获取你的团队");
         });
-    }
+    },
   },
   created() {
     this.user = this.$store.state.user;
@@ -566,8 +570,8 @@ export default {
   },
   watch: {
     TeamID() {
-      this.searchOutsideMsg = '';
-      this.searchMemberMsg = '';
+      this.searchOutsideMsg = "";
+      this.searchMemberMsg = "";
       //0成员，1管理者，2创建者
       getUserIdentity(this.$store.state.user.userID, this.TeamID)
         .then((res) => {
@@ -625,10 +629,6 @@ export default {
 </script>
 
 <style scoped>
-.teamspace {
-  height: 100%;
-}
-
 .teamspace-header--father {
   align-items: center;
   display: flex;
@@ -840,9 +840,6 @@ export default {
   margin-bottom: 5px;
 }
 
-.l-card__nav-btn:hover {
-}
-
 .opt {
   display: flex;
   flex-direction: row;
@@ -867,9 +864,11 @@ export default {
 
 .cooperation-search {
   border: 1px solid #cce6ff;
-  margin: auto;
+  display: flex;
+  margin: 10px auto;
   height: 30px;
   border-radius: 5px;
+  width: fit-content;
 }
 
 .member-header {
@@ -942,21 +941,21 @@ export default {
   padding-top: 10px;
 }
 
-.user-img{
+.user-img {
   width: 30px;
   border: 1px solid #a8d8ee;
   border-radius: 50%;
   margin-left: 10px;
   margin-top: 3px;
 }
-input::-ms-input-placeholder{
+input::-ms-input-placeholder {
   text-align: center;
 }
-input::-webkit-input-placeholder{
+input::-webkit-input-placeholder {
   text-align: center;
 }
 
-.icon-style{
+.icon-style {
   margin-right: 10px;
   cursor: pointer;
 }

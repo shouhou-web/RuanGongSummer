@@ -156,10 +156,6 @@ export default {
   transition: 0.4s;
 }
 
-.l-lcard.is-always-shadow,
-.l-lcard.is-hover-shadow:focus {
-}
-
 .l-lcard__nav {
   margin-right: 2px;
   margin-top: 2px;

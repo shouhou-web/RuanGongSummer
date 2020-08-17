@@ -1,4 +1,4 @@
-import {request} from "@/network/request";
+import { request } from "@/network/request";
 
 // 登录
 export function login(name, password) {
@@ -8,8 +8,8 @@ export function login(name, password) {
       name,
       password
     },
-    method: 'post'
-  })
+    method: "post"
+  });
 }
 
 // 注册
@@ -22,37 +22,33 @@ export function register(name, password, password2, emailAddress) {
       password2,
       emailAddress
     },
-    method: 'post'
-  })
+    method: "post"
+  });
 }
 
 // 获取验证码
 export function emailVerification(emailAddress) {
   return request({
-      url: "/emailVerification",
-      params: {
-        emailAddress
-      },
-      method: 'post'
-    }
-  )
+    url: "/emailVerification",
+    params: {
+      emailAddress
+    },
+    method: "post"
+  });
 }
 
 // 重置密码
-export function resetPwd(emailAddress,password,password2) {
-  return request(
-    {
-      url: "/resetPwd",
-      params: {
-        emailAddress,
-        password,
-        password2
-      },
-      method: 'post'
-    }
-  )
+export function resetPwd(emailAddress, password, password2) {
+  return request({
+    url: "/resetPwd",
+    params: {
+      emailAddress,
+      password,
+      password2
+    },
+    method: "post"
+  });
 }
-
 
 // 修改昵称
 export function setUserName(userID, userName) {
@@ -99,6 +95,17 @@ export function setImagePath(userID, imagePath) {
     params: {
       userID,
       imagePath
+    },
+    method: "post"
+  });
+}
+
+// 查看用户成就数据
+export function getUserAchievement(userID) {
+  return request({
+    url: "/getUserAchievement",
+    params: {
+      userID
     },
     method: "post"
   });

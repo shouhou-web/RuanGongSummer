@@ -57,6 +57,12 @@ const mutations = {
   },
   setHasTeam(state, hasTeam) {
     state.hasTeam = hasTeam;
+  },
+  // 个人成就
+  setAchieve(state, achieve) {
+    state.teamNum = achieve.teamNum;
+    state.collaboratorNum = achieve.collaboratorNum;
+    state.docNum = achieve.docNum;
   }
 };
 
