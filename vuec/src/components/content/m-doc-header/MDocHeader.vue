@@ -95,24 +95,21 @@
 
         <!-- 分享 -->
         <m-hover :on-show="openShare" title="分享此文档链接" :width="350">
-          <div style="height: 10vh">
-            <input
-              type="text"
-              id="input"
-              :value="shareSrc"
-              class="input-share"
-              readonly=""
-            />
-            <br />
-            <span
-              v-clipboard:copy="shareSrc"
-              v-clipboard:success="onCopy"
-              v-clipboard:error="onCopyError"
-              class="button-share"
-            >
-              复制
-            </span>
-          </div>
+          <input
+            type="text"
+            id="input"
+            :value="shareSrc"
+            class="input-share"
+            readonly=""
+          />
+          <span
+            v-clipboard:copy="shareSrc"
+            v-clipboard:success="onCopy"
+            v-clipboard:error="onCopyError"
+            class="button-share"
+          >
+            复制
+          </span>
         </m-hover>
 
         <m-hover
@@ -151,10 +148,10 @@
         </m-hover>
       </template>
     </m-header>
-    <div class="side-bar" :class="{'side-bar-active':isOpenComment}">
+    <div class="side-bar" :class="{ 'side-bar-active': isOpenComment }">
       <doc-comment :doc="doc" :flag="isOpenComment"></doc-comment>
     </div>
-    <div class="side-bar" :class="{'side-bar-active':isOpenHistory}">
+    <div class="side-bar" :class="{ 'side-bar-active': isOpenHistory }">
       <m-doc-history :docID="doc.docID" :flag="isOpenHistory"></m-doc-history>
     </div>
   </div>
@@ -547,12 +544,10 @@ export default {
   border-radius: 5px;
   width: 100%;
   padding: 10px;
+  margin: 20px 0;
 }
 
 .button-share {
-  position: fixed;
-  margin-top: 10px;
-  margin-left: 120px;
   background: #ffffff;
   border: 1px solid #d8e3ec;
   border-radius: 7px;
@@ -561,9 +556,9 @@ export default {
   font-weight: 500;
   font-size: 15px;
   line-height: 1;
+  margin: 0px auto 20px;
   padding: 12px 20px;
   text-align: center;
-  transition: ease-in-out 0.5s;
 }
 
 .hover-line {
@@ -585,15 +580,16 @@ export default {
 }
 
 .side-bar {
-  width: 20%;
   height: 100vh;
-  position: fixed;
-  overflow: hidden;
   margin-left: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
   padding-top: 9vh;
   padding-bottom: 8vh;
   padding-left: 1vh;
   transition: ease 0.6s;
+  z-index: 10;
 }
 
 .side-bar-active {

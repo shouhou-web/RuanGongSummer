@@ -63,6 +63,10 @@ const mutations = {
     state.teamNum = achieve.teamNum;
     state.collaboratorNum = achieve.collaboratorNum;
     state.docNum = achieve.docNum;
+  },
+  // 消息数目
+  setAllMsgNum(state,aLLMsgNum) {
+    state.aLLMsgNum = aLLMsgNum;
   }
 };
 

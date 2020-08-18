@@ -111,8 +111,8 @@
               <div class="item-message-a">
                 <a class="nav-item__inner" href="#">
                   消息
-                  <span v-if="allMsgNum.all" class="msg-num--main">
-                    {{ allMsgNum.all }}
+                  <span v-if="$store.state.allMsgNum.all" class="msg-num--main">
+                    {{ $store.state.allMsgNum.all }}
                   </span>
                 </a>
               </div>
@@ -125,8 +125,8 @@
                   <router-link class="message-item" :to="{ path: '/message' }">
                     <li>
                       加入申请
-                      <span v-if="allMsgNum.invitation" class="msg-num">
-                        {{ allMsgNum.application }}
+                      <span v-if="$store.state.allMsgNum.invitation" class="msg-num">
+                        {{ $store.state.allMsgNum.application }}
                       </span>
                     </li>
                   </router-link>
@@ -136,8 +136,8 @@
                   >
                     <li>
                       团队邀请
-                      <span v-if="allMsgNum.application" class="msg-num">
-                        {{ allMsgNum.invitation }}
+                      <span v-if="$store.state.allMsgNum.application" class="msg-num">
+                        {{ $store.state.allMsgNum.invitation }}
                       </span>
                     </li>
                   </router-link>
@@ -147,8 +147,8 @@
                   >
                     <li>
                       回复我的
-                      <span v-if="allMsgNum.reply" class="msg-num">
-                        {{ allMsgNum.reply }}
+                      <span v-if="$store.state.allMsgNum.reply" class="msg-num">
+                        {{ $store.state.allMsgNum.reply }}
                       </span>
                     </li>
                   </router-link>
@@ -158,8 +158,8 @@
                   >
                     <li>
                       系统通知
-                      <span v-if="allMsgNum.system" class="msg-num">
-                        {{ allMsgNum.system }}
+                      <span v-if="$store.state.allMsgNum.system" class="msg-num">
+                        {{ $store.state.allMsgNum.system }}
                       </span>
                     </li>
                   </router-link>
@@ -209,7 +209,8 @@ export default {
     this.user = this.$store.state.user;
     getAllMsgNum(this.$store.state.user.userID).then((res) => {
       console.log(res);
-      this.allMsgNum = res;
+      // this.allMsgNum = res;
+      this.$store.commit('setAllMsgNum',res);
     });
   },
   computed: {

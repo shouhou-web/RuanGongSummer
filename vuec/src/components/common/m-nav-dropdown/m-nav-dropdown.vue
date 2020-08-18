@@ -85,6 +85,7 @@ export default {
 .m-nav--show {
   align-items: center;
   display: flex;
+  width: fit-content;
 }
 
 .m-nav--hide {

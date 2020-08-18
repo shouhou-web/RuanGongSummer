@@ -10,7 +10,7 @@
         <div class="main">
           <slot></slot>
         </div>
-        <div class="footer">
+        <div v-if="assureBtn || cancelBtn" class="footer">
           <my-button v-if="assureBtn" @click="submit" size="small">
             {{ assureBtn }}
           </my-button>

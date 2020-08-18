@@ -130,13 +130,13 @@ export default {
       completeEditDoc(this.$store.state.user.userID, this.doc.docID).then(
         (res) => {
           // console.log("失焦事件返回:", res);
-          if (res == 0)
-            this.$notify({
-              title: "成功",
-              message: "编辑记录保存成功",
-              type: "success",
-            });
-          else
+          if (res == 0) {
+            // this.$notify({
+            //   title: "成功",
+            //   message: "编辑记录保存成功",
+            //   type: "success",
+            // });
+          } else
             this.$notify.error({
               title: "网络错误",
               message: "请稍后重试222~",
@@ -149,5 +149,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

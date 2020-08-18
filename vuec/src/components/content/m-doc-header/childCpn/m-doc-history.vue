@@ -72,6 +72,7 @@ export default {
 
 <style scoped>
 .history-whole {
+  right: 40px;
   width: 34vh;
   height: 80vh;
   border-radius: 5px;
@@ -84,7 +85,7 @@ export default {
   height: 80vh;
   overflow: auto;
   background-color: white;
-  padding-top: 5px;
+  padding-top: 10px;
 }
 
 .historys::-webkit-scrollbar {

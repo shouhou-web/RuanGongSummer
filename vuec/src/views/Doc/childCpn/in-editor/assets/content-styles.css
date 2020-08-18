@@ -40,14 +40,11 @@
   padding: 0 10px;
 }
 
-.ck.ck-editor {
-  /* z-index: -1; */
-}
-
 .ck .ck.ck-editor__top {
   height: 39px;
   width: 100vw;
   position: relative;
+  z-index: 2;
 }
 
 .ck .ck-toolbar {
@@ -69,6 +66,7 @@
 
 .ck-content {
   width: 816px;
+  z-index: 2;
   height: calc(100vh - 95px);
 }
 
