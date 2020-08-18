@@ -95,7 +95,7 @@
 
         <!-- 分享 -->
         <m-hover :on-show="openShare" title="分享此文档链接" :width="350">
-          <div>
+          <div style="height: 10vh">
             <input
               type="text"
               id="input"
@@ -151,11 +151,11 @@
         </m-hover>
       </template>
     </m-header>
-    <div class="side-bar" v-if="isOpenComment">
-      <doc-comment :doc="doc"></doc-comment>
+    <div class="side-bar" :class="{'side-bar-active':isOpenComment}">
+      <doc-comment :doc="doc" :flag="isOpenComment"></doc-comment>
     </div>
-    <div class="side-bar" v-if="isOpenHistory">
-      <m-doc-history :docID="doc.docID"></m-doc-history>
+    <div class="side-bar" :class="{'side-bar-active':isOpenHistory}">
+      <m-doc-history :docID="doc.docID" :flag="isOpenHistory"></m-doc-history>
     </div>
   </div>
 </template>
@@ -588,11 +588,17 @@ export default {
   width: 20%;
   height: 100vh;
   position: fixed;
-  overflow: auto;
-  margin-left: 80%;
+  overflow: hidden;
+  margin-left: 100%;
   padding-top: 9vh;
   padding-bottom: 8vh;
   padding-left: 1vh;
+  transition: ease 0.6s;
+}
+
+.side-bar-active {
+  transform: translateX(-100%);
+  transition: ease 0.6s;
 }
 
 .switch-type {

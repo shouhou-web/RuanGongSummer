@@ -38,7 +38,8 @@ export default {
     };
   },
   props: {
-    docID: ""
+    docID: "",
+    flag: false
   },
   methods: {
     getOperationName(operation) {
@@ -50,9 +51,21 @@ export default {
     }
   },
   created() {
-    getDocHistory(this.docID).then(res => {
-      this.historyInfo = res.reverse();
-    });
+    getDocHistory(this.docID)
+      .then(res => {
+        console.log('history',res);
+        this.historyInfo = res.reverse();
+      });
+  },
+  watch: {
+    flag() {
+      console.log('FLAG USE 历史');
+      getDocHistory(this.docID)
+        .then(res => {
+          console.log('历史',res);
+          this.historyInfo = res.reverse();
+        });
+    }
   }
 };
 </script>
@@ -76,7 +89,7 @@ export default {
 
 .history-single {
   margin: auto;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 5px;
   width: 94%;
   height: auto;
