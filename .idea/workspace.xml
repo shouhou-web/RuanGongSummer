@@ -22,17 +22,17 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:dev-pull-and-write" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/dev" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/components/content/m-doc-header/MDocHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/components/content/m-doc-header/MDocHeader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/components/content/m-doc-header/childCpn/docComment.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/components/content/m-doc-header/childCpn/docComment.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vuec/src/components/content/m-doc-header/childCpn/m-doc-history.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/components/content/m-doc-header/childCpn/m-doc-history.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/network/doc.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/network/doc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/Home/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Home/Home.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -423,7 +423,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="dev-pull-and-write" />
+                        <option value="origin/dev" />
                       </list>
                     </value>
                   </entry>
@@ -529,10 +529,10 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-1157" y="197" key="SettingsEditor/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597664389499" />
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597715746078">
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597725159480">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597715746078" />
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597725159480" />
     <state x="-1766" y="92" width="1674" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1596767599481">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
