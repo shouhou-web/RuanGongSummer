@@ -53,19 +53,25 @@
       </template>
       <template v-slot:right>
         <div class="doc-right-nav">
-          <div class="team">
+          <div v-if="isCreator" class="team">
             <my-button @click="openCooperation" size="small">协作</my-button>
           </div>
           <div class="share">
             <my-button size="small" @click="openCopy">分享</my-button>
           </div>
           <div class="share">
-            <my-button size="small" @click="isOpenComment = !isOpenComment, isOpenHistory = false"
+            <my-button
+              size="small"
+              @click="(isOpenComment = !isOpenComment), (isOpenHistory = false)"
               >评论</my-button
             >
           </div>
           <div class="share">
-            <my-button size="small" @click="isOpenHistory = !isOpenHistory, isOpenComment = false">历史</my-button>
+            <my-button
+              size="small"
+              @click="(isOpenHistory = !isOpenHistory), (isOpenComment = false)"
+              >历史</my-button
+            >
           </div>
           <div class="other">
             <m-nav-dropdown position="middle">
@@ -164,24 +170,28 @@ export default {
   components: {
     MHeader,
     docComment,
-    MDocHistory
+    MDocHistory,
   },
   props: {
     doc: {
       // 文档对象
       type: Object,
-      default: {}
-    }
+      default: {},
+    },
   },
   mounted() {
-    getRecentDocs(this.$store.state.user.userID).then(res => {
+    getRecentDocs(this.$store.state.user.userID).then((res) => {
       this.recentDoc = res;
       if (res.length > 10) {
         this.recentDoc = res.slice(0, 9);
       }
     });
   },
-  computed: {},
+  computed: {
+    isCreator() {
+      return this.$store.state.user.userID == this.doc.creatorID;
+    },
+  },
   data() {
     return {
       isOtherCan: false,
@@ -198,30 +208,30 @@ export default {
           title: "工作台",
           iconSrc: require("@/assets/icon/doc/workspace.png"),
           href: {
-            path: "/home/workSpace"
-          }
+            path: "/home/workSpace",
+          },
         },
         {
           title: "团队空间",
           iconSrc: require("@/assets/icon/doc/teamspace.png"),
           href: {
-            path: "/home/teamSpace"
-          }
+            path: "/home/teamSpace",
+          },
         },
         {
           title: "回收站",
           iconSrc: require("@/assets/icon/doc/desktop.png"),
           href: {
-            path: "/home/trash"
-          }
-        }
+            path: "/home/trash",
+          },
+        },
       ],
       // 近期文档
       recentDoc: [],
       // 打开分享hover
       openShare: false,
       // 分享信息
-      shareSrc: ""
+      shareSrc: "",
     };
   },
   watch: {
@@ -254,7 +264,7 @@ export default {
           this.isOtherCant = true;
           break;
       }
-    }
+    },
   },
   methods: {
     otherCan() {
@@ -315,18 +325,18 @@ export default {
         docLimit = 3;
       else docLimit = 4;
       setDocLimit(this.$store.state.user.userID, this.doc.docID, docLimit).then(
-        res => {
+        (res) => {
           if (res == 0) {
             this.$notify({
               title: "成功",
               message: "修改文档权限成功",
-              type: "success"
+              type: "success",
             });
             this.isCooperation = false;
           } else
             this.$notify.error({
               title: "网络错误",
-              message: "请稍后重试~"
+              message: "请稍后重试~",
             });
         }
       );
@@ -342,18 +352,18 @@ export default {
         this.doc.docID,
         this.doc.docTitle
       )
-        .then(res => {
+        .then((res) => {
           if (res == 1)
             this.$notify.error({
               title: "网络错误",
-              message: "请稍后重试~"
+              message: "请稍后重试~",
             });
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           this.$notify.error({
             title: "网络错误",
-            message: "请稍后重试~"
+            message: "请稍后重试~",
           });
         });
     },
@@ -375,11 +385,11 @@ export default {
     },
     onCopyError() {
       this.$message.error("复制失败");
-    }
+    },
   },
   created() {
     console.log("HEADER CREATED");
-  }
+  },
 };
 </script>
 <style scoped>

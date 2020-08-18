@@ -40,6 +40,10 @@
   padding: 0 10px;
 }
 
+.ck.ck-editor {
+  z-index: -1;
+}
+
 .ck-content {
   height: 80vh;
 }
