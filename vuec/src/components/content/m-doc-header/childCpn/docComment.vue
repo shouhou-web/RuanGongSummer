@@ -62,6 +62,7 @@ export default {
       type: Object,
       default: {},
     },
+    flag: false
   },
   data() {
     return {
@@ -88,11 +89,14 @@ export default {
       this.openSendComment = false;
     },
     sendComment() {
-      console.log(this.replyID);
+      console.log('replyID send only',this.replyID);
       if (this.commentContent == ''){
         this.$message.warning('评论字数不许小于0');
         return;
       }
+
+      console.log('send ONLY',this.doc.docID, this.$store.state.user.userID, this.commentContent, this.replyID);
+
       addComment(this.doc.docID, this.$store.state.user.userID, this.commentContent, this.replyID)
         .then(res => {
           if (res == 0){
@@ -102,16 +106,17 @@ export default {
 
             // 刷新
             getDocComment(this.doc.docID)
-              .then(res => {
-                console.log('return comment',res);
+              .then(newres => {
+                console.log('return comment',newres);
                 console.log(this.$store.state.user);
-                this.comments = res;
+                this.comments = newres;
               })
               .catch(err => {
                 this.$message.error('获取评论失败，请检查网络!')
               })
           }
           else {
+            console.log('err',res);
             this.$message.error('评论发送失败，请检查网络');
             this.openSendComment = false;
           }
@@ -122,11 +127,14 @@ export default {
         })
     },
     replyComment() {
-      console.log(this.replyID);
+      console.log('replyID',this.replyID);
       if (this.commentContent == ''){
         this.$message.warning('评论字数不许小于0');
         return;
       }
+
+      console.log('addcomment',this.doc.docID, this.$store.state.user.userID, this.commentContent, this.replyID);
+
       addComment(this.doc.docID, this.$store.state.user.userID, this.commentContent, this.replyID)
         .then(res => {
           if (res == 0){
@@ -138,8 +146,6 @@ export default {
             // 刷新
             getDocComment(this.doc.docID)
               .then(res => {
-                console.log('return comment',res);
-                console.log(this.$store.state.user);
                 this.comments = res;
               })
               .catch(err => {
@@ -147,6 +153,7 @@ export default {
               })
           }
           else {
+            console.log('err',res);
             this.$message.error('评论发送失败，请检查网络');
             this.openSendComment = false;
           }
@@ -161,7 +168,7 @@ export default {
     console.log('CREATED',this.doc);
     getDocComment(this.doc.docID)
       .then(res => {
-        console.log('return comment',res);
+        console.log('return comment created',res);
         console.log(this.$store.state.user);
         this.comments = res;
       })
@@ -174,6 +181,18 @@ export default {
       getDocComment(this.doc.docID)
         .then(res => {
           console.log('return comment',res);
+          console.log(this.$store.state.user);
+          this.comments = res;
+        })
+        .catch(err => {
+          this.$message.error('获取评论失败，请检查网络!')
+        })
+    },
+    flag() {
+      console.log('FLAG USE 评论');
+      getDocComment(this.doc.docID)
+        .then(res => {
+          console.log('评论',res);
           console.log(this.$store.state.user);
           this.comments = res;
         })
