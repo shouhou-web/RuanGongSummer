@@ -3,6 +3,7 @@
     <ckeditor
       class="ck-content"
       :editor="editor"
+      :config="editorConfig"
       v-model="editorData"
       :disabled="editDisabled"
       @input="onInput"
@@ -34,6 +35,10 @@ export default {
       type: Object,
       default: {},
     },
+    imagePath: {
+      type: String,
+      defaualt: "",
+    },
   },
   data() {
     return {
@@ -43,6 +48,12 @@ export default {
       editorConfig: {
         // 可以控制编辑器的提示文本
         placeholder: this.placeholder,
+        // 上传图片
+        simpleUpload: {
+          uploadUrl: `/uploadImage?docID=${
+            this.doc.docID
+          }?image=${JSON.stringify(this.imagePath)}`,
+        },
       },
       editState: false, // 锁权限
     };
@@ -72,7 +83,7 @@ export default {
       this.onBlur();
     }
     this.editorData = this.doc.docContent;
-    this._initEdit();
+    // this._initEdit();
   },
   mounted() {
     window.addEventListener("beforeunload", function (e) {});
@@ -133,118 +144,7 @@ export default {
         }
       );
     },
-    _initEdit() {
-      const appData = {
-        // Users data.
-        users: [
-          {
-            id: "user-1",
-            name: "Joe Doe",
-            // Note that the avatar is optional.
-            avatar: "https://randomuser.me/api/portraits/thumb/men/26.jpg",
-          },
-          {
-            id: "user-2",
-            name: "Ella Harper",
-            avatar: "https://randomuser.me/api/portraits/thumb/women/65.jpg",
-          },
-        ],
-
-        // The ID of the current user.
-        userId: "user-1",
-
-        // Suggestions data.
-        suggestions: [
-          {
-            id: "suggestion-1",
-            type: "insertion",
-            authorId: "user-2",
-            createdAt: new Date(2019, 1, 13, 11, 20, 48),
-          },
-          {
-            id: "suggestion-2",
-            type: "deletion",
-            authorId: "user-1",
-            createdAt: new Date(2019, 1, 14, 12, 7, 20),
-          },
-          {
-            id: "suggestion-3",
-            type: "formatInline:886cqig6g8rf",
-            authorId: "user-1",
-            createdAt: new Date(2019, 2, 8, 10, 2, 7),
-            data: {
-              commandName: "bold",
-              commandParams: [{ forceValue: true }],
-            },
-          },
-        ],
-
-        // Editor initial data.
-        initialData: `<h2>
-          Bilingual Personality Disorder
-      </h2>
-      <p>
-          This may be the first time you hear about this
-          <suggestion id="suggestion-1:user-2" suggestion-type="insertion" type="start"></suggestion>
-          made-up<suggestion id="suggestion-1:user-2" suggestion-type="insertion" type="end"></suggestion>
-          disorder but it actually isn’t so far from the truth.
-          As recent studies show, the language you speak has more effects on you than you realize.
-          According to the studies, the language a person speaks affects their cognition,
-          <suggestion id="suggestion-2:user-1" suggestion-type="deletion" type="start"></suggestion>
-          feelings, <suggestion id="suggestion-2:user-1" suggestion-type="deletion" type="end"></suggestion>
-          behavior, emotions and hence <strong>their personality</strong>.
-      </p>
-      <p>
-          This shouldn’t come as a surprise
-          <a href="https://en.wikipedia.org/wiki/Lateralization_of_brain_function">since we already know</a>
-          that different regions of the brain become more active depending on the activity.
-          The structure, information and especially
-          <suggestion id="suggestion-3:user-1" suggestion-type="formatInline:886cqig6g8rf" type="start"></suggestion>
-          the culture of languages<suggestion id="suggestion-3:user-1" suggestion-type="formatInline:886cqig6g8rf" type="end"></suggestion>
-          varies substantially
-          and the language a person speaks is an essential element of daily life.
-      </p>`,
-      };
-
-      class TrackChangesIntegration {
-        constructor(editor) {
-          this.editor = editor;
-        }
-
-        init() {
-          const usersPlugin = this.editor.plugins.get("Users");
-          const trackChangesPlugin = this.editor.plugins.get("TrackChanges");
-
-          // Load the users data.
-          for (const user of appData.users) {
-            usersPlugin.addUser(user);
-          }
-
-          // Set the current user.
-          usersPlugin.defineMe(appData.userId);
-
-          // Load the suggestions data.
-          for (const suggestion of appData.suggestions) {
-            trackChangesPlugin.addSuggestion(suggestion);
-          }
-
-          // In order to load comments added to suggestions, you
-          // should also configure the comments integration.
-        }
-      }
-
-      ClassicEditor.create(document.querySelector("#editor"), {
-        initialData: appData.initialData,
-        extraPlugins: [TrackChangesIntegration],
-        licenseKey: "BTwoN2FJuJIiGvx7Ro5jkvqKKgoTNDnl1CVyzZd8RxlOrhwXD2U5FW4=",
-        sidebar: {
-          container: document.querySelector("#sidebar"),
-        },
-        toolbar: {
-          items: ["bold", "italic", "|", "trackChanges"],
-        },
-      }).catch((error) => console.error(error));
-    },
+    _initEdit() {},
   },
 };
 </script>
