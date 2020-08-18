@@ -43,6 +43,7 @@
           @click.stop="confirmBatch"
         >
           <l-card
+            :canEdit="false"
             :ID="doc.docID"
             :title="doc.docTitle"
             :forceUnchecked="batchOrNot"
@@ -74,6 +75,7 @@
           @click.stop="confirmBatch"
         >
           <l-lcard
+            :canEdit="false"
             :ID="doc.docID"
             :title="doc.docTitle"
             :time="doc.lastEditTime"

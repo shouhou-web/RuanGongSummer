@@ -5,14 +5,14 @@
       shadow ? 'is-' + shadow + '-shadow' : 'is-hover-shadow',
       isSelected ? 'is-checked' : ''
     ]"
+    @click="toEditor"
   >
     <div class="l-lcard__left" :class="isSelected ? 'still' : ''">
-      <img :src="selectPath" class="l-lcard__select" @click="check" />
+      <img :src="selectPath" class="l-lcard__select" @click.stop="check" />
     </div>
     <img
       class="l-lcard__pic"
       alt="Picture Please!"
-      @click="toEditor"
       src="https://assets.smcdn.cn/static/lizard-service-desktop/assets/doc_160_flat@2x.098efd4b.png"
     />
     <img
@@ -29,7 +29,7 @@
     <div class="l-lcard__creator" :style="bodyStyle">
       {{ creatorID }}
     </div>
-    <div class="l-lcard__right" :class="isSelected ? 'still' : ''">
+    <div class="l-lcard__right" :class="isSelected ? 'still' : ''" @click.stop>
       <m-nav-dropdown
         position="middle"
         :triColor="tricolor"
@@ -74,6 +74,8 @@ export default {
       }
     },
     toEditor() {
+      if(!this.canEdit)
+        return;
       this.$router.push({
         path: "/doc",
         query: {
@@ -97,6 +99,10 @@ export default {
     bodyStyle: {},
     shadow: "",
     canCheck: {
+      type: Boolean,
+      default: true
+    },
+    canEdit: {
       type: Boolean,
       default: true
     },

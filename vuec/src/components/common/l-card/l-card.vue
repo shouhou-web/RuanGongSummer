@@ -68,6 +68,9 @@ export default {
       }
     },
     toEditor() {
+      if(!this.canEdit)
+        return;
+        console.log(this.canEdit)
       this.$router.push({
         path: "/doc",
         query: {
@@ -90,6 +93,10 @@ export default {
     bodyStyle: {},
     shadow: "",
     canCheck: {
+      type: Boolean,
+      default: true
+    },
+    canEdit: {
       type: Boolean,
       default: true
     },
