@@ -1,6 +1,6 @@
 <template>
   <div class="comment-body">
-    <div class="comments">
+    <div class="historys">
       <div v-for="(acomment, commentIndex) in comments" :key="commentIndex">
         <div class="a-comment">
           <div style="display: flex;flex-direction: row">
@@ -212,13 +212,30 @@ export default {
   position: absolute;
 }
 
-.comments{
+.historys{
   border-radius: 5px;
   border: 1px solid #bcbcbc;
   height: 75vh;
   overflow: auto;
   background-color: white;
   padding-top: 5px;
+}
+
+.historys::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width : 5px;  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+.historys::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius   : 10px;
+  background-color: #a1c4fd;
+}
+.historys::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow   : inset 0 0 5px rgba(236, 186, 186, 0.2);
+  background   : none;
+  border-radius: 10px;
 }
 
 .send-comment{

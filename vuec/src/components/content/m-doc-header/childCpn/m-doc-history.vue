@@ -87,6 +87,23 @@ export default {
   padding-top: 5px;
 }
 
+.historys::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width : 5px;  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+.historys::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius   : 10px;
+  background-color: #a1c4fd;
+}
+.historys::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow   : inset 0 0 5px rgba(236, 186, 186, 0.2);
+  background   : none;
+  border-radius: 10px;
+}
+
 .history-single {
   margin: auto;
   border-radius: 5px;
