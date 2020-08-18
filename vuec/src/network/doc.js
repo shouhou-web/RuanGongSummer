@@ -272,3 +272,27 @@ export function getDocHistory(docID) {
     method: "post"
   });
 }
+
+// 预览所有模板
+export function getAllTemplate() {
+  return request({
+    url: "getAllTemplate",
+    params: {
+
+    },
+    method: 'post'
+  })
+}
+
+// 用模板创建新文档
+export function addDocWithTemplate(userID, teamID, templateID) {
+  return request({
+    url: "addDocWithTemplate",
+    params: {
+      userID,
+      teamID,
+      templateID
+    },
+    method: 'post'
+  })
+}

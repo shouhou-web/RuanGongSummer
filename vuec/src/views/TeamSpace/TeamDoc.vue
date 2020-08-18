@@ -7,7 +7,7 @@
       <div class="docs-block" v-if="alignStyle">
         <div class="doc" v-for="(adoc, docIndex) in docs" :key="docIndex">
           <l-card
-            :title="adoc.docTitle"
+            :title="adoc.previewTitle"
             :i-d="adoc.docID"
             :can-check="adoc.creatorID == $store.state.user.userID"
             :hasCollected="adoc.isFavorite === 1"
