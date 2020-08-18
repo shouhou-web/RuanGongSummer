@@ -414,9 +414,6 @@ textarea {
   padding-right: 10px;
 }
 
-.return:hover {
-}
-
 .return-img {
   width: 12px;
   margin-left: 5px;
