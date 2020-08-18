@@ -4,24 +4,24 @@
     <div class="wrapper">
       <div class="profile-mask"></div>
       <div class="header">
-        <profile-header></profile-header>
+        <profile-header :user="user" :achieve="achieve"></profile-header>
       </div>
       <div class="main">
         <div class="nav">
-          <div class="nav-item" :class="[isEditProfile ? 'active' : '']">
+          <!-- <div class="nav-item" :class="[isEditProfile ? 'active' : '']">
             <router-link to="/profile/editProfile">账号信息</router-link>
-          </div>
-          <div class="nav-item">
+          </div> -->
+          <!-- <div class="nav-item">
             <router-link to="/profile/myTeam">参与的团队</router-link>
           </div>
           <div class="nav-item">
             <router-link to="/profile/setMessage">消息设置</router-link>
-          </div>
+          </div> -->
         </div>
         <div class="div"></div>
         <!-- 子页面 -->
         <div class="content">
-          <router-view></router-view>
+          <edit-profile :user="user"></edit-profile>
         </div>
       </div>
     </div>
@@ -31,16 +31,49 @@
 <script>
 import MAppHeader from "components/content/m-app-header/MAppHeader";
 import ProfileHeader from "./childCpn/profile-header";
+import EditProfile from "./EditProfile";
+import { getUserAchievement, getUserInfo } from "network/user";
 export default {
   name: "Home",
   components: {
     MAppHeader,
     ProfileHeader,
+    EditProfile,
+  },
+  created() {
+    let userID = this.$route.query.userID;
+    if (userID == this.$store.state.user.userID) {
+      this.user = this.$store.state.user;
+      getUserAchievement(userID).then((res) => {
+        this.achieve = res;
+        this.$store.commit("setAchieve", res);
+      });
+    } else
+      getUserInfo(userID)
+        .then((res) => {
+          this.user = res;
+        })
+        .then(
+          getUserAchievement(userID).then((res) => {
+            this.achieve = res;
+            this.$store.commit("setAchieve", res);
+          })
+        )
+        .catch((err) => {
+          this.$notify.error({
+            title: "网络错误",
+            message: "请稍后重试~",
+          });
+          this.$router.go(-1);
+        });
+  },
+  data() {
+    return {
+      user: {},
+      achieve: {},
+    };
   },
   computed: {
-    user() {
-      return this.$store.state.user;
-    },
     isEditProfile() {
       return this.$route.path == "/profile/editProfile";
     },

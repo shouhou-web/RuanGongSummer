@@ -26,6 +26,17 @@ export function register(name, password, password2, emailAddress) {
   });
 }
 
+// 查看他人页面
+export function getUserInfo(userID) {
+  return request({
+    url: "/getUserInfo",
+    params: {
+      userID
+    },
+    method: "post"
+  });
+}
+
 // 获取验证码
 export function emailVerification(emailAddress) {
   return request({

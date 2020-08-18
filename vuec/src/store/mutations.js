@@ -60,9 +60,11 @@ const mutations = {
   },
   // 个人成就
   setAchieve(state, achieve) {
+    // console.log(achieve)
     state.teamNum = achieve.teamNum;
     state.collaboratorNum = achieve.collaboratorNum;
     state.docNum = achieve.docNum;
+    // sessionStorage.setItem("achieve", JSON.stringify(achieve));
   },
   // 消息数目
   setAllMsgNum(state,aLLMsgNum) {

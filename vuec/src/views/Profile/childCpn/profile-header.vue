@@ -20,7 +20,7 @@
       <div class="main">
         <div class="main-item">
           <div class="num">
-            {{ $store.state.teamNum }}
+            {{ achieve.teamNum }}
           </div>
           <div class="label">
             团队
@@ -28,7 +28,7 @@
         </div>
         <div class="main-item border-left">
           <div class="num">
-            {{ $store.state.docNum }}
+            {{ achieve.docNum }}
           </div>
           <div class="label">
             已编辑
@@ -36,7 +36,7 @@
         </div>
         <div class="main-item border-left">
           <div class="num">
-            {{ $store.state.collaboratorNum }}
+            {{ achieve.collaboratorNum }}
           </div>
           <div class="label">
             协作成员
@@ -68,11 +68,21 @@
 
 <script>
 import MHover from "components/common/m-hover/m-hover";
-import { setImagePath } from "network/user";
+import { setImagePath, getUserAchievement } from "network/user";
 export default {
   name: "ProfileHeader",
   components: {
     MHover,
+  },
+  props: {
+    user: {
+      type: Object,
+      default: "",
+    },
+    achieve: {
+      type: Object,
+      default: {},
+    },
   },
   data() {
     return {
@@ -159,14 +169,6 @@ export default {
     imgClick(src) {
       this.imagePath = src;
     },
-  },
-  computed: {
-    user() {
-      return this.$store.state.user;
-    },
-  },
-  created() {
-    this.imagePath = this.$store.state.imagePath;
   },
 };
 </script>

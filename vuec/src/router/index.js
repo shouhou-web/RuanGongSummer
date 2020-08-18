@@ -14,7 +14,7 @@ const ForgetPwd = () => import("views/ForgetPwd/ForgetPwd.vue");
 
 // 个人界面
 const Profile = () => import("views/Profile/Profile.vue");
-const EditProfile = () => import("views/Profile/EditProfile.vue");
+// const EditProfile = () => import("views/Profile/EditProfile.vue");
 
 // 工作台二级导航栏
 const WorkSpace = () => import("views/Home/WorkSpace/WorkSpace.vue");
@@ -99,18 +99,18 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile,
-    children: [
-      {
-        path: "/",
-        // redirect重定向
-        redirect: "/profile/editProfile"
-      },
-      {
-        path: "/profile/editProfile",
-        name: "EditProfile",
-        component: EditProfile
-      }
-    ]
+    // children: [
+    //   {
+    //     path: "/",
+    //     // redirect重定向
+    //     redirect: "/profile/editProfile"
+    //   },
+    //   {
+    //     path: "/profile/editProfile",
+    //     name: "EditProfile",
+    //     component: EditProfile
+    //   }
+    // ]
   },
   {
     path: "/Login",

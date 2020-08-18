@@ -75,24 +75,16 @@
                     <div class="option__icon">
                       <img src="@/assets/icon/header/component.png" alt="" />
                     </div>
-                    <div class="option__content">
-                      我的团队
-                    </div>
-                  </div>
-                  <div class="option-item">
-                    <div class="option__icon">
-                      <img src="@/assets/icon/header/basics.png" alt="" />
-                    </div>
-                    <div class="option__content">
-                      提交记录
+                    <div @click="toProfile" class="option__content">
+                      参与团队
                     </div>
                   </div>
                   <div class="option-item">
                     <div class="option__icon">
                       <img src="@/assets/icon/header/plugin.png" alt="" />
                     </div>
-                    <div class="option__content">
-                      成员统计
+                    <div @click="toProfile" class="option__content">
+                      协作成员
                     </div>
                   </div>
                 </div>
@@ -125,7 +117,10 @@
                   <router-link class="message-item" :to="{ path: '/message' }">
                     <li>
                       加入申请
-                      <span v-if="$store.state.allMsgNum.invitation" class="msg-num">
+                      <span
+                        v-if="$store.state.allMsgNum.invitation"
+                        class="msg-num"
+                      >
                         {{ $store.state.allMsgNum.application }}
                       </span>
                     </li>
@@ -136,7 +131,10 @@
                   >
                     <li>
                       团队邀请
-                      <span v-if="$store.state.allMsgNum.application" class="msg-num">
+                      <span
+                        v-if="$store.state.allMsgNum.application"
+                        class="msg-num"
+                      >
                         {{ $store.state.allMsgNum.invitation }}
                       </span>
                     </li>
@@ -158,7 +156,10 @@
                   >
                     <li>
                       系统通知
-                      <span v-if="$store.state.allMsgNum.system" class="msg-num">
+                      <span
+                        v-if="$store.state.allMsgNum.system"
+                        class="msg-num"
+                      >
                         {{ $store.state.allMsgNum.system }}
                       </span>
                     </li>
@@ -208,9 +209,9 @@ export default {
   created() {
     this.user = this.$store.state.user;
     getAllMsgNum(this.$store.state.user.userID).then((res) => {
-      console.log(res);
+      // console.log(res);
       // this.allMsgNum = res;
-      this.$store.commit('setAllMsgNum',res);
+      this.$store.commit("setAllMsgNum", res);
     });
   },
   computed: {
@@ -229,7 +230,8 @@ export default {
       });
     },
     toProfile() {
-      this.$router.push({ path: "/profile" });
+      let userID = this.$store.state.user.userID;
+      this.$router.push({ path: "/profile", query: { userID } });
     },
     logout() {
       this.$store.commit("logout");

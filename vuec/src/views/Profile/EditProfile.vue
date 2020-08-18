@@ -4,21 +4,25 @@
     </editprofile-item>
     <editprofile-item icon="user" title="昵称" content="">
       <input
+        v-if="isUser"
         @blur="editUserName"
         class="input"
         type="text"
-        v-model="userName"
+        v-model="user.userName"
       />
+      <div v-else>
+        {{ user.userName }}
+      </div>
     </editprofile-item>
     <!-- 编辑密码 -->
-    <editprofile-item icon="lock" title="密码" content="******">
+    <editprofile-item v-if="isUser" icon="lock" title="密码" content="******">
       <my-button @click="clickPassword" type="primary" size="small">
         修改
       </my-button>
     </editprofile-item>
     <!-- 编辑邮箱 -->
     <editprofile-item icon="email" title="邮箱" :content="user.emailAddress">
-      <my-button @click="clickEmail" type="primary" size="small">
+      <my-button v-if="isUser" @click="clickEmail" type="primary" size="small">
         编辑
       </my-button>
     </editprofile-item>
@@ -127,7 +131,11 @@
 import editprofileItem from "./childCpn/editprofile-item";
 import MHover from "components/common/m-hover/m-hover";
 import { setUserName, setUserPassword, setEmailAddress } from "network/user.js";
-import { emailVerification } from "network/user.js";
+import {
+  emailVerification,
+  getUserInfo,
+  getUserAchievement,
+} from "network/user.js";
 export default {
   name: "Home",
   data() {
@@ -148,16 +156,25 @@ export default {
       newCode: "", // 新邮箱验证码
     };
   },
+  props: {
+    user: {
+      type: Object,
+      default: {},
+    },
+  },
   components: {
     editprofileItem,
     MHover,
   },
-  created() {
-    this.userName = this.$store.state.user.userName;
+  watch: {
+    user(user) {
+      console.log('watch',user)
+      this.userName = user.userName;
+    },
   },
   computed: {
-    user() {
-      return this.$store.state.user;
+    isUser() {
+      return this.$route.query.userID == this.$store.state.user.userID;
     },
   },
   methods: {
@@ -167,15 +184,16 @@ export default {
       this.editEmail = false;
     },
     editUserName() {
-      setUserName(this.user.userID, this.userName)
+      setUserName(this.user.userID, this.user.userName)
         .then((res) => {
           this.$notify({
             title: "成功",
             message: "修改昵称成功",
             type: "success",
           });
+          console.log(this.user.userName)
           // 更新信息
-          this.$store.commit("setUserName", this.userName);
+          this.$store.commit("setUserName", this.user.userName);
         })
         .catch((err) => {
           console.log(err);
