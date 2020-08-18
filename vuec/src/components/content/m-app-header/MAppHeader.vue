@@ -1,6 +1,6 @@
 <template>
   <div>
-    <m-header>
+    <m-header class="m-app-header">
       <template v-slot:left>
         <router-link :to="{ path: '/home' }" class="welcome">
           <img class="welcome__img" src="@/assets/image/logo.png" alt="" />
@@ -238,6 +238,10 @@ export default {
 };
 </script>
 <style scoped>
+.m-app-header {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+}
+
 .nav-left-ul,
 .nav-right-item {
   align-items: center;

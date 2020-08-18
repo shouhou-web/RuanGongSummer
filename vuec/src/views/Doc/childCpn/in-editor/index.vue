@@ -150,7 +150,4 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
-  height: 80vh;
-}
 </style>

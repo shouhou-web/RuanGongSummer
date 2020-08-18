@@ -41,12 +41,42 @@
 }
 
 .ck.ck-editor {
-  z-index: -1;
+  /* z-index: -1; */
+}
+
+.ck .ck.ck-editor__top {
+  height: 39px;
+  width: 100vw;
+  position: relative;
+}
+
+.ck .ck-toolbar {
+  background-color: var(--color-background-sub);
+}
+
+.ck.ck-editor__main,
+.ck .ck-toolbar__items {
+  display: flex;
+  justify-content: center;
+}
+
+.ck .ck.ck-editor__main {
+  background-color: var(--color-background-third);
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
 }
 
 .ck-content {
-  height: 80vh;
+  width: 816px;
+  height: calc(100vh - 95px);
 }
+
+.ck .ck-editor__editable {
+  border: 0;
+  padding: 30px 100px 0;
+}
+
 /* ckeditor5-image/theme/image.css */
 .ck-content .image {
   display: table;

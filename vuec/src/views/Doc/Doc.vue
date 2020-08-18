@@ -4,10 +4,7 @@
       <m-doc-header :doc="doc" @toRecent="toRecent"></m-doc-header>
     </div>
     <div class="editor">
-      <in-editor
-        :disabled="disabled"
-        :doc="doc"
-      ></in-editor>
+      <in-editor :disabled="disabled" :doc="doc"></in-editor>
     </div>
 
     <m-hover
@@ -172,17 +169,15 @@ export default {
         path: "/doc",
         query: { docID: item.docID, docTitle: item.docTitle },
       });
-
     },
   },
 };
 </script>
 
 <style scoped>
-.editor {
-  margin: 50px auto 0;
-  width: 60vw;
-  height: 80vh;
+#doc {
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .hover-input {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <m-header bgColor="#f7f7f7">
+    <m-header bgColor="var(--color-background-main)">
       <template v-slot:left>
         <m-nav-dropdown position="right">
           <my-button slot="show" size="small">快速跳转</my-button>
