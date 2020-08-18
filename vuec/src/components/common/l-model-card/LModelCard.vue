@@ -9,7 +9,6 @@
       <img
         class="l-card__pic"
         alt="Picture Please!"
-        @click="toEditor"
         src="https://assets.smcdn.cn/static/lizard-service-desktop/assets/doc_160_flat@2x.098efd4b.png"
       />
     </span>
@@ -22,22 +21,9 @@
 <script>
 export default {
   name: "LModelCard",
-  methods: {
-    toEditor() {
-      this.$router.push({
-        path: "/doc",
-        query: {
-          docID: this.ID,
-          docTitle: this.title
-        }
-      });
-    }
-  },
   props: {
     bodyStyle: {},
     shadow: "",
-    title: "",
-    ID: ""
   }
 };
 </script>
