@@ -1,6 +1,18 @@
 import { request } from "@/network/request";
 const qs = require("qs");
 
+// 上传图片
+export function uploadImage(docID, image) {
+  return request({
+    url: "/uploadImage",
+    params: {
+      docID,
+      image
+    },
+    method: "post"
+  });
+}
+
 // 新建文档
 export function addDoc(userID, teamID) {
   return request({
@@ -247,7 +259,7 @@ export function favoriteOrNot(userID, docID) {
       docID
     },
     method: "post"
-  })
+  });
 }
 
 // 获取文档操作历史记录
@@ -258,5 +270,5 @@ export function getDocHistory(docID) {
       docID
     },
     method: "post"
-  })
+  });
 }

@@ -109,15 +109,18 @@ export default {
     readyToComment(commentID) {
       this.replyID = commentID;
       this.openSendComment = true;
+      this.$emit('openComment')
     },
     readyToReply(commentID, userName, userImg) {
       this.replyID = commentID;
       this.openSendComment = true;
       this.toUserName = userName;
       this.toUserImgPath = userImg;
+      this.$emit('openComment')
     },
     cancelToComment() {
       this.openSendComment = false;
+      this.$emit('openComment')
     },
     sendComment() {
       console.log("replyID send only", this.replyID);

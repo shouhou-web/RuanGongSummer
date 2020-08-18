@@ -148,8 +148,18 @@
         </m-hover>
       </template>
     </m-header>
-    <div class="side-bar" :class="{ 'side-bar-active': isOpenComment }">
-      <doc-comment :doc="doc" :flag="isOpenComment"></doc-comment>
+    <div
+      class="side-bar"
+      :class="{
+        'side-bar-active': isOpenComment,
+        'side-bar--comment': isCommentActive,
+      }"
+    >
+      <doc-comment
+        @openComment="commentActive"
+        :doc="doc"
+        :flag="isOpenComment"
+      ></doc-comment>
     </div>
     <div class="side-bar" :class="{ 'side-bar-active': isOpenHistory }">
       <m-doc-history :docID="doc.docID" :flag="isOpenHistory"></m-doc-history>
@@ -199,6 +209,7 @@ export default {
       isOpenComment: false,
       isOpenHistory: false,
       docIdentity: 0, // 文档权限
+      isCommentActive: false, // 是否打开评论框
       // 返回跳转
       back: [
         {
@@ -233,7 +244,7 @@ export default {
   },
   watch: {
     doc(val) {
-      console.log("docLimit", val.docLimit);
+      // console.log("docLimit", val.docLimit);
       switch (val.docLimit) {
         case 0:
           this.isOtherCan = true;
@@ -244,13 +255,13 @@ export default {
           this.isOtherCant = true;
           this.isTeamRead = true;
           this.isTeamWrite = true;
-          console.log(1);
+          // console.log(1);
           break;
         case 2:
           this.isOtherCan = true;
           this.isTeamRead = true;
           this.isTeamWrite = false;
-          console.log(233);
+          // console.log(233);
           break;
         case 3:
           this.isOtherCant = true;
@@ -264,6 +275,10 @@ export default {
     },
   },
   methods: {
+    // 切换是否打开中部悬浮窗
+    commentActive() {
+      this.isCommentActive = !this.isCommentActive;
+    },
     otherCan() {
       this.isOtherCan = !this.isOtherCan;
       if (this.isOtherCan) {
@@ -366,15 +381,36 @@ export default {
     },
     // 跳转到近期浏览
     toRecent(item) {
-      console.log("child:toRecent");
+      // console.log("child:toRecent");
+      this._onBlur();
       this.$emit("toRecent", item);
+    },
+    // 失焦事件
+    _onBlur() {
+      // console.log("onBlur");
+      completeEditDoc(this.$store.state.user.userID, this.doc.docID).then(
+        (res) => {
+          // console.log("失焦事件返回:", res);
+          if (res == 0) {
+            // this.$notify({
+            //   title: "成功",
+            //   message: "编辑记录保存成功",
+            //   type: "success",
+            // });
+          } else
+            this.$notify.error({
+              title: "网络错误",
+              message: "请稍后重试222~",
+            });
+        }
+      );
     },
     // 复制
     openCopy() {
       this.openShare = true;
       var toDoc = window.location.href;
       this.shareSrc = toDoc;
-      console.log(toDoc);
+      // console.log(toDoc);
     },
     onCopy() {
       this.$message.success("复制成功！");
@@ -383,9 +419,6 @@ export default {
     onCopyError() {
       this.$message.error("复制失败");
     },
-  },
-  created() {
-    console.log("HEADER CREATED");
   },
 };
 </script>
@@ -590,6 +623,10 @@ export default {
   padding-left: 1vh;
   transition: ease 0.6s;
   z-index: 10;
+}
+
+.side-bar--comment {
+  z-index: 11;
 }
 
 .side-bar-active {

@@ -59,6 +59,7 @@
 
 .ck .ck.ck-editor__main {
   background-color: var(--color-background-third);
+  line-height: 1.7;
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
@@ -73,6 +74,11 @@
 .ck .ck-editor__editable {
   border: 0;
   padding: 30px 100px 0;
+}
+
+.ck .ck-focused {
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 /* ckeditor5-image/theme/image.css */

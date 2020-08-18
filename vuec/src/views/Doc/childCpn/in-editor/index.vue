@@ -8,7 +8,6 @@
       :disabled="editDisabled"
       @input="onInput"
       @focus="onFocus"
-      @blur="onBlur"
     ></ckeditor>
   </div>
 </template>
@@ -50,9 +49,8 @@ export default {
         placeholder: this.placeholder,
         // 上传图片
         simpleUpload: {
-          uploadUrl: `/uploadImage?docID=${
-            this.doc.docID
-          }?image=${JSON.stringify(this.imagePath)}`,
+          // The URL that the images are uploaded to.
+          uploadUrl: "http://39.99.154.244:8080/uploadImage",
         },
       },
       editState: false, // 锁权限
@@ -60,7 +58,7 @@ export default {
   },
   watch: {
     doc(val) {
-      console.log("value", this.doc.docContent);
+      // console.log("value", this.doc.docContent);
       if (!this.editor) {
         return;
       }
@@ -84,6 +82,10 @@ export default {
     }
     this.editorData = this.doc.docContent;
     // this._initEdit();
+  },
+  beforeDestroy() {
+    // console.log('beforeDestroy');
+    this._onBlur();
   },
   mounted() {
     window.addEventListener("beforeunload", function (e) {});
@@ -113,38 +115,90 @@ export default {
     // 聚焦事件
     onFocus() {
       // console.log("onFocus");
-      tryEditDoc(this.doc.docID).then((res) => {
-        // console.log("聚焦事件返回:", res);
-        if (res != 0) {
-          this.editState = true;
-          this.$message({
-            message: "有人正在编辑文档，请稍后刷新重试",
-            type: "warning",
-          });
-        }
-      });
-    },
-    // 失焦事件
-    onBlur() {
-      // console.log("onBlur");
-      completeEditDoc(this.$store.state.user.userID, this.doc.docID).then(
-        (res) => {
-          // console.log("失焦事件返回:", res);
-          if (res == 0) {
-            // this.$notify({
-            //   title: "成功",
-            //   message: "编辑记录保存成功",
-            //   type: "success",
-            // });
-          } else
-            this.$notify.error({
-              title: "网络错误",
-              message: "请稍后重试222~",
+      if (this.editState) {
+        tryEditDoc(this.doc.docID).then((res) => {
+          console.log("聚焦事件返回:", res);
+          if (res != 0) {
+            this.editState = true;
+            this.$message({
+              message: "有人正在编辑文档，请稍后刷新重试",
+              type: "warning",
             });
-        }
-      );
+          }
+        });
+      }
     },
-    _initEdit() {},
+    // 放锁事件
+    _onBlur() {
+      console.log("放锁");
+      completeEditDoc(
+        this.$store.state.user.userID,
+        this.doc.docID
+      ).then((res) => {});
+    },
+    _initEdit() {
+      class MyUploadAdapter {
+        constructor(loader) {
+          // The file loader instance to use during the upload.
+          this.loader = loader;
+        }
+
+        // Starts the upload process.
+        upload() {
+          return this.loader.file.then(
+            (file) =>
+              new Promise((resolve, reject) => {
+                this.uploadFile(file, resolve);
+              })
+          );
+        }
+
+        uploadFile(file, resolve) {
+          uploadImage(0, file)
+            .then((res) => {
+              resolve({
+                default: respJson.result[0].url,
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          // 上传文件
+          // $.ajax({
+          //     url: "XXXXXXXXX",
+          //     type: 'POST',
+          //     data: file,
+          //     processData: false,
+          //     beforeSend: function (request) {
+          //         request.setRequestHeader("Content-Type", file.type);
+          //     },
+          //     success: function (respJson) {
+          //         if (respJson.code == 0) {
+          //             resolve({
+          //                 default: respJson.result[0].url
+          //             });
+          //         } else {
+          //             alert("错误：" + respJson.msg)
+          //         }
+          //     },
+          //     error: function (e) {
+          //     }
+          // });
+        }
+
+        // Aborts the upload process.
+        abort() {
+          // Reject the promise returned from the upload() method.
+          server.abortUpload();
+        }
+      }
+
+      this.editor.plugins.get("FileRepository").createUploadAdapter = (
+        loader
+      ) => {
+        return new MyUploadAdapter(loader);
+      };
+    },
   },
 };
 </script>
