@@ -4,14 +4,13 @@
       <div class="align-icon-outer">
         <div class="align-icon-inner">
           <m-nav-dropdown v-if="showMoreOrNot" triColor="#DCDFE6">
-            <div style="height=20px" slot="show">
-              <img src="@/assets/icon/home/more.svg" class="align-icon" />
+            <div slot="show">
+              <div style="height: 20px;">
+                <img src="@/assets/icon/home/more.svg" class="align-icon" />
+              </div>
             </div>
             <div slot="hide" class="batch-nav">
-              <my-button
-                type="text"
-                class="nav-btn"
-                @click="batchRecover"
+              <my-button type="text" class="nav-btn" @click="batchRecover"
                 >批量还原</my-button
               >
               <my-button
@@ -35,10 +34,7 @@
         </div>
       </div>
     </div>
-    <div
-      v-if="!noneShow"
-      style="height: 80vh;margin: 20px;margin-left: 45px;overflow: auto;"
-    >
+    <div v-if="!noneShow" style="height: 80vh; overflow: auto;">
       <div v-if="alignStyle" class="docs-block" @click="cancelBatch">
         <div
           v-for="doc in myDeletedDocs"
@@ -152,7 +148,7 @@ export default {
       batchDocAbsoluteDeleteHoverOn: false,
       batchOrNot: true,
       batchDocs: [],
-      showMoreOrNot: false
+      showMoreOrNot: false,
     };
   },
   methods: {
@@ -165,16 +161,16 @@ export default {
       this.alignStyle = false;
     },
     toRecover(docID) {
-      recoverDoc(this.user.userID, docID).then(res => {
+      recoverDoc(this.user.userID, docID).then((res) => {
         if (res === 1) {
           this.$message.error("恢复文档失败，请检查网络或联系管理员");
         } else {
           this.$message({
             message: "恢复成功",
-            type: "success"
+            type: "success",
           });
         }
-        getDeletedDocs(this.user.userID).then(res => {
+        getDeletedDocs(this.user.userID).then((res) => {
           this.myDeletedDocs = res;
           if (res.length === 0) this.noneShow = true;
         });
@@ -188,16 +184,16 @@ export default {
       this.docAbsoluteDeleteHoverOn = false;
     },
     absoluteDeleteDoc() {
-      deleteDoc(this.user.userID, this.docToAbsoluteDeleteID).then(res => {
+      deleteDoc(this.user.userID, this.docToAbsoluteDeleteID).then((res) => {
         if (res === 1) {
           this.$message.error("彻底删除文档失败，请检查网络或联系管理员");
         } else {
           this.docAbsoluteDeleteHoverOn = false;
           this.$message({
             message: "文档已被彻底删除",
-            type: "success"
+            type: "success",
           });
-          getDeletedDocs(this.user.userID).then(res => {
+          getDeletedDocs(this.user.userID).then((res) => {
             this.myDeletedDocs = res;
             if (res.length === 0) this.noneShow = true;
           });
@@ -232,12 +228,12 @@ export default {
     absoluteDeleteBatchDoc() {
       var chosen_Docs = qs.stringify(this.batchDocs, { indices: false });
       docBatchDelete(chosen_Docs, this.user.userID)
-        .then(res => {
+        .then((res) => {
           if (res == 0) {
             this.batchDocAbsoluteDeleteHoverOn = false;
             this.showMoreOrNot = false;
             this.$message.success("批量彻底删除成功");
-            getDeletedDocs(this.user.userID).then(res => {
+            getDeletedDocs(this.user.userID).then((res) => {
               this.myDeletedDocs = res;
               if (res.length === 0) this.noneShow = true;
             });
@@ -246,7 +242,7 @@ export default {
             return;
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           this.$message.error("请检查网络，删除失败");
           return;
@@ -255,14 +251,14 @@ export default {
     batchRecover() {
       var chosen_Docs = qs.stringify(this.batchDocs, { indices: false });
       docBatchRecover(chosen_Docs, this.user.userID)
-        .then(res => {
+        .then((res) => {
           if (res == 0) {
             this.showMoreOrNot = false;
             this.$message({
               message: "批量还原成功",
-              type: "success"
+              type: "success",
             });
-            getDeletedDocs(this.user.userID).then(res => {
+            getDeletedDocs(this.user.userID).then((res) => {
               this.myDeletedDocs = res;
               if (res.length === 0) this.noneShow = true;
             });
@@ -271,7 +267,7 @@ export default {
             return;
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           this.$message.error("请检查网络，删除失败");
           return;
@@ -288,11 +284,11 @@ export default {
       this.$message.error("请先登录");
       return;
     }
-    getDeletedDocs(this.user.userID).then(res => {
+    getDeletedDocs(this.user.userID).then((res) => {
       this.myDeletedDocs = res;
       if (res.length === 0) this.noneShow = true;
     });
-  }
+  },
 };
 </script>
 
@@ -300,6 +296,7 @@ export default {
 .docs-block {
   display: flex;
   flex-wrap: wrap;
+  height: 100%;
 }
 
 .docs-list {
