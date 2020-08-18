@@ -4,7 +4,7 @@
       <div v-for="(acomment, commentIndex) in comments" :key="commentIndex">
         <div :id="acomment.commentID" class="a-comment">
           <div style="display: flex; flex-direction: row;">
-            <img :src="acomment.imagePath" class="user-img" />
+            <img :src="acomment.imagePath" class="user-img" @click="toUserProfile(acomment.userID)"/>
             <div class="comment-header">
               <div class="user-name">{{ acomment.userName }}</div>
               <div class="comment-date">
@@ -217,6 +217,9 @@ export default {
           this.openSendComment = false;
         });
     },
+    toUserProfile(userID) {
+      this.$router.push({ path: '/profile', query: { userID } });
+    }
   },
   created() {
     console.log("CREATED", this.doc);
@@ -350,6 +353,7 @@ textarea {
   width: 30px;
   border: 1px solid #a8d8ee;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .user-name {

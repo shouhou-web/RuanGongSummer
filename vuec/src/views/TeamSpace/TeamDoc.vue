@@ -14,7 +14,6 @@
             @addDoc="addToChosen"
             @cancelDoc="cancelChosen"
           >
-            <!--TODO: 添加管理员权限-->
             <div slot="hide-content" class="hide-nav">
               <my-button size="text" class="nav-btn">打开</my-button>
               <my-button size="text"

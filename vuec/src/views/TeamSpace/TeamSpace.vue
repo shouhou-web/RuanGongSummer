@@ -87,7 +87,6 @@
                 type="text"
                 class="l-card__nav-btn"
                 @click="readyToCooperate"
-                v-if="iden == 2"
                 >协作权限</my-button
               >
               <my-button
@@ -164,7 +163,7 @@
           :key="memberIndex"
         >
           <div>
-            <img :src="member.imagePath" class="user-img" />
+            <img :src="member.imagePath" class="user-img" @click="toUserProfile(member.userID)"/>
           </div>
           <div class="member-name-main">{{ member.userName }}</div>
           <div class="member-email-main">{{ member.emailAddress }}</div>
@@ -178,7 +177,7 @@
             <my-button
               size="small"
               type="text"
-              v-if="member.userIdentity == 0"
+              v-if="(member.userIdentity == 0) && (iden == 2)"
               @click="setUserIden(member.userID, TeamID, 1)"
             >
               +加入管理员
@@ -196,7 +195,7 @@
           :key="memberIndex"
         >
           <div>
-            <img :src="member.imagePath" class="user-img" />
+            <img :src="member.imagePath" class="user-img" @click="toUserProfile(member.userID)"/>
           </div>
           <div class="member-name-main" v-if="member.userIdentity > 0">
             {{ member.userName }}
@@ -214,7 +213,7 @@
             <my-button
               size="mini"
               type="text-danger"
-              v-if="member.userIdentity == 1"
+              v-if="(member.userIdentity == 1) && (iden == 2)"
               @click="setUserIden(member.userID, TeamID, 0)"
               style="margin-left: 5px;"
             >
@@ -261,7 +260,7 @@
             v-if="searchType == 0"
           >
             <div>
-              <img :src="userRes.imagePath" class="user-img" />
+              <img :src="userRes.imagePath" class="user-img" @click="toUserProfile(userRes.userID)"/>
             </div>
             <div class="member-name-main">{{ userRes.userName }}</div>
             <div class="member-email-main">{{ userRes.emailAddress }}</div>
@@ -280,7 +279,7 @@
             v-if="searchType == 1"
           >
             <div>
-              <img :src="userRes.imagePath" class="user-img" />
+              <img :src="userRes.imagePath" class="user-img" @click="toUserProfile(userRes.userID)"/>
             </div>
             <div class="member-name-main">{{ userRes.userName }}</div>
             <div class="member-email-main">{{ userRes.emailAddress }}</div>
@@ -539,6 +538,9 @@ export default {
           this.$message.error("请检查网络 - 暂时无法获取你的团队");
         });
     },
+    toUserProfile(userID) {
+      this.$router.push({ path: '/profile', query: { userID } });
+    }
   },
   created() {
     this.user = this.$store.state.user;
@@ -947,6 +949,7 @@ export default {
   border-radius: 50%;
   margin-left: 10px;
   margin-top: 3px;
+  cursor: pointer;
 }
 input::-ms-input-placeholder {
   text-align: center;

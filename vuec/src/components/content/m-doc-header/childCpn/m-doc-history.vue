@@ -8,7 +8,7 @@
       >
         <div class="history-single">
           <div class="history-top">
-            <img :src="$store.state.user.imagePath" class="history-pic" />
+            <img :src="history.imagePath" class="history-pic" @click="toUserProfile(history.userID)"/>
             <div class="history-user">
               {{ history.userName }}
             </div>
@@ -48,6 +48,9 @@ export default {
       else if (operation === 3) return "删除了这个文档";
       else if (operation === 4) return "恢复了这个文档";
       else return "修改了文档的标题";
+    },
+    toUserProfile(userID) {
+      this.$router.push({ path: '/profile', query: { userID } });
     }
   },
   created() {
@@ -151,6 +154,7 @@ export default {
   border: 1px solid #a8d8ee;
   border-radius: 50%;
   width: 30px;
+  cursor: pointer;
 }
 
 .history-text {
