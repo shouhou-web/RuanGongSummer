@@ -24,6 +24,8 @@ export default {
   props: {
     bodyStyle: {},
     shadow: "",
+    title: "",
+    ID: ""
   }
 };
 </script>
