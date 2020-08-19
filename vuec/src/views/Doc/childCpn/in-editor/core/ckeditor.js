@@ -124,32 +124,49 @@ class TrackChangesIntegration {
     // Set the adapter to the `TrackChanges#adapter` property.
     trackChangesPlugin.adapter = {
       getSuggestion: suggestionId => {
+        var result_id;
+        var result_type;
+        var result_authorId;
+        var result_createdAt;
+        var result_hascomments;
+        var result_data;
         // This function should query the database for data for a suggestion with a `suggestionId`.
         console.log("Get suggestion", suggestionId);
         var temp = getSuggestion(suggestionId).then(res => {
           if (res) {
-            // console.log(res);
             console.log("success");
             return res;
           } else {
             console.log("failed");
           }
         });
-        console.log(temp);
+        result_id = temp.then(function(res) {
+          console.log(res);
+          result_id = res.id;
+          return res.id;
+        })
+        console.log(result_id);
         return new Promise(resolve => {
-          resolve(temp);
+          resolve({
+            id: result_id,
+            type: result_type,
+            authorId: result_authorId,
+            createdAt: result_createdAt,
+            hasComments: result_hascomments,
+            data: result_data
+          });
         });
         return new Promise(resolve => {
           // switch (
           //   suggestionId
           // case "suggestion-1":
-          //   resolve({
-          //     id: "suggestion-1",
-          //     type: "insertion",
-          //     authorId: "user-2",
-          //     createdAt: new Date(2019, 1, 13, 11, 20, 48),
-          //     hasComments: true
-          //   });
+          // resolve({
+          //   id: "suggestion-1",
+          //   type: "insertion",
+          //   authorId: "user-2",
+          //   createdAt: new Date(2019, 1, 13, 11, 20, 48),
+          //   hasComments: true
+          // });
           //   break;
           // case "suggestion-2":
           //   resolve({
@@ -236,8 +253,8 @@ class TrackChangesIntegration {
 
       addSuggestion: suggestionData => {
         // This function should save `suggestionData` in the database.
-        console.log("Suggestion added", suggestionData);
-        console.log(suggestionData.id);
+        console.log(suggestionData);
+        suggestionData.createdAt = new Date();
         addSuggestion(suggestionData.id, suggestionData).then(res => {
           if (res === 0) {
             console.log("success");
