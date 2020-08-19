@@ -27,6 +27,7 @@ const state = {
   fullscreenLoading: false,
   homeMidNav: 0,
   homeLeftNav: 1,
+  nowDocID: -1,
   nowTeamID: -1, //-1表示未选择团体
   hasTeam: false, //是否有团队
   allMsgNum: {}, // 消息数目

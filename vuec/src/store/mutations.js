@@ -52,6 +52,9 @@ const mutations = {
       state.homeLeftNav = isActive;
     }
   },
+  setDocID(state, docID) {
+    state.nowDocID = docID;
+  },
   setTeamID(state, teamID) {
     state.nowTeamID = teamID;
   },
