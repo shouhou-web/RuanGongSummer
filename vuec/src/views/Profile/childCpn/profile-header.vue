@@ -143,6 +143,7 @@ export default {
   },
   computed: {
     isUser() {
+      console.log('个人空间的值',this.$route.query.userID == this.$store.state.user.userID)
       return this.$route.query.userID == this.$store.state.user.userID;
     },
   },

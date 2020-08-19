@@ -82,6 +82,9 @@ export default {
       this.onBlur();
     }
     this.editorData = this.doc.docContent;
+    window.addEventListener("beforeunload", (e) => {
+      this._onBlur();
+    });
     // this._initEdit();
   },
   beforeDestroy() {
