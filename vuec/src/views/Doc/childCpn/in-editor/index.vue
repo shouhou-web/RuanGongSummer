@@ -18,6 +18,7 @@ import ClassicEditor from "./core/ckeditor.js";
 import CKEditor from "@ckeditor/ckeditor5-vue";
 import "./assets/content-styles.css";
 import { tryEditDoc, completeEditDoc, editDoc } from "network/doc";
+import { addSuggestion, getSuggestion, updateSuggestion } from "network/doc";
 
 export default {
   name: "inEditor",
@@ -84,7 +85,7 @@ export default {
     // this._initEdit();
   },
   beforeDestroy() {
-    console.log("beforeDestroy");
+    // console.log("beforeDestroy");
     this._onBlur();
   },
   mounted() {

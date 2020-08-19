@@ -74,7 +74,7 @@ export default {
         message: "请登录已获取文档阅读权限~",
       });
       this.openLogin = true;
-    } 
+    }
     // else if (docTitle == "")
     //   // 新建文档
     //   this.doc.docID = docID;
@@ -131,6 +131,8 @@ export default {
       this._getDoc(userID, docID);
       // 获取权限
       this._getDocLimit(userID, docID);
+      // console.log('要设置的数据',this.$route.query.docID)
+      this.$store.commit("setDocID", this.$route.query.docID);
     },
     // 获取doc数据
     _getDoc(userID, docID) {
@@ -165,7 +167,7 @@ export default {
     // 跳转到最近的文档
     toRecent(item) {
       // console.log("father:toRecent");
-      this._getDoc(this.$store.state.user.userID, item.docID);
+      this._index(this.$store.state.user.userID, item.docID);
       this.$router.push({
         path: "/doc",
         query: { docID: item.docID },
