@@ -107,13 +107,13 @@ class TrackChangesIntegration {
     );
 
     // Load the users data.
-    let myUsers = getMyUsers();
-    console.log(myUsers);
+    // let myUsers = getMyUsers();
+    // console.log(myUsers);
     // for (let i = 0; i < myUsers.length; i++) {
     //   console.log(myUsers[i])
     //   usersPlugin.addUser(myUsers[i]);
     // }
-    for (const user of myUsers) {
+    for (const user of getMyUsers()) {
       usersPlugin.addUser(user);
     }
 
@@ -156,7 +156,31 @@ class TrackChangesIntegration {
             data: result_data
           });
         });
-        return new Promise(resolve => {
+        // var temp = getSuggestion(suggestionId).then(res => {
+        //   if (res) {
+        //     console.log("success");
+        //     return res;
+        //   } else {
+        //     console.log("failed");
+        //   }
+        // });
+        // result_id = temp.then(function(res) {
+        //   console.log(res);
+        //   result_id = res.id;
+        //   return res.id;
+        // })
+        // console.log(result_id);
+        // return new Promise(resolve => {
+        //   resolve({
+        //     id: result_id,
+        //     type: result_type,
+        //     authorId: result_authorId,
+        //     createdAt: result_createdAt,
+        //     hasComments: result_hascomments,
+        //     data: result_data
+        //   });
+        // });
+        // return new Promise(resolve => {
           // switch (
           //   suggestionId
           // case "suggestion-1":
@@ -248,7 +272,7 @@ class TrackChangesIntegration {
           //   });
           // ) {
           // }
-        });
+        // });
       },
 
       addSuggestion: suggestionData => {

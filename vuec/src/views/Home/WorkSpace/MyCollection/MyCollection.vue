@@ -401,8 +401,7 @@ export default {
 
 <style scoped>
 .docs-block {
-  display: flex;
-  flex-wrap: wrap;
+  height: 80vh;
 }
 
 .docs-list {
@@ -411,6 +410,7 @@ export default {
 }
 
 .doc {
+  display: inline-block;
   margin-left: 30px;
   margin-right: 10px;
   margin-top: 10px;

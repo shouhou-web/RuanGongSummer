@@ -67,8 +67,8 @@
       @submit="submit"
       @cancel="cancel"
     >
-      {{ assureContent }}?</m-hover
-    >
+      <div class="hover-content">{{ assureContent }}?</div>
+    </m-hover>
   </div>
 </template>
 
@@ -394,5 +394,11 @@ export default {
   margin: 0 auto;
   position: relative;
   width: calc(100% - 44px);
+}
+
+.hover-content {
+  margin-bottom: 5px;
+  padding: 7px;
+  width: 500px;
 }
 </style>

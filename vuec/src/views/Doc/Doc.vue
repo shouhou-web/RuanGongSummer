@@ -175,8 +175,13 @@ export default {
     _getDocLimit(userID, docID) {
       getDocLimit(userID, docID).then((res) => {
         if (res == 0) this.disabled = false;
-        else if (res == 1) this.disabled = true;
-        else {
+        else if (res == 1) {
+          this.$notify.info({
+            title: "提示",
+            message: "该文档您仅有阅读权限，无法进行修改",
+          });
+          this.disabled = true;
+        } else {
           this.$notify.error({
             title: "错误",
             message: "您没有该文档的阅读权限~",
