@@ -297,6 +297,7 @@ export default {
   methods: {
     // 切换是否打开中部悬浮窗
     commentActive() {
+      // console.log('我打开了悬浮窗')
       this.isCommentActive = !this.isCommentActive;
     },
     otherCan() {
@@ -663,7 +664,7 @@ export default {
   padding-bottom: 8vh;
   padding-left: 1vh;
   transition: ease 0.6s;
-  z-index: 10;
+  z-index: 1;
 }
 
 .side-bar--comment {
@@ -683,7 +684,9 @@ export default {
 }
 
 .collaborator-image {
-  width: 30px;
   border-radius: 50%;
+  cursor: pointer;
+  margin: 0 10px;
+  width: 30px;
 }
 </style>

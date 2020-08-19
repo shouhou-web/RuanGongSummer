@@ -12,16 +12,22 @@
 </template>
 
 <script>
-import { getCommentMsg } from "network/message";
+import { getCommentMsg, getAllMsgNum } from "network/message";
 import CommentMessage from "./childCpn/comment-message";
 export default {
   name: "Application",
   created() {
     console.log(this.$store.state.user.userID);
-    getCommentMsg(this.$store.state.user.userID).then((res) => {
-      console.log("res", res);
-      this.messageList = res;
-    });
+    getCommentMsg(this.$store.state.user.userID)
+      .then((res) => {
+        console.log("res", res);
+        this.messageList = res;
+      })
+      .then(
+        getAllMsgNum(this.$store.state.user.userID).then((res) => {
+          this.$store.commit("setAllMsgNum", res);
+        })
+      );
   },
   methods: {
     deleteItem(index) {
@@ -36,7 +42,8 @@ export default {
           msgID: "123465",
           userID: "123456",
           userName: "守候123",
-          imagePath: "https://assets.smcdn.cn/static/unmd5/default-avatar-moke.2.png",
+          imagePath:
+            "https://assets.smcdn.cn/static/unmd5/default-avatar-moke.2.png",
           createTime: "21小时前",
           ID: "",
           content: "这里是评论内容",

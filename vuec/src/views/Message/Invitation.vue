@@ -13,16 +13,22 @@
 </template>
 
 <script>
-import { getCommonMsg } from "network/message";
+import { getCommonMsg, getAllMsgNum } from "network/message";
 import commonMessage from "./childCpn/common-message";
 export default {
   name: "Application",
   created() {
     console.log(this.$store.state.user.userID);
-    getCommonMsg(0, this.$store.state.user.userID).then((res) => {
-      console.log("res", res);
-      this.messageList = res;
-    });
+    getCommonMsg(0, this.$store.state.user.userID)
+      .then((res) => {
+        console.log("res", res);
+        this.messageList = res;
+      })
+      .then(
+        getAllMsgNum(this.$store.state.user.userID).then((res) => {
+          this.$store.commit("setAllMsgNum", res);
+        })
+      );
   },
   methods: {
     deleteItem(index) {

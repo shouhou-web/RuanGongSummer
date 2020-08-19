@@ -150,6 +150,7 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   width: 150px;
+  white-space: nowrap;
 }
 
 .message__line2 {

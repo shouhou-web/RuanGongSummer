@@ -48,12 +48,12 @@ export default {
 }
 
 .nav-left {
-  min-width: 345px;
+  min-width: 385px;
   justify-content: flex-end;
 }
 
 .nav-right {
-  min-width: 480px;
+  min-width: 510px;
   justify-content: flex-start;
 }
 </style>

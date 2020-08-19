@@ -128,7 +128,7 @@ export default {
         this.$message.warning("评论字数不许小于0");
         return;
       }
-
+      this.$emit('openComment')
       // console.log(
       //   "send ONLY",
       //   this.doc.docID,

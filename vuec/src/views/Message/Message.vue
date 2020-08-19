@@ -72,9 +72,6 @@ export default {
   },
   computed: {
     currentIndex() {
-      getAllMsgNum(this.$store.state.user.userID).then((res) => {
-        this.$store.commit("setAllMsgNum", res);
-      });
       switch (this.$route.path) {
         case "/message/application":
           return 0;

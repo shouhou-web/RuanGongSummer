@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { getSystemMsg } from "network/message";
+import { getSystemMsg, getAllMsgNum } from "network/message";
 import SystemMessage from "./childCpn/system-message";
 export default {
   name: "Message",
@@ -30,6 +30,11 @@ export default {
         console.log("system message", res);
         this.messageList = res;
       })
+      .then(
+        getAllMsgNum(this.$store.state.user.userID).then((res) => {
+          this.$store.commit("setAllMsgNum", res);
+        })
+      )
       .catch((err) => {
         this.$notify.error({
           title: "网络错误",

@@ -118,7 +118,7 @@
                     <li>
                       加入申请
                       <span
-                        v-if="$store.state.allMsgNum.invitation"
+                        v-if="$store.state.allMsgNum.application"
                         class="msg-num"
                       >
                         {{ $store.state.allMsgNum.application }}
@@ -132,7 +132,7 @@
                     <li>
                       团队邀请
                       <span
-                        v-if="$store.state.allMsgNum.application"
+                        v-if="$store.state.allMsgNum.invitation"
                         class="msg-num"
                       >
                         {{ $store.state.allMsgNum.invitation }}
