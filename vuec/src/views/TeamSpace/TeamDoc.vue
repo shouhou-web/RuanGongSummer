@@ -291,7 +291,7 @@ export default {
             message: "删除文档成功",
             type: "success"
           });
-          getTeamDocs(this.TeamID)
+          getTeamDocs(this.$store.state.user.userID,this.TeamID)
             .then((docs) => {
               console.log("docs", docs);
               this.docs = docs;

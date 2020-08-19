@@ -78,14 +78,14 @@
               <my-button slot="show" size="small">其他操作</my-button>
               <div slot="hide">
                 <ul class="other-list">
-                  <li class="other-item">
+                  <li class="other-item" @click="toCollectDoc(doc.docID)">
                     收藏文档
                   </li>
                   <li class="other-item" @click="openCopy">
                     分享文档
                   </li>
-                  <li class="other-item other-item--red">
-                    删除文档
+                  <li class="other-item" @click="copyNowDoc">
+                    创建副本
                   </li>
                 </ul>
               </div>
@@ -172,6 +172,8 @@ import MHeader from "components/common/m-header/MHeader.vue";
 import docComment from "@/components/content/m-doc-header/childCpn/docComment";
 import MDocHistory from "@/components/content/m-doc-header/childCpn/m-doc-history";
 import { editDocTitle, getRecentDocs, setDocLimit } from "network/doc";
+import {collectDoc, deleteDoc, copyDoc} from "@/network/doc";
+import {getTeamDocs} from "@/network/team";
 export default {
   name: "MDocHeader",
   components: {
@@ -419,6 +421,34 @@ export default {
     onCopyError() {
       this.$message.error("复制失败");
     },
+    toCollectDoc(docID) {
+      collectDoc(this.$store.state.user.userID, docID).then(res => {
+        console.log(res);
+        if (res === 1) {
+          // 隐患
+          this.$message.info('文档已经被收藏');
+        } else {
+          this.docDeleteHoverOn = false;
+          this.$message({
+            message: "收藏文档成功",
+            type: "success"
+          });
+        }
+      });
+    },
+    copyNowDoc(){
+      copyDoc(this.$store.state.user.userID,this.doc.docID)
+        .then(res => {
+          console.log('副本',res);
+          if (res != null){
+            this.$message.success('创建副本成功');
+            this.$router.push({ path: '/doc', query: {'docID' : res} })
+          }
+        })
+        .catch(err => {
+          this.$message.error('创建副本失败，请检查网络');
+        })
+    }
   },
 };
 </script>
@@ -519,8 +549,8 @@ export default {
   background-color: #f4f4f4;
 }
 
-.other-item--red {
-  color: var(--color-tint);
+.other-item--blue {
+  color: #a1c4fd;
 }
 
 .cooperation-header {

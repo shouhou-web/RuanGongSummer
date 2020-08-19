@@ -296,3 +296,15 @@ export function addDocWithTemplate(userID, teamID, templateID) {
     method: 'post'
   })
 }
+
+// 创建副本
+export function copyDoc(userID, copyDocID) {
+  return request({
+    url: "copyDoc",
+    params: {
+      userID,
+      copyDocID
+    },
+    method: 'post'
+  })
+}
