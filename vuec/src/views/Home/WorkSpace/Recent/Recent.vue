@@ -350,7 +350,7 @@ export default {
     },
     toCollectDoc(docID) {
       collectDoc(this.user.userID, docID).then(res => {
-        console.log(res);
+        // console.log(res);
         if (res === 1) {
           this.$message.error("收藏文档失败，请检查网络或联系管理员");
         } else {
@@ -370,7 +370,7 @@ export default {
       var toDoc = window.location.href;
       toDoc = toDoc.substring(0, toDoc.length - 15);
       toDoc = toDoc + "/doc?docID=" + docID + "&docTitle=" + docTitle;
-      console.log(toDoc);
+      // console.log(toDoc);
       this.shareSrc = toDoc;
       this.openShare = true;
     },
@@ -389,7 +389,7 @@ export default {
     this.user = this.$store.state.user;
     getRecentDocs(this.user.userID).then(res => {
       this.myRecentDocs = res;
-      console.log(res);
+      // console.log(res);
       if (res.length === 0) this.noneShow = true;
     });
   },
