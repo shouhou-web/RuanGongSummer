@@ -124,28 +124,51 @@ class TrackChangesIntegration {
     // Set the adapter to the `TrackChanges#adapter` property.
     trackChangesPlugin.adapter = {
       getSuggestion: suggestionId => {
-        var result_id;
-        var result_type;
-        var result_authorId;
-        var result_createdAt;
-        var result_hascomments;
-        var result_data;
         // This function should query the database for data for a suggestion with a `suggestionId`.
         console.log("Get suggestion", suggestionId);
-        var temp = getSuggestion(suggestionId).then(res => {
+        return getSuggestion(suggestionId).then(res => {
           if (res) {
-            console.log("success");
-            return res;
+            console.log(res);
+            var result_id = res.id;
+            var result_type = res.type;
+            var result_authorId = res.authorId;
+            var result_createdAt = res.createdAt;
+            var result_hascomments = res.hascomments;
+            var result_data = res.data;
+            console.log(
+              result_id +
+                " " +
+                result_type +
+                " " +
+                result_authorId +
+                " " +
+                result_createdAt +
+                " " +
+                result_hascomments +
+                " " +
+                result_data
+            );
+            return new Promise(resolve => {
+              resolve({
+                id: result_id,
+                type: result_type,
+                authorId: result_authorId,
+                createdAt: result_createdAt,
+                hasComments: result_hascomments,
+                data: result_data
+              });
+            });
           } else {
             console.log("failed");
           }
         });
-        result_id = temp.then(function(res) {
-          console.log(res);
-          result_id = res.id;
-          return res.id;
-        })
-        console.log(result_id);
+        console.log(temp);
+        var result_id = temp.id;
+        var result_type = temp.type;
+        var result_authorId = temp.authorId;
+        var result_createdAt = temp.createdAt;
+        var result_hascomments = temp.hascomments;
+        var result_data = temp.data;
         return new Promise(resolve => {
           resolve({
             id: result_id,
@@ -181,97 +204,97 @@ class TrackChangesIntegration {
         //   });
         // });
         // return new Promise(resolve => {
-          // switch (
-          //   suggestionId
-          // case "suggestion-1":
-          // resolve({
-          //   id: "suggestion-1",
-          //   type: "insertion",
-          //   authorId: "user-2",
-          //   createdAt: new Date(2019, 1, 13, 11, 20, 48),
-          //   hasComments: true
-          // });
-          //   break;
-          // case "suggestion-2":
-          //   resolve({
-          //     id: "suggestion-2",
-          //     type: "deletion",
-          //     authorId: "user-1",
-          //     createdAt: new Date(2019, 1, 14, 12, 7, 20),
-          //     hasComments: false
-          //   });
-          //   break;
-          // case "suggestion-3":
-          //   resolve({
-          //     id: "suggestion-3",
-          //     type: "insertion",
-          //     authorId: "user-1",
-          //     createdAt: new Date(2019, 1, 14, 12, 7, 20),
-          //     hasComments: false
-          //   });
-          //   break;
-          // case "suggestion-4":
-          //   resolve({
-          //     id: "suggestion-4",
-          //     type: "deletion",
-          //     authorId: "user-1",
-          //     createdAt: new Date(2019, 1, 15, 8, 44, 1),
-          //     hasComments: true
-          //   });
-          //   break;
-          // case "suggestion-5":
-          //   resolve({
-          //     id: "suggestion-5",
-          //     type: "formatInline:886cqig6g8rf",
-          //     authorId: "user-2",
-          //     hasComments: false,
-          //     createdAt: new Date(2019, 2, 8, 10, 2, 7),
-          //     data: {
-          //       commandName: "bold",
-          //       commandParams: [{ forceValue: true }]
-          //     }
-          //   });
-          //   break;
-          // case "suggestion-6":
-          //   resolve({
-          //     id: "suggestion-6",
-          //     type: "formatBlock:698dn3otqzd6",
-          //     authorId: "user-2",
-          //     hasComments: false,
-          //     createdAt: new Date(2019, 2, 8, 10, 2, 10),
-          //     data: {
-          //       commandName: "heading",
-          //       commandParams: [{ value: "heading2" }],
-          //       formatGroupId: "blockName",
-          //       multipleBlocks: false
-          //     }
-          //   });
-          //   break;
-          // case "e3157f571d4a7b5d21a8876aec1a60b1c":
-          //   resolve({
-          //     id: "e3157f571d4a7b5d21a8876aec1a60b1c",
-          //     type: "formatBlock:mergeTableCells",
-          //     authorId: "user-1",
-          //     hasComments: false,
-          //     createdAt: new Date(2019, 2, 8, 10, 2, 10),
-          //     data: {
-          //       commandName: "mergeTableCells",
-          //       commandParams: [],
-          //       formatGroupId: "mergeTableCells",
-          //       multipleBlocks: false
-          //     }
-          //   });
-          //   break;
-          // case "ecbdfcf1052e0c6e6c756b095765560c8":
-          //   resolve({
-          //     id: "ecbdfcf1052e0c6e6c756b095765560c8",
-          //     type: "deletion:tableColumn",
-          //     authorId: "user-1",
-          //     hasComments: false,
-          //     createdAt: new Date(2019, 2, 8, 10, 2, 10)
-          //   });
-          // ) {
-          // }
+        // switch (
+        //   suggestionId
+        // case "suggestion-1":
+        // resolve({
+        //   id: "suggestion-1",
+        //   type: "insertion",
+        //   authorId: "user-2",
+        //   createdAt: new Date(2019, 1, 13, 11, 20, 48),
+        //   hasComments: true
+        // });
+        //   break;
+        // case "suggestion-2":
+        //   resolve({
+        //     id: "suggestion-2",
+        //     type: "deletion",
+        //     authorId: "user-1",
+        //     createdAt: new Date(2019, 1, 14, 12, 7, 20),
+        //     hasComments: false
+        //   });
+        //   break;
+        // case "suggestion-3":
+        //   resolve({
+        //     id: "suggestion-3",
+        //     type: "insertion",
+        //     authorId: "user-1",
+        //     createdAt: new Date(2019, 1, 14, 12, 7, 20),
+        //     hasComments: false
+        //   });
+        //   break;
+        // case "suggestion-4":
+        //   resolve({
+        //     id: "suggestion-4",
+        //     type: "deletion",
+        //     authorId: "user-1",
+        //     createdAt: new Date(2019, 1, 15, 8, 44, 1),
+        //     hasComments: true
+        //   });
+        //   break;
+        // case "suggestion-5":
+        //   resolve({
+        //     id: "suggestion-5",
+        //     type: "formatInline:886cqig6g8rf",
+        //     authorId: "user-2",
+        //     hasComments: false,
+        //     createdAt: new Date(2019, 2, 8, 10, 2, 7),
+        //     data: {
+        //       commandName: "bold",
+        //       commandParams: [{ forceValue: true }]
+        //     }
+        //   });
+        //   break;
+        // case "suggestion-6":
+        //   resolve({
+        //     id: "suggestion-6",
+        //     type: "formatBlock:698dn3otqzd6",
+        //     authorId: "user-2",
+        //     hasComments: false,
+        //     createdAt: new Date(2019, 2, 8, 10, 2, 10),
+        //     data: {
+        //       commandName: "heading",
+        //       commandParams: [{ value: "heading2" }],
+        //       formatGroupId: "blockName",
+        //       multipleBlocks: false
+        //     }
+        //   });
+        //   break;
+        // case "e3157f571d4a7b5d21a8876aec1a60b1c":
+        //   resolve({
+        //     id: "e3157f571d4a7b5d21a8876aec1a60b1c",
+        //     type: "formatBlock:mergeTableCells",
+        //     authorId: "user-1",
+        //     hasComments: false,
+        //     createdAt: new Date(2019, 2, 8, 10, 2, 10),
+        //     data: {
+        //       commandName: "mergeTableCells",
+        //       commandParams: [],
+        //       formatGroupId: "mergeTableCells",
+        //       multipleBlocks: false
+        //     }
+        //   });
+        //   break;
+        // case "ecbdfcf1052e0c6e6c756b095765560c8":
+        //   resolve({
+        //     id: "ecbdfcf1052e0c6e6c756b095765560c8",
+        //     type: "deletion:tableColumn",
+        //     authorId: "user-1",
+        //     hasComments: false,
+        //     createdAt: new Date(2019, 2, 8, 10, 2, 10)
+        //   });
+        // ) {
+        // }
         // });
       },
 

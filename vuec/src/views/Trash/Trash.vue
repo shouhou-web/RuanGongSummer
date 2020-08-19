@@ -302,6 +302,7 @@ export default {
 
 .docs-list {
   display: flex;
+  height: 100%;
   flex-direction: column;
 }
 
