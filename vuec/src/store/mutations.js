@@ -52,7 +52,9 @@ const mutations = {
       state.homeLeftNav = isActive;
     }
   },
+  // 设置全局docID
   setDocID(state, docID) {
+    // console.log("setDocID", docID);
     state.nowDocID = docID;
   },
   setTeamID(state, teamID) {
@@ -70,7 +72,7 @@ const mutations = {
     // sessionStorage.setItem("achieve", JSON.stringify(achieve));
   },
   // 消息数目
-  setAllMsgNum(state,aLLMsgNum) {
+  setAllMsgNum(state, aLLMsgNum) {
     state.aLLMsgNum = aLLMsgNum;
   },
   setEditState(state) {

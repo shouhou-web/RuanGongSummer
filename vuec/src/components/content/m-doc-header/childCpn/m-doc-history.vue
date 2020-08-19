@@ -56,16 +56,16 @@ export default {
   created() {
     getDocHistory(this.docID)
       .then(res => {
-        console.log('history',res);
+        // console.log('history',res);
         this.historyInfo = res.reverse();
       });
   },
   watch: {
     flag() {
-      console.log('FLAG USE 历史');
+      // console.log('FLAG USE 历史');
       getDocHistory(this.docID)
         .then(res => {
-          console.log('历史',res);
+          // console.log('历史',res);
           this.historyInfo = res.reverse();
         });
     }

@@ -72,11 +72,11 @@ appData.users = [
     avatar: "https://randomuser.me/api/portraits/thumb/women/65.jpg"
   }
 ];
+
 console.log(store.state.nowDocID);
 getCollaboratorInfo(store.state.nowDocID).then(res => {
   console.log(res + "test");
-});
-
+})
 // The ID of the current user.
 appData.userId = store.state.user.userID;
 

@@ -85,7 +85,7 @@ export default {
     // this._initEdit();
   },
   beforeDestroy() {
-    console.log("beforeDestroy");
+    // console.log("beforeDestroy");
     this._onBlur();
   },
   mounted() {
