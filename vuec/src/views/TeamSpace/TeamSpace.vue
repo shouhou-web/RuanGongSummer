@@ -197,12 +197,8 @@
           <div>
             <img :src="member.imagePath" class="user-img" @click="toUserProfile(member.userID)"/>
           </div>
-          <div class="member-name-main" v-if="member.userIdentity > 0">
-            {{ member.userName }}
-          </div>
-          <div class="member-email-main" v-if="member.userIdentity > 0">
-            {{ member.emailAddress }}
-          </div>
+          <div class="member-name-main">{{ member.userName }}</div>
+          <div class="member-email-main">{{ member.emailAddress }}</div>
           <div class="member-iden-main" v-if="member.userIdentity > 0">
             <div v-if="member.userIdentity == 1">
               <my-button size="mini" type="success">管理员</my-button>
@@ -605,6 +601,15 @@ export default {
       });
 
       this.$store.commit("setTeamID", this.TeamID);
+
+      searchTeamMember(this.TeamID, this.searchMemberMsg)
+        .then((res) => {
+          console.log("member", res);
+          this.searchRes = res;
+        })
+        .catch((err) => {
+          this.$notify.error("请检查网络，查找失败");
+        });
     },
     searchMemberMsg() {
       searchTeamMember(this.TeamID, this.searchMemberMsg)
@@ -905,7 +910,7 @@ export default {
 
 .member-name-main {
   padding-left: 10px;
-  width: 35%;
+  width: 25%;
   padding-top: 8px;
 }
 
