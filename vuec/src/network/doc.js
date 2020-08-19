@@ -308,3 +308,14 @@ export function copyDoc(userID, copyDocID) {
     method: 'post'
   })
 }
+
+// 获取所有协作者信息
+export function getDocCollaborator(docID) {
+  return request({
+    url: "/getDocCollaborator",
+    params: {
+      docID
+    },
+    method: 'post'
+  })
+}
