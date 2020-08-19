@@ -57,6 +57,9 @@ const mutations = {
     // console.log("setDocID", docID);
     state.nowDocID = docID;
   },
+  setDocCol(state,docCol) {
+    state.docCol = docCol;
+  },
   setTeamID(state, teamID) {
     state.nowTeamID = teamID;
   },

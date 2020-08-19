@@ -40,7 +40,7 @@
 <script>
 import MDocHeader from "@/components/content/m-doc-header/MDocHeader";
 import inEditor from "./childCpn/in-editor/index";
-import { getDoc, getDocLimit } from "network/doc";
+import { getDoc, getDocLimit, getCollaboratorInfo } from "network/doc";
 import { login } from "network/user";
 export default {
   name: "Doc",
@@ -133,6 +133,10 @@ export default {
       this._getDocLimit(userID, docID);
       // console.log('要设置的数据',this.$route.query.docID)
       this.$store.commit("setDocID", this.$route.query.docID);
+      getCollaboratorInfo(this.$route.query.docID).then((res) => {
+        console.log("这回该有了吧", res);
+        this.$store.commit("setDocCol", res);
+      });
     },
     // 获取doc数据
     _getDoc(userID, docID) {

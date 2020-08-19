@@ -27,7 +27,8 @@ const state = {
   fullscreenLoading: false,
   homeMidNav: 0,
   homeLeftNav: 1,
-  nowDocID: -1, // 表示没有进入doc
+  nowDocID: -1, // 当前文档ID
+  nowDocCol: [], // 当前文档协作者
   nowTeamID: -1, //-1表示未选择团体
   hasTeam: false, //是否有团队
   allMsgNum: {}, // 消息数目

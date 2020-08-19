@@ -134,75 +134,15 @@ export default {
     _onBlur() {
       if (this.$store.state.editState) {
         console.log("放锁");
-        completeEditDoc(this.$store.state.user.userID, this.doc.docID).then(res =>{
-          console.log('返回',res)
-        });
-        this.$store.commit('loseEditState')
+        completeEditDoc(this.$store.state.user.userID, this.doc.docID).then(
+          (res) => {
+            console.log("返回", res);
+          }
+        );
+        this.$store.commit("loseEditState");
       }
     },
-    _initEdit() {
-      class MyUploadAdapter {
-        constructor(loader) {
-          // The file loader instance to use during the upload.
-          this.loader = loader;
-        }
-
-        // Starts the upload process.
-        upload() {
-          return this.loader.file.then(
-            (file) =>
-              new Promise((resolve, reject) => {
-                this.uploadFile(file, resolve);
-              })
-          );
-        }
-
-        uploadFile(file, resolve) {
-          uploadImage(0, file)
-            .then((res) => {
-              resolve({
-                default: respJson.result[0].url,
-              });
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-          // 上传文件
-          // $.ajax({
-          //     url: "XXXXXXXXX",
-          //     type: 'POST',
-          //     data: file,
-          //     processData: false,
-          //     beforeSend: function (request) {
-          //         request.setRequestHeader("Content-Type", file.type);
-          //     },
-          //     success: function (respJson) {
-          //         if (respJson.code == 0) {
-          //             resolve({
-          //                 default: respJson.result[0].url
-          //             });
-          //         } else {
-          //             alert("错误：" + respJson.msg)
-          //         }
-          //     },
-          //     error: function (e) {
-          //     }
-          // });
-        }
-
-        // Aborts the upload process.
-        abort() {
-          // Reject the promise returned from the upload() method.
-          server.abortUpload();
-        }
-      }
-
-      this.editor.plugins.get("FileRepository").createUploadAdapter = (
-        loader
-      ) => {
-        return new MyUploadAdapter(loader);
-      };
-    },
+    _initEdit() {},
   },
 };
 </script>
