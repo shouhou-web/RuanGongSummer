@@ -171,9 +171,16 @@
 import MHeader from "components/common/m-header/MHeader.vue";
 import docComment from "@/components/content/m-doc-header/childCpn/docComment";
 import MDocHistory from "@/components/content/m-doc-header/childCpn/m-doc-history";
-import { editDocTitle, getRecentDocs, setDocLimit } from "network/doc";
-import {collectDoc, deleteDoc, copyDoc} from "@/network/doc";
-import {getTeamDocs} from "@/network/team";
+import {
+  editDocTitle,
+  getRecentDocs,
+  setDocLimit,
+  completeEditDoc,
+  collectDoc,
+  deleteDoc,
+  copyDoc,
+} from "network/doc";
+import { getTeamDocs } from "@/network/team";
 export default {
   name: "MDocHeader",
   components: {
@@ -246,7 +253,8 @@ export default {
   },
   watch: {
     doc(val) {
-      // console.log("docLimit", val.docLimit);
+      console.log("watch");
+      this.doc.docTitle = val.docTitle;
       switch (val.docLimit) {
         case 0:
           this.isOtherCan = true;
@@ -257,13 +265,11 @@ export default {
           this.isOtherCant = true;
           this.isTeamRead = true;
           this.isTeamWrite = true;
-          // console.log(1);
           break;
         case 2:
           this.isOtherCan = true;
           this.isTeamRead = true;
           this.isTeamWrite = false;
-          // console.log(233);
           break;
         case 3:
           this.isOtherCant = true;
@@ -390,22 +396,15 @@ export default {
     // 失焦事件
     _onBlur() {
       // console.log("onBlur");
-      completeEditDoc(this.$store.state.user.userID, this.doc.docID).then(
-        (res) => {
-          // console.log("失焦事件返回:", res);
-          if (res == 0) {
-            // this.$notify({
-            //   title: "成功",
-            //   message: "编辑记录保存成功",
-            //   type: "success",
-            // });
-          } else
-            this.$notify.error({
-              title: "网络错误",
-              message: "请稍后重试222~",
-            });
-        }
-      );
+      if (this.$store.state.editState) {
+        // console.log("放锁");
+        completeEditDoc(this.$store.state.user.userID, this.doc.docID).then(
+          (res) => {
+            // console.log("返回", res);
+          }
+        );
+        this.$store.commit("loseEditState");
+      }
     },
     // 复制
     openCopy() {
@@ -422,33 +421,33 @@ export default {
       this.$message.error("复制失败");
     },
     toCollectDoc(docID) {
-      collectDoc(this.$store.state.user.userID, docID).then(res => {
-        console.log(res);
+      collectDoc(this.$store.state.user.userID, docID).then((res) => {
+        // console.log(res);
         if (res === 1) {
           // 隐患
-          this.$message.info('文档已经被收藏');
+          this.$message.info("文档已经被收藏");
         } else {
           this.docDeleteHoverOn = false;
           this.$message({
             message: "收藏文档成功",
-            type: "success"
+            type: "success",
           });
         }
       });
     },
-    copyNowDoc(){
-      copyDoc(this.$store.state.user.userID,this.doc.docID)
-        .then(res => {
-          console.log('副本',res);
-          if (res != null){
-            this.$message.success('创建副本成功');
-            this.$router.push({ path: '/doc', query: {'docID' : res} })
+    copyNowDoc() {
+      copyDoc(this.$store.state.user.userID, this.doc.docID)
+        .then((res) => {
+          // console.log("副本", res);
+          if (res != null) {
+            this.$message.success("创建副本成功");
+            this.$emit("toRecent", { docID: res });
           }
         })
-        .catch(err => {
-          this.$message.error('创建副本失败，请检查网络');
-        })
-    }
+        .catch((err) => {
+          this.$message.error("创建副本失败，请检查网络");
+        });
+    },
   },
 };
 </script>
