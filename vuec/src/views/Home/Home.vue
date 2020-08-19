@@ -147,11 +147,17 @@ export default {
       this.teamHoverOn = false;
     },
     createNewTeamHover() {
-      if (!this.teamName) {
-        this.$message.error("团队名称不能为空");
-      }
       if (!this.user.userID) {
         this.$message.error("请先登录");
+        return;
+      }
+      if (!this.teamName) {
+        this.$message.error("团队名称不能为空");
+        return;
+      }
+      if (this.teamName.length > 10) {
+        this.$message.error("团队名称不能超过10个字");
+        return;
       }
       console.log(this.teamName);
       addTeam(this.user.userID, this.teamName).then((res) => {
@@ -172,6 +178,7 @@ export default {
     addNewDoc() {
       if (!this.user.userID) {
         this.$message.error("请先登录！");
+        return;
       }
       var currentPath = this.$route.path;
       if (currentPath === "/home/teamSpace") {
