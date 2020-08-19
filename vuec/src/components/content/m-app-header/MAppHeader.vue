@@ -209,7 +209,7 @@ export default {
   created() {
     this.user = this.$store.state.user;
     getAllMsgNum(this.$store.state.user.userID).then((res) => {
-      // console.log(res);
+      console.log(res);
       // this.allMsgNum = res;
       this.$store.commit("setAllMsgNum", res);
     });

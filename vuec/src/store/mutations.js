@@ -75,8 +75,8 @@ const mutations = {
     // sessionStorage.setItem("achieve", JSON.stringify(achieve));
   },
   // 消息数目
-  setAllMsgNum(state, aLLMsgNum) {
-    state.aLLMsgNum = aLLMsgNum;
+  setAllMsgNum(state, allMsgNum) {
+    state.allMsgNum = allMsgNum;
   },
   setEditState(state) {
     state.editState = true;
