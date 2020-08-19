@@ -25,6 +25,25 @@
   position: relative;
 }
 
+.ck .ck.ck-editor__main ::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 5px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+
+.ck .ck.ck-editor__main ::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  background-color: #a1c4fd;
+}
+
+.ck .ck.ck-editor__main ::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: inset 0 0 5px rgba(236, 186, 186, 0.2);
+  background: none;
+  border-radius: 10px;
+}
+
 #container .ck.ck-editor {
   /* To stretch the editor to max 700px
       (just to look nice for this example but it can be any size). */

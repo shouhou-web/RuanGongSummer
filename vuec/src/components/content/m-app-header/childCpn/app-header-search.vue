@@ -216,6 +216,7 @@ export default {
 
 .down-list {
   height: 450px;
+  overflow: auto;
 }
 
 .down-wrapper {
@@ -233,7 +234,7 @@ export default {
 
 .down__name {
   font-weight: bold;
-  font-style: 14px;
+  font-size: 14px;
   line-height: 20px;
 }
 
@@ -244,10 +245,12 @@ export default {
 
 .hover-input {
   border: 0px;
+  border-radius: 4px;
   color: #111;
   padding: 15px 20px;
   font-size: 15px;
   line-height: 1.5;
+  margin-top: 20px;
   width: 360px;
 }
 
