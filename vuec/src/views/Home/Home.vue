@@ -318,6 +318,25 @@ export default {
   --height: calc(100vh - 56px);
 }
 
+#home ::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 5px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+
+#home ::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  background-color: #a1c4fd;
+}
+
+#home ::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: inset 0 0 5px rgba(236, 186, 186, 0.2);
+  background: none;
+  border-radius: 10px;
+}
+
 .test {
   margin: 5px;
 }
