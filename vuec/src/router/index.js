@@ -1,9 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "../store/index";
+import { getCollaboratorInfo } from "network/doc";
 
 // 欢迎页
-const Index = () => import('views/Index.vue')
+const Index = () => import("views/Index.vue");
 
 // 首页相关组件
 const Home = () => import("views/Home/Home.vue");
@@ -98,7 +99,7 @@ const routes = [
   {
     path: "/profile",
     name: "Profile",
-    component: Profile,
+    component: Profile
     // children: [
     //   {
     //     path: "/",
@@ -168,6 +169,9 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  getCollaboratorInfo(0).then(res => {
+    store.commit("setDocCol", res);
+  });
   // ${//to and from are Route Object,next() must be called to resolve the hook}
   // 这里是修改名字的全局守护路由，暂不应用
   // document.title = to.matched[0].meta.title;

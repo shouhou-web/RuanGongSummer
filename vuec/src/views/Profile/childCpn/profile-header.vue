@@ -2,7 +2,7 @@
   <div>
     <div class="wrapper--son">
       <div class="header">
-        <div class="avator">
+        <div v-if="isUser" class="avator">
           <img class="avator__inner" :src="user.imagePath" alt="" />
           <a @click="editImage = true" class="avator__hide" title="上传新头像">
             <img
@@ -11,6 +11,9 @@
               alt=""
             />
           </a>
+        </div>
+        <div v-else class="avator">
+          <img class="avator__inner" :src="user.imagePath" alt="" />
         </div>
         <div class="name">
           {{ user.userName }}
@@ -137,6 +140,11 @@ export default {
         "https://img-static.mihoyo.com/communityweb/upload/52de23f1b1a060e4ccaa8b24c1305dd9.png",
       ],
     };
+  },
+  computed: {
+    isUser() {
+      return this.$route.query.userID == this.$store.state.user.userID;
+    },
   },
   methods: {
     submit() {

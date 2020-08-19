@@ -11,7 +11,7 @@ const mutations = {
     console.log(info);
     state.token = true;
     state.user = info;
-    sessionStorage.clear();
+    // sessionStorage.clear();
     sessionStorage.setItem("user", JSON.stringify(state.user));
   },
   // 登出
@@ -23,22 +23,22 @@ const mutations = {
   // profile相关修改
   setImagePath(state, imagePath) {
     state.user.imagePath = imagePath;
-    sessionStorage.clear();
+    // sessionStorage.clear();
     sessionStorage.setItem("user", JSON.stringify(state.user));
   },
   setUserName(state, userName) {
     state.user.userName = userName;
-    sessionStorage.clear();
+    // sessionStorage.clear();
     sessionStorage.setItem("user", JSON.stringify(state.user));
   },
   setPassword(state, userPassword) {
     state.user.userPassword = userPassword;
-    sessionStorage.clear();
+    // sessionStorage.clear();
     sessionStorage.setItem("user", JSON.stringify(state.user));
   },
   setEmailAddress(state, emailAddress) {
     state.user.emailAddress = emailAddress;
-    sessionStorage.clear();
+    // sessionStorage.clear();
     sessionStorage.setItem("user", JSON.stringify(state.user));
   },
   // 侧边栏active
@@ -59,6 +59,8 @@ const mutations = {
   },
   setDocCol(state,docCol) {
     state.nowDocCol = docCol;
+    console.log('存储',state.nowDocCol)
+    // sessionStorage.setItem("users", JSON.stringify(state.nowDocCol));
   },
   setTeamID(state, teamID) {
     state.nowTeamID = teamID;

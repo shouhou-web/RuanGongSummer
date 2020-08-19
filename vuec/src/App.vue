@@ -15,10 +15,11 @@ export default {
   },
   created() {
     if (sessionStorage.getItem("user") != null) {
-      console.log("我执行了", sessionStorage.getItem("achieve"));
+      console.log("我执行了", sessionStorage.getItem("user"));
       // let achieve = sessionStorage.getItem("achieve");
       this.$store.commit("login", JSON.parse(sessionStorage.getItem("user")));
-      // this.$store.commit("setAchieve", JSON.parse(achieve));
+      // console.log("我也执行了", sessionStorage.getItem("users"));
+      // this.$store.commit("setDocCol", JSON.parse(sessionStorage.getItem("user")));
     }
   },
 };

@@ -25,6 +25,12 @@ export default {
         this.messageList = res;
       })
       .then(
+        getCommonMsg(0, this.$store.state.user.userID).then((res) => {
+          console.log("res", res);
+          this.messageList = res;
+        })
+      )
+      .then(
         getAllMsgNum(this.$store.state.user.userID).then((res) => {
           this.$store.commit("setAllMsgNum", res);
         })
