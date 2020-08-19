@@ -61,7 +61,7 @@ export default {
         if (hideList[i].offsetWidth > 0) {
           show = showList[i].offsetWidth;
           hide = hideList[i].offsetWidth;
-          console.log("top", document.documentElement.scrollTop);
+          // console.log("top", document.documentElement.scrollTop);
           break;
         }
       }

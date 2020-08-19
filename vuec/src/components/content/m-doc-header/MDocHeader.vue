@@ -201,7 +201,7 @@ export default {
       type: Object,
       default: {}
     },
-    collaboratorInfo: [] // 协作者信息
+    collaboratorInfo: Array
   },
   mounted() {
     getRecentDocs(this.$store.state.user.userID).then(res => {

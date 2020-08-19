@@ -3,7 +3,7 @@
     <div class="header">
       <m-doc-header
         :doc="doc"
-        :collaborator="collaborators"
+        :collaboratorInfo="collaborators"
         @toRecent="toRecent"
       ></m-doc-header>
     </div>
