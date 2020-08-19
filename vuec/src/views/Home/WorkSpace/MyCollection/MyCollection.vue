@@ -132,7 +132,7 @@
       </div>
     </m-hover>
     <m-hover :on-show="openShare" title="分享此文档链接">
-      <div style="padding: 20px">
+      <div style="padding: 20px;height: 120px">
         <input
           type="text"
           id="input"
@@ -467,7 +467,7 @@ export default {
 .button-share {
   position: fixed;
   margin-top: 10px;
-  margin-left: 120px;
+  margin-left: 100px;
   background: #ffffff;
   border: 1px solid #d8e3ec;
   border-radius: 7px;

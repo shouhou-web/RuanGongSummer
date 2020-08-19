@@ -22,15 +22,18 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/dev" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:dev-pull-and-write" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/IMade/IMade.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/IMade/IMade.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/MyCollection/MyCollection.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/MyCollection/MyCollection.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/Recent/Recent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/Home/WorkSpace/Recent/Recent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamDoc.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -441,7 +444,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597826219513</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="文档批量收藏删除">
+      <created>1597841883523</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1597841883523</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -463,7 +473,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/dev" />
+                        <option value="dev-pull-and-write" />
                       </list>
                     </value>
                   </entry>
@@ -493,7 +503,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="TeamSpace更新" />
     <MESSAGE value="数据初始化" />
     <MESSAGE value="登陆注册优化" />
     <MESSAGE value="奇怪的bug修复了" />
@@ -518,7 +527,8 @@
     <MESSAGE value="副本功能上线" />
     <MESSAGE value="验证码按钮bug" />
     <MESSAGE value="团队成员搜索bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="团队成员搜索bug" />
+    <MESSAGE value="文档批量收藏删除" />
+    <option name="LAST_COMMIT_MESSAGE" value="文档批量收藏删除" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1240" y="330" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1597621826597">
@@ -573,10 +583,10 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-1157" y="197" key="SettingsEditor/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597664389499" />
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597826290320">
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597842019098">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597826290320" />
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597842019098" />
     <state x="-1766" y="92" width="1674" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1596767599481">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>

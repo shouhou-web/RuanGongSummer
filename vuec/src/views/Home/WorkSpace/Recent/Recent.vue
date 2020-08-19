@@ -148,7 +148,7 @@
       </div>
     </m-hover>
     <m-hover :on-show="openShare" title="分享此文档链接">
-      <div style="padding: 20px">
+      <div style="padding: 20px;height: 120px;">
         <input
           type="text"
           id="input"
