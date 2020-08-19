@@ -54,11 +54,11 @@
       <template v-slot:right>
         <div class="doc-right-nav">
           <div
-            class="collaborator-wrapper"
             v-for="collaborator in collaboratorInfo"
             :key="collaborator.userID"
+            class="collaborators"
           >
-            <img :src="collaborator.imagePath" class="collaborator-image" />
+            <img :src="collaborator.imagePath" class="collaborator-image" @click="toProfile(collaborator.userID)" />
           </div>
           <div v-if="isCreator" class="team">
             <my-button @click="openCooperation" size="small">协作</my-button>
@@ -296,6 +296,10 @@ export default {
     },
   },
   methods: {
+    // 跳转到个人信息界面
+    toProfile(userID) {
+      this.$router.push({ path: '/profile', query: { userID } });
+    },
     // 切换是否打开中部悬浮窗
     commentActive() {
       // console.log('我打开了悬浮窗')
@@ -684,15 +688,15 @@ export default {
   margin-left: 35%;
 }
 
-.collaborator-wrapper {
+.collaborators {
   align-items: center;
   display: flex;
-  margin: 0 10px;
 }
 
 .collaborator-image {
   border-radius: 50%;
   cursor: pointer;
+  margin-right: 20px;
   width: 30px;
 }
 </style>
