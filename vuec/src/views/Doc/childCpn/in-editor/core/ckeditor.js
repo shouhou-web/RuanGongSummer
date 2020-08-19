@@ -74,6 +74,7 @@ appData.users = [
 ];
 
 function getMyUsers() {
+  while(store.state.docCol.length == 0);
   return store.state.docCol;
   // console.log(store.state.nowDocID);
   // // let users = [];
@@ -133,7 +134,7 @@ class TrackChangesIntegration {
             var result_type = res.type;
             var result_authorId = res.authorId;
             var result_createdAt = res.createdAt;
-            var result_hascomments = res.hascomments;
+            var result_hasComments = res.hasComments;
             var result_data = res.data;
             console.log(
               result_id +
@@ -144,7 +145,7 @@ class TrackChangesIntegration {
                 " " +
                 result_createdAt +
                 " " +
-                result_hascomments +
+                result_hasComments +
                 " " +
                 result_data
             );
@@ -154,7 +155,7 @@ class TrackChangesIntegration {
                 type: result_type,
                 authorId: result_authorId,
                 createdAt: result_createdAt,
-                hasComments: result_hascomments,
+                hasComments: result_hasComments,
                 data: result_data
               });
             });
@@ -300,8 +301,9 @@ class TrackChangesIntegration {
 
       addSuggestion: suggestionData => {
         // This function should save `suggestionData` in the database.
-        console.log(suggestionData);
         suggestionData.createdAt = new Date();
+        suggestionData.authorId = store.state.user.userID;
+        console.log(suggestionData);
         addSuggestion(suggestionData.id, suggestionData).then(res => {
           if (res === 0) {
             console.log("success");
