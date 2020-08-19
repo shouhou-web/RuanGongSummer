@@ -126,7 +126,7 @@
                         v-model="email"
                       />
                     </div>
-                    <div style="display: flex; flex-direction: row;">
+                    <div style="display: flex;">
                       <input
                         @focus="code_info = 0"
                         id="logcode"
@@ -144,16 +144,14 @@
                         type="disabled"
                         v-if="!email"
                         @click="warnEmail"
-                        style="margin-top: 30px;margin-left: 50px"
-                      >发送验证码</my-button
+                        >发送验证码</my-button
                       >
                       <my-button
                         type="timer"
                         :count="countNum"
-                        style="margin-top: 30px;margin-left: 50px"
                         @click="sendCode"
                         v-if="email"
-                      >{{ btnMsg }}</my-button
+                        >{{ btnMsg }}</my-button
                       >
                     </div>
                   </div>
@@ -282,7 +280,7 @@
                         v-model="email"
                       />
                     </div>
-                    <div style="display: flex; flex-direction: row;">
+                    <div class="footer-btn">
                       <input
                         @focus="code_info = 0"
                         id="logcode"
@@ -297,19 +295,19 @@
                         v-model="code"
                       />
                       <my-button
+                        class="footer-btn__inner"
                         type="disabled"
                         v-if="!email"
                         @click="warnEmail"
-                        style="margin-top: 30px;margin-left: 50px"
-                      >发送验证码</my-button
+                        >发送验证码</my-button
                       >
                       <my-button
+                        class="footer-btn__inner"
                         type="timer"
                         :count="countNum"
-                        style="margin-top: 30px;margin-left: 50px"
                         @click="sendCode"
                         v-if="email"
-                      >{{ btnMsg }}</my-button
+                        >{{ btnMsg }}</my-button
                       >
                     </div>
                   </div>
@@ -759,6 +757,12 @@ p {
   width: 100%;
 }
 
+.footer-btn {
+  align-items: center;
+  display: flex;
+  margin: 20px 0;
+}
+
 .code-style {
   background-color: #ffffff;
   border: 2px solid #a1c4fd;
@@ -770,13 +774,13 @@ p {
   height: 48px;
   letter-spacing: 0.5px;
   line-height: 22px;
-  margin-top: 20px;
+  margin-right: 40px;
   outline: none;
   padding: 13px 10px;
   padding-left: 35px;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
-  width: 40%;
+  width: 50%;
 }
 
 .error-code-style {

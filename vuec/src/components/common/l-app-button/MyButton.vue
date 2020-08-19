@@ -112,6 +112,7 @@ export default {
 
 <style scoped>
 .l-button {
+  align-items: center;
   background: #ffffff;
   border: 1px solid #d8e3ec;
   box-sizing: border-box;
