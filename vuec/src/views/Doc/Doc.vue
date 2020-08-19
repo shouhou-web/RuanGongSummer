@@ -1,7 +1,11 @@
 <template>
   <div id="doc">
     <div class="header">
-      <m-doc-header :doc="doc" @toRecent="toRecent"></m-doc-header>
+      <m-doc-header
+        :doc="doc"
+        :collaborator="collaborators"
+        @toRecent="toRecent"
+      ></m-doc-header>
     </div>
     <div class="editor">
       <in-editor :disabled="disabled" :doc="doc"></in-editor>
@@ -40,7 +44,12 @@
 <script>
 import MDocHeader from "@/components/content/m-doc-header/MDocHeader";
 import inEditor from "./childCpn/in-editor/index";
-import { getDoc, getDocLimit, getCollaboratorInfo } from "network/doc";
+import {
+  getDoc,
+  getDocLimit,
+  getCollaboratorInfo,
+  getDocCollaborator,
+} from "network/doc";
 import { login } from "network/user";
 export default {
   name: "Doc",
@@ -60,6 +69,7 @@ export default {
       openLogin: false,
       name: "", // 账号
       password: "", // 密码
+      collaborators: [], // 协作者
     };
   },
   created() {
@@ -133,10 +143,17 @@ export default {
       this._getDocLimit(userID, docID);
       // console.log('要设置的数据',this.$route.query.docID)
       this.$store.commit("setDocID", this.$route.query.docID);
-      getCollaboratorInfo(this.$route.query.docID).then((res) => {
-        console.log("这回该有了吧", res);
-        this.$store.commit("setDocCol", res);
-      });
+      getCollaboratorInfo(this.$route.query.docID)
+        .then((res) => {
+          console.log("这回该有了吧", res);
+          this.$store.commit("setDocCol", res);
+        })
+        .then(
+          getDocCollaborator(this.$route.query.docID).then((res) => {
+            this.collaborators = res;
+            console.log(res);
+          })
+        );
     },
     // 获取doc数据
     _getDoc(userID, docID) {
