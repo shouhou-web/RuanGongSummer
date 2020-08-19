@@ -1,7 +1,7 @@
 <template>
   <div id="doc">
     <div class="header">
-      <m-doc-header :doc="doc" @toRecent="toRecent"></m-doc-header>
+      <m-doc-header :doc="doc" :collaborator="collaborators" @toRecent="toRecent"></m-doc-header>
     </div>
     <div class="editor">
       <in-editor :disabled="disabled" :doc="doc"></in-editor>
@@ -40,26 +40,27 @@
 <script>
 import MDocHeader from "@/components/content/m-doc-header/MDocHeader";
 import inEditor from "./childCpn/in-editor/index";
-import { getDoc, getDocLimit } from "network/doc";
+import { getDoc, getDocLimit, getDocCollaborator } from "network/doc";
 import { login } from "network/user";
 export default {
   name: "Doc",
   components: {
     inEditor,
-    MDocHeader,
+    MDocHeader
   },
   data() {
     return {
       doc: {
         docID: "",
         docTitle: "无标题",
-        docContent: "",
+        docContent: ""
       },
       disabled: false, // 是否禁用
       // login相关
       openLogin: false,
       name: "", // 账号
       password: "", // 密码
+      collaborators: [] // 协作者
     };
   },
   created() {
@@ -71,7 +72,7 @@ export default {
     if (userID == null) {
       this.$notify.info({
         title: "您还未登录",
-        message: "请登录已获取文档阅读权限~",
+        message: "请登录已获取文档阅读权限~"
       });
       this.openLogin = true;
     }
@@ -88,11 +89,11 @@ export default {
         return;
       }
       login(this.name, this.password)
-        .then((res) => {
+        .then(res => {
           if (res == null) {
             this.$notify.error({
               title: "网络错误",
-              message: "请稍后重试~",
+              message: "请稍后重试~"
             });
           } else {
             this.openLogin = false;
@@ -100,16 +101,16 @@ export default {
             this.$notify({
               title: "成功",
               message: "登录成功",
-              type: "success",
+              type: "success"
             });
             this._index(this.$store.state.user.userID, this.$route.query.docID);
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           this.$notify.error({
             title: "网络错误",
-            message: "请稍后重试~",
+            message: "请稍后重试~"
           });
         });
     },
@@ -119,7 +120,7 @@ export default {
       if (userID == null) {
         this.$notify.info({
           title: "您还未登录",
-          message: "请登录已获取文档阅读权限~",
+          message: "请登录已获取文档阅读权限~"
         });
         return;
       }
@@ -133,32 +134,37 @@ export default {
       this._getDocLimit(userID, docID);
       // console.log('要设置的数据',this.$route.query.docID)
       this.$store.commit("setDocID", this.$route.query.docID);
+
+      getDocCollaborator(docID).then(res => {
+        this.collaborators = res;
+        console.log(res)
+      });
     },
     // 获取doc数据
     _getDoc(userID, docID) {
       getDoc(userID, docID)
-        .then((res) => {
+        .then(res => {
           // console.log(res);
           // 暂时直接赋值
           this.doc = res;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           this.$notify.error({
             title: "网络错误",
-            message: "请稍后重试~",
+            message: "请稍后重试~"
           });
         });
     },
     // 获取文档权限
     _getDocLimit(userID, docID) {
-      getDocLimit(userID, docID).then((res) => {
+      getDocLimit(userID, docID).then(res => {
         if (res == 0) this.disabled = false;
         else if (res == 1) this.disabled = true;
         else {
           this.$notify.error({
             title: "错误",
-            message: "您没有该文档的阅读权限~",
+            message: "您没有该文档的阅读权限~"
           });
           this.$router.push({ path: "/home" });
         }
@@ -170,10 +176,10 @@ export default {
       this._index(this.$store.state.user.userID, item.docID);
       this.$router.push({
         path: "/doc",
-        query: { docID: item.docID },
+        query: { docID: item.docID }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
