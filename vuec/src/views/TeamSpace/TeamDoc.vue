@@ -197,25 +197,6 @@ export default {
           return;
         });
     },
-    batchFavorite() {
-      var chosen_Docs = qs.stringify(this.chosenDocs, { indices: false });
-      console.log(chosen_Docs);
-      docBatchFavorite(chosen_Docs, this.$store.state.user.userID)
-        .then((res) => {
-          if (res == 0) {
-            this.$notify.success("批量收藏成功");
-            this.$router.go(0);
-          } else {
-            this.$notify.error("请检查网络，收藏失败");
-            return;
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          this.$notify.error("请检查网络，收藏失败");
-          return;
-        });
-    },
     shareDoc(docID,docTitle) {
       var toDoc = window.location.href;
       toDoc = toDoc.substring(0,toDoc.length - 15);

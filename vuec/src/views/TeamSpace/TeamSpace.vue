@@ -43,13 +43,6 @@
                   @click="useBatchDelete"
                   >删除{{ chosenCount }}个文档</my-button
                 >
-                <my-button
-                  type="text"
-                  size="medium"
-                  class="l-card__nav-btn"
-                  @click="useBatchFavorite"
-                  >收藏{{ chosenCount }}个文档</my-button
-                >
               </div>
             </div>
             <input />
@@ -373,9 +366,6 @@ export default {
   methods: {
     useBatchDelete() {
       this.$refs.teamdoc.batchDelete();
-    },
-    useBatchFavorite() {
-      this.$refs.teamdoc.batchFavorite();
     },
     changeMoreOpt(data) {
       console.log("子传父", data);
