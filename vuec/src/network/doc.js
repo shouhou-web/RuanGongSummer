@@ -277,11 +277,9 @@ export function getDocHistory(docID) {
 export function getAllTemplate() {
   return request({
     url: "getAllTemplate",
-    params: {
-
-    },
-    method: 'post'
-  })
+    params: {},
+    method: "post"
+  });
 }
 
 // 用模板创建新文档
@@ -293,8 +291,53 @@ export function addDocWithTemplate(userID, teamID, templateID) {
       teamID,
       templateID
     },
-    method: 'post'
-  })
+    method: "post"
+  });
+}
+
+// 获取协作者信息
+export function getCollaboratorInfo(docID) {
+  return request({
+    url: "/getCollaboratorInfo",
+    params: {
+      docID
+    },
+    method: "post"
+  });
+}
+
+// 添加suggestion
+export function addSuggestion(id, suggestion) {
+  return request({
+    url: "/addSuggestion",
+    params: {
+      id,
+      suggestion
+    },
+    method: "post"
+  });
+}
+
+// 获取suggestion
+export function getSuggestion(id) {
+  return request({
+    url: "/getSuggestion",
+    params: {
+      id
+    },
+    method: "post"
+  });
+}
+
+// 更新suggestion
+export function updateSuggestion(id) {
+  return request({
+    url: "/updateSuggestion",
+    params: {
+      id
+    },
+    method: "post"
+  });
 }
 
 // 创建副本
