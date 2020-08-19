@@ -37,7 +37,7 @@
                     </div>
                   </div>
                   <div class="forget">
-                    <a class="forget-text" href="#">
+                    <router-link class="forget-text" to="/forgetPwd">
                       <div>
                         <img
                           src="../../assets/image/forget.svg"
@@ -45,7 +45,7 @@
                         />
                       </div>
                       ··· 忘记密码？
-                    </a>
+                    </router-link>
                   </div>
                   <a @click="loginSubmit" class="btn">Log in</a>
                 </div>
@@ -140,23 +140,22 @@
                         }"
                         v-model="code"
                       />
-                      <!--                      <div @click="sendCode" class="send-code">发送验证码</div>-->
-                    </div>
-                    <my-button
-                      type="disabled"
-                      v-if="!email"
-                      @click="warnEmail"
-                      style="margin-top: 10px;"
+                      <my-button
+                        type="disabled"
+                        v-if="!email"
+                        @click="warnEmail"
+                        style="margin-top: 30px;margin-left: 50px"
                       >发送验证码</my-button
-                    >
-                    <my-button
-                      type="timer"
-                      :count="countNum"
-                      style="margin-top: 10px;"
-                      @click="sendCode"
-                      v-if="email"
+                      >
+                      <my-button
+                        type="timer"
+                        :count="countNum"
+                        style="margin-top: 30px;margin-left: 50px"
+                        @click="sendCode"
+                        v-if="email"
                       >{{ btnMsg }}</my-button
-                    >
+                      >
+                    </div>
                   </div>
                   <a @click="registerSubmit" class="btn">Sign up</a>
                 </div>
@@ -297,23 +296,22 @@
                         }"
                         v-model="code"
                       />
-                      <!--                      <div @click="sendCode" class="send-code">发送验证码</div>-->
-                    </div>
-                    <my-button
-                      type="disabled"
-                      v-if="!email"
-                      @click="warnEmail"
-                      style="margin-top: 10px;"
+                      <my-button
+                        type="disabled"
+                        v-if="!email"
+                        @click="warnEmail"
+                        style="margin-top: 30px;margin-left: 50px"
                       >发送验证码</my-button
-                    >
-                    <my-button
-                      type="timer"
-                      :count="countNum"
-                      style="margin-top: 10px;"
-                      @click="sendCode"
-                      v-if="email"
+                      >
+                      <my-button
+                        type="timer"
+                        :count="countNum"
+                        style="margin-top: 30px;margin-left: 50px"
+                        @click="sendCode"
+                        v-if="email"
                       >{{ btnMsg }}</my-button
-                    >
+                      >
+                    </div>
                   </div>
                   <a @click="registerSubmit" class="btn">Sign up</a>
                 </div>
@@ -440,7 +438,7 @@ export default {
 
             this.username = "";
             this.password = "";
-            
+
             getUserAchievement(res.userID).then((res) => {
               console.log(res);
               this.$store.commit("setAchieve", res);
@@ -774,11 +772,11 @@ p {
   line-height: 22px;
   margin-top: 20px;
   outline: none;
-  padding: 13px 20px;
-  padding-left: 55px;
+  padding: 13px 10px;
+  padding-left: 35px;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
-  width: 100%;
+  width: 40%;
 }
 
 .error-code-style {
