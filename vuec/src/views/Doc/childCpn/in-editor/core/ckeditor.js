@@ -108,14 +108,14 @@ class TrackChangesIntegration {
 
     // Load the users data.
     let myUsers = getMyUsers();
-    console.log(myUsers)
-    for (let i = 0; i < myUsers.length; i++) {
-      console.log(myUsers[i])
-      usersPlugin.addUser(myUsers[i]);
-    }
-    // for (const user of appData.users) {
-    //   usersPlugin.addUser(user);
+    console.log(myUsers);
+    // for (let i = 0; i < myUsers.length; i++) {
+    //   console.log(myUsers[i])
+    //   usersPlugin.addUser(myUsers[i]);
     // }
+    for (const user of myUsers) {
+      usersPlugin.addUser(user);
+    }
 
     // Set the current user.
     // usersPlugin.defineMe('user-1');
@@ -126,99 +126,111 @@ class TrackChangesIntegration {
       getSuggestion: suggestionId => {
         // This function should query the database for data for a suggestion with a `suggestionId`.
         console.log("Get suggestion", suggestionId);
-
-        return new Promise(resolve => {
-          switch (
-            suggestionId
-            // case "suggestion-1":
-            //   resolve({
-            //     id: "suggestion-1",
-            //     type: "insertion",
-            //     authorId: "user-2",
-            //     createdAt: new Date(2019, 1, 13, 11, 20, 48),
-            //     hasComments: true
-            //   });
-            //   break;
-            // case "suggestion-2":
-            //   resolve({
-            //     id: "suggestion-2",
-            //     type: "deletion",
-            //     authorId: "user-1",
-            //     createdAt: new Date(2019, 1, 14, 12, 7, 20),
-            //     hasComments: false
-            //   });
-            //   break;
-            // case "suggestion-3":
-            //   resolve({
-            //     id: "suggestion-3",
-            //     type: "insertion",
-            //     authorId: "user-1",
-            //     createdAt: new Date(2019, 1, 14, 12, 7, 20),
-            //     hasComments: false
-            //   });
-            //   break;
-            // case "suggestion-4":
-            //   resolve({
-            //     id: "suggestion-4",
-            //     type: "deletion",
-            //     authorId: "user-1",
-            //     createdAt: new Date(2019, 1, 15, 8, 44, 1),
-            //     hasComments: true
-            //   });
-            //   break;
-            // case "suggestion-5":
-            //   resolve({
-            //     id: "suggestion-5",
-            //     type: "formatInline:886cqig6g8rf",
-            //     authorId: "user-2",
-            //     hasComments: false,
-            //     createdAt: new Date(2019, 2, 8, 10, 2, 7),
-            //     data: {
-            //       commandName: "bold",
-            //       commandParams: [{ forceValue: true }]
-            //     }
-            //   });
-            //   break;
-            // case "suggestion-6":
-            //   resolve({
-            //     id: "suggestion-6",
-            //     type: "formatBlock:698dn3otqzd6",
-            //     authorId: "user-2",
-            //     hasComments: false,
-            //     createdAt: new Date(2019, 2, 8, 10, 2, 10),
-            //     data: {
-            //       commandName: "heading",
-            //       commandParams: [{ value: "heading2" }],
-            //       formatGroupId: "blockName",
-            //       multipleBlocks: false
-            //     }
-            //   });
-            //   break;
-            // case "e3157f571d4a7b5d21a8876aec1a60b1c":
-            //   resolve({
-            //     id: "e3157f571d4a7b5d21a8876aec1a60b1c",
-            //     type: "formatBlock:mergeTableCells",
-            //     authorId: "user-1",
-            //     hasComments: false,
-            //     createdAt: new Date(2019, 2, 8, 10, 2, 10),
-            //     data: {
-            //       commandName: "mergeTableCells",
-            //       commandParams: [],
-            //       formatGroupId: "mergeTableCells",
-            //       multipleBlocks: false
-            //     }
-            //   });
-            //   break;
-            // case "ecbdfcf1052e0c6e6c756b095765560c8":
-            //   resolve({
-            //     id: "ecbdfcf1052e0c6e6c756b095765560c8",
-            //     type: "deletion:tableColumn",
-            //     authorId: "user-1",
-            //     hasComments: false,
-            //     createdAt: new Date(2019, 2, 8, 10, 2, 10)
-            //   });
-          ) {
+        var temp = getSuggestion(suggestionId).then(res => {
+          if (res) {
+            // console.log(res);
+            console.log("success");
+            return res;
+          } else {
+            console.log("failed");
           }
+        });
+        console.log(temp);
+        return new Promise(resolve => {
+          resolve(temp);
+        });
+        return new Promise(resolve => {
+          // switch (
+          //   suggestionId
+          // case "suggestion-1":
+          //   resolve({
+          //     id: "suggestion-1",
+          //     type: "insertion",
+          //     authorId: "user-2",
+          //     createdAt: new Date(2019, 1, 13, 11, 20, 48),
+          //     hasComments: true
+          //   });
+          //   break;
+          // case "suggestion-2":
+          //   resolve({
+          //     id: "suggestion-2",
+          //     type: "deletion",
+          //     authorId: "user-1",
+          //     createdAt: new Date(2019, 1, 14, 12, 7, 20),
+          //     hasComments: false
+          //   });
+          //   break;
+          // case "suggestion-3":
+          //   resolve({
+          //     id: "suggestion-3",
+          //     type: "insertion",
+          //     authorId: "user-1",
+          //     createdAt: new Date(2019, 1, 14, 12, 7, 20),
+          //     hasComments: false
+          //   });
+          //   break;
+          // case "suggestion-4":
+          //   resolve({
+          //     id: "suggestion-4",
+          //     type: "deletion",
+          //     authorId: "user-1",
+          //     createdAt: new Date(2019, 1, 15, 8, 44, 1),
+          //     hasComments: true
+          //   });
+          //   break;
+          // case "suggestion-5":
+          //   resolve({
+          //     id: "suggestion-5",
+          //     type: "formatInline:886cqig6g8rf",
+          //     authorId: "user-2",
+          //     hasComments: false,
+          //     createdAt: new Date(2019, 2, 8, 10, 2, 7),
+          //     data: {
+          //       commandName: "bold",
+          //       commandParams: [{ forceValue: true }]
+          //     }
+          //   });
+          //   break;
+          // case "suggestion-6":
+          //   resolve({
+          //     id: "suggestion-6",
+          //     type: "formatBlock:698dn3otqzd6",
+          //     authorId: "user-2",
+          //     hasComments: false,
+          //     createdAt: new Date(2019, 2, 8, 10, 2, 10),
+          //     data: {
+          //       commandName: "heading",
+          //       commandParams: [{ value: "heading2" }],
+          //       formatGroupId: "blockName",
+          //       multipleBlocks: false
+          //     }
+          //   });
+          //   break;
+          // case "e3157f571d4a7b5d21a8876aec1a60b1c":
+          //   resolve({
+          //     id: "e3157f571d4a7b5d21a8876aec1a60b1c",
+          //     type: "formatBlock:mergeTableCells",
+          //     authorId: "user-1",
+          //     hasComments: false,
+          //     createdAt: new Date(2019, 2, 8, 10, 2, 10),
+          //     data: {
+          //       commandName: "mergeTableCells",
+          //       commandParams: [],
+          //       formatGroupId: "mergeTableCells",
+          //       multipleBlocks: false
+          //     }
+          //   });
+          //   break;
+          // case "ecbdfcf1052e0c6e6c756b095765560c8":
+          //   resolve({
+          //     id: "ecbdfcf1052e0c6e6c756b095765560c8",
+          //     type: "deletion:tableColumn",
+          //     authorId: "user-1",
+          //     hasComments: false,
+          //     createdAt: new Date(2019, 2, 8, 10, 2, 10)
+          //   });
+          // ) {
+          // }
         });
       },
 
@@ -226,6 +238,14 @@ class TrackChangesIntegration {
         // This function should save `suggestionData` in the database.
         console.log("Suggestion added", suggestionData);
         console.log(suggestionData.id);
+        addSuggestion(suggestionData.id, suggestionData).then(res => {
+          if (res === 0) {
+            console.log("success");
+            console.log(suggestionData);
+          } else {
+            console.log("failed");
+          }
+        });
 
         return Promise.resolve({
           createdAt: new Date() // Should be set server-side.
