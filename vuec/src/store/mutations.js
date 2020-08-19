@@ -58,7 +58,7 @@ const mutations = {
     state.nowDocID = docID;
   },
   setDocCol(state,docCol) {
-    state.docCol = docCol;
+    state.nowDocCol = docCol;
   },
   setTeamID(state, teamID) {
     state.nowTeamID = teamID;

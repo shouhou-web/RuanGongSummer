@@ -143,17 +143,10 @@ export default {
       this._getDocLimit(userID, docID);
       // console.log('要设置的数据',this.$route.query.docID)
       this.$store.commit("setDocID", this.$route.query.docID);
-      getCollaboratorInfo(this.$route.query.docID)
-        .then((res) => {
-          console.log("这回该有了吧", res);
-          this.$store.commit("setDocCol", res);
-        })
-        .then(
-          getDocCollaborator(this.$route.query.docID).then((res) => {
-            this.collaborators = res;
-            console.log(res);
-          })
-        );
+      getDocCollaborator(this.$route.query.docID).then((res) => {
+        this.collaborators = res;
+        console.log(res);
+      });
     },
     // 获取doc数据
     _getDoc(userID, docID) {

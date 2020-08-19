@@ -74,8 +74,9 @@ appData.users = [
 ];
 
 function getMyUsers() {
-  while(store.state.docCol.length == 0);
-  return store.state.docCol;
+  // while(store.state.nowDocCol.length == 0);
+  // console.log()
+  return store.state.nowDocCol;
   // console.log(store.state.nowDocID);
   // // let users = [];
   // return getCollaboratorInfo(store.state.nowDocID)

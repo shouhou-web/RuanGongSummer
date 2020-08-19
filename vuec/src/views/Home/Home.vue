@@ -76,7 +76,6 @@
         </div>
         <div class="column-divider"></div>
         <div class="Other">
-          Other Things!
         </div>
       </div>
     </div>

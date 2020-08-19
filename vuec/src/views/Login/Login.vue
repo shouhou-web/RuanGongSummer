@@ -126,7 +126,7 @@
                         v-model="email"
                       />
                     </div>
-                    <div style="display: flex;">
+                    <div class="footer-btn">
                       <input
                         @focus="code_info = 0"
                         id="logcode"
@@ -331,6 +331,8 @@ import {
   getUserAchievement,
 } from "../../network/user.js";
 
+import { getCollaboratorInfo } from "network/doc";
+
 export default {
   name: "Login",
   data() {
@@ -426,6 +428,11 @@ export default {
             sessionStorage.setItem("user", JSON.stringify(res));
 
             console.log("本地缓存", sessionStorage.getItem("user"));
+
+            getCollaboratorInfo(0).then((res) => {
+              console.log("这回该有了吧", res);
+              this.$store.commit("setDocCol", res);
+            });
 
             this.$store.commit("login", res);
             this.$notify({
