@@ -84,7 +84,7 @@ export default {
     // this._initEdit();
   },
   beforeDestroy() {
-    // console.log('beforeDestroy');
+    console.log("beforeDestroy");
     this._onBlur();
   },
   mounted() {
@@ -115,7 +115,7 @@ export default {
     // 聚焦事件
     onFocus() {
       // console.log("onFocus");
-      if (this.editState) {
+      if (!this.$store.state.editState)
         tryEditDoc(this.doc.docID).then((res) => {
           console.log("聚焦事件返回:", res);
           if (res != 0) {
@@ -124,17 +124,20 @@ export default {
               message: "有人正在编辑文档，请稍后刷新重试",
               type: "warning",
             });
+          } else {
+            this.$store.commit("setEditState");
           }
         });
-      }
     },
     // 放锁事件
     _onBlur() {
-      console.log("放锁");
-      completeEditDoc(
-        this.$store.state.user.userID,
-        this.doc.docID
-      ).then((res) => {});
+      if (this.$store.state.editState) {
+        console.log("放锁");
+        completeEditDoc(this.$store.state.user.userID, this.doc.docID).then(res =>{
+          console.log('返回',res)
+        });
+        this.$store.commit('loseEditState')
+      }
     },
     _initEdit() {
       class MyUploadAdapter {

@@ -63,8 +63,8 @@ export default {
     };
   },
   created() {
-    console.log("docID", this.$route.query.docID);
-    console.log("docTitle", this.$route.query.docTitle);
+    // console.log("docID", this.$route.query.docID);
+    // console.log("docTitle", this.$route.query.docTitle);
     let userID = this.$store.state.user.userID;
     let docID = this.$route.query.docID;
     let docTitle = this.$route.query.docTitle;
@@ -74,9 +74,10 @@ export default {
         message: "请登录已获取文档阅读权限~",
       });
       this.openLogin = true;
-    } else if (docTitle == "")
-      // 新建文档
-      this.doc.docID = docID;
+    } 
+    // else if (docTitle == "")
+    //   // 新建文档
+    //   this.doc.docID = docID;
     else this._index(userID, docID);
   },
   methods: {
@@ -135,7 +136,7 @@ export default {
     _getDoc(userID, docID) {
       getDoc(userID, docID)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           // 暂时直接赋值
           this.doc = res;
         })
@@ -163,11 +164,11 @@ export default {
     },
     // 跳转到最近的文档
     toRecent(item) {
-      console.log("father:toRecent");
+      // console.log("father:toRecent");
       this._getDoc(this.$store.state.user.userID, item.docID);
       this.$router.push({
         path: "/doc",
-        query: { docID: item.docID, docTitle: item.docTitle },
+        query: { docID: item.docID },
       });
     },
   },

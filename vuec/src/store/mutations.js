@@ -69,6 +69,12 @@ const mutations = {
   // 消息数目
   setAllMsgNum(state,aLLMsgNum) {
     state.aLLMsgNum = aLLMsgNum;
+  },
+  setEditState(state) {
+    state.editState = true;
+  },
+  loseEditState(state) {
+    state.editState = false;
   }
 };
 
