@@ -302,9 +302,9 @@ class TrackChangesIntegration {
 
       addSuggestion: suggestionData => {
         // This function should save `suggestionData` in the database.
+        console.log(suggestionData);
         suggestionData.createdAt = new Date();
         suggestionData.authorId = store.state.user.userID;
-        console.log(suggestionData);
         addSuggestion(suggestionData.id, suggestionData).then(res => {
           if (res === 0) {
             console.log("success");

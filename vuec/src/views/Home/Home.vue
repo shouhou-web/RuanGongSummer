@@ -93,16 +93,16 @@
       <input class="hover-input" placeholder="团队名称" v-model="teamName" />
     </m-hover>
 
-    <m-hover :on-show="openTemplates"
-             title="模板文件库"
-             cancel-btn="X"
-             @cancel="openTemplates = false">
+    <m-hover
+      :on-show="openTemplates"
+      title="模板文件库"
+      cancel-btn="X"
+      @cancel="openTemplates = false"
+    >
       <div style="display: flex;flex-direction: row">
-        <div v-for="(temp,tIndex) in templates" :key="tIndex">
+        <div v-for="(temp, tIndex) in templates" :key="tIndex">
           <div @click="addNewDocWithTeamplate(temp.templateID)">
-            <l-model-card :title="temp.templateName"
-                          :i-d="temp.templateID"
-                          >
+            <l-model-card :title="temp.templateName" :i-d="temp.templateID">
             </l-model-card>
           </div>
         </div>
@@ -116,7 +116,11 @@ import MAppHeader from "components/content/m-app-header/MAppHeader";
 import Recent from "./WorkSpace/WorkSpace";
 
 import { addTeam } from "../../network/team.js";
-import { addDoc,addDocWithTemplate,getAllTemplate } from "../../network/doc.js";
+import {
+  addDoc,
+  addDocWithTemplate,
+  getAllTemplate
+} from "../../network/doc.js";
 
 export default {
   name: "Home",
@@ -125,7 +129,7 @@ export default {
       user: "",
       teamName: "",
       teamHoverOn: false,
-      templates: '',
+      templates: "",
       openTemplates: false
     };
   },
@@ -159,20 +163,20 @@ export default {
         return;
       }
       console.log(this.teamName);
-      addTeam(this.user.userID, this.teamName).then((res) => {
+      addTeam(this.user.userID, this.teamName).then(res => {
         console.log(res);
         if (res === 1) {
           this.$message.error("创建失败，请检查网络或联系管理员");
         } else if (res === 0) {
-          this.teamHoverOn = false;
-          this.teamName = "";
-          this.$router.go(0);
           this.$message({
             message: "创建团队成功",
-            type: "success",
+            type: "success"
           });
+          this.teamHoverOn = false;
+          this.teamName = "";
         }
       });
+      this.$router.go(0);
     },
     addNewDoc() {
       if (!this.user.userID) {
@@ -190,20 +194,20 @@ export default {
             this.$message.error("请选择团队后再创建文档");
           }
         } else {
-          addDoc(this.user.userID, nowTeamID).then((res) => {
+          addDoc(this.user.userID, nowTeamID).then(res => {
             if (res === 1) {
               this.$message.error("创建文档失败，请检查网络或联系管理员");
             } else {
               this.$message({
                 message: "创建文档成功",
-                type: "success",
+                type: "success"
               });
               this.$router.push({
                 path: "/doc",
                 query: {
                   docID: res,
-                  docTitle: "",
-                },
+                  docTitle: ""
+                }
               });
             }
           });
@@ -213,20 +217,20 @@ export default {
         currentPath === "/home/workSpace/iMade" ||
         currentPath === "/home/workSpace/myCollection"
       ) {
-        addDoc(this.user.userID, 0).then((res) => {
+        addDoc(this.user.userID, 0).then(res => {
           if (res === 1) {
             this.$message.error("创建文档失败，请检查网络或联系管理员");
           } else {
             this.$message({
               message: "创建文档成功",
-              type: "success",
+              type: "success"
             });
             this.$router.push({
               path: "/doc",
               query: {
                 docID: res,
-                docTitle: "",
-              },
+                docTitle: ""
+              }
             });
           }
         });
@@ -236,23 +240,23 @@ export default {
       this.noticeHoverOn = false;
     },
     getTemplates() {
-      console.log('获取模板');
+      console.log("获取模板");
       getAllTemplate()
         .then(res => {
           console.log(res);
           this.templates = res;
         })
         .catch(err => {
-          this.$message.error('无法获取模板，请检查网络');
-        })
+          this.$message.error("无法获取模板，请检查网络");
+        });
     },
     openTemplate() {
-      console.log('OPEN');
+      console.log("OPEN");
       this.openTemplates = true;
       this.getTemplates();
     },
     addNewDocWithTeamplate(templateID) {
-      console.log('啊这啊这啊这啊这');
+      console.log("啊这啊这啊这啊这");
       if (!this.user.userID) {
         this.$message.error("请先登录！");
       }
@@ -267,46 +271,48 @@ export default {
             this.$message.error("请选择团队后再创建模板文档");
           }
         } else {
-          addDocWithTemplate(this.$store.state.user.userID,nowTeamID,templateID)
-            .then(res => {
-              console.log('TEAM - TEMPLAETE - DOC',res);
-              if (res === null) {
-                this.$message.error("创建文档失败，请检查网络或联系管理员");
-              }
-              else {
-                this.$message.success('模板文档创建成功');
-                this.$router.push({
-                  path: "/doc",
-                  query: {docID: res.docID, docTitle: res.docTitle},
-                })
-              }
-            })
+          addDocWithTemplate(
+            this.$store.state.user.userID,
+            nowTeamID,
+            templateID
+          ).then(res => {
+            console.log("TEAM - TEMPLAETE - DOC", res);
+            if (res === null) {
+              this.$message.error("创建文档失败，请检查网络或联系管理员");
+            } else {
+              this.$message.success("模板文档创建成功");
+              this.$router.push({
+                path: "/doc",
+                query: { docID: res.docID, docTitle: res.docTitle }
+              });
+            }
+          });
         }
       } else if (
         currentPath === "/home/workSpace/recent" ||
         currentPath === "/home/workSpace/iMade" ||
         currentPath === "/home/workSpace/myCollection"
       ) {
-        addDocWithTemplate(this.$store.state.user.userID,0,templateID)
-          .then(res => {
-            console.log('TEAM - TEMPLAETE - DOC',res);
+        addDocWithTemplate(this.$store.state.user.userID, 0, templateID).then(
+          res => {
+            console.log("TEAM - TEMPLAETE - DOC", res);
             if (res === null) {
               this.$message.error("创建文档失败，请检查网络或联系管理员");
-            }
-            else {
-              this.$message.success('模板文档创建成功');
+            } else {
+              this.$message.success("模板文档创建成功");
               this.$router.push({
                 path: "/doc",
-                query: {docID: res.docID, docTitle: res.docTitle},
-              })
+                query: { docID: res.docID, docTitle: res.docTitle }
+              });
             }
-          })
+          }
+        );
       }
-    },
+    }
   },
   components: {
     Recent,
-    MAppHeader,
+    MAppHeader
   },
   created() {
     this.user = this.$store.state.user;
@@ -315,7 +321,7 @@ export default {
       this.$message.error("请先登录！");
       return;
     }
-  },
+  }
 };
 </script>
 

@@ -45,7 +45,7 @@
           <l-card
             :canEdit="false"
             :ID="doc.docID"
-            :title="doc.docTitle"
+            :title="doc.previewTitle"
             :forceUnchecked="batchOrNot"
             @addDoc="addToBatchDocs"
             @cancelDoc="removeFromBatchDocs"
