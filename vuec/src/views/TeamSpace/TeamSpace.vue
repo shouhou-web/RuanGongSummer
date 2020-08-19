@@ -251,7 +251,7 @@
           <!--TODO:添加分类-->
           <div
             class="member-header"
-            v-for="(userRes, resIndex) in searchRes"
+            v-for="(userRes, resIndex) in searchOutRes"
             :key="resIndex"
             v-if="searchType == 0"
           >
@@ -356,6 +356,7 @@ export default {
       searchMemberMsg: "",
       searchOutsideMsg: "",
       searchRes: "",
+      searchOutRes: "",
       showRes: false,
       openSearch: false,
       searchType: 0, //0 搜非团队成员，1 搜团队成员
@@ -625,7 +626,7 @@ export default {
       searchOutsideUser(this.TeamID, this.searchOutsideMsg)
         .then((res) => {
           console.log("outside", res);
-          this.searchRes = res;
+          this.searchOutRes = res;
         })
         .catch((err) => {
           this.$notify.error("请检查网络，查找失败");
