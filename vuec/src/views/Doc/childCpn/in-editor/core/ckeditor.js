@@ -76,7 +76,8 @@ appData.users = [
 function getMyUsers() {
   // while(store.state.nowDocCol.length == 0);
   // console.log()
-  return store.state.nowDocCol;
+  if (store.state.nowDocCol) return store.state.nowDocCol;
+  else return appData.users;
   // console.log(store.state.nowDocID);
   // // let users = [];
   // return getCollaboratorInfo(store.state.nowDocID)
@@ -90,8 +91,9 @@ function getMyUsers() {
 }
 
 function getUser() {
-  console.log("当前操作者", store.state.user.userID);
-  return store.state.user.userID;
+  // console.log("当前操作者", store.state.user.userID);
+  if (store.state.user.userID) return store.state.user.userID;
+  else return "DAE7FC3E";
 }
 // The ID of the current user.
 // appData.userId = 'usewr-1'
