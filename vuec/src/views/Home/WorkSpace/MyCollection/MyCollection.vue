@@ -360,9 +360,15 @@ export default {
       });
     },
     shareDoc(docID, docTitle) {
-      var toDoc = window.location.href;
-      toDoc = toDoc.substring(0, toDoc.length - 15);
-      toDoc = toDoc + "/doc?docID=" + docID + "&docTitle=" + docTitle;
+      // var toDoc = window.location.href;
+      // toDoc = toDoc.substring(0, toDoc.length - 15);
+      // toDoc = toDoc + "/doc?docID=" + docID + "&docTitle=" + docTitle;
+      // console.log(toDoc);
+      // this.shareSrc = toDoc;
+      // this.openShare = true;
+      //http://39.99.154.244/doc?docID=084A0A627D&docTitle=%E6%97%A0%E6%A0%87%E9%A2%98
+      var toDoc = "http://39.99.154.244";
+      toDoc = toDoc + '/doc?docID=' + docID + '&docTitle=' + docTitle;
       console.log(toDoc);
       this.shareSrc = toDoc;
       this.openShare = true;
