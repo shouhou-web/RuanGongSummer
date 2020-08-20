@@ -94,4 +94,14 @@ export function setAdmin(userID,teamID,userIdentity) {
   })
 }
 
-
+// 团队名称修改
+export function setTeamName(teamID, teamName) {
+  return request({
+    url: "setTeamName",
+    params: {
+      teamID,
+      teamName
+    },
+    method: 'post'
+  })
+}

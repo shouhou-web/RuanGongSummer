@@ -94,6 +94,13 @@
                 @click="readyTosearch_1"
                 >搜索团队成员</my-button
               >
+              <my-button
+                type="text"
+                class="l-card__nav-btn"
+                @click="readyReNameTeam"
+                v-if="this.$store.state.user.userID == this.teamCreatorID"
+              >团队重命名</my-button
+              >
             </div>
           </div>
           <input />
@@ -300,6 +307,22 @@
       </div>
     </m-hover>
 
+    <m-hover :on-show="openReNameTeam"
+             title="团队重命名"
+             cancel-btn="取消"
+             assure-btn="确定"
+             @cancel="closeReNameTeam"
+             @submit="reNameTeam">
+      <div>
+        <input
+          class="cooperation-search"
+          v-model="teamName"
+          placeholder="输入新团队名称"
+          style="padding-left: 5px;"
+        />
+      </div>
+    </m-hover>
+
     <div style="margin: 20px;">
       <transition mode="out-in">
         <TeamDoc
@@ -325,6 +348,7 @@ import {
   quitTeam,
   setAdmin,
   getTeamMembers,
+  setTeamName
 } from "@/network/team";
 import { searchOutsideUser, searchTeamMember } from "@/network/search";
 import TeamDoc from "@/views/TeamSpace/TeamDoc";
@@ -357,6 +381,9 @@ export default {
       listOrBlock: true,
       openMoreOpt: false,
       chosenCount: 0,
+      teamName: '',
+      openReNameTeam: false,
+      teamCreatorID: ''
     };
   },
   components: {
@@ -527,6 +554,43 @@ export default {
     },
     toUserProfile(userID) {
       this.$router.push({ path: '/profile', query: { userID } });
+    },
+    readyReNameTeam() {
+      this.openReNameTeam = true;
+    },
+    closeReNameTeam() {
+      this.openReNameTeam = false;
+    },
+    reNameTeam() {
+      setTeamName(this.TeamID,this.teamName)
+        .then(res => {
+          if (res == 0) {
+            this.$message.success('团队名称修改成功');
+            this.openReNameTeam = false;
+            getMyTeam(this.user.userID)
+              .then((res) => {
+                // console.log(res);
+                this.myTeams = res;
+                // this.chosenPos = 0;
+                console.log(this.myTeams);
+                console.log(this.myTeams.length);
+                // this.chosenPos = res[0].teamID;
+                if (this.myTeams.length == 0) this.$store.commit("setHasTeam", false);
+                else {
+                  this.$store.commit("setHasTeam", true);
+                  // this.chosenPos = res[0].teamID;
+                  this.chooseTeam(res[0].teamID, res[0].teamName);
+                  this.teamCreatorID = res[0].creatorID;
+                }
+              })
+              .catch((err) => {
+                this.$message.error("请检查网络 - 暂时无法获取你的团队");
+              });
+          }
+          else {
+            this.$message.error('团队名称修改失败，请检查网络');
+          }
+        })
     }
   },
   created() {
@@ -551,6 +615,7 @@ export default {
           this.$store.commit("setHasTeam", true);
           // this.chosenPos = res[0].teamID;
           this.chooseTeam(res[0].teamID, res[0].teamName);
+          this.teamCreatorID = res[0].creatorID;
         }
       })
       .catch((err) => {
@@ -569,12 +634,15 @@ export default {
           if (res == 0) {
             this.iden = 0;
             this.iden_message = "普通成员";
+            this.teamCreatorID = '';
           } else if (res == 1) {
             this.iden = 1;
             this.iden_message = "管理员";
+            this.teamCreatorID = '';
           } else {
             this.iden = 2;
             this.iden_message = "创建者";
+            this.teamCreatorID = this.$store.state.user.userID;
           }
         })
         .catch((err) => {

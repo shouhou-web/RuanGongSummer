@@ -30,6 +30,8 @@
   <component name="ChangeListManager">
     <list default="true" id="15215e78-fc39-4035-aff0-13a849c9e4b3" name="Default Changelist" comment="login路由修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/network/team.js" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/network/team.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vuec/src/views/TeamSpace/TeamSpace.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,6 +134,7 @@
       <workItem from="1596769620660" duration="10000" />
       <workItem from="1596769631963" duration="941000" />
       <workItem from="1597621786260" duration="3763000" />
+      <workItem from="1597891858784" duration="1430000" />
     </task>
     <task id="LOCAL-00001" summary="看了看🐎佬的项目，大概看了一下App.vue的结构">
       <created>1596016363239</created>
@@ -455,7 +458,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597848661104</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="分享的路径bug">
+      <created>1597883310995</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1597883310995</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,7 +517,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="登陆注册优化" />
     <MESSAGE value="奇怪的bug修复了" />
     <MESSAGE value="团队空间完善，API编写" />
     <MESSAGE value="YDoc上线，但是没什么用" />
@@ -532,7 +541,8 @@
     <MESSAGE value="团队成员搜索bug" />
     <MESSAGE value="文档批量收藏删除" />
     <MESSAGE value="分享hover的bug修复" />
-    <option name="LAST_COMMIT_MESSAGE" value="分享hover的bug修复" />
+    <MESSAGE value="分享的路径bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="分享的路径bug" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1240" y="330" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1597621826597">
@@ -587,10 +597,10 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-1157" y="197" key="SettingsEditor/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597664389499" />
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597848704593">
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597883320048">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597848704593" />
+    <state x="-1097" y="258" key="Vcs.Push.Dialog.v2/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597883320048" />
     <state x="-1766" y="92" width="1674" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1596767599481">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
@@ -607,9 +617,9 @@
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
     <state x="-809" y="254" key="run.anything.popup/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597567421541" />
-    <state x="-802" y="241" width="672" height="678" key="search.everywhere.popup" timestamp="1597303418410">
+    <state x="-802" y="241" width="672" height="678" key="search.everywhere.popup" timestamp="1597892877629">
       <screen x="-1858" y="0" width="1858" height="1080" />
     </state>
-    <state x="-802" y="241" width="672" height="678" key="search.everywhere.popup/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597303418410" />
+    <state x="-802" y="241" width="672" height="678" key="search.everywhere.popup/89.0.1447.864/-1858.0.1858.1080@-1858.0.1858.1080" timestamp="1597892877629" />
   </component>
 </project>
