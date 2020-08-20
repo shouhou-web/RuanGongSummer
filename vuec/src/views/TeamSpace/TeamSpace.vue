@@ -567,6 +567,7 @@ export default {
           if (res == 0) {
             this.$message.success('团队名称修改成功');
             this.openReNameTeam = false;
+            this.teamName = '';
             getMyTeam(this.user.userID)
               .then((res) => {
                 // console.log(res);
