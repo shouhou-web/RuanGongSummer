@@ -270,6 +270,7 @@ export default {
           type: "success",
         });
         this.token = true;
+        this.editToken = false;
         this.editEmail = true;
       } else {
         this.$notify.error({

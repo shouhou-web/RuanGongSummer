@@ -92,6 +92,7 @@ export default {
               message: "删除消息成功",
               type: "success",
             });
+            this.cancel()
             this.$emit("delete");
           }
         })
