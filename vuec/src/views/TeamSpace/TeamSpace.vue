@@ -192,6 +192,7 @@
         <div
           class="member-header"
           v-for="(member, memberIndex) in members"
+          v-if="member.userIdentity > 0"
           :key="memberIndex"
         >
           <div>
@@ -306,7 +307,6 @@
         </div>
       </div>
     </m-hover>
-
     <m-hover :on-show="openReNameTeam"
              title="团队重命名"
              cancel-btn="取消"
