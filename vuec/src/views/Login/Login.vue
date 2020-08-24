@@ -429,11 +429,6 @@ export default {
 
             console.log("本地缓存", sessionStorage.getItem("user"));
 
-            getCollaboratorInfo(0).then((res) => {
-              console.log("这回该有了吧", res);
-              this.$store.commit("setDocCol", res);
-            });
-
             this.$store.commit("login", res);
             this.$notify({
               title: "成功",

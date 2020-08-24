@@ -67,7 +67,7 @@ appData.users = [
     avatar: "https://randomuser.me/api/portraits/thumb/men/26.jpg"
   },
   {
-    id: "DAE7FC3E",
+    id: "1",
     name: "Ella Harper",
     avatar: "https://randomuser.me/api/portraits/thumb/women/65.jpg"
   }
@@ -76,24 +76,24 @@ appData.users = [
 function getMyUsers() {
   // while(store.state.nowDocCol.length == 0);
   // console.log()
-  if (store.state.nowDocCol) return store.state.nowDocCol;
-  else return appData.users;
+  // if (store.state.nowDocCol) return store.state.nowDocCol;
+  // else return appData.users;
   // console.log(store.state.nowDocID);
   // // let users = [];
-  // return getCollaboratorInfo(store.state.nowDocID)
-  //   .then(res => {
-  //     console.log("test", res);
-  //     return res;
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   });
+  return getCollaboratorInfo(store.state.nowDocID)
+    .then(res => {
+      console.log("test", res);
+      return res;
+    })
+    .catch(err => {
+      console.log(err);
+    });
 }
 
 function getUser() {
-  // console.log("当前操作者", store.state.user.userID);
+  console.log("当前操作者", store.state.user.userID);
   if (store.state.user.userID) return store.state.user.userID;
-  else return "DAE7FC3E";
+  else return "1";
 }
 // The ID of the current user.
 // appData.userId = 'usewr-1'
@@ -110,11 +110,13 @@ class TrackChangesIntegration {
       "CommentsRepository"
     );
 
-    for (const user of getMyUsers()) {
-      usersPlugin.addUser(user);
-    }
-
-    usersPlugin.defineMe(getUser());
+    getMyUsers().then(res => {
+      console.log(res);
+      for (const user of res) {
+        usersPlugin.addUser(user);
+      }
+      usersPlugin.defineMe(getUser());
+    });
 
     // Set the adapter to the `TrackChanges#adapter` property.
     trackChangesPlugin.adapter = {

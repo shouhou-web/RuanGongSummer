@@ -21,7 +21,43 @@ export default {
   },
   data() {
     return {
-      messageList: [], // 消息列表
+      messageList: [
+        // {
+        //   msgType: 3,
+        //   createTime: "刚刚",
+        //   name: "软工展示",
+        // },
+        // {
+        //   msgType: 4,
+        //   createTime: "刚刚",
+        //   name: "单身同盟",
+        // },
+        // {
+        //   msgType:5,
+        //   createTime: "刚刚",
+        //   name: "test1",
+        // },
+        // {
+        //   msgType: 6,
+        //   createTime: "刚刚",
+        //   name: "test2",
+        // },
+        // {
+        //   msgType: 7,
+        //   createTime: "刚刚",
+        //   name: "test3",
+        // },
+        // {
+        //   msgType: 8,
+        //   createTime: "刚刚",
+        //   name: "北航炸酱面",
+        // },
+        // {
+        //   msgType: 11,
+        //   createTime: "刚刚",
+        //   name: "北航炸酱面不好吃的一百个理由",
+        // },
+      ], // 消息列表
     };
   },
   created() {
@@ -30,9 +66,7 @@ export default {
         console.log("system message", res);
         this.messageList = res;
       })
-      .then(
-         getSystemMsg(this.$store.state.user.userID)
-      )
+      .then(getSystemMsg(this.$store.state.user.userID))
       .then(
         getAllMsgNum(this.$store.state.user.userID).then((res) => {
           this.$store.commit("setAllMsgNum", res);
